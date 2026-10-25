@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Help &amp; Report | Trinetra Gargi Foundation</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-container": "#e7eeff",
+            "surface-bright": "#f9f9ff",
+            "emergency-crimson": "#DC2626",
+            "error-container": "#ffdad6",
+            "on-surface-variant": "#554336",
+            "on-surface": "#111c2d",
+            "surface-ivory": "#FAFAF9",
+            "on-secondary": "#ffffff",
+            "secondary-fixed": "#d1e4ff",
+            "primary-container": "#b15f00",
+            "on-tertiary-fixed": "#002114",
+            "on-primary": "#ffffff",
+            "on-secondary-fixed-variant": "#314863",
+            "surface-variant": "#d8e3fb",
+            "on-error-container": "#93000a",
+            "on-tertiary-fixed-variant": "#005137",
+            "secondary": "#49607c",
+            "on-primary-fixed": "#2f1500",
+            "outline-variant": "#dbc2b0",
+            "primary-fixed-dim": "#ffb77d",
+            "marigold-bright": "#F59E0B",
+            "on-error": "#ffffff",
+            "text-muted": "#64748B",
+            "surface-container-low": "#f0f3ff",
+            "inverse-primary": "#ffb77d",
+            "on-tertiary": "#ffffff",
+            "surface-container-highest": "#d8e3fb",
+            "primary-fixed": "#ffdcc3",
+            "inverse-surface": "#263143",
+            "on-primary-fixed-variant": "#6e3900",
+            "primary": "#8d4b00",
+            "error": "#ba1a1a",
+            "inverse-on-surface": "#ecf1ff",
+            "tertiary": "#006948",
+            "surface-container-lowest": "#ffffff",
+            "surface-dim": "#cfdaf2",
+            "coral-warmth": "#EA580C",
+            "tertiary-fixed-dim": "#68dba9",
+            "tertiary-container": "#00855d",
+            "secondary-fixed-dim": "#b0c9e8",
+            "on-tertiary-container": "#f5fff7",
+            "on-secondary-fixed": "#011d35",
+            "outline": "#887364",
+            "sage-soft": "#10B981",
+            "tertiary-fixed": "#85f8c4",
+            "on-secondary-container": "#4b637e",
+            "highlight-amber-soft": "#FEF3C7",
+            "background": "#f9f9ff",
+            "on-primary-container": "#fffbff",
+            "on-background": "#111c2d",
+            "surface-tint": "#904d00",
+            "surface": "#f9f9ff",
+            "secondary-container": "#c7dfff",
+            "surface-warm-card": "#F5F5F4",
+            "surface-container-high": "#dee8ff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "margin-desktop": "3rem",
+            "margin": "1rem",
+            "margin-tablet": "2rem",
+            "gutter": "1.5rem",
+            "space-lg": "1.5rem",
+            "space-md": "1rem",
+            "space-xs": "0.25rem",
+            "space-sm": "0.5rem",
+            "space-xl": "2.5rem",
+            "gutter-desktop": "2rem"
+          },
+          "fontFamily": {
+            "label-lg": ["Plus Jakarta Sans"],
+            "headline-xl-mobile": ["Plus Jakarta Sans"],
+            "label-md": ["Plus Jakarta Sans"],
+            "headline-lg": ["Plus Jakarta Sans"],
+            "display": ["Plus Jakarta Sans"],
+            "headline-xl": ["Plus Jakarta Sans"],
+            "stat-metric": ["Plus Jakarta Sans"],
+            "headline-md": ["Plus Jakarta Sans"],
+            "stat-metric-mobile": ["Plus Jakarta Sans"],
+            "body-lg": ["Plus Jakarta Sans"],
+            "label-caps": ["Plus Jakarta Sans"],
+            "headline-sm": ["Plus Jakarta Sans"],
+            "body-md": ["Plus Jakarta Sans"],
+            "display-mobile": ["Plus Jakarta Sans"],
+            "body-sm": ["Plus Jakarta Sans"]
+          },
+          "fontSize": {
+            "label-lg": ["0.875rem", { "lineHeight": "1.25", "letterSpacing": "0.01em", "fontWeight": "600" }],
+            "headline-xl-mobile": ["1.875rem", { "lineHeight": "1.25", "letterSpacing": "-0.015em", "fontWeight": "700" }],
+            "label-md": ["0.75rem", { "lineHeight": "1.25", "letterSpacing": "0.04em", "fontWeight": "600" }],
+            "headline-lg": ["2rem", { "lineHeight": "1.25", "letterSpacing": "-0.015em", "fontWeight": "700" }],
+            "display": ["3.5rem", { "lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "800" }],
+            "headline-xl": ["2.5rem", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "stat-metric": ["3.75rem", { "lineHeight": "1.0", "letterSpacing": "-0.03em", "fontWeight": "800" }],
+            "headline-md": ["1.5rem", { "lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "stat-metric-mobile": ["2.5rem", { "lineHeight": "1.0", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+            "body-lg": ["1.125rem", { "lineHeight": "1.6", "fontWeight": "400" }],
+            "label-caps": ["0.75rem", { "lineHeight": "1.2", "letterSpacing": "0.08em", "fontWeight": "700" }],
+            "headline-sm": ["1.25rem", { "lineHeight": "1.4", "fontWeight": "600" }],
+            "body-md": ["1rem", { "lineHeight": "1.6", "fontWeight": "400" }],
+            "display-mobile": ["2.25rem", { "lineHeight": "1.15", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+            "body-sm": ["0.875rem", { "lineHeight": "1.5", "fontWeight": "400" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 500, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+  </style>
+</head>
+<body class="bg-surface-ivory text-on-surface antialiased min-h-screen flex flex-col font-body-md selection:bg-highlight-amber-soft selection:text-primary">
+<!-- TOP UTILITY & IMMEDIATE RESCUE RIBBON -->
+<aside class="bg-on-surface text-surface-bright py-2 px-4 border-b border-secondary/20 relative z-50">
+<div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between text-xs gap-2">
+<div class="flex flex-wrap items-center gap-3">
+<span class="inline-flex items-center gap-1.5 font-label-md text-label-md tracking-wider text-surface-bright">
+<span class="inline-flex w-2 h-2 rounded-full bg-emergency-crimson animate-ping"></span>
+24/7 Rapid Response Active
+</span>
+<span class="text-text-muted hidden md:inline">•</span>
+<a class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-error-container text-emergency-crimson font-label-md text-label-md hover:bg-error transition-colors" href="tel:1098">
+<span class="material-symbols-outlined text-xs" style="font-variation-settings: 'FILL' 1;">call</span>
+Childline 1098
+</a>
+<a class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-surface-variant text-primary font-label-md text-label-md hover:bg-surface-container transition-colors" href="tel:181">
+<span class="material-symbols-outlined text-xs" style="font-variation-settings: 'FILL' 1;">support_agent</span>
+Women Helpline 181
+</a>
+</div>
+<div class="flex items-center gap-4 text-surface-container-high">
+<span class="hidden sm:inline-flex items-center gap-1 font-label-md text-label-md text-surface-variant">
+<span class="material-symbols-outlined text-xs" style="font-variation-settings: 'FILL' 1;">verified</span>
+Section 8 Licensed Non-Profit Entity
+</span>
+<div class="flex items-center gap-2 border-l border-secondary/30 pl-3">
+<button class="hover:text-surface-bright font-label-md text-label-md transition-colors" type="button">EN</button>
+<span class="text-text-muted">/</span>
+<button class="text-text-muted hover:text-surface-bright font-label-md text-label-md transition-colors" type="button">हिन्दी</button>
+</div>
+<a class="flex items-center gap-1 text-emergency-crimson hover:text-error font-label-md text-label-md ml-1 px-2 py-0.5 rounded bg-error-container/40 border border-emergency-crimson/30 transition-all" href="https://weather.com" target="_top" title="Quick Safe Exit">
+<span class="material-symbols-outlined text-xs">logout</span>
+<span class="hidden md:inline">Quick Exit</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- SHARED COMPONENT: TopNavBar -->
+<header class="bg-surface-ivory/95 dark:bg-inverse-surface/95 border-b border-surface-container dark:border-outline-variant shadow-sm docked full-width top-0 sticky z-50">
+<div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-20">
+<!-- Brand Emblem -->
+<a class="flex items-center gap-3.5 group focus:outline-none focus:ring-2 focus:ring-marigold-bright rounded-xl p-1" href="#">
+<div class="w-11 h-11 rounded-xl bg-gradient-to-br from-marigold-bright via-primary to-primary-container flex items-center justify-center text-on-primary shadow-sm group-hover:scale-105 transition-transform relative overflow-hidden">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">shield_with_heart</span>
+</div>
+<div class="flex flex-col">
+<span class="text-headline-md font-headline-md font-bold text-on-surface dark:text-inverse-on-surface tracking-tight leading-tight flex items-center gap-1.5">
+TRINETRA GARGI FOUNDATION
+</span>
+<span class="font-label-md text-label-md text-text-muted tracking-wide">Restoring Dignity &amp; Childhood</span>
+</div>
+</a>
+<!-- Segmented Pill Navigation Links -->
+<nav class="hidden lg:flex items-center gap-1 bg-surface-container-low/80 p-1.5 rounded-full border border-surface-container">
+<a class="px-3.5 py-1.5 rounded-full text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary hover:bg-surface-container-lowest font-medium transition-all font-label-lg text-label-lg" href="#">About Us</a>
+<a class="px-3.5 py-1.5 rounded-full text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary hover:bg-surface-container-lowest font-medium transition-all font-label-lg text-label-lg" href="#">Our Work</a>
+<a class="px-3.5 py-1.5 rounded-full text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary hover:bg-surface-container-lowest font-medium transition-all font-label-lg text-label-lg" href="#">Govt Schemes</a>
+<a class="px-3.5 py-1.5 rounded-full text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary hover:bg-surface-container-lowest font-medium transition-all font-label-lg text-label-lg" href="#">Impact &amp; Audits</a>
+<a class="px-3.5 py-1.5 rounded-full text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary hover:bg-surface-container-lowest font-medium transition-all font-label-lg text-label-lg" href="#">Stories</a>
+<a class="px-3.5 py-1.5 rounded-full text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary hover:bg-surface-container-lowest font-medium transition-all font-label-lg text-label-lg" href="#">Volunteer</a>
+</nav>
+<!-- High-Contrast Action Cluster -->
+<div class="flex items-center gap-2.5">
+<!-- Highlighted / Active SOS Report Crisis Button -->
+<a class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-emergency-crimson text-on-error font-label-md text-label-md shadow-sm border border-emergency-crimson hover:bg-error transition-all active:scale-95" href="#portal">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
+</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">warning</span>
+<span>Report Crisis</span>
+</a>
+<!-- Donate Now CTA with 80G Relief Badge -->
+<a class="inline-flex flex-col items-center justify-center px-4 py-1.5 rounded-lg bg-marigold-bright hover:bg-primary-container text-on-primary shadow-sm transition-all active:scale-95 group" href="#">
+<div class="flex items-center gap-1 font-label-lg text-label-lg font-bold leading-tight">
+<span>Donate Now</span>
+<span class="material-symbols-outlined text-sm group-hover:translate-x-0.5 transition-transform">arrow_forward</span>
+</div>
+<span class="text-[11px] text-white/90 font-medium leading-none">Section 8 Support</span>
+</a>
+</div>
+</div>
+</header>
+<!-- MAIN CANVAS -->
+<main class="flex-grow">
+<!-- HERO & URGENT EMERGENCY HOTLINES SECTION -->
+<section class="bg-surface-container-low/60 border-b border-surface-container py-10 md:py-14" id="emergency-hotlines">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="max-w-3xl mb-8">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-error-container text-emergency-crimson font-label-md text-label-md mb-3 border border-emergency-crimson/20">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">emergency</span>
+            Direct Immediate Interventions
+          </div>
+<h1 class="font-headline-xl text-headline-xl text-on-surface tracking-tight mb-3">
+            Help &amp; Confidential Report Portal
+          </h1>
+<p class="font-body-lg text-body-lg text-secondary">
+            If a child or woman is in imminent physical danger, do not wait for online ticket verification. Use the single-tap verified government lines below immediately.
+          </p>
+</div>
+<!-- 4 Emergency Hotline Fast Action Cards (Bento style grid) -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+<!-- Card 1: Childline -->
+<div class="bg-surface-container-lowest rounded-xl p-5 border border-outline-variant/60 shadow-sm hover:border-emergency-crimson transition-all flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-3">
+<span class="p-2 rounded-lg bg-error-container text-emergency-crimson">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">child_care</span>
+</span>
+<span class="font-label-md text-label-md px-2 py-0.5 rounded bg-surface-container text-secondary">Toll Free 24×7</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface mb-1">Childline India</h2>
+<p class="font-body-sm text-body-sm text-text-muted mb-4">Immediate rescue for abandoned, runaway, abused, or trafficked children.</p>
+</div>
+<a class="w-full inline-flex items-center justify-center gap-2 py-3 px-4 rounded-lg bg-emergency-crimson hover:bg-error text-on-error font-label-lg text-label-lg active:scale-95 transition-transform" href="tel:1098">
+<span class="material-symbols-outlined text-base">call</span>
+              Dial 1098 Now
+            </a>
+</div>
+<!-- Card 2: Women Helpline -->
+<div class="bg-surface-container-lowest rounded-xl p-5 border border-outline-variant/60 shadow-sm hover:border-coral-warmth transition-all flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-3">
+<span class="p-2 rounded-lg bg-surface-variant text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">woman</span>
+</span>
+<span class="font-label-md text-label-md px-2 py-0.5 rounded bg-surface-container text-secondary">Govt National</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface mb-1">Women Helpline</h2>
+<p class="font-body-sm text-body-sm text-text-muted mb-4">Support for domestic distress, harassment, gender violence, &amp; emergency shelter.</p>
+</div>
+<a class="w-full inline-flex items-center justify-center gap-2 py-3 px-4 rounded-lg bg-on-surface hover:bg-secondary text-surface-bright font-label-lg text-label-lg active:scale-95 transition-transform" href="tel:181">
+<span class="material-symbols-outlined text-base">call</span>
+              Dial 181 Line
+            </a>
+</div>
+<!-- Card 3: Police Emergency 112 -->
+<div class="bg-surface-container-lowest rounded-xl p-5 border border-outline-variant/60 shadow-sm hover:border-secondary transition-all flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-3">
+<span class="p-2 rounded-lg bg-secondary-container text-on-secondary-fixed-variant">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">local_police</span>
+</span>
+<span class="font-label-md text-label-md px-2 py-0.5 rounded bg-surface-container text-secondary">All-Hazards</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface mb-1">Police Emergency</h2>
+<p class="font-body-sm text-body-sm text-text-muted mb-4">National ERSS dispatcher for life-threatening violence, assault, and abduction.</p>
+</div>
+<a class="w-full inline-flex items-center justify-center gap-2 py-3 px-4 rounded-lg bg-on-surface hover:bg-secondary text-surface-bright font-label-lg text-label-lg active:scale-95 transition-transform" href="tel:112">
+<span class="material-symbols-outlined text-base">call</span>
+              Dial 112 Direct
+            </a>
+</div>
+<!-- Card 4: Trinetra Rapid Response Desk -->
+<div class="bg-highlight-amber-soft/40 rounded-xl p-5 border border-marigold-bright/40 shadow-sm hover:border-marigold-bright transition-all flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-3">
+<span class="p-2 rounded-lg bg-marigold-bright text-on-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">diversity_1</span>
+</span>
+<span class="font-label-md text-label-md px-2 py-0.5 rounded bg-white text-primary font-bold">Field Triage</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface mb-1">Trinetra Rapid Desk</h2>
+<p class="font-body-sm text-body-sm text-text-muted mb-4">Direct foundation social caseworkers for school dropouts &amp; welfare denial.</p>
+</div>
+<a class="w-full inline-flex items-center justify-center gap-2 py-3 px-4 rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-lg text-label-lg active:scale-95 transition-transform" href="tel:18002081098">
+<span class="material-symbols-outlined text-base">support_agent</span>
+              1800-208-1098
+            </a>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION: CONFIDENTIAL REPORTING PORTAL -->
+<section class="py-12 md:py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" id="portal">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+<!-- Left Column: Form Canvas (8 cols) -->
+<div class="lg:col-span-8 bg-surface-container-lowest rounded-2xl border border-surface-container p-6 sm:p-10 shadow-sm">
+<div class="border-b border-surface-container pb-6 mb-8">
+<div class="flex items-center gap-2 text-tertiary mb-2">
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">lock</span>
+<span class="font-label-md text-label-md">End-to-End Encrypted Case Intake</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-2">
+              Lodge a Confidential Grievance or Distress Alert
+            </h2>
+<p class="font-body-md text-body-md text-text-muted">
+              Submit critical details safely. Reports are triaged by licensed legal and social caseworkers. Anonymous submissions are treated with equal emergency severity.
+            </p>
+</div>
+<form class="space-y-8" id="grievanceForm" onsubmit="event.preventDefault(); document.getElementById('successToast').classList.remove('hidden');">
+<!-- 1. Purpose Toggle -->
+<div>
+<label class="block font-label-lg text-label-lg text-on-surface mb-3">
+                1. What is the nature of this submission? <span class="text-emergency-crimson">*</span>
+</label>
+<div aria-label="Reporting Purpose" class="grid grid-cols-1 sm:grid-cols-2 gap-3" role="radiogroup">
+<label class="relative flex items-center p-4 border border-outline-variant/60 rounded-xl cursor-pointer hover:bg-surface-container-low transition-colors has-[:checked]:border-primary has-[:checked]:bg-highlight-amber-soft/20">
+<input checked="" class="text-primary focus:ring-marigold-bright h-4 w-4" name="reporting_intent" type="radio" value="self"/>
+<div class="ml-3">
+<span class="block font-label-lg text-label-lg text-on-surface">Seek Help for Myself or Family</span>
+<span class="block font-body-sm text-body-sm text-text-muted">I require immediate welfare, scheme access, or rescue aid.</span>
+</div>
+</label>
+<label class="relative flex items-center p-4 border border-outline-variant/60 rounded-xl cursor-pointer hover:bg-surface-container-low transition-colors has-[:checked]:border-primary has-[:checked]:bg-highlight-amber-soft/20">
+<input class="text-primary focus:ring-marigold-bright h-4 w-4" name="reporting_intent" type="radio" value="third_party"/>
+<div class="ml-3">
+<span class="block font-label-lg text-label-lg text-on-surface">Report a Person in Distress</span>
+<span class="block font-body-sm text-body-sm text-text-muted">Reporting child exploitation, domestic violence, or denial.</span>
+</div>
+</label>
+</div>
+</div>
+<!-- 2. Anonymous Toggle with Explicit Legal Guarantee Banner -->
+<div class="bg-surface-warm-card rounded-xl p-5 border border-outline-variant/50">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+<div>
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm text-on-surface">Anonymous Submission Mode</span>
+<span class="px-2 py-0.5 rounded text-[11px] bg-tertiary text-on-tertiary font-bold tracking-wider">POCSO SAFE</span>
+</div>
+<p class="font-body-sm text-body-sm text-text-muted mt-1">
+                    Toggle ON if you wish to file without sharing your name, phone number, or email identity.
+                  </p>
+</div>
+<!-- Toggle switch -->
+<label class="relative inline-flex items-center cursor-pointer flex-shrink-0">
+<input class="sr-only peer" id="anonToggle" onchange="document.getElementById('contactSection').classList.toggle('opacity-40'); document.getElementById('contactSection').classList.toggle('pointer-events-none');" type="checkbox"/>
+<div class="w-14 h-7 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-tertiary"></div>
+</label>
+</div>
+<!-- Legal disclaimer note -->
+<div class="mt-4 pt-3 border-t border-surface-container flex items-start gap-2.5 text-xs text-text-muted">
+<span class="material-symbols-outlined text-sm text-tertiary mt-0.5" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+<span>
+<strong>Statutory Guarantee:</strong> Trinetra operates zero client IP-logging servers. Under Section 19 of the POCSO Act &amp; Juvenile Justice Act (2015), informant confidentiality is strictly protected by non-disclosure legal immunities.
+                </span>
+</div>
+</div>
+<!-- 3. Issue Category Selector (6 structured tags) -->
+<div>
+<label class="block font-label-lg text-label-lg text-on-surface mb-2">
+                2. Select Primary Distress Category <span class="text-emergency-crimson">*</span>
+</label>
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+<label class="border border-outline-variant/60 rounded-lg p-3 flex items-start gap-3 cursor-pointer hover:border-primary transition-all has-[:checked]:border-primary has-[:checked]:bg-highlight-amber-soft/30">
+<input checked="" class="mt-1 text-primary focus:ring-marigold-bright" name="category" type="radio" value="child_labour"/>
+<div>
+<span class="block font-label-md text-label-md text-on-surface">Child Labour / Trafficking</span>
+<span class="block text-xs text-text-muted">Brick kilns, begging, hazardous work.</span>
+</div>
+</label>
+<label class="border border-outline-variant/60 rounded-lg p-3 flex items-start gap-3 cursor-pointer hover:border-primary transition-all has-[:checked]:border-primary has-[:checked]:bg-highlight-amber-soft/30">
+<input class="mt-1 text-primary focus:ring-marigold-bright" name="category" type="radio" value="out_of_school"/>
+<div>
+<span class="block font-label-md text-label-md text-on-surface">Out-of-School Child</span>
+<span class="block text-xs text-text-muted">RTE denial, orphan dropouts.</span>
+</div>
+</label>
+<label class="border border-outline-variant/60 rounded-lg p-3 flex items-start gap-3 cursor-pointer hover:border-primary transition-all has-[:checked]:border-primary has-[:checked]:bg-highlight-amber-soft/30">
+<input class="mt-1 text-primary focus:ring-marigold-bright" name="category" type="radio" value="domestic_abuse"/>
+<div>
+<span class="block font-label-md text-label-md text-on-surface">Domestic Abuse / Violence</span>
+<span class="block text-xs text-text-muted">Assault, physical cruelty, forced isolation.</span>
+</div>
+</label>
+<label class="border border-outline-variant/60 rounded-lg p-3 flex items-start gap-3 cursor-pointer hover:border-primary transition-all has-[:checked]:border-primary has-[:checked]:bg-highlight-amber-soft/30">
+<input class="mt-1 text-primary focus:ring-marigold-bright" name="category" type="radio" value="malnutrition"/>
+<div>
+<span class="block font-label-md text-label-md text-on-surface">Severe Malnutrition / Hunger</span>
+<span class="block text-xs text-text-muted">SAM child, zero ration access.</span>
+</div>
+</label>
+<label class="border border-outline-variant/60 rounded-lg p-3 flex items-start gap-3 cursor-pointer hover:border-primary transition-all has-[:checked]:border-primary has-[:checked]:bg-highlight-amber-soft/30">
+<input class="mt-1 text-primary focus:ring-marigold-bright" name="category" type="radio" value="medical_need"/>
+<div>
+<span class="block font-label-md text-label-md text-on-surface">Emergency Medical Need</span>
+<span class="block text-xs text-text-muted">Critical trauma, untreated sickness.</span>
+</div>
+</label>
+<label class="border border-outline-variant/60 rounded-lg p-3 flex items-start gap-3 cursor-pointer hover:border-primary transition-all has-[:checked]:border-primary has-[:checked]:bg-highlight-amber-soft/30">
+<input class="mt-1 text-primary focus:ring-marigold-bright" name="category" type="radio" value="welfare_denial"/>
+<div>
+<span class="block font-label-md text-label-md text-on-surface">Welfare Denial / Documents</span>
+<span class="block text-xs text-text-muted">Aadhaar/pension block, denial of food aid.</span>
+</div>
+</label>
+</div>
+</div>
+<!-- 4. Incident Location Pinpoint -->
+<div>
+<div class="flex items-center justify-between mb-2">
+<label class="font-label-lg text-label-lg text-on-surface">
+                  3. Incident or Victim Location <span class="text-emergency-crimson">*</span>
+</label>
+<button class="text-primary text-xs font-label-md flex items-center gap-1 hover:underline" type="button">
+<span class="material-symbols-outlined text-sm">my_location</span>
+                  Detect Approximate GPS
+                </button>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-3">
+<div>
+<label class="block text-xs text-text-muted mb-1 font-label-md">State / Union Territory</label>
+<select class="w-full bg-white border border-slate-300 rounded-lg px-3.5 py-2.5 text-on-surface text-sm focus:ring-2 focus:ring-marigold-bright focus:outline-none">
+<option value="">Select State</option>
+<option value="UP">Uttar Pradesh</option>
+<option value="BR">Bihar</option>
+<option value="DL">Delhi NCR</option>
+<option value="MP">Madhya Pradesh</option>
+<option value="RJ">Rajasthan</option>
+<option value="WB">West Bengal</option>
+<option value="MH">Maharashtra</option>
+<option value="OTHER">Other State</option>
+</select>
+</div>
+<div>
+<label class="block text-xs text-text-muted mb-1 font-label-md">District / Tehsil / Block</label>
+<input class="w-full bg-white border border-slate-300 rounded-lg px-3.5 py-2.5 text-on-surface text-sm placeholder:text-text-muted/60 focus:ring-2 focus:ring-marigold-bright focus:outline-none" placeholder="e.g. Varanasi Sadar, Mirzapur" type="text"/>
+</div>
+</div>
+<div>
+<label class="block text-xs text-text-muted mb-1 font-label-md">Specific Street, Landmark, or Facility Pin</label>
+<input class="w-full bg-white border border-slate-300 rounded-lg px-3.5 py-2.5 text-on-surface text-sm placeholder:text-text-muted/60 focus:ring-2 focus:ring-marigold-bright focus:outline-none" placeholder="e.g. Near Shiv Mandir, Gate 3 of Old Industrial Area, Gali No. 4" type="text"/>
+</div>
+</div>
+<!-- 5. Evidence & Description Field -->
+<div>
+<label class="block font-label-lg text-label-lg text-on-surface mb-1">
+                4. Incident Details &amp; Circumstances <span class="text-emergency-crimson">*</span>
+</label>
+<p class="text-xs text-text-muted mb-2">
+                Prompt: How many individuals are affected? Are they currently safe? What immediate danger exists? Mention approximate ages if known.
+              </p>
+<textarea class="w-full bg-white border border-slate-300 rounded-lg p-3 text-on-surface text-sm placeholder:text-text-muted/60 focus:ring-2 focus:ring-marigold-bright focus:outline-none" placeholder="Provide accurate, objective observations without endangering yourself to gather details..." rows="4"></textarea>
+<!-- Evidence Upload note -->
+<div class="mt-2.5 flex items-center justify-between p-3 rounded-lg border border-dashed border-outline-variant bg-surface-ivory">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-text-muted text-base">attach_file</span>
+<span class="text-xs text-text-muted">Attach supporting documents or images (Max 15MB, metadata stripped for safety).</span>
+</div>
+<button class="px-3 py-1 bg-surface-container-high hover:bg-surface-container text-on-surface text-xs font-label-md rounded border border-outline-variant/60" type="button">
+                  Select Files
+                </button>
+</div>
+</div>
+<!-- 6. Optional Contact Info (Disabled conditionally if anonymous) -->
+<div class="transition-all duration-200" id="contactSection">
+<div class="flex items-center justify-between mb-2">
+<label class="font-label-lg text-label-lg text-on-surface">
+                  5. Contact Information (Optional &amp; Encrypted)
+                </label>
+<span class="text-xs text-text-muted">Leave blank if submitting purely anonymously</span>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-3">
+<div>
+<input class="w-full bg-white border border-slate-300 rounded-lg px-3.5 py-2.5 text-on-surface text-sm placeholder:text-text-muted/60 focus:ring-2 focus:ring-marigold-bright focus:outline-none" placeholder="Your Name or Safe Pseudonym" type="text"/>
+</div>
+<div>
+<input class="w-full bg-white border border-slate-300 rounded-lg px-3.5 py-2.5 text-on-surface text-sm placeholder:text-text-muted/60 focus:ring-2 focus:ring-marigold-bright focus:outline-none" placeholder="Mobile Number (for safe verification)" type="tel"/>
+</div>
+</div>
+<div class="flex flex-wrap items-center gap-4 text-xs text-text-muted">
+<span class="font-label-md">Callback Preference:</span>
+<label class="inline-flex items-center gap-1.5 cursor-pointer">
+<input checked="" class="text-primary focus:ring-marigold-bright" name="callback_time" type="radio" value="anytime"/>
+<span>Anytime Immediate</span>
+</label>
+<label class="inline-flex items-center gap-1.5 cursor-pointer">
+<input class="text-primary focus:ring-marigold-bright" name="callback_time" type="radio" value="morning"/>
+<span>Mornings (9am - 12pm)</span>
+</label>
+<label class="inline-flex items-center gap-1.5 cursor-pointer">
+<input class="text-primary focus:ring-marigold-bright" name="callback_time" type="radio" value="evening"/>
+<span>Evenings (6pm - 9pm)</span>
+</label>
+<label class="inline-flex items-center gap-1.5 cursor-pointer">
+<input class="text-primary focus:ring-marigold-bright" name="callback_time" type="radio" value="whatsapp_only"/>
+<span>End-to-End Encrypted Signal/WhatsApp Only</span>
+</label>
+</div>
+</div>
+<!-- Submit CTA -->
+<div class="pt-4 border-t border-surface-container">
+<button class="w-full py-4 px-6 rounded-lg bg-primary hover:bg-primary-container text-on-primary font-headline-sm text-headline-sm flex items-center justify-center gap-2 shadow-sm transition-all active:scale-98" type="submit">
+<span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">send</span>
+                Submit Priority Case for Verification
+              </button>
+<div class="hidden mt-4 p-4 rounded-xl bg-surface-container text-on-surface border border-tertiary-container/40 flex items-center gap-3" id="successToast">
+<span class="material-symbols-outlined text-tertiary text-2xl" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<div class="text-xs">
+<p class="font-bold text-on-surface">Report Successfully Encrypted and Dispatched.</p>
+<p class="text-text-muted">Incident Reference #TGF-2024-8841 generated. Our triage officer has acknowledged the ping.</p>
+</div>
+</div>
+</div>
+</form>
+</div>
+<!-- Right Column: Security Guarantees & Safe Exit Widget (4 cols) -->
+<div class="lg:col-span-4 space-y-6">
+<!-- Quick Safety Exit Button (Standard for Domestic Violence & Distress Pages) -->
+<div class="bg-surface-warm-card rounded-2xl p-6 border border-outline-variant/60 shadow-sm">
+<div class="flex items-center gap-3 mb-3 text-emergency-crimson">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">exit_to_app</span>
+<h3 class="font-headline-sm text-headline-sm">Quick Safety Exit</h3>
+</div>
+<p class="font-body-sm text-body-sm text-text-muted mb-4">
+              If someone is approaching or you are monitoring in an unsafe environment, click below to immediately redirect to an innocent weather portal and clear session inputs.
+            </p>
+<a class="w-full inline-flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-colors border border-outline-variant" href="https://weather.com" target="_top">
+<span>Quick Exit to Neutral Site</span>
+<span class="material-symbols-outlined text-sm">open_in_new</span>
+</a>
+</div>
+<!-- Trust & Legal Protection Seal -->
+<div class="bg-surface-container-lowest rounded-2xl p-6 border border-surface-container shadow-sm">
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-3 flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary" style="font-variation-settings: 'FILL' 1;">gavel</span>
+              Legal Protection Protocol
+            </h3>
+<ul class="space-y-3 font-body-sm text-body-sm text-text-muted">
+<li class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-tertiary text-sm mt-0.5" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span><strong>POCSO Section 19:</strong> Mandates immediate state action with full legal shielding for good-faith informants.</span>
+</li>
+<li class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-tertiary text-sm mt-0.5" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span><strong>No Retaliation Risk:</strong> Case files shared with Child Welfare Committees (CWC) redact all informant coordinates unless consent is filed.</span>
+</li>
+<li class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-tertiary text-sm mt-0.5" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span><strong>Zero Ad-Trackers:</strong> No marketing pixels, Google Analytics trackers, or Facebook tags run on this report domain.</span>
+</li>
+</ul>
+<div class="mt-5 p-3 rounded-lg bg-surface-container-low border border-surface-container text-xs text-secondary">
+<span class="font-bold block text-on-surface mb-0.5">District Officer On Call</span>
+              District Child Protection Unit (DCPU) integration operational across 42 nodal administrative zones.
+            </div>
+</div>
+<!-- Direct Field Helplines Card -->
+<div class="bg-surface-container-lowest rounded-2xl p-6 border border-surface-container shadow-sm">
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-3">
+              Specialized Welfare Contacts
+            </h3>
+<div class="space-y-3 text-sm">
+<div class="pb-2.5 border-b border-surface-container flex justify-between items-center">
+<div>
+<div class="font-semibold text-on-surface">National Cyber Crime Portal</div>
+<div class="text-xs text-text-muted">Online child abuse material report</div>
+</div>
+<a class="text-primary font-bold hover:underline font-mono" href="tel:1930">1930</a>
+</div>
+<div class="pb-2.5 border-b border-surface-container flex justify-between items-center">
+<div>
+<div class="font-semibold text-on-surface">Kiran Mental Health Line</div>
+<div class="text-xs text-text-muted">Crisis trauma counseling</div>
+</div>
+<a class="text-primary font-bold hover:underline font-mono" href="tel:18005990019">1800-599-0019</a>
+</div>
+<div class="flex justify-between items-center">
+<div>
+<div class="font-semibold text-on-surface">Senior Citizen Helpline</div>
+<div class="text-xs text-text-muted">Elder abuse &amp; abandonment</div>
+</div>
+<a class="text-primary font-bold hover:underline font-mono" href="tel:14567">14567</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION: WHAT HAPPENS AFTER YOU REPORT (TRANSPARENT 4-STEP TIMELINE) -->
+<section class="bg-surface-warm-card py-16 border-y border-surface-container">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="text-center max-w-2xl mx-auto mb-12">
+<div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container text-secondary font-label-md text-label-md mb-2">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">account_tree</span>
+            Accountability Protocol
+          </div>
+<h2 class="font-headline-xl text-headline-xl text-on-surface tracking-tight mb-3">
+            What Happens After You Report
+          </h2>
+<p class="font-body-md text-body-md text-text-muted">
+            Radical operational transparency. Every case follows an audited, legal timeline to prevent administrative delay or bureaucratic inaction.
+          </p>
+</div>
+<!-- 4 Step Interactive Timeline Matrix -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative">
+<!-- Step 1 -->
+<div class="bg-surface-container-lowest rounded-xl p-6 border border-outline-variant/60 shadow-sm relative flex flex-col justify-between">
+<div>
+<div class="w-10 h-10 rounded-full bg-primary-fixed text-primary font-bold flex items-center justify-center font-stat-metric-mobile text-base mb-4">
+                01
+              </div>
+<div class="text-xs font-label-md uppercase tracking-wider text-coral-warmth mb-1">Within 45 Minutes</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-2">Verification &amp; Intake</h3>
+<p class="font-body-sm text-body-sm text-text-muted">
+                Our central crisis triage verifies geolocation authenticity, assesses imminent physical peril, and logs the secure case docket.
+              </p>
+</div>
+<div class="mt-6 pt-3 border-t border-surface-container text-xs text-secondary flex items-center gap-1">
+<span class="material-symbols-outlined text-sm text-tertiary">speed</span>
+<span>Avg triage: 28 mins</span>
+</div>
+</div>
+<!-- Step 2 -->
+<div class="bg-surface-container-lowest rounded-xl p-6 border border-outline-variant/60 shadow-sm relative flex flex-col justify-between">
+<div>
+<div class="w-10 h-10 rounded-full bg-primary-fixed text-primary font-bold flex items-center justify-center font-stat-metric-mobile text-base mb-4">
+                02
+              </div>
+<div class="text-xs font-label-md uppercase tracking-wider text-marigold-bright mb-1">Within 2 to 4 Hours</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-2">Triage with CWC &amp; SJPU</h3>
+<p class="font-body-sm text-body-sm text-text-muted">
+                Statutory escalation to District Child Welfare Committee (CWC) or Special Juvenile Police Unit (SJPU) under standard operating procedures.
+              </p>
+</div>
+<div class="mt-6 pt-3 border-t border-surface-container text-xs text-secondary flex items-center gap-1">
+<span class="material-symbols-outlined text-sm text-tertiary">policy</span>
+<span>Judicial statutory mandate</span>
+</div>
+</div>
+<!-- Step 3 -->
+<div class="bg-surface-container-lowest rounded-xl p-6 border border-outline-variant/60 shadow-sm relative flex flex-col justify-between">
+<div>
+<div class="w-10 h-10 rounded-full bg-primary-fixed text-primary font-bold flex items-center justify-center font-stat-metric-mobile text-base mb-4">
+                03
+              </div>
+<div class="text-xs font-label-md uppercase tracking-wider text-secondary mb-1">Same-Day Action</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-2">Field Worker Dispatch</h3>
+<p class="font-body-sm text-body-sm text-text-muted">
+                Trinetra ground social caseworkers deploy alongside local protection officers to conduct physical spot intervention and child extraction.
+              </p>
+</div>
+<div class="mt-6 pt-3 border-t border-surface-container text-xs text-secondary flex items-center gap-1">
+<span class="material-symbols-outlined text-sm text-tertiary">groups</span>
+<span>Trained female caseworkers</span>
+</div>
+</div>
+<!-- Step 4 -->
+<div class="bg-surface-container-lowest rounded-xl p-6 border border-outline-variant/60 shadow-sm relative flex flex-col justify-between">
+<div>
+<div class="w-10 h-10 rounded-full bg-primary-fixed text-primary font-bold flex items-center justify-center font-stat-metric-mobile text-base mb-4">
+                04
+              </div>
+<div class="text-xs font-label-md uppercase tracking-wider text-tertiary mb-1">Long-Term Custody</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-2">Safe Shelter &amp; Legal Lodging</h3>
+<p class="font-body-sm text-body-sm text-text-muted">
+                Immediate clinical checkup, admission to Child Care Institution (CCI) or safe home, formal FIR lodging, and enrollment into welfare pensions.
+              </p>
+</div>
+<div class="mt-6 pt-3 border-t border-surface-container text-xs text-secondary flex items-center gap-1">
+<span class="material-symbols-outlined text-sm text-tertiary">done_all</span>
+<span>Continuous legal monitoring</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION: FAQ ON CONFIDENTIALITY, LEGAL PROTECTION, AND WHISTLEBLOWER SAFETY -->
+<section class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="max-w-3xl mx-auto mb-10 text-center">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-3">
+          Frequently Asked Questions on Protection &amp; Confidentiality
+        </h2>
+<p class="font-body-md text-body-md text-text-muted">
+          Clear, jargon-free explanations of your rights, legal safety as a reporter, and our operational responsibilities.
+        </p>
+</div>
+<div class="max-w-3xl mx-auto space-y-4">
+<!-- FAQ 1 -->
+<details class="group bg-surface-container-lowest rounded-xl border border-surface-container p-5 open:bg-surface-ivory transition-colors">
+<summary class="flex justify-between items-center font-headline-sm text-headline-sm text-on-surface cursor-pointer list-none">
+<span>Can I be sued or harassed for reporting suspected child abuse?</span>
+<span class="material-symbols-outlined group-open:rotate-180 transition-transform text-secondary">expand_more</span>
+</summary>
+<div class="mt-4 pt-3 border-t border-surface-container font-body-sm text-body-sm text-text-muted space-y-2">
+<p>
+              No. Under Indian law (The POCSO Act 2012, Section 19(7)), no person who reports in good faith can be subjected to civil or criminal liability. Even if subsequent police inquiries establish that no abuse occurred, you are legally protected provided the report was filed in good faith.
+            </p>
+</div>
+</details>
+<!-- FAQ 2 -->
+<details class="group bg-surface-container-lowest rounded-xl border border-surface-container p-5 open:bg-surface-ivory transition-colors">
+<summary class="flex justify-between items-center font-headline-sm text-headline-sm text-on-surface cursor-pointer list-none">
+<span>How does Trinetra ensure my anonymous report cannot be traced back?</span>
+<span class="material-symbols-outlined group-open:rotate-180 transition-transform text-secondary">expand_more</span>
+</summary>
+<div class="mt-4 pt-3 border-t border-surface-container font-body-sm text-body-sm text-text-muted space-y-2">
+<p>
+              When the 'Anonymous Submission Mode' is toggled, our servers discard client IP addresses and user agents at the memory buffer level before saving the case record. Case reports are encrypted at rest with AES-256 and only accessed by authorized caseworkers.
+            </p>
+</div>
+</details>
+<!-- FAQ 3 -->
+<details class="group bg-surface-container-lowest rounded-xl border border-surface-container p-5 open:bg-surface-ivory transition-colors">
+<summary class="flex justify-between items-center font-headline-sm text-headline-sm text-on-surface cursor-pointer list-none">
+<span>What if the child is being forced to work by their own parents?</span>
+<span class="material-symbols-outlined group-open:rotate-180 transition-transform text-secondary">expand_more</span>
+</summary>
+<div class="mt-4 pt-3 border-t border-surface-container font-body-sm text-body-sm text-text-muted space-y-2">
+<p>
+              Under the Child Labour (Prohibition and Regulation) Amendment Act, children under 14 cannot work in hazardous or commercial capacities. Trinetra's model focuses on restorative family rehabilitation: pairing destitute parents with State Social Welfare schemes (PDS, MNREGA, sponsorship grants) while securing compulsory school admission for the child through the RTE Act.
+            </p>
+</div>
+</details>
+<!-- FAQ 4 -->
+<details class="group bg-surface-container-lowest rounded-xl border border-surface-container p-5 open:bg-surface-ivory transition-colors">
+<summary class="flex justify-between items-center font-headline-sm text-headline-sm text-on-surface cursor-pointer list-none">
+<span>Can I follow up on the status of my report without revealing my identity?</span>
+<span class="material-symbols-outlined group-open:rotate-180 transition-transform text-secondary">expand_more</span>
+</summary>
+<div class="mt-4 pt-3 border-t border-surface-container font-body-sm text-body-sm text-text-muted space-y-2">
+<p>
+              Yes. Upon submission, you will receive a unique cryptographic Case Reference token (e.g., TGF-2024-XXXX). You can call the Trinetra Rapid Response Desk and quote only this token to receive an update on whether a field worker was deployed and if the individual is safe.
+            </p>
+</div>
+</details>
+<!-- FAQ 5 -->
+<details class="group bg-surface-container-lowest rounded-xl border border-surface-container p-5 open:bg-surface-ivory transition-colors">
+<summary class="flex justify-between items-center font-headline-sm text-headline-sm text-on-surface cursor-pointer list-none">
+<span>What happens if the local authorities refuse to file an FIR or intervene?</span>
+<span class="material-symbols-outlined group-open:rotate-180 transition-transform text-secondary">expand_more</span>
+</summary>
+<div class="mt-4 pt-3 border-t border-surface-container font-body-sm text-body-sm text-text-muted space-y-2">
+<p>
+              Trinetra maintains a panel of pro-bono High Court and Supreme Court advocates who immediately petition the National Commission for Protection of Child Rights (NCPCR) and District Magistrates if field police show reluctance or negligence in child welfare emergencies.
+            </p>
+</div>
+</details>
+</div>
+</section>
+</main>
+<!-- SHARED COMPONENT: Footer -->
+<footer class="bg-surface-warm-card dark:bg-inverse-surface border-t border-surface-container dark:border-outline-variant full-width flat no shadows">
+<div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+<!-- Top Tier: Brand, Credentials, & Primary Links -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
+<!-- Col 1: Foundation Info (2 cols) -->
+<div class="lg:col-span-2 space-y-4">
+<a class="inline-block text-headline-md font-headline-md font-bold text-on-surface dark:text-inverse-on-surface" href="#">
+            Trinetra Gargi Foundation
+          </a>
+<p class="font-body-sm text-body-sm text-text-muted max-w-sm">
+            Dedicated civic development, child welfare protection, and direct grievance redressal. Empowering vulnerable communities through verified government integration.
+          </p>
+<div class="flex flex-wrap gap-2 pt-2">
+<span class="px-2.5 py-1 rounded bg-surface-container text-secondary text-xs font-label-md">Section 8 Registered Non-Profit</span>
+<span class="px-2.5 py-1 rounded bg-surface-container text-secondary text-xs font-label-md">FCRA Registered</span>
+<span class="px-2.5 py-1 rounded bg-surface-container text-secondary text-xs font-label-md">12A Compliant</span>
+</div>
+</div>
+<!-- Col 2: Quick Links -->
+<div>
+<h4 class="font-label-md text-label-md uppercase tracking-wider text-on-surface dark:text-inverse-on-surface mb-3">Core Portals</h4>
+<ul class="space-y-2 font-body-sm text-body-sm">
+<li><a class="text-text-muted dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary transition-colors focus:outline-none focus:ring-2 focus:ring-marigold-bright" href="#">About Us</a></li>
+<li><a class="text-text-muted dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary transition-colors focus:outline-none focus:ring-2 focus:ring-marigold-bright" href="#">Government Schemes Portal</a></li>
+<li><a class="text-text-muted dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary transition-colors focus:outline-none focus:ring-2 focus:ring-marigold-bright" href="#">Impact Reports &amp; Audits</a></li>
+<li><a class="text-text-muted dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary transition-colors focus:outline-none focus:ring-2 focus:ring-marigold-bright" href="#">Statutory Donation Accounting</a></li>
+</ul>
+</div>
+<!-- Col 3: Rapid Hotlines -->
+<div>
+<h4 class="font-label-md text-label-md uppercase tracking-wider text-on-surface dark:text-inverse-on-surface mb-3">Distress Desks</h4>
+<ul class="space-y-2 font-body-sm text-body-sm">
+<li><a class="text-emergency-crimson font-semibold hover:underline focus:outline-none focus:ring-2 focus:ring-marigold-bright" href="tel:1098">Child Protection (1098)</a></li>
+<li><a class="text-emergency-crimson font-semibold hover:underline focus:outline-none focus:ring-2 focus:ring-marigold-bright" href="tel:181">Women Helpline (181)</a></li>
+<li><a class="text-primary dark:text-inverse-primary underline focus:outline-none focus:ring-2 focus:ring-marigold-bright" href="#portal">Confidential Grievance Redressal</a></li>
+<li><a class="text-text-muted dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary transition-colors focus:outline-none focus:ring-2 focus:ring-marigold-bright" href="#">Stories &amp; Field News</a></li>
+</ul>
+</div>
+<!-- Col 4: Governance & Legal -->
+<div>
+<h4 class="font-label-md text-label-md uppercase tracking-wider text-on-surface dark:text-inverse-on-surface mb-3">Institutional</h4>
+<ul class="space-y-2 font-body-sm text-body-sm">
+<li><a class="text-text-muted dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary transition-colors focus:outline-none focus:ring-2 focus:ring-marigold-bright" href="#">Volunteer &amp; CSR Partnerships</a></li>
+<li><a class="text-text-muted dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary transition-colors focus:outline-none focus:ring-2 focus:ring-marigold-bright" href="#">Privacy Policy &amp; Disclosures</a></li>
+</ul>
+</div>
+</div>
+<!-- Bottom Tier: Immutable Legal Statement -->
+<div class="pt-8 border-t border-surface-container dark:border-outline-variant/40 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+<p class="font-body-sm text-body-sm text-text-muted">
+          © 2024 Trinetra Gargi Foundation. Registered Non-Profit Entity (FCRA, Section 8 Licensed Non-Profit). Radical Transparency Verified. Zero Synthetic Media.
+        </p>
+<div class="flex items-center gap-4 text-xs text-text-muted">
+<span>Non-commercial civic resource</span>
+<span>•</span>
+<span>Server Location: India (In-Country Data Residence)</span>
+</div>
+</div>
+</div>
+</footer>
+</body></html>

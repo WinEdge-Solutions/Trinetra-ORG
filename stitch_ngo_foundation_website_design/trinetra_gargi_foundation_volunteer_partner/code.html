@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Trinetra Gargi Foundation - Volunteer &amp; Institutional Partnerships</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "secondary": "#49607c",
+            "on-tertiary-container": "#f5fff7",
+            "inverse-primary": "#ffb77d",
+            "surface-variant": "#d8e3fb",
+            "surface-container-lowest": "#ffffff",
+            "on-tertiary-fixed": "#002114",
+            "on-surface-variant": "#554336",
+            "coral-warmth": "#EA580C",
+            "on-primary": "#ffffff",
+            "surface-container": "#e7eeff",
+            "primary-fixed-dim": "#ffb77d",
+            "surface-container-high": "#dee8ff",
+            "on-tertiary-fixed-variant": "#005137",
+            "primary-fixed": "#ffdcc3",
+            "on-primary-fixed": "#2f1500",
+            "secondary-container": "#c7dfff",
+            "highlight-amber-soft": "#FEF3C7",
+            "on-tertiary": "#ffffff",
+            "emergency-crimson": "#DC2626",
+            "inverse-surface": "#263143",
+            "inverse-on-surface": "#ecf1ff",
+            "surface-tint": "#904d00",
+            "surface-warm-card": "#F5F5F4",
+            "secondary-fixed-dim": "#b0c9e8",
+            "outline": "#887364",
+            "surface-bright": "#f9f9ff",
+            "background": "#f9f9ff",
+            "error": "#ba1a1a",
+            "secondary-fixed": "#d1e4ff",
+            "on-background": "#111c2d",
+            "on-surface": "#111c2d",
+            "surface-container-highest": "#d8e3fb",
+            "on-secondary": "#ffffff",
+            "sage-soft": "#10B981",
+            "on-primary-container": "#fffbff",
+            "on-primary-fixed-variant": "#6e3900",
+            "outline-variant": "#dbc2b0",
+            "tertiary-container": "#00855d",
+            "primary-container": "#b15f00",
+            "tertiary-fixed": "#85f8c4",
+            "text-muted": "#64748B",
+            "surface-ivory": "#FAFAF9",
+            "surface-container-low": "#f0f3ff",
+            "tertiary-fixed-dim": "#68dba9",
+            "tertiary": "#006948",
+            "marigold-bright": "#F59E0B",
+            "on-secondary-fixed": "#011d35",
+            "error-container": "#ffdad6",
+            "on-secondary-container": "#4b637e",
+            "on-secondary-fixed-variant": "#314863",
+            "on-error": "#ffffff",
+            "surface": "#f9f9ff",
+            "surface-dim": "#cfdaf2",
+            "on-error-container": "#93000a",
+            "primary": "#8d4b00"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "margin": "1rem",
+            "gutter-desktop": "2rem",
+            "space-lg": "1.5rem",
+            "margin-tablet": "2rem",
+            "gutter": "1.5rem",
+            "margin-desktop": "3rem",
+            "space-md": "1rem",
+            "space-xs": "0.25rem",
+            "space-sm": "0.5rem",
+            "space-xl": "2.5rem"
+          },
+          "fontFamily": {
+            "headline-lg": ["Plus Jakarta Sans"],
+            "body-sm": ["Plus Jakarta Sans"],
+            "stat-metric-mobile": ["Plus Jakarta Sans"],
+            "headline-xl": ["Plus Jakarta Sans"],
+            "body-lg": ["Plus Jakarta Sans"],
+            "headline-sm": ["Plus Jakarta Sans"],
+            "display-mobile": ["Plus Jakarta Sans"],
+            "stat-metric": ["Plus Jakarta Sans"],
+            "label-lg": ["Plus Jakarta Sans"],
+            "headline-md": ["Plus Jakarta Sans"],
+            "body-md": ["Plus Jakarta Sans"],
+            "label-md": ["Plus Jakarta Sans"],
+            "display": ["Plus Jakarta Sans"],
+            "headline-xl-mobile": ["Plus Jakarta Sans"],
+            "label-caps": ["Plus Jakarta Sans"]
+          },
+          "fontSize": {
+            "headline-lg": ["2rem", { "lineHeight": "1.25", "letterSpacing": "-0.015em", "fontWeight": "700" }],
+            "body-sm": ["0.875rem", { "lineHeight": "1.5", "fontWeight": "400" }],
+            "stat-metric-mobile": ["2.5rem", { "lineHeight": "1.0", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+            "headline-xl": ["2.5rem", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "body-lg": ["1.125rem", { "lineHeight": "1.6", "fontWeight": "400" }],
+            "headline-sm": ["1.25rem", { "lineHeight": "1.4", "fontWeight": "600" }],
+            "display-mobile": ["2.25rem", { "lineHeight": "1.15", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+            "stat-metric": ["3.75rem", { "lineHeight": "1.0", "letterSpacing": "-0.03em", "fontWeight": "800" }],
+            "label-lg": ["0.875rem", { "lineHeight": "1.25", "letterSpacing": "0.01em", "fontWeight": "600" }],
+            "headline-md": ["1.5rem", { "lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "body-md": ["1rem", { "lineHeight": "1.6", "fontWeight": "400" }],
+            "label-md": ["0.75rem", { "lineHeight": "1.25", "letterSpacing": "0.04em", "fontWeight": "600" }],
+            "display": ["3.5rem", { "lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "800" }],
+            "headline-xl-mobile": ["1.875rem", { "lineHeight": "1.25", "letterSpacing": "-0.015em", "fontWeight": "700" }],
+            "label-caps": ["0.75rem", { "lineHeight": "1.2", "letterSpacing": "0.08em", "fontWeight": "700" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 500, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    .custom-warm-card {
+      background-color: #FFFFFF;
+      border: 1px solid #FEF3C7;
+      box-shadow: 0 4px 20px -2px rgba(15, 41, 66, 0.04), 0 2px 6px -1px rgba(217, 119, 6, 0.03);
+    }
+    .custom-warm-card:hover {
+      box-shadow: 0 8px 24px -4px rgba(15, 41, 66, 0.06), 0 2px 8px -1px rgba(217, 119, 6, 0.06);
+    }
+  </style>
+</head>
+<body class="bg-surface-ivory text-on-surface antialiased selection:bg-highlight-amber-soft selection:text-primary">
+<!-- Top Emergency & Civic Verification Utility Bar -->
+<aside class="bg-on-background text-surface-ivory py-2 px-4 sm:px-6 lg:px-8 text-label-md font-label-md">
+<div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-1.5 text-tertiary-fixed">
+<span class="w-2 h-2 rounded-full bg-sage-soft animate-pulse"></span>
+<span class="tracking-wide">24/7 Rapid Response Active across 18 Districts</span>
+</div>
+<div class="hidden md:flex items-center gap-4 text-slate-300">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-marigold-bright" style="font-size: 16px;">call</span>
+            Childline Emergency: <strong class="text-white ml-0.5">1098</strong>
+</span>
+<span class="text-slate-500">|</span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-coral-warmth" style="font-size: 16px;">shield</span>
+            Women Helpline: <strong class="text-white ml-0.5">181</strong>
+</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<span class="bg-surface-container-high/20 text-marigold-bright px-2 py-0.5 rounded text-xs border border-marigold-bright/30 font-medium">
+          Section 8 Compliant • 50% Tax Relief
+        </span>
+<a class="text-surface-ivory hover:text-marigold-bright transition-colors flex items-center gap-1 text-xs" href="#volunteer-form">
+<span>Ethics Registry</span>
+<span class="material-symbols-outlined" style="font-size: 14px;">verified_user</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- TopNavBar (Shared Component Execution) -->
+<header class="bg-surface-ivory dark:bg-inverse-surface border-b border-surface-container dark:border-outline-variant shadow-sm dark:shadow-none docked full-width top-0 sticky z-50">
+<div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-20">
+<!-- Brand Logo Anchor -->
+<a class="flex items-center gap-3 group focus:outline-none focus:ring-2 focus:ring-marigold-bright rounded-lg" href="#">
+<div class="w-11 h-11 rounded-xl bg-highlight-amber-soft border border-marigold-bright/40 flex items-center justify-center text-primary shadow-sm group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-marigold-bright" style="font-size: 26px; font-variation-settings: 'FILL' 1;">wb_sunny</span>
+</div>
+<div class="flex flex-col">
+<span class="text-headline-md font-headline-md font-bold text-on-surface dark:text-inverse-on-surface tracking-tight leading-tight">
+            Trinetra Gargi Foundation
+          </span>
+<span class="text-label-md font-label-md text-text-muted">Child Safeguarding &amp; Institutional Equity</span>
+</div>
+</a>
+<!-- Primary Desktop Navigation -->
+<nav aria-label="Main Navigation" class="hidden lg:flex items-center gap-7">
+<a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary font-medium transition-colors text-label-lg font-label-lg" href="#about">About Us</a>
+<a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary font-medium transition-colors text-label-lg font-label-lg" href="#work">Our Work</a>
+<a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary font-medium transition-colors text-label-lg font-label-lg" href="#schemes">Government Schemes</a>
+<a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary font-medium transition-colors text-label-lg font-label-lg" href="#resources">Awareness &amp; Resources</a>
+<a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary font-medium transition-colors text-label-lg font-label-lg" href="#help">Help &amp; Report</a>
+<a class="text-primary dark:text-inverse-primary font-bold border-b-2 border-primary dark:border-inverse-primary pb-1 text-label-lg font-label-lg" href="#volunteer-tracks">Volunteer &amp; Partner</a>
+<a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary font-medium transition-colors text-label-lg font-label-lg" href="#impact">Impact &amp; Reports</a>
+</nav>
+<!-- Trailing Action Hub -->
+<div class="flex items-center gap-3">
+<a class="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-emergency-crimson/10 text-emergency-crimson border border-emergency-crimson/30 hover:bg-emergency-crimson hover:text-white transition-all text-label-md font-label-md active:scale-95" href="#emergency-report">
+<span class="material-symbols-outlined" style="font-size: 16px;">emergency</span>
+<span>Report Crisis</span>
+</a>
+<a class="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-lg bg-marigold-bright hover:bg-primary-container text-white font-headline-sm text-label-lg shadow-sm hover:shadow transition-all active:scale-95" href="#donate">
+<span class="material-symbols-outlined" style="font-size: 18px; font-variation-settings: 'FILL' 1;">volunteer_activism</span>
+<span>Donate Now</span>
+</a>
+</div>
+</div>
+</header>
+<!-- Dual-Track Header & Hero Section -->
+<section class="relative overflow-hidden py-14 lg:py-20 border-b border-surface-container bg-surface-ivory">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<!-- Civic Pill Badge -->
+<div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-highlight-amber-soft border border-marigold-bright/30 mb-6">
+<span class="material-symbols-outlined text-primary" style="font-size: 18px; font-variation-settings: 'FILL' 1;">groups</span>
+<span class="text-primary font-semibold text-label-md">Direct Grassroots Mobilization &amp; Corporate Philanthropy</span>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-end">
+<div class="lg:col-span-8 space-y-4">
+<h1 class="text-headline-xl font-headline-xl lg:text-display lg:font-display text-on-surface tracking-tight text-balance">
+            Two Pathways to Restore Dignity: On the Ground or at Scale.
+          </h1>
+<p class="text-body-lg font-body-lg text-secondary max-w-3xl leading-relaxed">
+            Choose your theater of impact. Whether you are an individual lending hours to an underprivileged child's bridge classroom, or an enterprise directing audited CSR investments toward institutional protection hubs, our zero-synthetic verification system accounts for every minute and every rupee.
+          </p>
+</div>
+<!-- Quick Switch Indicator Cards -->
+<div class="lg:col-span-4 flex flex-col sm:flex-row lg:flex-col gap-3">
+<a class="flex items-center justify-between p-4 rounded-xl bg-white border border-highlight-amber-soft hover:border-marigold-bright transition-all group shadow-sm" href="#track-individual">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined">person</span>
+</div>
+<div>
+<p class="text-label-caps font-label-caps text-secondary uppercase tracking-wider">Track 01</p>
+<h2 class="text-label-lg font-label-lg text-on-surface font-bold">Individual Grassroots</h2>
+</div>
+</div>
+<span class="material-symbols-outlined text-secondary group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+<a class="flex items-center justify-between p-4 rounded-xl bg-white border border-highlight-amber-soft hover:border-marigold-bright transition-all group shadow-sm" href="#track-institutional">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined">domain</span>
+</div>
+<div>
+<p class="text-label-caps font-label-caps text-secondary uppercase tracking-wider">Track 02</p>
+<h2 class="text-label-lg font-label-lg text-on-surface font-bold">Institutional &amp; Corporate CSR</h2>
+</div>
+</div>
+<span class="material-symbols-outlined text-secondary group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Trust Badges Bar -->
+<div class="mt-12 pt-8 border-t border-slate-200 grid grid-cols-2 sm:grid-cols-4 gap-6">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-sage-soft text-2xl">verified</span>
+<div>
+<p class="text-label-lg font-label-lg font-bold text-on-surface">MCA CSR-1 Certified</p>
+<p class="text-body-sm font-body-sm text-text-muted">Reg #CSR000129281</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-sage-soft text-2xl">receipt_long</span>
+<div>
+<p class="text-label-lg font-label-lg font-bold text-on-surface">Section 8 Licensed Entity</p>
+<p class="text-body-sm font-body-sm text-text-muted">50% Exemptive Deductions</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-sage-soft text-2xl">policy</span>
+<div>
+<p class="text-label-lg font-label-lg font-bold text-on-surface">POCSO &amp; CWC Bound</p>
+<p class="text-body-sm font-body-sm text-text-muted">100% Police Vetted Personnel</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-sage-soft text-2xl">account_balance</span>
+<div>
+<p class="text-label-lg font-label-lg font-bold text-on-surface">FCRA Compliant</p>
+<p class="text-body-sm font-body-sm text-text-muted">MHA Foreign Inward Audited</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Track 1: Individual Volunteer Opportunities -->
+<section class="py-16 md:py-24 bg-surface-bright border-b border-surface-container" id="track-individual">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+<!-- Section Header -->
+<div class="max-w-3xl space-y-3">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded bg-surface-container text-primary font-bold text-label-md font-label-md">
+          TRACK 1 • DIRECT ACTION
+        </div>
+<h2 class="text-headline-xl font-headline-xl text-on-surface tracking-tight">
+          Stand in the Trenches: Grassroots Volunteering
+        </h2>
+<p class="text-body-lg font-body-lg text-secondary">
+          No ornamental charity. Our field volunteers work on actual legal documentation, teaching foundational numeracy in informal settlement centers, or guiding mothers through social protection schemes.
+        </p>
+</div>
+<!-- Volunteer Commitment Badges -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="bg-white p-6 rounded-xl border border-highlight-amber-soft flex items-start gap-4">
+<div class="p-3 bg-highlight-amber-soft rounded-lg text-primary">
+<span class="material-symbols-outlined text-2xl">schedule</span>
+</div>
+<div>
+<h3 class="text-headline-sm font-headline-sm text-on-surface font-bold">Flexible 3-5 hrs/week</h3>
+<p class="text-body-sm font-body-sm text-secondary mt-1">Structured weekend shifts designed for working professionals and university scholars.</p>
+</div>
+</div>
+<div class="bg-white p-6 rounded-xl border border-highlight-amber-soft flex items-start gap-4">
+<div class="p-3 bg-highlight-amber-soft rounded-lg text-primary">
+<span class="material-symbols-outlined text-2xl">military_tech</span>
+</div>
+<div>
+<h3 class="text-headline-sm font-headline-sm text-on-surface font-bold">Certified Volunteer Credentials</h3>
+<p class="text-body-sm font-body-sm text-secondary mt-1">Officially endorsed by Trinetra Gargi Board with logged social service hours.</p>
+</div>
+</div>
+<div class="bg-white p-6 rounded-xl border border-highlight-amber-soft flex items-start gap-4">
+<div class="p-3 bg-highlight-amber-soft rounded-lg text-primary">
+<span class="material-symbols-outlined text-2xl">family_restroom</span>
+</div>
+<div>
+<h3 class="text-headline-sm font-headline-sm text-on-surface font-bold">Direct Grassroots Mentorship</h3>
+<p class="text-body-sm font-body-sm text-secondary mt-1">Pair one-on-one with senior child rights activists and accredited legal fellows.</p>
+</div>
+</div>
+</div>
+<!-- 4 Core Role Pillars -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Pillar 1 -->
+<div class="custom-warm-card p-6 rounded-xl flex flex-col justify-between transition-all">
+<div class="space-y-4">
+<div class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-2xl">menu_book</span>
+</div>
+<h3 class="text-headline-sm font-headline-sm text-on-surface font-bold">Weekend Bridge School Mentor</h3>
+<p class="text-body-sm font-body-sm text-secondary">
+              Teach basic foundational numeracy, Hindi literacy, and conversational English to out-of-school street children re-entering mainstream schools.
+            </p>
+<div class="space-y-2 pt-2 border-t border-slate-100">
+<span class="inline-block text-xs font-semibold text-secondary">Key Locations:</span>
+<p class="text-xs text-text-muted">East Delhi, Noida Informal Clusters, Varanasi Rural</p>
+</div>
+</div>
+<a class="mt-6 inline-flex items-center gap-1 text-primary font-bold text-label-md font-label-md hover:underline" href="#volunteer-form">
+<span>Apply for this Role</span>
+<span class="material-symbols-outlined text-sm">north_east</span>
+</a>
+</div>
+<!-- Pillar 2 -->
+<div class="custom-warm-card p-6 rounded-xl flex flex-col justify-between transition-all">
+<div class="space-y-4">
+<div class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-2xl">assignment_turned_in</span>
+</div>
+<h3 class="text-headline-sm font-headline-sm text-on-surface font-bold">Community Paralegal &amp; Scheme Volunteer</h3>
+<p class="text-body-sm font-body-sm text-secondary">
+              Assist impoverished mothers in filling and filing Sukanya Samriddhi Yojana (SSY), RTE 25% quota applications, and digital ration transfers.
+            </p>
+<div class="space-y-2 pt-2 border-t border-slate-100">
+<span class="inline-block text-xs font-semibold text-secondary">Key Skills:</span>
+<p class="text-xs text-text-muted">Regional Language Fluency, Document Verification</p>
+</div>
+</div>
+<a class="mt-6 inline-flex items-center gap-1 text-primary font-bold text-label-md font-label-md hover:underline" href="#volunteer-form">
+<span>Apply for this Role</span>
+<span class="material-symbols-outlined text-sm">north_east</span>
+</a>
+</div>
+<!-- Pillar 3 -->
+<div class="custom-warm-card p-6 rounded-xl flex flex-col justify-between transition-all">
+<div class="space-y-4">
+<div class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-2xl">gavel</span>
+</div>
+<h3 class="text-headline-sm font-headline-sm text-on-surface font-bold">Child Rights &amp; Safe Custody Advocate</h3>
+<p class="text-body-sm font-body-sm text-secondary">
+              For law students and junior lawyers: assist our standing counsel in drafting Child Welfare Committee (CWC) reports and POCSO guardianship appeals.
+            </p>
+<div class="space-y-2 pt-2 border-t border-slate-100">
+<span class="inline-block text-xs font-semibold text-secondary">Target Background:</span>
+<p class="text-xs text-text-muted">LL.B Candidates, LL.M, Practicing Advocates</p>
+</div>
+</div>
+<a class="mt-6 inline-flex items-center gap-1 text-primary font-bold text-label-md font-label-md hover:underline" href="#volunteer-form">
+<span>Apply for this Role</span>
+<span class="material-symbols-outlined text-sm">north_east</span>
+</a>
+</div>
+<!-- Pillar 4 -->
+<div class="custom-warm-card p-6 rounded-xl flex flex-col justify-between transition-all">
+<div class="space-y-4">
+<div class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-2xl">devices</span>
+</div>
+<h3 class="text-headline-sm font-headline-sm text-on-surface font-bold">Digital Literacy &amp; Skill Center Tutor</h3>
+<p class="text-body-sm font-body-sm text-secondary">
+              Instruct adolescent girls and rescued youth in computer fundamentals, typing, cyber safety protocols, and introductory programming tracks.
+            </p>
+<div class="space-y-2 pt-2 border-t border-slate-100">
+<span class="inline-block text-xs font-semibold text-secondary">Curriculum:</span>
+<p class="text-xs text-text-muted">MS Office, Web Basics, Online Banking Safety</p>
+</div>
+</div>
+<a class="mt-6 inline-flex items-center gap-1 text-primary font-bold text-label-md font-label-md hover:underline" href="#volunteer-form">
+<span>Apply for this Role</span>
+<span class="material-symbols-outlined text-sm">north_east</span>
+</a>
+</div>
+</div>
+<!-- Embedded Volunteer Application Form -->
+<div class="bg-white rounded-2xl p-8 lg:p-12 border border-highlight-amber-soft shadow-sm" id="volunteer-form">
+<div class="max-w-3xl mb-8 space-y-2">
+<div class="flex items-center gap-2 text-primary font-bold text-label-md font-label-md">
+<span class="material-symbols-outlined text-base">edit_note</span>
+            REGISTRATION GATEWAY
+          </div>
+<h3 class="text-headline-lg font-headline-lg text-on-surface">Volunteer Intake &amp; Background Audit</h3>
+<p class="text-body-md font-body-md text-secondary">
+            All prospective volunteers must undergo identity confirmation in compliance with our Child Protection Framework. Please provide authentic records.
+          </p>
+</div>
+<form class="grid grid-cols-1 md:grid-cols-2 gap-6" onsubmit="event.preventDefault(); alert('Application submitted for vetting. Our volunteer desk will reach out within 48 hours.');">
+<div class="space-y-1">
+<label class="text-label-md font-label-md text-on-surface font-semibold">Full Legal Name *</label>
+<input class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-marigold-bright focus:border-marigold-bright text-body-md font-body-md" placeholder="e.g. Priyanshu Sharma" required="" type="text"/>
+</div>
+<div class="space-y-1">
+<label class="text-label-md font-label-md text-on-surface font-semibold">Phone / WhatsApp Number *</label>
+<input class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-marigold-bright focus:border-marigold-bright text-body-md font-body-md" placeholder="+91 98765 43210" required="" type="tel"/>
+</div>
+<div class="space-y-1">
+<label class="text-label-md font-label-md text-on-surface font-semibold">Email Address *</label>
+<input class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-marigold-bright focus:border-marigold-bright text-body-md font-body-md" placeholder="priyanshu@example.com" required="" type="email"/>
+</div>
+<div class="space-y-1">
+<label class="text-label-md font-label-md text-on-surface font-semibold">City &amp; District *</label>
+<input class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-marigold-bright focus:border-marigold-bright text-body-md font-body-md" placeholder="e.g. South West Delhi / Varanasi" required="" type="text"/>
+</div>
+<div class="space-y-1">
+<label class="text-label-md font-label-md text-on-surface font-semibold">Primary Area of Interest *</label>
+<select class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-marigold-bright focus:border-marigold-bright text-body-md font-body-md bg-white" required="">
+<option value="">Select an engagement track</option>
+<option value="bridge-school">Weekend Bridge School Mentor</option>
+<option value="paralegal">Community Paralegal &amp; Scheme Assistance</option>
+<option value="legal">Child Rights &amp; Legal Advocacy</option>
+<option value="digital">Digital Literacy &amp; Skill Center Tutor</option>
+<option value="medical">Medical Camps &amp; Emergency Field Support</option>
+</select>
+</div>
+<div class="space-y-1">
+<label class="text-label-md font-label-md text-on-surface font-semibold">Weekly Availability *</label>
+<select class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-marigold-bright focus:border-marigold-bright text-body-md font-body-md bg-white" required="">
+<option value="weekends">Saturdays &amp; Sundays (3 - 5 Hours)</option>
+<option value="weekdays">Weekday Afternoons (2 - 4 Hours)</option>
+<option value="intensive">Field Intensive (10+ Hours/week)</option>
+<option value="remote">Remote Research &amp; Documentation Only</option>
+</select>
+</div>
+<div class="md:col-span-2 space-y-1">
+<label class="text-label-md font-label-md text-on-surface font-semibold">Academic / Professional Background *</label>
+<input class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-marigold-bright focus:border-marigold-bright text-body-md font-body-md" placeholder="e.g. 4th year B.A. LL.B student at NLU Delhi, or Senior Software Developer at Infosys" required="" type="text"/>
+</div>
+<div class="md:col-span-2 space-y-1">
+<label class="text-label-md font-label-md text-on-surface font-semibold">Motivation Statement (Briefly share why you want to serve) *</label>
+<textarea class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-marigold-bright focus:border-marigold-bright text-body-md font-body-md" placeholder="Describe past civic exposure or personal conviction..." required="" rows="3"></textarea>
+</div>
+<div class="md:col-span-2 flex items-start gap-3 bg-surface-ivory p-4 rounded-lg border border-slate-200">
+<input class="mt-1 h-4 w-4 rounded border-slate-300 text-marigold-bright focus:ring-marigold-bright" id="safeguard-consent" required="" type="checkbox"/>
+<label class="text-body-sm font-body-sm text-secondary" for="safeguard-consent">
+              I certify that I have never been convicted of an offense against children or vulnerable persons. I consent to mandatory identity verification and background vetting under the Foundation's Child Safeguarding Protocol.
+            </label>
+</div>
+<div class="md:col-span-2">
+<button class="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-lg bg-primary hover:bg-primary-container text-white font-bold text-label-lg font-label-lg transition-all shadow hover:shadow-md active:scale-95" type="submit">
+<span>Submit Volunteer Enrolment</span>
+<span class="material-symbols-outlined text-lg">arrow_forward</span>
+</button>
+</div>
+</form>
+</div>
+</div>
+</section>
+<!-- Track 2: Corporate CSR & Institutional Philanthropy -->
+<section class="py-16 md:py-24 bg-surface-ivory" id="track-institutional">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+<!-- Section Header -->
+<div class="max-w-3xl space-y-3">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded bg-highlight-amber-soft text-primary font-bold text-label-md font-label-md">
+          TRACK 2 • INSTITUTIONAL ALLIANCES
+        </div>
+<h2 class="text-headline-xl font-headline-xl text-on-surface tracking-tight">
+          Institutional &amp; Corporate CSR Partnerships
+        </h2>
+<p class="text-body-lg font-body-lg text-secondary">
+          For companies mandated under Section 135 of the Companies Act 2013 and philanthropic foundations seeking turnkey social impact infrastructure with mathematically verified outcomes.
+        </p>
+</div>
+<!-- Legal Compliance Matrix Banner -->
+<div class="bg-white border-2 border-marigold-bright/30 rounded-2xl p-6 lg:p-8 flex flex-col lg:flex-row items-center justify-between gap-6 shadow-sm">
+<div class="space-y-2">
+<div class="flex items-center gap-2 text-tertiary font-bold text-label-lg font-label-lg">
+<span class="material-symbols-outlined text-xl">verified</span>
+<span>Statutory Compliance Baseline</span>
+</div>
+<p class="text-headline-sm font-headline-sm text-on-surface">
+            Fully Registered, Audited, and Exempted Under Indian Law
+          </p>
+<div class="flex flex-wrap items-center gap-4 text-body-sm font-body-sm text-secondary pt-2">
+<span class="bg-surface-ivory px-3 py-1 rounded border border-slate-200 font-mono font-medium">MCA CSR-1: CSR000129281</span>
+<span class="bg-surface-ivory px-3 py-1 rounded border border-slate-200 font-mono font-medium">Corporate CIN: U85300RJ2026NPL098757</span>
+<span class="bg-surface-ivory px-3 py-1 rounded border border-slate-200 font-mono font-medium">FCRA Registration: 231661902</span>
+</div>
+</div>
+<div class="flex-shrink-0">
+<a class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-on-background text-white font-semibold text-label-lg font-label-lg hover:bg-slate-800 transition-all shadow" href="#csr-form">
+<span>Download Compliance Dossier</span>
+<span class="material-symbols-outlined text-base">download</span>
+</a>
+</div>
+</div>
+<!-- Ready Turnkey Pillars Grid -->
+<div>
+<div class="mb-6">
+<h3 class="text-headline-md font-headline-md text-on-surface font-bold">Turnkey Programmatic Pillars Ready for Co-Branding</h3>
+<p class="text-body-md font-body-md text-secondary">Execute focused, measurable mandates within 30 days of MoU signing.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Pillar Card 1 -->
+<div class="custom-warm-card p-8 rounded-xl flex flex-col justify-between">
+<div class="space-y-4">
+<span class="text-xs font-bold uppercase tracking-wider text-primary bg-highlight-amber-soft px-3 py-1 rounded-full">
+                Primary Education
+              </span>
+<h4 class="text-headline-sm font-headline-sm text-on-surface font-bold">Adopt a Bridge Learning School</h4>
+<p class="text-body-sm font-body-sm text-secondary">
+                Sponsor a 60-child accelerated learning center in high-density migration settlements. Covers educator honorariums, STEM kits, midday nutrition, and formal RTE school mainstreaming.
+              </p>
+<div class="p-4 bg-surface-ivory rounded-lg space-y-1 text-xs">
+<div class="flex justify-between text-secondary">
+<span>Audited Budget:</span>
+<span class="font-bold text-on-surface">₹7.2 Lakhs / Year</span>
+</div>
+<div class="flex justify-between text-secondary">
+<span>Mainstream Success:</span>
+<span class="font-bold text-tertiary">91.4% Rate</span>
+</div>
+</div>
+</div>
+<a class="mt-6 text-primary font-bold text-label-md font-label-md flex items-center gap-1 hover:underline" href="#csr-form">
+<span>Enquire for Sponsorship</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+<!-- Pillar Card 2 -->
+<div class="custom-warm-card p-8 rounded-xl flex flex-col justify-between">
+<div class="space-y-4">
+<span class="text-xs font-bold uppercase tracking-wider text-primary bg-highlight-amber-soft px-3 py-1 rounded-full">
+                Secondary &amp; STEM
+              </span>
+<h4 class="text-headline-sm font-headline-sm text-on-surface font-bold">Sponsor 100 Girls' Higher Education</h4>
+<p class="text-body-sm font-body-sm text-secondary">
+                Direct financial stipends, tuition coverage, and bicycle access for vulnerable adolescent girls vulnerable to early forced marriage and secondary school dropouts.
+              </p>
+<div class="p-4 bg-surface-ivory rounded-lg space-y-1 text-xs">
+<div class="flex justify-between text-secondary">
+<span>Audited Budget:</span>
+<span class="font-bold text-on-surface">₹14.5 Lakhs / Cohort</span>
+</div>
+<div class="flex justify-between text-secondary">
+<span>Dropout Prevention:</span>
+<span class="font-bold text-tertiary">98.2% Retention</span>
+</div>
+</div>
+</div>
+<a class="mt-6 text-primary font-bold text-label-md font-label-md flex items-center gap-1 hover:underline" href="#csr-form">
+<span>Enquire for Sponsorship</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+<!-- Pillar Card 3 -->
+<div class="custom-warm-card p-8 rounded-xl flex flex-col justify-between">
+<div class="space-y-4">
+<span class="text-xs font-bold uppercase tracking-wider text-primary bg-highlight-amber-soft px-3 py-1 rounded-full">
+                Healthcare &amp; Diagnostics
+              </span>
+<h4 class="text-headline-sm font-headline-sm text-on-surface font-bold">Deploy Mobile Medical &amp; Diagnostic Van</h4>
+<p class="text-body-sm font-body-sm text-secondary">
+                Fully equipped mobile clinic providing pediatric screening, malnutrition diagnosis, prenatal sonography, and emergency triage in unserved brick kiln belts.
+              </p>
+<div class="p-4 bg-surface-ivory rounded-lg space-y-1 text-xs">
+<div class="flex justify-between text-secondary">
+<span>Audited Budget:</span>
+<span class="font-bold text-on-surface">₹22.0 Lakhs / Year</span>
+</div>
+<div class="flex justify-between text-secondary">
+<span>Screening Outreach:</span>
+<span class="font-bold text-tertiary">14,000+ Children/Yr</span>
+</div>
+</div>
+</div>
+<a class="mt-6 text-primary font-bold text-label-md font-label-md flex items-center gap-1 hover:underline" href="#csr-form">
+<span>Enquire for Sponsorship</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Audited Impact Deliverables Row -->
+<div class="bg-surface-warm-card p-8 rounded-2xl border border-slate-200">
+<h4 class="text-headline-sm font-headline-sm text-on-surface font-bold mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary">fact_check</span>
+          Audited Impact Deliverables: The Anti-Leakage Standard
+        </h4>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="space-y-2">
+<h5 class="text-label-lg font-label-lg font-bold text-on-surface">1. Quarterly Third-Party Audits</h5>
+<p class="text-body-sm font-body-sm text-secondary">
+              Statutory inspections conducted by independent chartered accountancy firms with unredacted beneficiary cross-verification.
+            </p>
+</div>
+<div class="space-y-2">
+<h5 class="text-label-lg font-label-lg font-bold text-on-surface">2. Formal Utilization Certificates</h5>
+<p class="text-body-sm font-body-sm text-secondary">
+              Issuance of Form 10BD certificates and project completion documentation fully harmonized with Ministry of Corporate Affairs reporting.
+            </p>
+</div>
+<div class="space-y-2">
+<h5 class="text-label-lg font-label-lg font-bold text-on-surface">3. Zero Synthetic Attribution</h5>
+<p class="text-body-sm font-body-sm text-secondary">
+              Zero simulated photography or stock testimonials. Real-time geolocated attendance counters accessible via secure donor API.
+            </p>
+</div>
+</div>
+</div>
+<!-- CSR Enquiry Form -->
+<div class="bg-white rounded-2xl p-8 lg:p-12 border border-highlight-amber-soft shadow-sm" id="csr-form">
+<div class="max-w-3xl mb-8 space-y-2">
+<div class="flex items-center gap-2 text-primary font-bold text-label-md font-label-md">
+<span class="material-symbols-outlined text-base">business_center</span>
+            CORPORATE CSR DESK
+          </div>
+<h3 class="text-headline-lg font-headline-lg text-on-surface">Initiate CSR Consultation &amp; MoU Scoping</h3>
+<p class="text-body-md font-body-md text-secondary">
+            Connect with our Director of Institutional Partnerships to review comprehensive financial models, DPRs, and impact metrics.
+          </p>
+</div>
+<form class="grid grid-cols-1 md:grid-cols-2 gap-6" onsubmit="event.preventDefault(); alert('CSR Consultation request logged. Our institutional relations director will reply within 24 business hours.');">
+<div class="space-y-1">
+<label class="text-label-md font-label-md text-on-surface font-semibold">Organization / Enterprise Name *</label>
+<input class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-marigold-bright focus:border-marigold-bright text-body-md font-body-md" placeholder="e.g. Tata Steel / Mahindra Foundation" required="" type="text"/>
+</div>
+<div class="space-y-1">
+<label class="text-label-md font-label-md text-on-surface font-semibold">CSR Lead / Contact Person Name *</label>
+<input class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-marigold-bright focus:border-marigold-bright text-body-md font-body-md" placeholder="e.g. Ananya Sen, Head of CSR" required="" type="text"/>
+</div>
+<div class="space-y-1">
+<label class="text-label-md font-label-md text-on-surface font-semibold">Official Corporate Email *</label>
+<input class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-marigold-bright focus:border-marigold-bright text-body-md font-body-md" placeholder="ananya.sen@company.com" required="" type="email"/>
+</div>
+<div class="space-y-1">
+<label class="text-label-md font-label-md text-on-surface font-semibold">Direct Telephone Number *</label>
+<input class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-marigold-bright focus:border-marigold-bright text-body-md font-body-md" placeholder="+91 22 6123 4567" required="" type="tel"/>
+</div>
+<div class="space-y-1">
+<label class="text-label-md font-label-md text-on-surface font-semibold">Annual CSR Budget Range (INR) *</label>
+<select class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-marigold-bright focus:border-marigold-bright text-body-md font-body-md bg-white" required="">
+<option value="">Select allocation bracket</option>
+<option value="10-25L">₹10 Lakhs - ₹25 Lakhs</option>
+<option value="25-50L">₹25 Lakhs - ₹50 Lakhs</option>
+<option value="50L-1Cr">₹50 Lakhs - ₹1 Crore</option>
+<option value="1Cr+">Above ₹1 Crore</option>
+</select>
+</div>
+<div class="space-y-1">
+<label class="text-label-md font-label-md text-on-surface font-semibold">Preferred Thematic Area *</label>
+<select class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-marigold-bright focus:border-marigold-bright text-body-md font-body-md bg-white" required="">
+<option value="education">Bridge Education &amp; RTE Mainstreaming</option>
+<option value="girls">Adolescent Girls' Higher Education &amp; Safe Custody</option>
+<option value="medical">Mobile Healthcare &amp; Diagnostic Outreach</option>
+<option value="rehab">Rescue &amp; Rehabilitation from Hazardous Labor</option>
+<option value="custom">Integrated Comprehensive District Adoption</option>
+</select>
+</div>
+<div class="md:col-span-2 space-y-1">
+<label class="text-label-md font-label-md text-on-surface font-semibold">Project Specifications &amp; Target Geography (Optional)</label>
+<textarea class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-marigold-bright focus:border-marigold-bright text-body-md font-body-md" placeholder="Provide geographical focus (state/district) or special board mandates..." rows="3"></textarea>
+</div>
+<div class="md:col-span-2">
+<button class="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-lg bg-primary hover:bg-primary-container text-white font-bold text-label-lg font-label-lg transition-all shadow hover:shadow-md active:scale-95" type="submit">
+<span>Schedule CSR Consultation &amp; Request Deck</span>
+<span class="material-symbols-outlined text-lg">calendar_month</span>
+</button>
+</div>
+</form>
+</div>
+</div>
+</section>
+<!-- Campus Chapter Network (Colleges & Universities) -->
+<section class="py-16 bg-surface-bright border-b border-surface-container">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="bg-gradient-to-r from-highlight-amber-soft to-surface-ivory rounded-2xl p-8 lg:p-12 border border-marigold-bright/30">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+<div class="lg:col-span-7 space-y-4">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded bg-white text-primary text-label-md font-label-md font-bold shadow-sm">
+<span class="material-symbols-outlined text-base">school</span>
+              ACADEMIC ALLIANCES
+            </div>
+<h3 class="text-headline-xl font-headline-xl text-on-surface">Trinetra Gargi Campus Chapter Network</h3>
+<p class="text-body-md font-body-md text-secondary">
+              Universities and colleges are our strongest intellectual lifelines. Launch a recognized Student Chapter to drive legal awareness clinics, weekend education drives, and volunteer blood networks directly from your campus.
+            </p>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+<div class="flex items-center gap-2 text-sm text-on-surface font-semibold">
+<span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                Official Foundation Charter &amp; Mentorship
+              </div>
+<div class="flex items-center gap-2 text-sm text-on-surface font-semibold">
+<span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                National Internship Fast-Track
+              </div>
+<div class="flex items-center gap-2 text-sm text-on-surface font-semibold">
+<span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                Project Seed Funding Grants
+              </div>
+<div class="flex items-center gap-2 text-sm text-on-surface font-semibold">
+<span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                Annual Youth Leadership Summit
+              </div>
+</div>
+</div>
+<div class="lg:col-span-5 bg-white p-6 rounded-xl border border-slate-200 shadow-sm space-y-4">
+<h4 class="text-headline-sm font-headline-sm text-on-surface font-bold">Start a Student Chapter</h4>
+<p class="text-body-sm font-body-sm text-secondary">Requires endorsement from a Faculty Advisor and a core group of 10 student founders.</p>
+<div class="space-y-3 pt-2">
+<input class="w-full px-3.5 py-2 rounded-lg border border-slate-300 text-body-sm font-body-sm focus:ring-2 focus:ring-marigold-bright focus:outline-none" placeholder="College / University Name" type="text"/>
+<input class="w-full px-3.5 py-2 rounded-lg border border-slate-300 text-body-sm font-body-sm focus:ring-2 focus:ring-marigold-bright focus:outline-none" placeholder="Student Lead Name &amp; Course" type="text"/>
+<input class="w-full px-3.5 py-2 rounded-lg border border-slate-300 text-body-sm font-body-sm focus:ring-2 focus:ring-marigold-bright focus:outline-none" placeholder="Institutional (.edu/.ac.in) Email" type="email"/>
+<button class="w-full py-2.5 rounded-lg bg-secondary text-white font-bold text-label-md font-label-md hover:bg-slate-700 transition-colors" onclick="alert('Campus Chapter prospectus dispatched to your email.');">
+                Apply for Chapter Charter
+              </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Volunteer Ethics & Child Safeguarding Policy Summary -->
+<section class="py-16 bg-surface-ivory border-b border-surface-container">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="max-w-3xl space-y-3 mb-10">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded bg-error/10 text-error font-bold text-label-md font-label-md">
+<span class="material-symbols-outlined text-base">security</span>
+          MANDATORY ETHICAL COMPLIANCE
+        </div>
+<h2 class="text-headline-xl font-headline-xl text-on-surface">Volunteer Ethics &amp; Child Safeguarding Framework</h2>
+<p class="text-body-md font-body-md text-secondary">
+          We maintain absolute, non-negotiable zero tolerance toward physical, verbal, emotional, or digital harm. All individuals entering child-centric facilities operate under these statutory commitments.
+        </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="bg-white p-6 rounded-xl border border-slate-200 space-y-3">
+<div class="w-10 h-10 rounded-lg bg-surface-ivory flex items-center justify-center text-primary font-bold">01</div>
+<h4 class="text-headline-sm font-headline-sm text-on-surface font-bold">POCSO Act 2012 Alignment</h4>
+<p class="text-body-sm font-body-sm text-secondary">
+            Mandatory legal reporting obligation. Any suspicion of abuse or endangerment is reported directly to the Child Welfare Committee within 2 hours.
+          </p>
+</div>
+<div class="bg-white p-6 rounded-xl border border-slate-200 space-y-3">
+<div class="w-10 h-10 rounded-lg bg-surface-ivory flex items-center justify-center text-primary font-bold">02</div>
+<h4 class="text-headline-sm font-headline-sm text-on-surface font-bold">Biometric &amp; Identity Vetting</h4>
+<p class="text-body-sm font-body-sm text-secondary">
+            Every long-term volunteer undergoes government photo identification verification, two institutional references, and local police verification.
+          </p>
+</div>
+<div class="bg-white p-6 rounded-xl border border-slate-200 space-y-3">
+<div class="w-10 h-10 rounded-lg bg-surface-ivory flex items-center justify-center text-primary font-bold">03</div>
+<h4 class="text-headline-sm font-headline-sm text-on-surface font-bold">Media &amp; Identity Privacy Protocol</h4>
+<p class="text-body-sm font-body-sm text-secondary">
+            Strict prohibition on unauthorized photographing or broadcasting of children. Zero posting of beneficiary faces or identifying geotags on personal social feeds.
+          </p>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer (Shared Component Execution) -->
+<footer class="bg-surface-warm-card dark:bg-inverse-surface border-t border-surface-container dark:border-outline-variant full-width">
+<div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 space-y-12">
+<!-- Upper Footer Hierarchy -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
+<!-- Brand Narrative Column -->
+<div class="lg:col-span-2 space-y-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-highlight-amber-soft border border-marigold-bright/40 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-marigold-bright" style="font-size: 24px; font-variation-settings: 'FILL' 1;">wb_sunny</span>
+</div>
+<span class="text-headline-md font-headline-md font-bold text-on-surface dark:text-inverse-on-surface">
+              Trinetra Gargi Foundation
+            </span>
+</div>
+<p class="text-body-sm font-body-sm text-secondary max-w-sm leading-relaxed">
+            A certified non-profit institution dedicated to radical accountability in child protection, grassroots education parity, and transparent legal custody advocacy across the Indian heartland.
+          </p>
+<div class="pt-2 text-label-md font-label-md text-text-muted space-y-1">
+<p><strong>Registered HQ:</strong> B-14, Institutional Area, South Extension, New Delhi - 110049</p>
+<p><strong>Secretariat Phone:</strong> +91 (011) 2659 4000</p>
+<p><strong>Official Inquiries:</strong> partnerships@trinetragargi.org</p>
+</div>
+</div>
+<!-- Quick Links: Institutional -->
+<div class="space-y-3">
+<h4 class="text-label-lg font-label-lg font-bold text-on-surface uppercase tracking-wider">Programs</h4>
+<ul class="space-y-2 text-body-sm font-body-sm">
+<li><a class="text-text-muted dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary transition-colors" href="#about">About Us</a></li>
+<li><a class="text-text-muted dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary transition-colors" href="#schemes">Government Schemes Portal</a></li>
+<li><a class="text-primary dark:text-inverse-primary underline" href="#track-individual">Volunteer &amp; CSR Partnerships</a></li>
+<li><a class="text-text-muted dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary transition-colors" href="#impact">Impact Reports &amp; Audits</a></li>
+<li><a class="text-text-muted dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary transition-colors" href="#stories">Stories &amp; Field News</a></li>
+</ul>
+</div>
+<!-- Quick Links: Legal & Safeguards -->
+<div class="space-y-3">
+<h4 class="text-label-lg font-label-lg font-bold text-on-surface uppercase tracking-wider">Helplines &amp; Protection</h4>
+<ul class="space-y-2 text-body-sm font-body-sm">
+<li><a class="text-text-muted dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary transition-colors flex items-center gap-1 font-semibold text-emergency-crimson" href="tel:1098">Child Protection (1098)</a></li>
+<li><a class="text-text-muted dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary transition-colors flex items-center gap-1 font-semibold text-primary" href="tel:181">Women Helpline (181)</a></li>
+<li><a class="text-text-muted dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary transition-colors" href="#tax-exempt">Statutory Donation Accounting</a></li>
+<li><a class="text-text-muted dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary transition-colors" href="#privacy">Privacy Policy &amp; Disclosures</a></li>
+<li><a class="text-text-muted dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary transition-colors" href="#grievance">Confidential Grievance Redressal</a></li>
+</ul>
+</div>
+<!-- Verification Accreditations -->
+<div class="space-y-3">
+<h4 class="text-label-lg font-label-lg font-bold text-on-surface uppercase tracking-wider">Verification</h4>
+<div class="space-y-2">
+<div class="p-3 bg-white rounded-lg border border-slate-200">
+<p class="text-xs font-bold text-tertiary">GuideStar India</p>
+<p class="text-[11px] text-text-muted">Platinum Transparency Seal 2024</p>
+</div>
+<div class="p-3 bg-white rounded-lg border border-slate-200">
+<p class="text-xs font-bold text-tertiary">NITI Aayog Darpan</p>
+<p class="text-[11px] text-text-muted">Unique ID: DL/2019/0248811</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Sitemap Copyright & Mandate -->
+<div class="pt-8 border-t border-slate-300/60 flex flex-col md:flex-row items-center justify-between gap-4 text-body-sm font-body-sm text-text-muted">
+<p class="text-center md:text-left">
+          © 2024 Trinetra Gargi Foundation. Registered Non-Profit Entity (FCRA, Section 8 Licensed Non-Profit). Radical Transparency Verified. Zero Synthetic Media.
+        </p>
+<div class="flex items-center gap-6">
+<a class="text-xs hover:text-primary transition-colors" href="#safeguard">Child Protection Policy</a>
+<a class="text-xs hover:text-primary transition-colors" href="#csr-audit">Audit Disclosures</a>
+<a class="text-xs text-primary font-bold hover:underline flex items-center gap-0.5" href="#top">
+<span>Back to top</span>
+<span class="material-symbols-outlined text-sm">arrow_upward</span>
+</a>
+</div>
+</div>
+</div>
+</footer>
+</body></html>

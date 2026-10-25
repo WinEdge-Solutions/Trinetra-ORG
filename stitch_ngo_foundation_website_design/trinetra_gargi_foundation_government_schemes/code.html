@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Government Schemes Directory | Trinetra Gargi Foundation</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-container": "#e7eeff",
+            "surface-bright": "#f9f9ff",
+            "emergency-crimson": "#DC2626",
+            "error-container": "#ffdad6",
+            "on-surface-variant": "#554336",
+            "on-surface": "#111c2d",
+            "surface-ivory": "#FAFAF9",
+            "on-secondary": "#ffffff",
+            "secondary-fixed": "#d1e4ff",
+            "primary-container": "#b15f00",
+            "on-tertiary-fixed": "#002114",
+            "on-primary": "#ffffff",
+            "on-secondary-fixed-variant": "#314863",
+            "surface-variant": "#d8e3fb",
+            "on-error-container": "#93000a",
+            "on-tertiary-fixed-variant": "#005137",
+            "secondary": "#49607c",
+            "on-primary-fixed": "#2f1500",
+            "outline-variant": "#dbc2b0",
+            "primary-fixed-dim": "#ffb77d",
+            "marigold-bright": "#F59E0B",
+            "on-error": "#ffffff",
+            "text-muted": "#64748B",
+            "surface-container-low": "#f0f3ff",
+            "inverse-primary": "#ffb77d",
+            "on-tertiary": "#ffffff",
+            "surface-container-highest": "#d8e3fb",
+            "primary-fixed": "#ffdcc3",
+            "inverse-surface": "#263143",
+            "on-primary-fixed-variant": "#6e3900",
+            "primary": "#8d4b00",
+            "error": "#ba1a1a",
+            "inverse-on-surface": "#ecf1ff",
+            "tertiary": "#006948",
+            "surface-container-lowest": "#ffffff",
+            "surface-dim": "#cfdaf2",
+            "coral-warmth": "#EA580C",
+            "tertiary-fixed-dim": "#68dba9",
+            "tertiary-container": "#00855d",
+            "secondary-fixed-dim": "#b0c9e8",
+            "on-tertiary-container": "#f5fff7",
+            "on-secondary-fixed": "#011d35",
+            "outline": "#887364",
+            "sage-soft": "#10B981",
+            "tertiary-fixed": "#85f8c4",
+            "on-secondary-container": "#4b637e",
+            "highlight-amber-soft": "#FEF3C7",
+            "background": "#f9f9ff",
+            "on-primary-container": "#fffbff",
+            "on-background": "#111c2d",
+            "surface-tint": "#904d00",
+            "surface": "#f9f9ff",
+            "secondary-container": "#c7dfff",
+            "surface-warm-card": "#F5F5F4",
+            "surface-container-high": "#dee8ff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "margin-desktop": "3rem",
+            "margin": "1rem",
+            "margin-tablet": "2rem",
+            "gutter": "1.5rem",
+            "space-lg": "1.5rem",
+            "space-md": "1rem",
+            "space-xs": "0.25rem",
+            "space-sm": "0.5rem",
+            "space-xl": "2.5rem",
+            "gutter-desktop": "2rem"
+          },
+          "fontFamily": {
+            "label-lg": ["Plus Jakarta Sans"],
+            "headline-xl-mobile": ["Plus Jakarta Sans"],
+            "label-md": ["Plus Jakarta Sans"],
+            "headline-lg": ["Plus Jakarta Sans"],
+            "display": ["Plus Jakarta Sans"],
+            "headline-xl": ["Plus Jakarta Sans"],
+            "stat-metric": ["Plus Jakarta Sans"],
+            "headline-md": ["Plus Jakarta Sans"],
+            "stat-metric-mobile": ["Plus Jakarta Sans"],
+            "body-lg": ["Plus Jakarta Sans"],
+            "label-caps": ["Plus Jakarta Sans"],
+            "headline-sm": ["Plus Jakarta Sans"],
+            "body-md": ["Plus Jakarta Sans"],
+            "display-mobile": ["Plus Jakarta Sans"],
+            "body-sm": ["Plus Jakarta Sans"]
+          },
+          "fontSize": {
+            "label-lg": ["0.875rem", { "lineHeight": "1.25", "letterSpacing": "0.01em", "fontWeight": "600" }],
+            "headline-xl-mobile": ["1.875rem", { "lineHeight": "1.25", "letterSpacing": "-0.015em", "fontWeight": "700" }],
+            "label-md": ["0.75rem", { "lineHeight": "1.25", "letterSpacing": "0.04em", "fontWeight": "600" }],
+            "headline-lg": ["2rem", { "lineHeight": "1.25", "letterSpacing": "-0.015em", "fontWeight": "700" }],
+            "display": ["3.5rem", { "lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "800" }],
+            "headline-xl": ["2.5rem", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "stat-metric": ["3.75rem", { "lineHeight": "1.0", "letterSpacing": "-0.03em", "fontWeight": "800" }],
+            "headline-md": ["1.5rem", { "lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "stat-metric-mobile": ["2.5rem", { "lineHeight": "1.0", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+            "body-lg": ["1.125rem", { "lineHeight": "1.6", "fontWeight": "400" }],
+            "label-caps": ["0.75rem", { "lineHeight": "1.2", "letterSpacing": "0.08em", "fontWeight": "700" }],
+            "headline-sm": ["1.25rem", { "lineHeight": "1.4", "fontWeight": "600" }],
+            "body-md": ["1rem", { "lineHeight": "1.6", "fontWeight": "400" }],
+            "display-mobile": ["2.25rem", { "lineHeight": "1.15", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+            "body-sm": ["0.875rem", { "lineHeight": "1.5", "fontWeight": "400" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 500, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      height: 6px;
+      width: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+  </style>
+</head>
+<body class="bg-surface-ivory text-on-surface antialiased min-h-screen flex flex-col font-body-md text-body-md selection:bg-highlight-amber-soft selection:text-primary">
+<!-- Top Emergency Ribbon -->
+<aside aria-label="Emergency helpline ribbon" class="bg-[#0F2942] text-white py-2 px-4 sm:px-6 lg:px-8 text-xs border-b border-slate-800/80"><div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3"><div class="flex items-center flex-wrap gap-3"><span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-semibold text-[11px]"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>● 24/7 Rapid Response Active</span><span class="text-slate-600 hidden sm:inline">|</span><a class="flex items-center gap-1 px-2 py-0.5 rounded bg-emergency-crimson/20 hover:bg-emergency-crimson/30 text-rose-200 border border-emergency-crimson/40 font-bold transition-colors" href="tel:1098"><span class="material-symbols-outlined text-[14px] text-emergency-crimson">call</span><span>Childline 1098</span></a><a class="flex items-center gap-1 px-2 py-0.5 rounded bg-amber-500/20 hover:bg-amber-500/30 text-highlight-amber-soft border border-amber-500/40 font-bold transition-colors" href="tel:181"><span class="material-symbols-outlined text-[14px] text-marigold-bright">call</span><span>Women Helpline 181</span></a></div><div class="flex items-center gap-3 text-slate-300"><span class="hidden md:inline-flex items-center gap-1 text-[11px] text-slate-300"><span class="material-symbols-outlined text-[14px] text-marigold-bright">verified</span><span>Section 8 Licensed Non-Profit Entity</span></span><span class="hidden md:inline text-slate-600">|</span><button class="hover:text-white transition-colors font-semibold text-[11px] px-1.5 py-0.5 rounded bg-slate-800 border border-slate-700" type="button">EN / हिन्दी</button><a class="inline-flex items-center gap-1 text-[11px] text-slate-400 hover:text-white transition-colors" href="https://www.google.com" title="Quick Emergency Exit"><span class="material-symbols-outlined text-[15px]">logout</span><span class="hidden sm:inline">Quick Exit</span></a></div></div></aside>
+<!-- Sticky TopNavBar adhering strictly to JSON blueprint -->
+<header class="sticky top-0 z-50 bg-surface-ivory/90 backdrop-blur-md border-b border-surface-container shadow-xs"><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-20"><a class="flex items-center gap-3.5 group focus:outline-none" href="#"><div class="w-11 h-11 rounded-xl bg-gradient-to-br from-[#0F2942] to-slate-900 border border-amber-300/40 flex items-center justify-center text-marigold-bright shadow-sm group-hover:scale-105 transition-transform"><span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">light_mode</span></div><div class="flex flex-col"><span class="text-[17px] font-extrabold tracking-tight text-[#0F2942] leading-tight flex items-center gap-1.5">TRINETRA GARGI FOUNDATION</span><span class="text-[11px] font-medium text-text-muted tracking-wide">Restoring Dignity &amp; Childhood</span></div></a><nav aria-label="Main Navigation" class="hidden xl:flex items-center bg-surface-container-low/80 p-1.5 rounded-full border border-slate-200/80"><a class="px-3.5 py-1.5 rounded-full text-xs font-semibold text-slate-700 hover:text-primary transition-colors" href="#">About Us</a><a class="px-3.5 py-1.5 rounded-full text-xs font-semibold text-slate-700 hover:text-primary transition-colors" href="#">Our Work</a><a aria-current="page" class="px-4 py-1.5 rounded-full text-xs font-bold bg-[#0F2942] text-white shadow-xs transition-colors" href="#">Govt Schemes</a><a class="px-3.5 py-1.5 rounded-full text-xs font-semibold text-slate-700 hover:text-primary transition-colors" href="#">Impact &amp; Audits</a><a class="px-3.5 py-1.5 rounded-full text-xs font-semibold text-slate-700 hover:text-primary transition-colors" href="#">Stories</a><a class="px-3.5 py-1.5 rounded-full text-xs font-semibold text-slate-700 hover:text-primary transition-colors" href="#">Volunteer</a></nav><div class="flex items-center gap-2.5 sm:gap-3"><a class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-emergency-crimson/10 hover:bg-emergency-crimson/20 border border-emergency-crimson/30 text-emergency-crimson font-bold text-xs tracking-tight transition-all active:scale-95 animate-pulse" href="#helpline"><span class="material-symbols-outlined text-[16px]">crisis_alert</span><span>Report Crisis</span></a><a class="inline-flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-lg bg-gradient-to-r from-marigold-bright via-primary-container to-[#D97706] hover:brightness-105 text-white font-bold text-xs sm:text-sm shadow-sm transition-all active:scale-95" href="#donate"><div class="flex flex-col items-start leading-none"><span class="flex items-center gap-1">Donate Now <span class="material-symbols-outlined text-[16px]">favorite</span></span><span class="text-[10px] font-normal opacity-90 mt-0.5">Section 8 Support</span></div></a></div></div></header>
+<main class="flex-grow">
+<!-- Hero Section: High Utility, Institutional, Vector/Badge Accents -->
+<section class="bg-gradient-to-b from-white via-surface-ivory to-surface-container-low border-b border-surface-container py-12 md:py-16">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+<div class="lg:col-span-8">
+<div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-highlight-amber-soft border border-amber-300 text-primary text-label-md font-label-md mb-4">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+<span>Direct Public Service Delivery • No Agent Commissions</span>
+</div>
+<h1 class="text-headline-xl md:text-display font-display text-on-surface tracking-tight mb-4">
+              Citizen Entitlements &amp; Government Welfare Directory
+            </h1>
+<p class="text-body-lg font-body-lg text-text-muted max-w-3xl leading-relaxed mb-6">
+              Helping underprivileged families, women, and marginalized youth unlock life-changing government welfare, subsidies, statutory reservations, and legal safeguards without middlemen exploitation.
+            </p>
+<div class="flex flex-wrap gap-4 items-center pt-2">
+<a class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-[#0F2942] text-white hover:bg-slate-800 font-label-lg text-label-lg transition-all shadow-sm" href="#schemes-matrix">
+<span>Browse Scheme Roster</span>
+<span class="material-symbols-outlined text-[18px]">arrow_downward</span>
+</a>
+<a class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-surface-container-lowest border border-slate-300 text-on-surface hover:bg-surface-warm-card font-label-lg text-label-lg transition-all" href="#readiness-desk">
+<span class="material-symbols-outlined text-[18px] text-tertiary">fact_check</span>
+<span>Document Verification Desk</span>
+</a>
+</div>
+</div>
+<!-- Trust & Service Delivery Metrics Bento Tile -->
+<div class="lg:col-span-4">
+<div class="bg-surface-container-lowest rounded-xl p-6 border border-amber-200/60 shadow-sm relative overflow-hidden">
+<div class="absolute -top-10 -right-10 w-32 h-32 bg-amber-100/50 rounded-full blur-xl pointer-events-none"></div>
+<div class="flex items-center justify-between pb-4 border-b border-slate-100">
+<span class="text-label-caps font-label-caps text-text-muted">FIELD FACILITATION COUNTERS</span>
+<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">Active</span>
+</div>
+<div class="mt-4 grid grid-cols-2 gap-4">
+<div>
+<div class="text-headline-lg font-stat-metric text-[#0F2942]">48,200+</div>
+<div class="text-body-sm font-body-sm text-text-muted mt-1">Beneficiary Applications Processed</div>
+</div>
+<div>
+<div class="text-headline-lg font-stat-metric text-primary">100%</div>
+<div class="text-body-sm font-body-sm text-text-muted mt-1">Gratis Citizen Service Desk</div>
+</div>
+</div>
+<div class="mt-6 pt-4 border-t border-slate-100 flex items-start gap-3">
+<span class="material-symbols-outlined text-marigold-bright text-xl shrink-0 mt-0.5">verified_user</span>
+<p class="text-body-sm font-body-sm text-secondary">
+                  Trinetra Gargi volunteer booths guide applicants directly through Jan Seva Kendras, CSCs, and Aadhaar Seva Kendras.
+                </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Search & Fast Filter Bar -->
+<section class="bg-surface-container-lowest border-b border-surface-container sticky top-20 z-40 shadow-xs">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+<div class="flex flex-col md:flex-row gap-4 items-stretch md:items-center justify-between">
+<!-- Category Chips Filter -->
+<div class="flex items-center gap-2 overflow-x-auto pb-1 md:pb-0 custom-scrollbar" id="categoryFilterContainer">
+<button class="filter-btn active-filter px-4 py-2 rounded-full text-label-md font-label-md bg-[#0F2942] text-white shrink-0 transition-colors" data-category="all">
+              All Schemes (8)
+            </button>
+<button class="filter-btn px-4 py-2 rounded-full text-label-md font-label-md bg-surface-container-low hover:bg-surface-container text-on-surface shrink-0 transition-colors" data-category="girl-child">
+              Girl Child &amp; Education
+            </button>
+<button class="filter-btn px-4 py-2 rounded-full text-label-md font-label-md bg-surface-container-low hover:bg-surface-container text-on-surface shrink-0 transition-colors" data-category="women">
+              Women Empowerment
+            </button>
+<button class="filter-btn px-4 py-2 rounded-full text-label-md font-label-md bg-surface-container-low hover:bg-surface-container text-on-surface shrink-0 transition-colors" data-category="child">
+              Child Welfare &amp; Nutrition
+            </button>
+<button class="filter-btn px-4 py-2 rounded-full text-label-md font-label-md bg-surface-container-low hover:bg-surface-container text-on-surface shrink-0 transition-colors" data-category="youth">
+              Youth Skill Development
+            </button>
+<button class="filter-btn px-4 py-2 rounded-full text-label-md font-label-md bg-surface-container-low hover:bg-surface-container text-on-surface shrink-0 transition-colors" data-category="health">
+              Health &amp; Security
+            </button>
+</div>
+<!-- Quick Search Filter -->
+<div class="relative w-full md:w-72 shrink-0">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[18px]">search</span>
+<input class="w-full pl-9 pr-4 py-2 text-body-sm font-body-sm bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-marigold-bright focus:border-transparent" id="schemeSearchInput" placeholder="Search scheme name, ministry..." type="text"/>
+</div>
+</div>
+</div>
+</section>
+<!-- Comprehensive Schemes Directory Grid -->
+<section class="py-12 md:py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" id="schemes-matrix">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mb-8">
+<div>
+<span class="text-label-caps font-label-caps text-primary">CENTRAL &amp; STATE STATUTORY PROVISIONS</span>
+<h2 class="text-headline-lg font-headline-lg text-on-surface mt-1">Verified Government Welfare Schemes</h2>
+<p class="text-body-md font-body-md text-text-muted mt-1">Each dossier below provides authenticated qualification rules, document checklists, and Trinetra booth facilitation details.</p>
+</div>
+<div class="flex items-center gap-2 text-label-md font-label-md text-slate-500">
+<span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+<span>Portals Monitored Weekly • Direct .gov.in Routing</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6" id="schemesGrid">
+<!-- Scheme 1: Beti Bachao Beti Padhao -->
+<article class="scheme-card bg-surface-container-lowest rounded-xl border border-slate-200/90 hover:border-amber-400 transition-all duration-200 p-6 flex flex-col justify-between shadow-xs hover:shadow-md" data-category="girl-child">
+<div>
+<div class="flex items-center justify-between gap-3 mb-4">
+<span class="px-3 py-1 rounded-full text-xs font-semibold bg-amber-50 text-amber-800 border border-amber-200">
+                Girl Child &amp; Education
+              </span>
+<span class="text-xs text-slate-500 font-mono">Ministry of WCD</span>
+</div>
+<h3 class="text-headline-sm font-headline-sm text-on-surface font-bold tracking-tight mb-2">
+              Beti Bachao Beti Padhao (BBBP)
+            </h3>
+<p class="text-body-sm font-body-sm text-text-muted mb-4">
+              National flagship initiative preventing gender-biased sex selection, securing birth survival, and guaranteeing free institutional secondary education for the girl child.
+            </p>
+<!-- Key Criteria & Document Checklist -->
+<div class="bg-surface-ivory rounded-lg p-4 border border-slate-200/70 mb-4">
+<div class="text-xs font-bold text-slate-800 tracking-wider mb-2 flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-tertiary">check_circle</span>
+<span>ELIGIBILITY CRITERIA</span>
+</div>
+<ul class="text-body-sm font-body-sm text-secondary space-y-1.5 mb-3">
+<li class="flex items-start gap-2">
+<span class="text-tertiary font-bold">•</span>
+<span>Indian female child from birth up to 18 years of age.</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="text-tertiary font-bold">•</span>
+<span>Enrolled in recognized government or municipal schooling system.</span>
+</li>
+</ul>
+<div class="text-xs font-bold text-slate-800 tracking-wider mb-2 flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-primary">folder_open</span>
+<span>MANDATORY DOCUMENTS</span>
+</div>
+<div class="flex flex-wrap gap-1.5">
+<span class="px-2 py-0.5 bg-white text-xs text-slate-700 border border-slate-200 rounded">Child Birth Certificate</span>
+<span class="px-2 py-0.5 bg-white text-xs text-slate-700 border border-slate-200 rounded">Parents Aadhaar</span>
+<span class="px-2 py-0.5 bg-white text-xs text-slate-700 border border-slate-200 rounded">School Bonafide</span>
+</div>
+</div>
+<!-- Trinetra Booth Assistance Note -->
+<div class="p-3 bg-amber-50/70 border-l-4 border-marigold-bright rounded-r-md text-xs text-slate-800 mb-6">
+<span class="font-bold text-primary">Trinetra Booth Aid:</span> Our grassroots desk helps obtain delayed birth certificates through district revenue officers and facilitates formal school re-enrollment.
+            </div>
+</div>
+<!-- Direct Official Link & Help Action -->
+<div class="pt-4 border-t border-slate-100 flex items-center justify-between gap-3">
+<a class="inline-flex items-center gap-1.5 text-label-md font-label-md text-primary hover:text-primary-container font-semibold" href="https://wcd.nic.in/bbbp-schemes" rel="noopener noreferrer" target="_blank">
+<span>Official WCD Portal</span>
+<span class="material-symbols-outlined text-[16px]">open_in_new</span>
+</a>
+<a class="inline-flex items-center gap-1 px-3 py-1.5 bg-surface-container text-[#0F2942] rounded-lg text-label-md font-label-md hover:bg-surface-container-high transition-colors" href="#helpline">
+<span class="material-symbols-outlined text-[15px]">support_agent</span>
+<span>Booth Desk Request</span>
+</a>
+</div>
+</article>
+<!-- Scheme 2: Sukanya Samriddhi Yojana -->
+<article class="scheme-card bg-surface-container-lowest rounded-xl border border-slate-200/90 hover:border-amber-400 transition-all duration-200 p-6 flex flex-col justify-between shadow-xs hover:shadow-md" data-category="girl-child">
+<div>
+<div class="flex items-center justify-between gap-3 mb-4">
+<span class="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200">
+                Girl Child &amp; Financial Security
+              </span>
+<span class="text-xs text-slate-500 font-mono">Ministry of Finance</span>
+</div>
+<h3 class="text-headline-sm font-headline-sm text-on-surface font-bold tracking-tight mb-2">
+              Sukanya Samriddhi Yojana (SSY)
+            </h3>
+<p class="text-body-sm font-body-sm text-text-muted mb-4">
+              High-interest, tax-free small deposit savings scheme for girl children, providing safe compound wealth creation for higher studies and matrimonial independence.
+            </p>
+<div class="bg-surface-ivory rounded-lg p-4 border border-slate-200/70 mb-4">
+<div class="grid grid-cols-2 gap-2 pb-3 mb-3 border-b border-slate-200/60">
+<div>
+<span class="text-xs text-text-muted block">Current Interest Rate</span>
+<span class="text-label-lg font-label-lg font-bold text-tertiary">8.2% p.a. (Govt Guaranteed)</span>
+</div>
+<div>
+<span class="text-xs text-text-muted block">Tenure / Maturity</span>
+<span class="text-label-lg font-label-lg font-bold text-slate-800">21 Years from Opening</span>
+</div>
+</div>
+<div class="text-xs font-bold text-slate-800 tracking-wider mb-2 flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-tertiary">account_balance</span>
+<span>POST OFFICE / BANK SETUP GUIDE</span>
+</div>
+<ul class="text-body-sm font-body-sm text-secondary space-y-1 mb-3">
+<li>• Account opened before child turns 10 years of age.</li>
+<li>• Min. initial deposit ₹250; maximum ₹1,50,000 per financial year.</li>
+<li>• 100% Tax-Exempt under Section 80C on deposits and maturity.</li>
+</ul>
+<div class="flex flex-wrap gap-1.5">
+<span class="px-2 py-0.5 bg-white text-xs text-slate-700 border border-slate-200 rounded">Child Birth Certificate</span>
+<span class="px-2 py-0.5 bg-white text-xs text-slate-700 border border-slate-200 rounded">Guardian KYC (PAN/Aadhaar)</span>
+<span class="px-2 py-0.5 bg-white text-xs text-slate-700 border border-slate-200 rounded">Address Proof</span>
+</div>
+</div>
+<div class="p-3 bg-amber-50/70 border-l-4 border-marigold-bright rounded-r-md text-xs text-slate-800 mb-6">
+<span class="font-bold text-primary">Trinetra Booth Aid:</span> We accompany daily-wage mothers to India Post branches to ensure zero rejection on minimum ₹250 passbook inaugurations.
+            </div>
+</div>
+<div class="pt-4 border-t border-slate-100 flex items-center justify-between gap-3">
+<a class="inline-flex items-center gap-1.5 text-label-md font-label-md text-primary hover:text-primary-container font-semibold" href="https://www.indiapost.gov.in" rel="noopener noreferrer" target="_blank">
+<span>India Post SSY Rules</span>
+<span class="material-symbols-outlined text-[16px]">open_in_new</span>
+</a>
+<a class="inline-flex items-center gap-1 px-3 py-1.5 bg-surface-container text-[#0F2942] rounded-lg text-label-md font-label-md hover:bg-surface-container-high transition-colors" href="#helpline">
+<span class="material-symbols-outlined text-[15px]">support_agent</span>
+<span>Account Setup Aid</span>
+</a>
+</div>
+</article>
+<!-- Scheme 3: RTE Section 12(1)(c) -->
+<article class="scheme-card bg-surface-container-lowest rounded-xl border border-slate-200/90 hover:border-amber-400 transition-all duration-200 p-6 flex flex-col justify-between shadow-xs hover:shadow-md" data-category="girl-child">
+<div>
+<div class="flex items-center justify-between gap-3 mb-4">
+<span class="px-3 py-1 rounded-full text-xs font-semibold bg-blue-50 text-blue-800 border border-blue-200">
+                Statutory Education Right
+              </span>
+<span class="text-xs text-slate-500 font-mono">Ministry of Education</span>
+</div>
+<h3 class="text-headline-sm font-headline-sm text-on-surface font-bold tracking-tight mb-2">
+              RTE Section 12(1)(c) Mandate
+            </h3>
+<p class="text-body-sm font-body-sm text-text-muted mb-4">
+              Legally mandated 25% free seat reservation in non-minority private unaided schools for children from Economically Weaker Sections (EWS) and Disadvantaged Groups.
+            </p>
+<div class="bg-surface-ivory rounded-lg p-4 border border-slate-200/70 mb-4">
+<div class="text-xs font-bold text-slate-800 tracking-wider mb-2 flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-tertiary">how_to_reg</span>
+<span>LOTTERY ADMISSION PROCESS</span>
+</div>
+<ul class="text-body-sm font-body-sm text-secondary space-y-1 mb-3">
+<li>• Age window: 3-5 years (Nursery/KG) or 6 years for Class 1.</li>
+<li>• State online centralized portal allocation via transparent lottery.</li>
+<li>• Complete tuition, textbook, and uniform fee waiver until Class 8.</li>
+</ul>
+<div class="text-xs font-bold text-slate-800 tracking-wider mb-2 flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-primary">folder_open</span>
+<span>DOCUMENT CHECKLIST</span>
+</div>
+<div class="flex flex-wrap gap-1.5">
+<span class="px-2 py-0.5 bg-white text-xs text-slate-700 border border-slate-200 rounded">Income Certificate (&lt; ₹1 Lakh)</span>
+<span class="px-2 py-0.5 bg-white text-xs text-slate-700 border border-slate-200 rounded">Caste/Category Cert (if applicable)</span>
+<span class="px-2 py-0.5 bg-white text-xs text-slate-700 border border-slate-200 rounded">Ward/Neighborhood Proof</span>
+</div>
+</div>
+<div class="p-3 bg-amber-50/70 border-l-4 border-marigold-bright rounded-r-md text-xs text-slate-800 mb-6">
+<span class="font-bold text-primary">Trinetra Booth Aid:</span> Online lottery application filing assistance, GPS neighborhood mapping, and legal grievance redressal if private schools deny admission.
+            </div>
+</div>
+<div class="pt-4 border-t border-slate-100 flex items-center justify-between gap-3">
+<a class="inline-flex items-center gap-1.5 text-label-md font-label-md text-primary hover:text-primary-container font-semibold" href="https://dsel.education.gov.in/rte" rel="noopener noreferrer" target="_blank">
+<span>National RTE Portal</span>
+<span class="material-symbols-outlined text-[16px]">open_in_new</span>
+</a>
+<a class="inline-flex items-center gap-1 px-3 py-1.5 bg-surface-container text-[#0F2942] rounded-lg text-label-md font-label-md hover:bg-surface-container-high transition-colors" href="#helpline">
+<span class="material-symbols-outlined text-[15px]">support_agent</span>
+<span>RTE Application Filing</span>
+</a>
+</div>
+</article>
+<!-- Scheme 4: PM Kaushal Vikas Yojana (PMKVY 4.0) -->
+<article class="scheme-card bg-surface-container-lowest rounded-xl border border-slate-200/90 hover:border-amber-400 transition-all duration-200 p-6 flex flex-col justify-between shadow-xs hover:shadow-md" data-category="youth">
+<div>
+<div class="flex items-center justify-between gap-3 mb-4">
+<span class="px-3 py-1 rounded-full text-xs font-semibold bg-purple-50 text-purple-800 border border-purple-200">
+                Youth Skill Development
+              </span>
+<span class="text-xs text-slate-500 font-mono">MSDE / NSDC</span>
+</div>
+<h3 class="text-headline-sm font-headline-sm text-on-surface font-bold tracking-tight mb-2">
+              PM Kaushal Vikas Yojana (PMKVY 4.0)
+            </h3>
+<p class="text-body-sm font-body-sm text-text-muted mb-4">
+              Free industry-standard technical training, NSQF government certification, monetary stipend, and direct job placement support for dropouts and youth.
+            </p>
+<div class="bg-surface-ivory rounded-lg p-4 border border-slate-200/70 mb-4">
+<div class="text-xs font-bold text-slate-800 tracking-wider mb-2 flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-tertiary">bolt</span>
+<span>KEY OFFERINGS</span>
+</div>
+<ul class="text-body-sm font-body-sm text-secondary space-y-1 mb-3">
+<li>• 100% Free Short-Term Training (STT) across 30+ sectors (IT, Solar, Healthcare).</li>
+<li>• Assessment &amp; Certification reward with DBT conveyance stipend.</li>
+<li>• Recognition of Prior Learning (RPL) for experienced informal workers.</li>
+</ul>
+<div class="text-xs font-bold text-slate-800 tracking-wider mb-2 flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-primary">folder_open</span>
+<span>ENROLLMENT PREREQUISITES</span>
+</div>
+<div class="flex flex-wrap gap-1.5">
+<span class="px-2 py-0.5 bg-white text-xs text-slate-700 border border-slate-200 rounded">Age: 15–45 Years</span>
+<span class="px-2 py-0.5 bg-white text-xs text-slate-700 border border-slate-200 rounded">Aadhaar Linked Mobile</span>
+<span class="px-2 py-0.5 bg-white text-xs text-slate-700 border border-slate-200 rounded">Active Bank Account</span>
+</div>
+</div>
+<div class="p-3 bg-amber-50/70 border-l-4 border-marigold-bright rounded-r-md text-xs text-slate-800 mb-6">
+<span class="font-bold text-primary">Trinetra Booth Aid:</span> We administer aptitude assessments, match candidates to vetted Pradhan Mantri Kaushal Kendras (PMKK), and oversee placement compliance.
+            </div>
+</div>
+<div class="pt-4 border-t border-slate-100 flex items-center justify-between gap-3">
+<a class="inline-flex items-center gap-1.5 text-label-md font-label-md text-primary hover:text-primary-container font-semibold" href="https://www.pmkvyofficial.org" rel="noopener noreferrer" target="_blank">
+<span>Official PMKVY Portal</span>
+<span class="material-symbols-outlined text-[16px]">open_in_new</span>
+</a>
+<a class="inline-flex items-center gap-1 px-3 py-1.5 bg-surface-container text-[#0F2942] rounded-lg text-label-md font-label-md hover:bg-surface-container-high transition-colors" href="#helpline">
+<span class="material-symbols-outlined text-[15px]">support_agent</span>
+<span>Skill Center Match</span>
+</a>
+</div>
+</article>
+<!-- Scheme 5: Poshan Abhiyaan -->
+<article class="scheme-card bg-surface-container-lowest rounded-xl border border-slate-200/90 hover:border-amber-400 transition-all duration-200 p-6 flex flex-col justify-between shadow-xs hover:shadow-md" data-category="child">
+<div>
+<div class="flex items-center justify-between gap-3 mb-4">
+<span class="px-3 py-1 rounded-full text-xs font-semibold bg-rose-50 text-rose-800 border border-rose-200">
+                Child Welfare &amp; Nutrition
+              </span>
+<span class="text-xs text-slate-500 font-mono">Ministry of WCD</span>
+</div>
+<h3 class="text-headline-sm font-headline-sm text-on-surface font-bold tracking-tight mb-2">
+              Poshan Abhiyaan (National Nutrition Mission)
+            </h3>
+<p class="text-body-sm font-body-sm text-text-muted mb-4">
+              Comprehensive holistic nutrition support to prevent stunting, under-nutrition, and anemia in children (0-6 years), adolescent girls, and expectant mothers.
+            </p>
+<div class="bg-surface-ivory rounded-lg p-4 border border-slate-200/70 mb-4">
+<div class="text-xs font-bold text-slate-800 tracking-wider mb-2 flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-tertiary">health_and_safety</span>
+<span>ENTITLEMENT SPECIFICS</span>
+</div>
+<ul class="text-body-sm font-body-sm text-secondary space-y-1 mb-3">
+<li>• Supplementary Nutrition Program (SNP) Take-Home Rations (THR) via Anganwadi.</li>
+<li>• Hot cooked meals daily for children 3-6 years at local centers.</li>
+<li>• Periodic growth monitoring and therapeutic foods for SAM/MAM children.</li>
+</ul>
+<div class="text-xs font-bold text-slate-800 tracking-wider mb-2 flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-primary">folder_open</span>
+<span>ACCESS CRITERIA</span>
+</div>
+<div class="flex flex-wrap gap-1.5">
+<span class="px-2 py-0.5 bg-white text-xs text-slate-700 border border-slate-200 rounded">Poshan Tracker Registration</span>
+<span class="px-2 py-0.5 bg-white text-xs text-slate-700 border border-slate-200 rounded">Mother's MCP Card</span>
+<span class="px-2 py-0.5 bg-white text-xs text-slate-700 border border-slate-200 rounded">Aadhaar (Mother or Father)</span>
+</div>
+</div>
+<div class="p-3 bg-amber-50/70 border-l-4 border-marigold-bright rounded-r-md text-xs text-slate-800 mb-6">
+<span class="font-bold text-primary">Trinetra Booth Aid:</span> Poshan Tracker app registration support for illiterate parents and intervention in cases of ration diversion or Anganwadi exclusion.
+            </div>
+</div>
+<div class="pt-4 border-t border-slate-100 flex items-center justify-between gap-3">
+<a class="inline-flex items-center gap-1.5 text-label-md font-label-md text-primary hover:text-primary-container font-semibold" href="https://poshantracker.in" rel="noopener noreferrer" target="_blank">
+<span>Poshan Tracker Portal</span>
+<span class="material-symbols-outlined text-[16px]">open_in_new</span>
+</a>
+<a class="inline-flex items-center gap-1 px-3 py-1.5 bg-surface-container text-[#0F2942] rounded-lg text-label-md font-label-md hover:bg-surface-container-high transition-colors" href="#helpline">
+<span class="material-symbols-outlined text-[15px]">support_agent</span>
+<span>Anganwadi Connect</span>
+</a>
+</div>
+</article>
+<!-- Scheme 6: PM Matru Vandana Yojana (PMMVY) -->
+<article class="scheme-card bg-surface-container-lowest rounded-xl border border-slate-200/90 hover:border-amber-400 transition-all duration-200 p-6 flex flex-col justify-between shadow-xs hover:shadow-md" data-category="women">
+<div>
+<div class="flex items-center justify-between gap-3 mb-4">
+<span class="px-3 py-1 rounded-full text-xs font-semibold bg-amber-50 text-amber-800 border border-amber-200">
+                Women Empowerment &amp; Maternal Care
+              </span>
+<span class="text-xs text-slate-500 font-mono">Ministry of WCD</span>
+</div>
+<h3 class="text-headline-sm font-headline-sm text-on-surface font-bold tracking-tight mb-2">
+              PM Matru Vandana Yojana (PMMVY)
+            </h3>
+<p class="text-body-sm font-body-sm text-text-muted mb-4">
+              Direct Benefit Transfer (DBT) maternity incentive of ₹5,000 to compensate for wage loss and encourage institutional delivery for safe maternal health.
+            </p>
+<div class="bg-surface-ivory rounded-lg p-4 border border-slate-200/70 mb-4">
+<div class="text-xs font-bold text-slate-800 tracking-wider mb-2 flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-tertiary">currency_rupee</span>
+<span>DBT INSTALLMENT STRUCTURE</span>
+</div>
+<ul class="text-body-sm font-body-sm text-secondary space-y-1 mb-3">
+<li>• 1st Installment (₹3,000): Early registration of pregnancy &amp; ANC check.</li>
+<li>• 2nd Installment (₹2,000): Child birth registration &amp; 1st cycle vaccines.</li>
+<li>• Additional ₹6,000 if second child is a girl under PMMVY 2.0.</li>
+</ul>
+<div class="text-xs font-bold text-slate-800 tracking-wider mb-2 flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-primary">folder_open</span>
+<span>REQUIRED DOCUMENTS</span>
+</div>
+<div class="flex flex-wrap gap-1.5">
+<span class="px-2 py-0.5 bg-white text-xs text-slate-700 border border-slate-200 rounded">MCP Card Record</span>
+<span class="px-2 py-0.5 bg-white text-xs text-slate-700 border border-slate-200 rounded">Mother's Aadhaar</span>
+<span class="px-2 py-0.5 bg-white text-xs text-slate-700 border border-slate-200 rounded">DBT NPCI-Linked Bank Account</span>
+</div>
+</div>
+<div class="p-3 bg-amber-50/70 border-l-4 border-marigold-bright rounded-r-md text-xs text-slate-800 mb-6">
+<span class="font-bold text-primary">Trinetra Booth Aid:</span> NPCI Aadhaar bank seeding verification to prevent payment bounces, and PMMVY online portal dossier submission.
+            </div>
+</div>
+<div class="pt-4 border-t border-slate-100 flex items-center justify-between gap-3">
+<a class="inline-flex items-center gap-1.5 text-label-md font-label-md text-primary hover:text-primary-container font-semibold" href="https://pmmvy.wcd.gov.in" rel="noopener noreferrer" target="_blank">
+<span>Official PMMVY Portal</span>
+<span class="material-symbols-outlined text-[16px]">open_in_new</span>
+</a>
+<a class="inline-flex items-center gap-1 px-3 py-1.5 bg-surface-container text-[#0F2942] rounded-lg text-label-md font-label-md hover:bg-surface-container-high transition-colors" href="#helpline">
+<span class="material-symbols-outlined text-[15px]">support_agent</span>
+<span>DBT Bank Verification</span>
+</a>
+</div>
+</article>
+<!-- Scheme 7: Ayushman Bharat PM-JAY -->
+<article class="scheme-card bg-surface-container-lowest rounded-xl border border-slate-200/90 hover:border-amber-400 transition-all duration-200 p-6 flex flex-col justify-between shadow-xs hover:shadow-md" data-category="health">
+<div>
+<div class="flex items-center justify-between gap-3 mb-4">
+<span class="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200">
+                Universal Health Security
+              </span>
+<span class="text-xs text-slate-500 font-mono">National Health Authority</span>
+</div>
+<h3 class="text-headline-sm font-headline-sm text-on-surface font-bold tracking-tight mb-2">
+              Ayushman Bharat (PM-JAY)
+            </h3>
+<p class="text-body-sm font-body-sm text-text-muted mb-4">
+              World's largest government-funded healthcare assurance scheme offering ₹5,00,000 annual cashless secondary &amp; tertiary hospitalization per family.
+            </p>
+<div class="bg-surface-ivory rounded-lg p-4 border border-slate-200/70 mb-4">
+<div class="text-xs font-bold text-slate-800 tracking-wider mb-2 flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-tertiary">local_hospital</span>
+<span>BENEFIT DETAILS</span>
+</div>
+<ul class="text-body-sm font-body-sm text-secondary space-y-1 mb-3">
+<li>• ₹5 Lakh/family/year cashless cover across 27,000+ empanelled hospitals.</li>
+<li>• Pre-existing diseases covered from day one without waiting period.</li>
+<li>• Diagnostic tests, surgeries, medicines, and post-discharge covered.</li>
+</ul>
+<div class="text-xs font-bold text-slate-800 tracking-wider mb-2 flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-primary">folder_open</span>
+<span>AYUSHMAN CARD GENERATION</span>
+</div>
+<div class="flex flex-wrap gap-1.5">
+<span class="px-2 py-0.5 bg-white text-xs text-slate-700 border border-slate-200 rounded">Ration Card (NFSA)</span>
+<span class="px-2 py-0.5 bg-white text-xs text-slate-700 border border-slate-200 rounded">Aadhaar Card (e-KYC)</span>
+<span class="px-2 py-0.5 bg-white text-xs text-slate-700 border border-slate-200 rounded">SECC-2011 Eligibility Match</span>
+</div>
+</div>
+<div class="p-3 bg-amber-50/70 border-l-4 border-marigold-bright rounded-r-md text-xs text-slate-800 mb-6">
+<span class="font-bold text-primary">Trinetra Booth Aid:</span> Instant on-spot BIS Ayushman Card generation camp via our authorized field tablets, eliminating hospital admission rejections.
+            </div>
+</div>
+<div class="pt-4 border-t border-slate-100 flex items-center justify-between gap-3">
+<a class="inline-flex items-center gap-1.5 text-label-md font-label-md text-primary hover:text-primary-container font-semibold" href="https://pmjay.gov.in" rel="noopener noreferrer" target="_blank">
+<span>Official PM-JAY Portal</span>
+<span class="material-symbols-outlined text-[16px]">open_in_new</span>
+</a>
+<a class="inline-flex items-center gap-1 px-3 py-1.5 bg-surface-container text-[#0F2942] rounded-lg text-label-md font-label-md hover:bg-surface-container-high transition-colors" href="#helpline">
+<span class="material-symbols-outlined text-[15px]">support_agent</span>
+<span>Generate Card Support</span>
+</a>
+</div>
+</article>
+<!-- Scheme 8: PM SVANidhi -->
+<article class="scheme-card bg-surface-container-lowest rounded-xl border border-slate-200/90 hover:border-amber-400 transition-all duration-200 p-6 flex flex-col justify-between shadow-xs hover:shadow-md" data-category="youth">
+<div>
+<div class="flex items-center justify-between gap-3 mb-4">
+<span class="px-3 py-1 rounded-full text-xs font-semibold bg-cyan-50 text-cyan-800 border border-cyan-200">
+                Livelihood &amp; Micro-Credit
+              </span>
+<span class="text-xs text-slate-500 font-mono">Ministry of HUA</span>
+</div>
+<h3 class="text-headline-sm font-headline-sm text-on-surface font-bold tracking-tight mb-2">
+              PM SVANidhi Micro-Credit Scheme
+            </h3>
+<p class="text-body-sm font-body-sm text-text-muted mb-4">
+              Collateral-free working capital micro-loans for street vendors and small informal hawkers to liberate them from predatory loan sharks.
+            </p>
+<div class="bg-surface-ivory rounded-lg p-4 border border-slate-200/70 mb-4">
+<div class="text-xs font-bold text-slate-800 tracking-wider mb-2 flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-tertiary">payments</span>
+<span>LOAN TRANCHES &amp; INCENTIVES</span>
+</div>
+<ul class="text-body-sm font-body-sm text-secondary space-y-1 mb-3">
+<li>• 1st Tranche: ₹10,000 (1 year) | 2nd: ₹20,000 | 3rd: ₹50,000.</li>
+<li>• 7% Interest subsidy credited directly via DBT on timely repayment.</li>
+<li>• Monthly cash back incentive on digital transactions (QR payments).</li>
+</ul>
+<div class="text-xs font-bold text-slate-800 tracking-wider mb-2 flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-primary">folder_open</span>
+<span>DOCUMENT VERIFICATION</span>
+</div>
+<div class="flex flex-wrap gap-1.5">
+<span class="px-2 py-0.5 bg-white text-xs text-slate-700 border border-slate-200 rounded">Vending Certificate (CoB / LoR)</span>
+<span class="px-2 py-0.5 bg-white text-xs text-slate-700 border border-slate-200 rounded">Aadhaar Linked Mobile</span>
+<span class="px-2 py-0.5 bg-white text-xs text-slate-700 border border-slate-200 rounded">Bank Passbook</span>
+</div>
+</div>
+<div class="p-3 bg-amber-50/70 border-l-4 border-marigold-bright rounded-r-md text-xs text-slate-800 mb-6">
+<span class="font-bold text-primary">Trinetra Booth Aid:</span> Procurement of Letter of Recommendation (LoR) from Urban Local Bodies (ULBs) and submission into the PM SVANidhi bank pipeline.
+            </div>
+</div>
+<div class="pt-4 border-t border-slate-100 flex items-center justify-between gap-3">
+<a class="inline-flex items-center gap-1.5 text-label-md font-label-md text-primary hover:text-primary-container font-semibold" href="https://pmsvanidhi.mohua.gov.in" rel="noopener noreferrer" target="_blank">
+<span>Official PM SVANidhi</span>
+<span class="material-symbols-outlined text-[16px]">open_in_new</span>
+</a>
+<a class="inline-flex items-center gap-1 px-3 py-1.5 bg-surface-container text-[#0F2942] rounded-lg text-label-md font-label-md hover:bg-surface-container-high transition-colors" href="#helpline">
+<span class="material-symbols-outlined text-[15px]">support_agent</span>
+<span>Loan Portal Aid</span>
+</a>
+</div>
+</article>
+</div>
+</section>
+<!-- Document Readiness & Assistance Desk (High Utility Bento) -->
+<section class="py-12 md:py-16 bg-surface-warm-card border-t border-b border-surface-container" id="readiness-desk">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="text-center max-w-3xl mx-auto mb-12">
+<span class="text-label-caps font-label-caps text-primary">NO AGENTS • NO BRIBES • RADICAL TRANSPARENCY</span>
+<h2 class="text-headline-xl font-headline-xl text-on-surface mt-2">Document Readiness &amp; Assistance Desk</h2>
+<p class="text-body-md font-body-md text-text-muted mt-2">
+            Over 64% of scheme rejections occur due to mismatched names, unlinked mobile numbers, or unseeded bank accounts. Ensure your documents are 100% compliant before applying.
+          </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Card 1: Aadhaar Updates -->
+<div class="bg-surface-container-lowest rounded-xl p-6 border border-slate-200/80 shadow-xs flex flex-col justify-between">
+<div>
+<div class="w-12 h-12 rounded-lg bg-amber-50 text-primary flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-2xl">badge</span>
+</div>
+<h3 class="text-headline-sm font-headline-sm font-bold text-on-surface mb-2">Aadhaar Card Sync</h3>
+<p class="text-body-sm font-body-sm text-text-muted mb-4">
+                Verify that your biometric data is up to date and your phone number is actively linked to receive OTPs for portal verifications.
+              </p>
+<div class="bg-surface-ivory p-3 rounded text-xs space-y-1.5 text-secondary border border-slate-100">
+<div class="flex items-center justify-between">
+<span>Mandatory for:</span>
+<span class="font-bold text-slate-800">All DBT Transfers</span>
+</div>
+<div class="flex items-center justify-between">
+<span>Child Biometric Age:</span>
+<span class="font-bold text-slate-800">5 &amp; 15 Years</span>
+</div>
+</div>
+</div>
+<a class="mt-6 inline-flex items-center gap-1 text-label-md font-label-md text-primary font-semibold hover:underline" href="https://myaadhaar.uidai.gov.in" rel="noopener noreferrer" target="_blank">
+<span>UIDAI Official Portal</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+<!-- Card 2: Ration Cards (NFSA) -->
+<div class="bg-surface-container-lowest rounded-xl p-6 border border-slate-200/80 shadow-xs flex flex-col justify-between">
+<div>
+<div class="w-12 h-12 rounded-lg bg-emerald-50 text-tertiary flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-2xl">receipt_long</span>
+</div>
+<h3 class="text-headline-sm font-headline-sm font-bold text-on-surface mb-2">Ration Card (NFSA)</h3>
+<p class="text-body-sm font-body-sm text-text-muted mb-4">
+                Inclusion in the National Food Security Act database enables subsidized food grains and unlocks instant Ayushman Bharat cover.
+              </p>
+<div class="bg-surface-ivory p-3 rounded text-xs space-y-1.5 text-secondary border border-slate-100">
+<div class="flex items-center justify-between">
+<span>Category:</span>
+<span class="font-bold text-slate-800">AAY / BPL / PHH</span>
+</div>
+<div class="flex items-center justify-between">
+<span>Family Addition:</span>
+<span class="font-bold text-slate-800">Birth Cert Required</span>
+</div>
+</div>
+</div>
+<a class="mt-6 inline-flex items-center gap-1 text-label-md font-label-md text-tertiary font-semibold hover:underline" href="https://nfsa.gov.in" rel="noopener noreferrer" target="_blank">
+<span>NFSA Transparency Portal</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+<!-- Card 3: Income & Caste Certificates -->
+<div class="bg-surface-container-lowest rounded-xl p-6 border border-slate-200/80 shadow-xs flex flex-col justify-between">
+<div>
+<div class="w-12 h-12 rounded-lg bg-blue-50 text-[#0F2942] flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-2xl">verified</span>
+</div>
+<h3 class="text-headline-sm font-headline-sm font-bold text-on-surface mb-2">Income &amp; Category</h3>
+<p class="text-body-sm font-body-sm text-text-muted mb-4">
+                Tehsildar/SDM issued income certification is pivotal for RTE 25% reservations, scholarship disbursements, and state tuition fee exemptions.
+              </p>
+<div class="bg-surface-ivory p-3 rounded text-xs space-y-1.5 text-secondary border border-slate-100">
+<div class="flex items-center justify-between">
+<span>Validity:</span>
+<span class="font-bold text-slate-800">1 Financial Year</span>
+</div>
+<div class="flex items-center justify-between">
+<span>Issuing Authority:</span>
+<span class="font-bold text-slate-800">Revenue Dept (e-District)</span>
+</div>
+</div>
+</div>
+<a class="mt-6 inline-flex items-center gap-1 text-label-md font-label-md text-[#0F2942] font-semibold hover:underline" href="https://services.india.gov.in" rel="noopener noreferrer" target="_blank">
+<span>National Services Portal</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+<!-- Card 4: NPCI Bank DBT Linking -->
+<div class="bg-surface-container-lowest rounded-xl p-6 border border-slate-200/80 shadow-xs flex flex-col justify-between">
+<div>
+<div class="w-12 h-12 rounded-lg bg-purple-50 text-purple-700 flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-2xl">account_balance_wallet</span>
+</div>
+<h3 class="text-headline-sm font-headline-sm font-bold text-on-surface mb-2">NPCI DBT Bank Seeding</h3>
+<p class="text-body-sm font-body-sm text-text-muted mb-4">
+                Government subsidies do not transfer to normal bank accounts unless mapped on the NPCI Aadhaar Payments Bridge (APB).
+              </p>
+<div class="bg-surface-ivory p-3 rounded text-xs space-y-1.5 text-secondary border border-slate-100">
+<div class="flex items-center justify-between">
+<span>Verification:</span>
+<span class="font-bold text-slate-800">DBT Bharat Portal</span>
+</div>
+<div class="flex items-center justify-between">
+<span>Form:</span>
+<span class="font-bold text-slate-800">Bank Aadhaar Consent</span>
+</div>
+</div>
+</div>
+<a class="mt-6 inline-flex items-center gap-1 text-label-md font-label-md text-purple-800 font-semibold hover:underline" href="https://dbtbharat.gov.in" rel="noopener noreferrer" target="_blank">
+<span>DBT Bharat Status Check</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- Helpline Callout Banner: Grassroots Booth Action -->
+<section class="py-12 md:py-16 bg-[#0F2942] text-white relative overflow-hidden" id="helpline">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+<div class="bg-slate-900/40 border border-slate-700/60 rounded-2xl p-8 md:p-12">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+<div class="lg:col-span-8">
+<span class="inline-flex items-center gap-2 px-3 py-1 rounded bg-emergency-crimson text-white text-label-md font-label-md mb-3 font-semibold">
+<span class="material-symbols-outlined text-[16px]">contact_support</span>
+<span>Direct Grassroots Field Presence</span>
+</span>
+<h2 class="text-headline-xl font-headline-xl text-white font-bold tracking-tight">
+                Facing issues with your application? Visit our nearest grassroots booth or call our assistance desk.
+              </h2>
+<p class="text-body-lg font-body-lg text-slate-300 mt-4 max-w-2xl">
+                Our trained community field paralegals help with document scanning, CSC form filling, correction notices, and grievance escalations without charging a single rupee.
+              </p>
+<div class="flex flex-wrap gap-4 items-center mt-6">
+<a class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-marigold-bright hover:bg-amber-600 text-slate-950 font-label-lg text-label-lg font-bold transition-all shadow-md" href="tel:1098">
+<span class="material-symbols-outlined text-[20px]">call</span>
+<span>Direct Desk: +91 11 2680 1098</span>
+</a>
+<a class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-600 text-white font-label-lg text-label-lg transition-all" href="#booth-locator">
+<span class="material-symbols-outlined text-[20px]">pin_drop</span>
+<span>Find Nearest Grassroots Booth</span>
+</a>
+</div>
+</div>
+<!-- Operating Timings & Assurance Badge -->
+<div class="lg:col-span-4 bg-slate-800/80 rounded-xl p-6 border border-slate-700 text-slate-200">
+<div class="text-label-caps font-label-caps text-highlight-amber-soft mb-2">BOOTH ASSISTANCE HOURS</div>
+<p class="text-body-sm font-body-sm text-slate-300 mb-4">
+                Monday to Saturday: <strong class="text-white">09:00 AM – 06:00 PM</strong><br/>
+                Walk-ins welcome with physical identity proofs.
+              </p>
+<div class="p-3 bg-slate-900/80 rounded border border-slate-700 text-xs text-slate-300 flex items-start gap-2.5">
+<span class="material-symbols-outlined text-emerald-400 text-[18px] shrink-0 mt-0.5">verified</span>
+<span>Complies strictly with FCRA, Section 12A, and Section 80G governance rules. No synthetic media.</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Comprehensive Footer adhering strictly to JSON Blueprint -->
+<footer class="full-width bg-surface-warm-card dark:bg-inverse-surface border-t border-surface-container dark:border-outline-variant flat no shadows">
+<div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 pb-12 border-b border-slate-200 dark:border-slate-800">
+<!-- Brand & Certification Column -->
+<div class="lg:col-span-2">
+<a class="inline-block text-headline-md font-headline-md font-bold text-on-surface dark:text-inverse-on-surface mb-3" href="#">
+            Trinetra Gargi Foundation
+          </a>
+<p class="text-body-sm font-body-sm text-text-muted dark:text-secondary-fixed-dim max-w-sm mb-4">
+            A nationwide non-profit civic coalition defending the rights of the girl child, securing public statutory benefits, and ending child exploitation.
+          </p>
+<div class="flex flex-wrap gap-2 text-xs">
+<span class="px-2.5 py-1 rounded bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-medium">Statutory Donation Accounting</span>
+<span class="px-2.5 py-1 rounded bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-medium">12A Registered</span>
+<span class="px-2.5 py-1 rounded bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-medium">FCRA Compliant</span>
+</div>
+</div>
+<!-- Quick Links (from Footer links array) -->
+<div>
+<h4 class="text-headline-sm font-headline-sm font-bold text-on-surface dark:text-inverse-on-surface mb-4">Navigation</h4>
+<ul class="space-y-2.5 text-label-md font-label-md">
+<li><a class="text-text-muted dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary transition-colors" href="#">About Us</a></li>
+<li><a class="text-primary dark:text-inverse-primary underline" href="#">Government Schemes Portal</a></li>
+<li><a class="text-text-muted dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary transition-colors" href="#">Impact Reports &amp; Audits</a></li>
+<li><a class="text-text-muted dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary transition-colors" href="#">Stories &amp; Field News</a></li>
+</ul>
+</div>
+<!-- Statutory & Helplines (from Footer links array) -->
+<div>
+<h4 class="text-headline-sm font-headline-sm font-bold text-on-surface dark:text-inverse-on-surface mb-4">Emergency Support</h4>
+<ul class="space-y-2.5 text-label-md font-label-md">
+<li><a class="text-text-muted dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary transition-colors font-bold text-emergency-crimson flex items-center gap-1" href="tel:1098"><span class="material-symbols-outlined text-[15px]">call</span> Child Protection (1098)</a></li>
+<li><a class="text-text-muted dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary transition-colors font-bold text-emergency-crimson flex items-center gap-1" href="tel:181"><span class="material-symbols-outlined text-[15px]">call</span> Women Helpline (181)</a></li>
+<li><a class="text-text-muted dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary transition-colors" href="#">Statutory Donation Accounting</a></li>
+<li><a class="text-text-muted dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary transition-colors" href="#">Volunteer &amp; CSR Partnerships</a></li>
+</ul>
+</div>
+<!-- Governance & Disclosures -->
+<div>
+<h4 class="text-headline-sm font-headline-sm font-bold text-on-surface dark:text-inverse-on-surface mb-4">Legal &amp; Grievance</h4>
+<ul class="space-y-2.5 text-label-md font-label-md">
+<li><a class="text-text-muted dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary transition-colors" href="#">Privacy Policy &amp; Disclosures</a></li>
+<li><a class="text-text-muted dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary transition-colors" href="#">Confidential Grievance Redressal</a></li>
+<li><a class="text-text-muted dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary transition-colors" href="#">Whistleblower Protection</a></li>
+</ul>
+</div>
+</div>
+<!-- Copyright Statement verbatim from JSON blueprint -->
+<div class="pt-8 text-center text-body-sm font-body-sm text-text-muted dark:text-secondary-fixed-dim">
+<p>© 2024 Trinetra Gargi Foundation. Registered Non-Profit Entity (FCRA, Section 8 Licensed Non-Profit). Radical Transparency Verified. Zero Synthetic Media.</p>
+</div>
+</div>
+</footer>
+<!-- Interactive Filter & Search Script -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const searchInput = document.getElementById('schemeSearchInput');
+      const filterButtons = document.querySelectorAll('.filter-btn');
+      const schemeCards = document.querySelectorAll('.scheme-card');
+
+      let currentCategory = 'all';
+      let currentQuery = '';
+
+      function applyFilters() {
+        schemeCards.forEach(card => {
+          const category = card.getAttribute('data-category');
+          const cardText = card.innerText.toLowerCase();
+          
+          const matchesCategory = (currentCategory === 'all' || category === currentCategory);
+          const matchesSearch = (!currentQuery || cardText.includes(currentQuery));
+
+          if (matchesCategory && matchesSearch) {
+            card.classList.remove('hidden');
+          } else {
+            card.classList.add('hidden');
+          }
+        });
+      }
+
+      filterButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          filterButtons.forEach(b => {
+            b.classList.remove('bg-[#0F2942]', 'text-white', 'active-filter');
+            b.classList.add('bg-surface-container-low', 'text-on-surface');
+          });
+          btn.classList.remove('bg-surface-container-low', 'text-on-surface');
+          btn.classList.add('bg-[#0F2942]', 'text-white', 'active-filter');
+
+          currentCategory = btn.getAttribute('data-category');
+          applyFilters();
+        });
+      });
+
+      if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+          currentQuery = e.target.value.toLowerCase().trim();
+          applyFilters();
+        });
+      }
+    });
+  </script>
+</body></html>

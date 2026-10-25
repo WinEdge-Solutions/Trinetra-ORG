@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>About Us | Trinetra Gargi Foundation</title>
+<!-- Fonts & Material Symbols -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-container": "#e7eeff",
+            "surface-bright": "#f9f9ff",
+            "emergency-crimson": "#DC2626",
+            "error-container": "#ffdad6",
+            "on-surface-variant": "#554336",
+            "on-surface": "#111c2d",
+            "surface-ivory": "#FAFAF9",
+            "on-secondary": "#ffffff",
+            "secondary-fixed": "#d1e4ff",
+            "primary-container": "#b15f00",
+            "on-tertiary-fixed": "#002114",
+            "on-primary": "#ffffff",
+            "on-secondary-fixed-variant": "#314863",
+            "surface-variant": "#d8e3fb",
+            "on-error-container": "#93000a",
+            "on-tertiary-fixed-variant": "#005137",
+            "secondary": "#49607c",
+            "on-primary-fixed": "#2f1500",
+            "outline-variant": "#dbc2b0",
+            "primary-fixed-dim": "#ffb77d",
+            "marigold-bright": "#F59E0B",
+            "on-error": "#ffffff",
+            "text-muted": "#64748B",
+            "surface-container-low": "#f0f3ff",
+            "inverse-primary": "#ffb77d",
+            "on-tertiary": "#ffffff",
+            "surface-container-highest": "#d8e3fb",
+            "primary-fixed": "#ffdcc3",
+            "inverse-surface": "#263143",
+            "on-primary-fixed-variant": "#6e3900",
+            "primary": "#8d4b00",
+            "error": "#ba1a1a",
+            "inverse-on-surface": "#ecf1ff",
+            "tertiary": "#006948",
+            "surface-container-lowest": "#ffffff",
+            "surface-dim": "#cfdaf2",
+            "coral-warmth": "#EA580C",
+            "tertiary-fixed-dim": "#68dba9",
+            "tertiary-container": "#00855d",
+            "secondary-fixed-dim": "#b0c9e8",
+            "on-tertiary-container": "#f5fff7",
+            "on-secondary-fixed": "#011d35",
+            "outline": "#887364",
+            "sage-soft": "#10B981",
+            "tertiary-fixed": "#85f8c4",
+            "on-secondary-container": "#4b637e",
+            "highlight-amber-soft": "#FEF3C7",
+            "background": "#f9f9ff",
+            "on-primary-container": "#fffbff",
+            "on-background": "#111c2d",
+            "surface-tint": "#904d00",
+            "surface": "#f9f9ff",
+            "secondary-container": "#c7dfff",
+            "surface-warm-card": "#F5F5F4",
+            "surface-container-high": "#dee8ff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "margin-desktop": "3rem",
+            "margin": "1rem",
+            "margin-tablet": "2rem",
+            "gutter": "1.5rem",
+            "space-lg": "1.5rem",
+            "space-md": "1rem",
+            "space-xs": "0.25rem",
+            "space-sm": "0.5rem",
+            "space-xl": "2.5rem",
+            "gutter-desktop": "2rem"
+          },
+          "fontFamily": {
+            "label-lg": ["Plus Jakarta Sans"],
+            "headline-xl-mobile": ["Plus Jakarta Sans"],
+            "label-md": ["Plus Jakarta Sans"],
+            "headline-lg": ["Plus Jakarta Sans"],
+            "display": ["Plus Jakarta Sans"],
+            "headline-xl": ["Plus Jakarta Sans"],
+            "stat-metric": ["Plus Jakarta Sans"],
+            "headline-md": ["Plus Jakarta Sans"],
+            "stat-metric-mobile": ["Plus Jakarta Sans"],
+            "body-lg": ["Plus Jakarta Sans"],
+            "label-caps": ["Plus Jakarta Sans"],
+            "headline-sm": ["Plus Jakarta Sans"],
+            "body-md": ["Plus Jakarta Sans"],
+            "display-mobile": ["Plus Jakarta Sans"],
+            "body-sm": ["Plus Jakarta Sans"]
+          },
+          "fontSize": {
+            "label-lg": ["0.875rem", { "lineHeight": "1.25", "letterSpacing": "0.01em", "fontWeight": "600" }],
+            "headline-xl-mobile": ["1.875rem", { "lineHeight": "1.25", "letterSpacing": "-0.015em", "fontWeight": "700" }],
+            "label-md": ["0.75rem", { "lineHeight": "1.25", "letterSpacing": "0.04em", "fontWeight": "600" }],
+            "headline-lg": ["2rem", { "lineHeight": "1.25", "letterSpacing": "-0.015em", "fontWeight": "700" }],
+            "display": ["3.5rem", { "lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "800" }],
+            "headline-xl": ["2.5rem", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "stat-metric": ["3.75rem", { "lineHeight": "1.0", "letterSpacing": "-0.03em", "fontWeight": "800" }],
+            "headline-md": ["1.5rem", { "lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "stat-metric-mobile": ["2.5rem", { "lineHeight": "1.0", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+            "body-lg": ["1.125rem", { "lineHeight": "1.6", "fontWeight": "400" }],
+            "label-caps": ["0.75rem", { "lineHeight": "1.2", "letterSpacing": "0.08em", "fontWeight": "700" }],
+            "headline-sm": ["1.25rem", { "lineHeight": "1.4", "fontWeight": "600" }],
+            "body-md": ["1rem", { "lineHeight": "1.6", "fontWeight": "400" }],
+            "display-mobile": ["2.25rem", { "lineHeight": "1.15", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+            "body-sm": ["0.875rem", { "lineHeight": "1.5", "fontWeight": "400" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    .material-symbols-outlined.fill-icon {
+      font-variation-settings: 'FILL' 1;
+    }
+  </style>
+</head>
+<body class="bg-surface-ivory text-on-surface antialiased font-body-md selection:bg-highlight-amber-soft selection:text-on-surface">
+<!-- EMERGENCY STATUTORY NOTICE & RAPID ESCALATION RIBBON -->
+<aside aria-label="Critical Emergency &amp; Statutory Utility Ribbon" class="bg-[#0B132B] text-surface-bright py-2 px-4 text-xs border-b border-white/10 z-50 relative">
+<div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
+<div class="flex items-center space-x-3 flex-wrap">
+<div class="inline-flex items-center gap-2 px-2 py-0.5 rounded-full bg-emergency-crimson/20 border border-emergency-crimson/40 text-surface-bright font-mono text-[11px]">
+<span class="w-2 h-2 rounded-full bg-emergency-crimson animate-pulse"></span>
+<span class="font-semibold tracking-wide">24/7 Rapid Response Active</span>
+</div>
+<span class="text-white/20 hidden sm:inline">|</span>
+<a class="inline-flex items-center gap-1.5 font-semibold text-marigold-bright hover:text-white transition-colors" href="tel:1098">
+<span class="material-symbols-outlined text-[14px]">call</span>
+<span>Childline <strong class="underline decoration-marigold-bright">1098</strong></span>
+</a>
+<span class="text-white/20 hidden sm:inline">•</span>
+<a class="inline-flex items-center gap-1.5 font-semibold text-surface-bright hover:text-marigold-bright transition-colors" href="tel:181">
+<span>Women Helpline <strong class="underline">181</strong></span>
+</a>
+</div>
+<div class="flex items-center space-x-3 text-[11px]">
+<div class="hidden md:inline-flex items-center gap-1.5 text-secondary-fixed-dim bg-white/5 px-2.5 py-0.5 rounded border border-white/10 font-mono">
+<span class="material-symbols-outlined text-xs text-sage-soft">verified</span>
+<span>Section 8 Licensed Non-Profit Entity</span>
+</div>
+<button class="inline-flex items-center gap-1 text-white/80 hover:text-white transition-colors px-2 py-0.5 rounded bg-white/5 border border-white/10 font-medium" type="button">
+<span class="material-symbols-outlined text-xs">translate</span>
+<span>EN / हिन्दी</span>
+</button>
+<a class="inline-flex items-center gap-1 text-emergency-crimson hover:bg-emergency-crimson hover:text-white px-2 py-0.5 rounded bg-emergency-crimson/15 border border-emergency-crimson/30 transition-all font-semibold" href="https://www.google.com" title="Quick Emergency Exit">
+<span class="material-symbols-outlined text-xs">logout</span>
+<span class="hidden sm:inline">Quick Exit</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- TOP APP BAR (from Shared Components JSON: About Us is ACTIVE) -->
+<header class="bg-surface-ivory/90 backdrop-blur-md border-b border-surface-container/70 shadow-sm docked full-width top-0 sticky z-50 transition-all duration-200">
+<div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-20">
+<!-- Brand Emblem & Typography -->
+<a class="flex items-center space-x-3.5 group shrink-0" href="#">
+<div class="relative w-11 h-11 rounded-xl bg-gradient-to-br from-marigold-bright/20 via-primary/10 to-primary/20 border border-marigold-bright/40 flex items-center justify-center text-primary shadow-sm group-hover:scale-105 group-hover:border-primary transition-all duration-200">
+<span class="material-symbols-outlined text-2xl text-primary group-hover:rotate-12 transition-transform duration-300">brightness_7</span>
+<span class="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 rounded-full bg-tertiary flex items-center justify-center text-[9px] text-white font-bold border border-white">
+<span class="material-symbols-outlined text-[10px]">verified</span>
+</span>
+</div>
+<div class="leading-tight">
+<span class="text-headline-sm font-headline-sm font-bold text-on-surface tracking-tight block flex items-center gap-1.5">
+          TRINETRA GARGI FOUNDATION
+        </span>
+<span class="text-[11px] font-label-caps text-text-muted tracking-widest block uppercase font-medium">
+          Restoring Dignity &amp; Childhood
+        </span>
+</div>
+</a>
+<!-- Segmented Interactive Navigation Pills -->
+<nav aria-label="Main Navigation" class="hidden xl:flex items-center bg-surface-warm-card/80 p-1.5 rounded-full border border-surface-container-high/60 shadow-inner space-x-1">
+<!-- About Us - Active Selected Pill -->
+<a class="px-4 py-2 rounded-full bg-primary text-on-primary font-bold text-label-md shadow-sm flex items-center gap-1.5 transition-all" href="#">
+<span class="w-1.5 h-1.5 rounded-full bg-marigold-bright"></span>
+<span>About Us</span>
+</a>
+<!-- Other Nav Items -->
+<div class="relative group inline-flex items-center">
+<button class="px-3.5 py-2 rounded-full text-secondary hover:text-primary hover:bg-surface-container-lowest transition-colors text-label-md font-semibold flex items-center gap-1" type="button">
+<span>Our Work</span>
+<span class="material-symbols-outlined text-[16px] text-text-muted group-hover:text-primary transition-transform group-hover:rotate-180">expand_more</span>
+</button>
+</div>
+<a class="px-3.5 py-2 rounded-full text-secondary hover:text-primary hover:bg-surface-container-lowest transition-colors text-label-md font-semibold" href="#">
+        Govt Schemes
+      </a>
+<a class="px-3.5 py-2 rounded-full text-secondary hover:text-primary hover:bg-surface-container-lowest transition-colors text-label-md font-semibold" href="#">
+        Impact &amp; Audits
+      </a>
+<a class="px-3.5 py-2 rounded-full text-secondary hover:text-primary hover:bg-surface-container-lowest transition-colors text-label-md font-semibold" href="#">
+        Stories
+      </a>
+<a class="px-3.5 py-2 rounded-full text-secondary hover:text-primary hover:bg-surface-container-lowest transition-colors text-label-md font-semibold" href="#">
+        Volunteer
+      </a>
+</nav>
+<!-- High-Contrast Action Cluster -->
+<div class="flex items-center space-x-3 shrink-0">
+<!-- Coral / Red SOS Button -->
+<a class="inline-flex items-center gap-2 px-3.5 py-2 bg-emergency-crimson/10 border border-emergency-crimson/30 hover:bg-emergency-crimson text-emergency-crimson hover:text-white rounded-xl font-label-md text-label-md font-bold transition-all duration-150 shadow-sm" href="tel:1098">
+<span class="relative flex h-2.5 w-2.5">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emergency-crimson opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emergency-crimson"></span>
+</span>
+<span class="material-symbols-outlined text-[17px]">emergency</span>
+<span>Report Crisis</span>
+</a>
+<!-- Radiant Warm Amber Gradient CTA Button with Section 8 Support -->
+<a class="group relative inline-flex items-center justify-between px-5 py-2 rounded-xl bg-gradient-to-r from-primary via-primary to-marigold-bright hover:from-primary-container hover:to-primary text-on-primary font-bold shadow-md hover:shadow-lg transition-all duration-200 active:scale-95 border border-primary/20" href="#donate">
+<div class="flex flex-col text-left">
+<span class="text-label-md font-bold leading-tight flex items-center gap-1">
+            Donate Now
+            <span class="material-symbols-outlined text-sm group-hover:translate-x-0.5 transition-transform">arrow_forward</span>
+</span>
+<span class="text-[10px] text-highlight-amber-soft font-mono font-medium -mt-0.5">Section 8 Support</span>
+</div>
+</a>
+</div>
+</div>
+</header>
+<main>
+<!-- HERO SECTION: Genesis, Vision & Uncompromising Mission -->
+<section class="relative bg-surface-ivory pt-14 pb-20 border-b border-surface-container overflow-hidden">
+<!-- Subtle graphic background watermark -->
+<div class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/4 pointer-events-none opacity-5">
+<span class="material-symbols-outlined text-[720px] text-primary" data-icon="shield">shield</span>
+</div>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+<div class="max-w-4xl">
+<!-- Institutional Taxonomy Pill -->
+<div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-highlight-amber-soft border border-marigold-bright/30 mb-6">
+<span class="w-2 h-2 rounded-full bg-marigold-bright"></span>
+<span class="font-label-md text-label-md text-primary font-semibold">
+              INSTITUTIONAL CHARTER &amp; PUBLIC RECORD
+            </span>
+</div>
+<h1 class="text-display font-display text-on-surface mb-6 tracking-tight">
+            Our Genesis, Vision &amp; Uncompromising Mission
+          </h1>
+<p class="text-body-lg font-body-lg text-secondary leading-relaxed mb-8 max-w-3xl">
+            Trinetra Gargi Foundation was established on a radical civic premise: vulnerable children and young women do not need patronizing charity; they demand systemic rights enforcement, restorative dignity, and institutional accountability. Operating across India’s most underserved informal settlements and peri-urban hubs, we dismantle generational structural vulnerabilities through direct grassroots intervention.
+          </p>
+<!-- Core Credo Tags -->
+<div class="flex flex-wrap gap-3 pt-2">
+<div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-surface-container-lowest border border-surface-container text-on-surface text-body-sm font-body-sm">
+<span class="material-symbols-outlined text-tertiary text-base" data-icon="verified_user">verified_user</span>
+<span>Statutory Alignment with CWC &amp; JJ Act</span>
+</div>
+<div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-surface-container-lowest border border-surface-container text-on-surface text-body-sm font-body-sm">
+<span class="material-symbols-outlined text-primary text-base" data-icon="account_balance">account_balance</span>
+<span>100% Publicly Audited Books</span>
+</div>
+<div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-surface-container-lowest border border-surface-container text-on-surface text-body-sm font-body-sm">
+<span class="material-symbols-outlined text-coral-warmth text-base" data-icon="gavel">gavel</span>
+<span>Rights-Based Judicial Advocacy</span>
+</div>
+</div>
+</div>
+<!-- High-Impact Live Verification Metric Cards (Bento Cluster) -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6 mt-16 pt-12 border-t border-surface-container">
+<div class="bg-surface-container-lowest rounded-xl p-6 border border-highlight-amber-soft shadow-sm hover:border-marigold-bright transition-all">
+<span class="text-label-caps font-label-caps text-text-muted uppercase tracking-wider block mb-2">Total Grassroots Reach</span>
+<div class="text-stat-metric font-stat-metric text-on-surface tracking-tight mb-2">142,000+</div>
+<p class="text-body-sm font-body-sm text-secondary">
+              At-risk children integrated into accredited formal schooling pipelines.
+            </p>
+</div>
+<div class="bg-surface-container-lowest rounded-xl p-6 border border-highlight-amber-soft shadow-sm hover:border-marigold-bright transition-all">
+<span class="text-label-caps font-label-caps text-text-muted uppercase tracking-wider block mb-2">Decentralized Centers</span>
+<div class="text-stat-metric font-stat-metric text-primary tracking-tight mb-2">85+</div>
+<p class="text-body-sm font-body-sm text-secondary">
+              Community Learning &amp; Child Protection Nodes operating 6 days a week.
+            </p>
+</div>
+<div class="bg-surface-container-lowest rounded-xl p-6 border border-highlight-amber-soft shadow-sm hover:border-marigold-bright transition-all">
+<span class="text-label-caps font-label-caps text-text-muted uppercase tracking-wider block mb-2">Direct Programme Ratio</span>
+<div class="text-stat-metric font-stat-metric text-tertiary tracking-tight mb-2">93.4%</div>
+<p class="text-body-sm font-body-sm text-secondary">
+              Of every Rupee directly deployed to beneficiary programs without middle-tier rent.
+            </p>
+</div>
+<div class="bg-surface-container-lowest rounded-xl p-6 border border-highlight-amber-soft shadow-sm hover:border-marigold-bright transition-all">
+<span class="text-label-caps font-label-caps text-text-muted uppercase tracking-wider block mb-2">Legal Rescues &amp; Restorations</span>
+<div class="text-stat-metric font-stat-metric text-emergency-crimson tracking-tight mb-2">4,810</div>
+<p class="text-body-sm font-body-sm text-secondary">
+              Successful rescues from child labor, trafficking, and early forced marriage.
+            </p>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION: CORE PHILOSOPHY & OBJECTIVES (4 Distinct Pillars) -->
+<section class="py-20 bg-surface-warm-card border-b border-surface-container">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+<div class="max-w-2xl">
+<span class="font-label-caps text-label-caps text-primary uppercase tracking-widest block mb-2">
+              Our Operating Doctrine
+            </span>
+<h2 class="text-headline-xl font-headline-xl text-on-surface tracking-tight">
+              Four Pillars of Non-Negotiable Civic Impact
+            </h2>
+</div>
+<p class="text-body-md font-body-md text-secondary max-w-md">
+            We reject ephemeral aid. Our methodologies are crafted to dismantle institutional barriers and establish enduring local autonomy.
+          </p>
+</div>
+<!-- 4 Pillar Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<!-- Pillar 1 -->
+<div class="bg-surface-container-lowest rounded-xl p-8 border border-surface-container hover:shadow-md transition-shadow relative overflow-hidden group">
+<div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary mb-6 group-hover:bg-primary group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-2xl" data-icon="school">school</span>
+</div>
+<span class="font-label-caps text-label-caps text-text-muted block mb-1">PILLAR 01</span>
+<h3 class="text-headline-md font-headline-md text-on-surface mb-3">
+              Equitable Childhoods &amp; Pedagogical Dignity
+            </h3>
+<p class="text-body-md font-body-md text-secondary leading-relaxed mb-6">
+              Education is an unconditional human entitlement, not a privileged luxury. We build non-coercive, trauma-informed accelerated bridge schools that bring out-of-school street children and migrant youth up to age-appropriate academic competency, guaranteeing permanent transition into government formal schools.
+            </p>
+<ul class="space-y-2.5 border-t border-surface-container pt-4 text-body-sm font-body-sm text-on-surface">
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary text-lg" data-icon="check_circle">check_circle</span>
+<span>Contextual multilingual foundational literacy and numeracy</span>
+</li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary text-lg" data-icon="check_circle">check_circle</span>
+<span>Daily hot nutrition and biannual preventive pediatric diagnostics</span>
+</li>
+</ul>
+</div>
+<!-- Pillar 2 -->
+<div class="bg-surface-container-lowest rounded-xl p-8 border border-surface-container hover:shadow-md transition-shadow relative overflow-hidden group">
+<div class="w-12 h-12 rounded-lg bg-coral-warmth/10 flex items-center justify-center text-coral-warmth mb-6 group-hover:bg-coral-warmth group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-2xl" data-icon="balance">balance</span>
+</div>
+<span class="font-label-caps text-label-caps text-text-muted block mb-1">PILLAR 02</span>
+<h3 class="text-headline-md font-headline-md text-on-surface mb-3">
+              Systemic Rights Enforcement &amp; Child Protection
+            </h3>
+<p class="text-body-md font-body-md text-secondary leading-relaxed mb-6">
+              Paper rights do not save lives; grassroots enforcement does. We activate vigilant neighborhood Child Protection Committees (CPCs), partnering directly with the Juvenile Justice Board, Child Welfare Committees, and local police stations to preempt hazardous child labor and forced child marriage.
+            </p>
+<ul class="space-y-2.5 border-t border-surface-container pt-4 text-body-sm font-body-sm text-on-surface">
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary text-lg" data-icon="check_circle">check_circle</span>
+<span>Pro bono statutory legal counsel for rescued minors and families</span>
+</li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary text-lg" data-icon="check_circle">check_circle</span>
+<span>POCSO awareness workshops delivered directly inside bustees</span>
+</li>
+</ul>
+</div>
+<!-- Pillar 3 -->
+<div class="bg-surface-container-lowest rounded-xl p-8 border border-surface-container hover:shadow-md transition-shadow relative overflow-hidden group">
+<div class="w-12 h-12 rounded-lg bg-tertiary/10 flex items-center justify-center text-tertiary mb-6 group-hover:bg-tertiary group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-2xl" data-icon="hub">hub</span>
+</div>
+<span class="font-label-caps text-label-caps text-text-muted block mb-1">PILLAR 03</span>
+<h3 class="text-headline-md font-headline-md text-on-surface mb-3">
+              Transparent Grassroots Civic Infrastructure
+            </h3>
+<p class="text-body-md font-body-md text-secondary leading-relaxed mb-6">
+              Vulnerable families often miss out on government welfare due to digital exclusion and predatory middlemen. We run physical Citizen Guidance Desks inside slum clusters to link households with existing state entitlements: PM Poshan, Sukanya Samriddhi, Ladli Laxmi, and Ration Portability.
+            </p>
+<ul class="space-y-2.5 border-t border-surface-container pt-4 text-body-sm font-body-sm text-on-surface">
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary text-lg" data-icon="check_circle">check_circle</span>
+<span>Direct state entitlement mobilization exceeding ₹14.8 Crores to date</span>
+</li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary text-lg" data-icon="check_circle">check_circle</span>
+<span>Zero service fees charged to beneficiaries under any circumstance</span>
+</li>
+</ul>
+</div>
+<!-- Pillar 4 -->
+<div class="bg-surface-container-lowest rounded-xl p-8 border border-surface-container hover:shadow-md transition-shadow relative overflow-hidden group">
+<div class="w-12 h-12 rounded-lg bg-marigold-bright/15 flex items-center justify-center text-primary mb-6 group-hover:bg-primary group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-2xl" data-icon="fact_check">fact_check</span>
+</div>
+<span class="font-label-caps text-label-caps text-text-muted block mb-1">PILLAR 04</span>
+<h3 class="text-headline-md font-headline-md text-on-surface mb-3">
+              Zero Administrative Rent-Seeking &amp; Radical Openness
+            </h3>
+<p class="text-body-md font-body-md text-secondary leading-relaxed mb-6">
+              We hold ourselves to strict fiduciary transparency. We publish line-item expense manifests, third-party statutory audits, and longitudinal progress reports quarterly. Executive salaries are capped in our charter to guarantee that community trust is honored down to every single rupee.
+            </p>
+<ul class="space-y-2.5 border-t border-surface-container pt-4 text-body-sm font-body-sm text-on-surface">
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary text-lg" data-icon="check_circle">check_circle</span>
+<span>Certified by independent tier-1 auditing houses annually</span>
+</li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary text-lg" data-icon="check_circle">check_circle</span>
+<span>Publicly downloadable utilization certificates and bank records</span>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION: FOUNDER'S MESSAGE & MILESTONE TIMELINE -->
+<section class="py-20 bg-surface-ivory border-b border-surface-container">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<!-- Founder's Letter Box -->
+<div class="bg-surface-container-lowest rounded-2xl border border-highlight-amber-soft p-8 md:p-12 shadow-sm mb-20 relative">
+<div class="max-w-3xl">
+<span class="font-label-caps text-label-caps text-primary uppercase tracking-widest block mb-3">
+              A Personal Reckoning
+            </span>
+<h2 class="text-headline-lg font-headline-lg text-on-surface mb-6">
+              "We didn't start with a boardroom grant. We started with two wooden chalkboards under the Mayur Vihar flyover."
+            </h2>
+<div class="space-y-4 text-body-lg font-body-lg text-secondary leading-relaxed">
+<p>
+                In 2014, while walking through the Yamuna floodplains, we encountered thirty-four children sorting hazardous electronic scrap while schools 800 meters away operated with empty desks. The divide wasn't that parents didn't want their children educated—it was that a labyrinth of missing birth certificates, systemic hostility, and abject economic vulnerability barred their entry.
+              </p>
+<p>
+                Trinetra Gargi Foundation was created to be the battering ram that breaks open those institutional doors. We measure our success not by the awards on our walls, but by whether a 10-year-old girl holds a textbook instead of a ragpicker's sack, and whether her mother possesses the legal fortitude to demand what the Constitution already guaranteed her.
+              </p>
+</div>
+<div class="mt-8 pt-6 border-t border-surface-container flex items-center justify-between flex-wrap gap-4">
+<div>
+<p class="font-bold text-on-surface text-headline-sm font-headline-sm">Prof. Gargi V. Shastri &amp; Trinetra Sen</p>
+<p class="text-text-muted text-body-sm font-body-sm">Co-Founders &amp; Permanent Trustees, Trinetra Gargi Foundation</p>
+</div>
+<div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-surface-warm-card border border-surface-container text-xs text-secondary font-mono">
+                REG. NO: DEL/IV/2014/19827
+              </div>
+</div>
+</div>
+</div>
+<!-- Chronological Milestone Timeline (2014 - Present) -->
+<div>
+<div class="text-center max-w-2xl mx-auto mb-16">
+<span class="font-label-caps text-label-caps text-primary uppercase tracking-widest block mb-2">
+              A Decade of Measurable Progress
+            </span>
+<h2 class="text-headline-xl font-headline-xl text-on-surface">
+              Grassroots Milestone Trajectory
+            </h2>
+</div>
+<!-- Timeline Grid -->
+<div class="relative border-l-2 border-primary/20 ml-4 md:ml-32 space-y-12">
+<!-- Milestone 2014 -->
+<div class="relative pl-8 md:pl-12 group">
+<!-- Timeline Dot -->
+<div class="absolute -left-[11px] top-1.5 w-5 h-5 rounded-full bg-surface-ivory border-4 border-primary group-hover:scale-125 transition-transform"></div>
+<div class="flex flex-col md:flex-row md:items-baseline gap-2 md:gap-6 mb-2">
+<span class="font-bold text-primary font-headline-sm text-headline-sm">2014</span>
+<h3 class="text-headline-sm font-headline-sm text-on-surface font-semibold">The Flyover Bridge Initiative</h3>
+</div>
+<p class="text-body-md font-body-md text-secondary max-w-2xl">
+                Inception of the first makeshift open-air learning center under Mayur Vihar Flyover, East Delhi. 34 waste-picker children enrolled into accelerated basic Hindi and arithmetic modules.
+              </p>
+<div class="mt-3 inline-flex items-center gap-2 text-label-md font-label-md text-tertiary">
+<span class="material-symbols-outlined text-sm" data-icon="check">check</span>
+<span>34 out-of-school children regularized</span>
+</div>
+</div>
+<!-- Milestone 2016 -->
+<div class="relative pl-8 md:pl-12 group">
+<div class="absolute -left-[11px] top-1.5 w-5 h-5 rounded-full bg-surface-ivory border-4 border-marigold-bright group-hover:scale-125 transition-transform"></div>
+<div class="flex flex-col md:flex-row md:items-baseline gap-2 md:gap-6 mb-2">
+<span class="font-bold text-marigold-bright font-headline-sm text-headline-sm">2016</span>
+<h3 class="text-headline-sm font-headline-sm text-on-surface font-semibold">Statutory Formalization &amp; Legal Cell</h3>
+</div>
+<p class="text-body-md font-body-md text-secondary max-w-2xl">
+                Formal registration as an Irrevocable Public Charitable Trust. Inauguration of our dedicated Child Protection Legal Cell to intervene in trafficking corridors across the Delhi-NCR border.
+              </p>
+<div class="mt-3 inline-flex items-center gap-2 text-label-md font-label-md text-tertiary">
+<span class="material-symbols-outlined text-sm" data-icon="check">check</span>
+<span>Awarded 12A &amp; 80G Tax-Exempt Status</span>
+</div>
+</div>
+<!-- Milestone 2019 -->
+<div class="relative pl-8 md:pl-12 group">
+<div class="absolute -left-[11px] top-1.5 w-5 h-5 rounded-full bg-surface-ivory border-4 border-coral-warmth group-hover:scale-125 transition-transform"></div>
+<div class="flex flex-col md:flex-row md:items-baseline gap-2 md:gap-6 mb-2">
+<span class="font-bold text-coral-warmth font-headline-sm text-headline-sm">2019</span>
+<h3 class="text-headline-sm font-headline-sm text-on-surface font-semibold">Decentralized Expansion into 25 Hubs</h3>
+</div>
+<p class="text-body-md font-body-md text-secondary max-w-2xl">
+                Replication of the bridge-school model across 25 high-density informal settlement clusters. Launch of the Women Entitlement Desks, connecting over 8,000 single mothers with government cash transfers.
+              </p>
+<div class="mt-3 inline-flex items-center gap-2 text-label-md font-label-md text-tertiary">
+<span class="material-symbols-outlined text-sm" data-icon="check">check</span>
+<span>Active presence across Delhi, Haryana, and Western UP</span>
+</div>
+</div>
+<!-- Milestone 2021 -->
+<div class="relative pl-8 md:pl-12 group">
+<div class="absolute -left-[11px] top-1.5 w-5 h-5 rounded-full bg-surface-ivory border-4 border-tertiary group-hover:scale-125 transition-transform"></div>
+<div class="flex flex-col md:flex-row md:items-baseline gap-2 md:gap-6 mb-2">
+<span class="font-bold text-tertiary font-headline-sm text-headline-sm">2021</span>
+<h3 class="text-headline-sm font-headline-sm text-on-surface font-semibold">COVID-19 Humanitarian &amp; Orphan Shield</h3>
+</div>
+<p class="text-body-md font-body-md text-secondary max-w-2xl">
+                Mobilized rapid rations to 60,000 migrant households. Formed the Emergency Orphan Protection Protocol to document and safely foster 420+ children who lost both guardians, preventing trafficking.
+              </p>
+<div class="mt-3 inline-flex items-center gap-2 text-label-md font-label-md text-tertiary">
+<span class="material-symbols-outlined text-sm" data-icon="check">check</span>
+<span>FCRA Certification granted by Ministry of Home Affairs</span>
+</div>
+</div>
+<!-- Milestone Present -->
+<div class="relative pl-8 md:pl-12 group">
+<div class="absolute -left-[11px] top-1.5 w-5 h-5 rounded-full bg-primary border-4 border-highlight-amber-soft group-hover:scale-125 transition-transform"></div>
+<div class="flex flex-col md:flex-row md:items-baseline gap-2 md:gap-6 mb-2">
+<span class="font-bold text-primary font-headline-sm text-headline-sm">Present</span>
+<h3 class="text-headline-sm font-headline-sm text-on-surface font-semibold">85+ Centers &amp; Over 142,000 Lives Uplifted</h3>
+</div>
+<p class="text-body-md font-body-md text-secondary max-w-2xl">
+                A robust, institutional civic operation managing 85+ full-time learning and community safety nodes. National standard-bearer in non-profit transparency and zero administrative overhead.
+              </p>
+<div class="mt-3 inline-flex items-center gap-2 text-label-md font-label-md text-primary font-bold">
+<span class="material-symbols-outlined text-sm" data-icon="star">star</span>
+<span>Active partnership with 120+ accredited municipal schools</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION: LEADERSHIP & ADVISORY COUNCIL (NO stock photos/AI portraits - Monograms & Vector Badges) -->
+<section class="py-20 bg-surface-warm-card border-b border-surface-container">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="max-w-3xl mb-16">
+<span class="font-label-caps text-label-caps text-primary uppercase tracking-widest block mb-2">
+            Governance &amp; Fiduciary Stewardship
+          </span>
+<h2 class="text-headline-xl font-headline-xl text-on-surface tracking-tight mb-4">
+            Leadership &amp; Advisory Council
+          </h2>
+<p class="text-body-lg font-body-lg text-secondary">
+            Our governance framework is directed by retired statutory officers, human rights jurists, and veteran field pedagogues. In alignment with our strict modesty charter, our leaders are recognized by their civic contributions and legal accountability, not curated vanity portraits.
+          </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Leader 1 -->
+<div class="bg-surface-container-lowest rounded-xl p-6 border border-surface-container hover:border-primary/40 transition-all flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-4">
+<!-- Monogram Avatar -->
+<div class="w-14 h-14 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary font-bold text-headline-sm font-headline-sm tracking-wider">
+                  GS
+                </div>
+<span class="px-2.5 py-1 rounded bg-surface-container text-xs font-semibold text-secondary font-mono">
+                  Trustee / Co-Founder
+                </span>
+</div>
+<h3 class="text-headline-sm font-headline-sm text-on-surface mb-1">
+                Prof. Gargi V. Shastri
+              </h3>
+<p class="text-label-md font-label-md text-primary mb-3">
+                Pedagogical Frameworks &amp; Direct Operations
+              </p>
+<p class="text-body-sm font-body-sm text-secondary leading-relaxed">
+                Former Chair of Child Development Studies, University of Delhi. 28 years designing grassroots non-coercive curriculum frameworks for migrant communities and juvenile observation homes.
+              </p>
+</div>
+<div class="mt-6 pt-4 border-t border-surface-container flex items-center gap-2 text-xs text-text-muted">
+<span class="material-symbols-outlined text-sm" data-icon="policy">policy</span>
+<span>Gov. Committee on RTE Implementation (2012)</span>
+</div>
+</div>
+<!-- Leader 2 -->
+<div class="bg-surface-container-lowest rounded-xl p-6 border border-surface-container hover:border-primary/40 transition-all flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-4">
+<!-- Monogram Avatar -->
+<div class="w-14 h-14 rounded-xl bg-tertiary/10 border border-tertiary/20 flex items-center justify-center text-tertiary font-bold text-headline-sm font-headline-sm tracking-wider">
+                  TS
+                </div>
+<span class="px-2.5 py-1 rounded bg-surface-container text-xs font-semibold text-secondary font-mono">
+                  Managing Trustee
+                </span>
+</div>
+<h3 class="text-headline-sm font-headline-sm text-on-surface mb-1">
+                Trinetra Sen
+              </h3>
+<p class="text-label-md font-label-md text-tertiary mb-3">
+                Field Deployment &amp; Public Transparency
+              </p>
+<p class="text-body-sm font-body-sm text-secondary leading-relaxed">
+                Social Anthropologist and grassroots organizer. Spearheaded the transformation of street-level intervention models into institutional Child Protection Centers across northern India.
+              </p>
+</div>
+<div class="mt-6 pt-4 border-t border-surface-container flex items-center gap-2 text-xs text-text-muted">
+<span class="material-symbols-outlined text-sm" data-icon="verified">verified</span>
+<span>Alum, Tata Institute of Social Sciences (TISS)</span>
+</div>
+</div>
+<!-- Leader 3 -->
+<div class="bg-surface-container-lowest rounded-xl p-6 border border-surface-container hover:border-primary/40 transition-all flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-4">
+<!-- Monogram Avatar -->
+<div class="w-14 h-14 rounded-xl bg-coral-warmth/10 border border-coral-warmth/20 flex items-center justify-center text-coral-warmth font-bold text-headline-sm font-headline-sm tracking-wider">
+                  AR
+                </div>
+<span class="px-2.5 py-1 rounded bg-surface-container text-xs font-semibold text-secondary font-mono">
+                  Legal Advisor
+                </span>
+</div>
+<h3 class="text-headline-sm font-headline-sm text-on-surface mb-1">
+                Adv. Aniruddha Ray
+              </h3>
+<p class="text-label-md font-label-md text-coral-warmth mb-3">
+                Senior Advocate, Supreme Court of India
+              </p>
+<p class="text-body-sm font-body-sm text-secondary leading-relaxed">
+                Leads the pro bono statutory litigation unit. Specialist in POCSO enforcement, Juvenile Justice Act interpretation, and statutory constitutional writ petitions on the Right to Education.
+              </p>
+</div>
+<div class="mt-6 pt-4 border-t border-surface-container flex items-center gap-2 text-xs text-text-muted">
+<span class="material-symbols-outlined text-sm" data-icon="gavel">gavel</span>
+<span>Bar Council of Delhi • 30+ Years Practice</span>
+</div>
+</div>
+<!-- Leader 4 -->
+<div class="bg-surface-container-lowest rounded-xl p-6 border border-surface-container hover:border-primary/40 transition-all flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-4">
+<div class="w-14 h-14 rounded-xl bg-on-surface/10 border border-on-surface/20 flex items-center justify-center text-on-surface font-bold text-headline-sm font-headline-sm tracking-wider">
+                  KM
+                </div>
+<span class="px-2.5 py-1 rounded bg-surface-container text-xs font-semibold text-secondary font-mono">
+                  Advisory Member
+                </span>
+</div>
+<h3 class="text-headline-sm font-headline-sm text-on-surface mb-1">
+                Dr. K. Meenakshi
+              </h3>
+<p class="text-label-md font-label-md text-secondary mb-3">
+                Retd. Chairperson, Child Welfare Committee (CWC)
+              </p>
+<p class="text-body-sm font-body-sm text-secondary leading-relaxed">
+                Supervises institutional compliance and multi-agency coordination with state departments, observation homes, and child restoration registries.
+              </p>
+</div>
+<div class="mt-6 pt-4 border-t border-surface-container flex items-center gap-2 text-xs text-text-muted">
+<span class="material-symbols-outlined text-sm" data-icon="account_balance">account_balance</span>
+<span>Former Member, Delhi Commission for Protection of Child Rights</span>
+</div>
+</div>
+<!-- Leader 5 -->
+<div class="bg-surface-container-lowest rounded-xl p-6 border border-surface-container hover:border-primary/40 transition-all flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-4">
+<div class="w-14 h-14 rounded-xl bg-marigold-bright/20 border border-marigold-bright/30 flex items-center justify-center text-primary font-bold text-headline-sm font-headline-sm tracking-wider">
+                  BL
+                </div>
+<span class="px-2.5 py-1 rounded bg-surface-container text-xs font-semibold text-secondary font-mono">
+                  Director of Audits
+                </span>
+</div>
+<h3 class="text-headline-sm font-headline-sm text-on-surface mb-1">
+                Birendra Lal, FCA
+              </h3>
+<p class="text-label-md font-label-md text-primary mb-3">
+                Chief Fiduciary &amp; Statutory Compliance Officer
+              </p>
+<p class="text-body-sm font-body-sm text-secondary leading-relaxed">
+                Fellow Chartered Accountant with 35 years in non-profit statutory accounting, FCRA reporting protocols, and zero-leakage financial controls across public trusts.
+              </p>
+</div>
+<div class="mt-6 pt-4 border-t border-surface-container flex items-center gap-2 text-xs text-text-muted">
+<span class="material-symbols-outlined text-sm" data-icon="description">description</span>
+<span>ICAI Reg. 048192 • Independent Fiduciary</span>
+</div>
+</div>
+<!-- Leader 6 -->
+<div class="bg-surface-container-lowest rounded-xl p-6 border border-surface-container hover:border-primary/40 transition-all flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-4">
+<div class="w-14 h-14 rounded-xl bg-emergency-crimson/10 border border-emergency-crimson/20 flex items-center justify-center text-emergency-crimson font-bold text-headline-sm font-headline-sm tracking-wider">
+                  SD
+                </div>
+<span class="px-2.5 py-1 rounded bg-surface-container text-xs font-semibold text-secondary font-mono">
+                  Ground Operations
+                </span>
+</div>
+<h3 class="text-headline-sm font-headline-sm text-on-surface mb-1">
+                Sunita Devi
+              </h3>
+<p class="text-label-md font-label-md text-emergency-crimson mb-3">
+                Director of Grassroots Field Mobilization
+              </p>
+<p class="text-body-sm font-body-sm text-secondary leading-relaxed">
+                Former community health worker who led slum cluster federations for two decades. Leads our frontline team of 180+ community educators and safety monitors.
+              </p>
+</div>
+<div class="mt-6 pt-4 border-t border-surface-container flex items-center gap-2 text-xs text-text-muted">
+<span class="material-symbols-outlined text-sm" data-icon="group">group</span>
+<span>Recipient of National Grassroots Leadership Citation</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION: INSTITUTIONAL ACCREDITATIONS & TRANSPARENCY PLEDGE -->
+<section class="py-20 bg-surface-ivory border-b border-surface-container">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="text-center max-w-3xl mx-auto mb-16">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container border border-surface-container-high mb-4">
+<span class="material-symbols-outlined text-tertiary text-sm fill-icon" data-icon="verified">verified</span>
+<span class="font-label-md text-label-md text-secondary">STATUTORY AUDITING &amp; VERIFIED COMPLIANCE</span>
+</div>
+<h2 class="text-headline-xl font-headline-xl text-on-surface tracking-tight mb-4">
+            Our Radical Transparency Pledge
+          </h2>
+<p class="text-body-lg font-body-lg text-secondary">
+            Public trust is our only currency. We operate under rigorous multi-agency regulatory governance, maintaining full disclosures accessible to every citizen, government regulator, and partner.
+          </p>
+</div>
+<!-- Badges & Verification Cards (Minimalist Vector Badges) -->
+<div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-14">
+<!-- Badge 1: 80G -->
+<div class="bg-surface-container-lowest rounded-xl p-5 border border-surface-container flex flex-col items-center text-center hover:border-primary transition-all">
+<div class="w-12 h-12 rounded-full bg-highlight-amber-soft flex items-center justify-center text-primary mb-3">
+<span class="material-symbols-outlined text-2xl" data-icon="receipt_long">receipt_long</span>
+</div>
+<h4 class="font-bold text-on-surface text-headline-sm font-headline-sm">Section 80G</h4>
+<span class="text-xs font-semibold text-text-muted mb-2">Income Tax Act 1961</span>
+<p class="text-xs text-secondary leading-snug">
+              50% Tax Exemption certificate valid for all Indian individual &amp; corporate donors.
+            </p>
+<span class="mt-3 text-[11px] font-mono text-primary font-bold">CIT(E)/80G/2016-17</span>
+</div>
+<!-- Badge 2: 12A -->
+<div class="bg-surface-container-lowest rounded-xl p-5 border border-surface-container flex flex-col items-center text-center hover:border-primary transition-all">
+<div class="w-12 h-12 rounded-full bg-highlight-amber-soft flex items-center justify-center text-primary mb-3">
+<span class="material-symbols-outlined text-2xl" data-icon="verified_user">verified_user</span>
+</div>
+<h4 class="font-bold text-on-surface text-headline-sm font-headline-sm">Section 12A</h4>
+<span class="text-xs font-semibold text-text-muted mb-2">Charitable Trust Status</span>
+<p class="text-xs text-secondary leading-snug">
+              Unconditional nonprofit statutory recognition with 100% surplus asset lock.
+            </p>
+<span class="mt-3 text-[11px] font-mono text-primary font-bold">DEL-12A/2015-16/482</span>
+</div>
+<!-- Badge 3: FCRA -->
+<div class="bg-surface-container-lowest rounded-xl p-5 border border-surface-container flex flex-col items-center text-center hover:border-primary transition-all">
+<div class="w-12 h-12 rounded-full bg-highlight-amber-soft flex items-center justify-center text-primary mb-3">
+<span class="material-symbols-outlined text-2xl" data-icon="public">public</span>
+</div>
+<h4 class="font-bold text-on-surface text-headline-sm font-headline-sm">FCRA Certified</h4>
+<span class="text-xs font-semibold text-text-muted mb-2">Ministry of Home Affairs</span>
+<p class="text-xs text-secondary leading-snug">
+              Authorized to accept international institutional developmental grants via SBI New Delhi.
+            </p>
+<span class="mt-3 text-[11px] font-mono text-primary font-bold">FCRA REG: 231661842</span>
+</div>
+<!-- Badge 4: NITI Aayog -->
+<div class="bg-surface-container-lowest rounded-xl p-5 border border-surface-container flex flex-col items-center text-center hover:border-primary transition-all">
+<div class="w-12 h-12 rounded-full bg-highlight-amber-soft flex items-center justify-center text-primary mb-3">
+<span class="material-symbols-outlined text-2xl" data-icon="assured_workload">assured_workload</span>
+</div>
+<h4 class="font-bold text-on-surface text-headline-sm font-headline-sm">NITI Aayog</h4>
+<span class="text-xs font-semibold text-text-muted mb-2">NGO-Darpan Registry</span>
+<p class="text-xs text-secondary leading-snug">
+              Validated non-governmental entity eligible for central statutory schemes and audits.
+            </p>
+<span class="mt-3 text-[11px] font-mono text-primary font-bold">DL/2017/0154982</span>
+</div>
+<!-- Badge 5: GuideStar India -->
+<div class="bg-surface-container-lowest rounded-xl p-5 border border-surface-container flex flex-col items-center text-center hover:border-primary transition-all">
+<div class="w-12 h-12 rounded-full bg-highlight-amber-soft flex items-center justify-center text-primary mb-3">
+<span class="material-symbols-outlined text-2xl fill-icon" data-icon="star">star</span>
+</div>
+<h4 class="font-bold text-on-surface text-headline-sm font-headline-sm">GuideStar India</h4>
+<span class="text-xs font-semibold text-text-muted mb-2">Platinum Transparency</span>
+<p class="text-xs text-secondary leading-snug">
+              Highest verification tier for public disclosure of programmatic impact &amp; financials.
+            </p>
+<span class="mt-3 text-[11px] font-mono text-primary font-bold">GS-IN-PLATINUM #8932</span>
+</div>
+</div>
+<!-- Downloadable Disclosure Documents Strip -->
+<div class="bg-surface-warm-card rounded-xl p-6 border border-surface-container flex flex-col lg:flex-row items-center justify-between gap-6">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-on-surface text-surface-bright flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-xl" data-icon="folder_open">folder_open</span>
+</div>
+<div>
+<p class="font-bold text-on-surface text-body-md font-body-md">Statutory Filings Repository (FY 2023-24)</p>
+<p class="text-xs text-secondary">Independent Auditor's Report, Form 10B, Balance Sheet, and FCRA Annual Returns (Form FC-4).</p>
+</div>
+</div>
+<div class="flex items-center gap-3 shrink-0">
+<a class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-surface-container-lowest border border-outline-variant/50 text-xs font-semibold text-on-surface hover:bg-surface-container transition-colors" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="download">download</span>
+<span>Audited Financials PDF</span>
+</a>
+<a class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-surface-container-lowest border border-outline-variant/50 text-xs font-semibold text-on-surface hover:bg-surface-container transition-colors" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="download">download</span>
+<span>Annual Impact Audit</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION: CIVIC CALL TO ACTION / ZERO RENT STATEMENT -->
+<section class="py-20 bg-on-surface text-surface-bright relative overflow-hidden" id="donate">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+<div class="max-w-3xl">
+<span class="text-marigold-bright font-label-caps text-label-caps uppercase tracking-wider block mb-3">
+            Stand With Us In The Trenches
+          </span>
+<h2 class="text-headline-xl font-headline-xl text-surface-bright tracking-tight mb-6">
+            Empower a Child with Irrevocable Dignity
+          </h2>
+<p class="text-body-lg font-body-lg text-secondary-fixed-dim leading-relaxed mb-8">
+            Your support does not feed bureaucratic inertia. At 93.4% direct program utilization, contributions immediately sponsor accelerated classroom seats, child protection defense lawyers, and daily pediatric nutrition.
+          </p>
+<div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
+<a class="inline-flex items-center justify-center px-8 py-3.5 rounded-lg bg-marigold-bright hover:bg-primary-container text-on-surface hover:text-on-primary font-bold text-label-lg font-label-lg shadow-md transition-all active:scale-95" href="#">
+<span>Sponsor a Bridge School Desk (₹1,500/mo)</span>
+<span class="material-symbols-outlined text-sm ml-2" data-icon="arrow_forward">arrow_forward</span>
+</a>
+<a class="inline-flex items-center justify-center px-6 py-3.5 rounded-lg border border-secondary-fixed-dim text-surface-bright hover:bg-surface-bright/10 font-medium text-label-lg font-label-lg transition-all" href="tel:1098">
+<span class="material-symbols-outlined text-sm mr-2" data-icon="shield">shield</span>
+<span>Report a Minor in Distress</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- SITEMAP FOOTER (Generated verbatim matching Shared Components JSON) -->
+<footer class="bg-surface-warm-card dark:bg-inverse-surface border-t border-surface-container dark:border-outline-variant flat no shadows full-width">
+<div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+<!-- Brand Summary Column -->
+<div class="md:col-span-2 space-y-4">
+<div class="flex items-center space-x-3">
+<div class="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-xl fill-icon" data-icon="shield">shield</span>
+</div>
+<span class="text-headline-md font-headline-md font-bold text-on-surface dark:text-inverse-on-surface">
+              Trinetra Gargi Foundation
+            </span>
+</div>
+<p class="text-body-sm font-body-sm text-secondary dark:text-secondary-fixed-dim max-w-md">
+            A registered Public Charitable Trust committed to dismantling structural inequity for children and women across India through rights-based pedagogical and legal intervention.
+          </p>
+<div class="flex flex-wrap gap-2 text-xs text-text-muted dark:text-secondary-fixed-dim pt-2">
+<span class="px-2.5 py-1 bg-surface-container-lowest dark:bg-on-surface rounded border border-surface-container dark:border-outline-variant">FCRA Valid</span>
+<span class="px-2.5 py-1 bg-surface-container-lowest dark:bg-on-surface rounded border border-surface-container dark:border-outline-variant">80G Tax Exempt</span>
+<span class="px-2.5 py-1 bg-surface-container-lowest dark:bg-on-surface rounded border border-surface-container dark:border-outline-variant">12A Certified</span>
+<span class="px-2.5 py-1 bg-surface-container-lowest dark:bg-on-surface rounded border border-surface-container dark:border-outline-variant">Zero Synthetic Media</span>
+</div>
+</div>
+<!-- Links Column 1 (Exact links from JSON) -->
+<div>
+<span class="text-label-caps font-label-caps text-on-surface dark:text-inverse-on-surface uppercase tracking-wider block mb-4">
+            Navigation &amp; Assistance
+          </span>
+<ul class="space-y-2.5 text-body-sm font-body-sm">
+<li>
+<!-- About Us is ACTIVE -->
+<a class="text-primary dark:text-inverse-primary underline hover:text-primary dark:hover:text-inverse-primary transition-colors focus:outline-none focus:ring-2 focus:ring-marigold-bright" href="#">
+                About Us
+              </a>
+</li>
+<li>
+<a class="text-emergency-crimson font-medium hover:underline transition-colors focus:outline-none focus:ring-2 focus:ring-marigold-bright flex items-center gap-1.5" href="tel:1098">
+<span class="material-symbols-outlined text-xs" data-icon="call">call</span>
+<span>Child Protection (1098)</span>
+</a>
+</li>
+<li>
+<a class="text-emergency-crimson font-medium hover:underline transition-colors focus:outline-none focus:ring-2 focus:ring-marigold-bright flex items-center gap-1.5" href="tel:181">
+<span class="material-symbols-outlined text-xs" data-icon="call">call</span>
+<span>Women Helpline (181)</span>
+</a>
+</li>
+<li>
+<a class="text-text-muted dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary transition-colors focus:outline-none focus:ring-2 focus:ring-marigold-bright" href="#">
+                Government Schemes Portal
+              </a>
+</li>
+<li>
+<a class="text-text-muted dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary transition-colors focus:outline-none focus:ring-2 focus:ring-marigold-bright" href="#">
+                Impact Reports &amp; Audits
+              </a>
+</li>
+</ul>
+</div>
+<!-- Links Column 2 (Exact links from JSON) -->
+<div>
+<span class="text-label-caps font-label-caps text-on-surface dark:text-inverse-on-surface uppercase tracking-wider block mb-4">
+            Governance &amp; Outreach
+          </span>
+<ul class="space-y-2.5 text-body-sm font-body-sm">
+<li>
+<a class="text-text-muted dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary transition-colors focus:outline-none focus:ring-2 focus:ring-marigold-bright" href="#">
+                Statutory Donation Accounting
+              </a>
+</li>
+<li>
+<a class="text-text-muted dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary transition-colors focus:outline-none focus:ring-2 focus:ring-marigold-bright" href="#">
+                Stories &amp; Field News
+              </a>
+</li>
+<li>
+<a class="text-text-muted dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary transition-colors focus:outline-none focus:ring-2 focus:ring-marigold-bright" href="#">
+                Volunteer &amp; CSR Partnerships
+              </a>
+</li>
+<li>
+<a class="text-text-muted dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary transition-colors focus:outline-none focus:ring-2 focus:ring-marigold-bright" href="#">
+                Privacy Policy &amp; Disclosures
+              </a>
+</li>
+<li>
+<a class="text-text-muted dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary transition-colors focus:outline-none focus:ring-2 focus:ring-marigold-bright" href="#">
+                Confidential Grievance Redressal
+              </a>
+</li>
+</ul>
+</div>
+</div>
+<!-- Copyright Notice verbatim from JSON -->
+<div class="pt-8 border-t border-surface-container dark:border-outline-variant flex flex-col md:flex-row items-center justify-between text-body-sm font-body-sm text-text-muted dark:text-secondary-fixed-dim gap-4">
+<p class="text-center md:text-left">
+          © 2024 Trinetra Gargi Foundation. Registered Non-Profit Entity (FCRA, Section 8 Licensed Non-Profit). Radical Transparency Verified. Zero Synthetic Media.
+        </p>
+<div class="flex items-center space-x-6 shrink-0">
+<span class="inline-flex items-center gap-1.5 text-tertiary font-semibold">
+<span class="w-2 h-2 rounded-full bg-sage-soft"></span>
+            Statutory Systems Operational
+          </span>
+</div>
+</div>
+</div>
+</footer>
+</body></html>

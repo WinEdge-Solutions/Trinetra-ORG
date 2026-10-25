@@ -1,0 +1,9 @@
+{
+  "name": "trinetra-gargi-foundation",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Trinetra Gargi Foundation official web platform",
+  "dependencies": {
+    "zod": "^3.23.8"
+  }
+}

@@ -1,0 +1,30 @@
+# Dependencies
+node_modules/
+
+# Environment variables & local secrets
+.env
+.env*.local
+.env*
+
+# Vercel
+.vercel/
+
+# Local junctions
+design
+
+# IDE & Editor files
+.gemini/
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Operating System files
+Thumbs.db
+.DS_Store
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log

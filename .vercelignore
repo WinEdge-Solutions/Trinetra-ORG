@@ -1,0 +1,9 @@
+stitch_ngo_foundation_website_design/
+.git/
+*.log
+scratch/
+.agent/
+docs/
+design/
+AGENTS.md
+

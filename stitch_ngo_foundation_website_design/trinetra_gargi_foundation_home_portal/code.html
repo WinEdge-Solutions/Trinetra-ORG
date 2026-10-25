@@ -1,0 +1,1280 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en" style=""><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title class="">Trinetra Gargi Foundation - Home Portal</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "secondary-fixed-dim": "#b0c9e8",
+            "coral-warmth": "#EA580C",
+            "inverse-on-surface": "#ecf1ff",
+            "on-tertiary-container": "#f5fff7",
+            "surface-container-highest": "#d8e3fb",
+            "on-error-container": "#93000a",
+            "secondary-fixed": "#d1e4ff",
+            "on-primary": "#ffffff",
+            "inverse-surface": "#263143",
+            "outline-variant": "#dbc2b0",
+            "on-primary-container": "#fffbff",
+            "secondary-container": "#c7dfff",
+            "primary": "#8d4b00",
+            "secondary": "#49607c",
+            "on-primary-fixed-variant": "#6e3900",
+            "sage-soft": "#10B981",
+            "on-primary-fixed": "#2f1500",
+            "tertiary-fixed": "#85f8c4",
+            "outline": "#887364",
+            "on-error": "#ffffff",
+            "on-secondary-fixed": "#011d35",
+            "on-secondary-fixed-variant": "#314863",
+            "surface-container-low": "#f0f3ff",
+            "inverse-primary": "#ffb77d",
+            "marigold-bright": "#F59E0B",
+            "primary-container": "#b15f00",
+            "surface-container": "#e7eeff",
+            "surface-bright": "#f9f9ff",
+            "error": "#ba1a1a",
+            "emergency-crimson": "#DC2626",
+            "primary-fixed-dim": "#ffb77d",
+            "error-container": "#ffdad6",
+            "tertiary-fixed-dim": "#68dba9",
+            "surface-ivory": "#FAFAF9",
+            "on-surface-variant": "#554336",
+            "surface": "#f9f9ff",
+            "on-secondary-container": "#4b637e",
+            "primary-fixed": "#ffdcc3",
+            "on-secondary": "#ffffff",
+            "surface-tint": "#904d00",
+            "on-background": "#111c2d",
+            "highlight-amber-soft": "#FEF3C7",
+            "background": "#f9f9ff",
+            "tertiary": "#006948",
+            "text-muted": "#64748B",
+            "surface-warm-card": "#F5F5F4",
+            "surface-variant": "#d8e3fb",
+            "tertiary-container": "#00855d",
+            "on-tertiary": "#ffffff",
+            "on-surface": "#111c2d",
+            "surface-container-high": "#dee8ff",
+            "surface-container-lowest": "#ffffff",
+            "on-tertiary-fixed-variant": "#005137",
+            "on-tertiary-fixed": "#002114",
+            "surface-dim": "#cfdaf2"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "margin": "1rem",
+            "gutter-desktop": "2rem",
+            "margin-tablet": "2rem",
+            "gutter": "1.5rem",
+            "space-xl": "2.5rem",
+            "space-xs": "0.25rem",
+            "space-sm": "0.5rem",
+            "margin-desktop": "3rem",
+            "space-lg": "1.5rem",
+            "space-md": "1rem"
+          },
+          "fontFamily": {
+            "label-md": ["Plus Jakarta Sans"],
+            "body-lg": ["Plus Jakarta Sans"],
+            "headline-md": ["Plus Jakarta Sans"],
+            "stat-metric-mobile": ["Plus Jakarta Sans"],
+            "display-mobile": ["Plus Jakarta Sans"],
+            "headline-sm": ["Plus Jakarta Sans"],
+            "body-sm": ["Plus Jakarta Sans"],
+            "headline-lg": ["Plus Jakarta Sans"],
+            "body-md": ["Plus Jakarta Sans"],
+            "headline-xl-mobile": ["Plus Jakarta Sans"],
+            "label-caps": ["Plus Jakarta Sans"],
+            "headline-xl": ["Plus Jakarta Sans"],
+            "display": ["Plus Jakarta Sans"],
+            "label-lg": ["Plus Jakarta Sans"],
+            "stat-metric": ["Plus Jakarta Sans"]
+          },
+          "fontSize": {
+            "label-md": ["0.75rem", { "lineHeight": "1.25", "letterSpacing": "0.04em", "fontWeight": "600" }],
+            "body-lg": ["1.125rem", { "lineHeight": "1.6", "fontWeight": "400" }],
+            "headline-md": ["1.5rem", { "lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "stat-metric-mobile": ["2.5rem", { "lineHeight": "1.0", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+            "display-mobile": ["2.25rem", { "lineHeight": "1.15", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+            "headline-sm": ["1.25rem", { "lineHeight": "1.4", "fontWeight": "600" }],
+            "body-sm": ["0.875rem", { "lineHeight": "1.5", "fontWeight": "400" }],
+            "headline-lg": ["2rem", { "lineHeight": "1.25", "letterSpacing": "-0.015em", "fontWeight": "700" }],
+            "body-md": ["1rem", { "lineHeight": "1.6", "fontWeight": "400" }],
+            "headline-xl-mobile": ["1.875rem", { "lineHeight": "1.25", "letterSpacing": "-0.015em", "fontWeight": "700" }],
+            "label-caps": ["0.75rem", { "lineHeight": "1.2", "letterSpacing": "0.08em", "fontWeight": "700" }],
+            "headline-xl": ["2.5rem", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "display": ["3.5rem", { "lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "800" }],
+            "label-lg": ["0.875rem", { "lineHeight": "1.25", "letterSpacing": "0.01em", "fontWeight": "600" }],
+            "stat-metric": ["3.75rem", { "lineHeight": "1.0", "letterSpacing": "-0.03em", "fontWeight": "800" }]
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-surface-ivory text-on-surface antialiased selection:bg-highlight-amber-soft selection:text-primary">
+<!-- TOP TRUST & EMERGENCY RIBBON -->
+<div class="bg-inverse-surface text-inverse-on-surface py-2 px-4 sm:px-6 lg:px-8 border-b border-surface-container relative z-50 text-xs">
+<div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
+<div class="flex items-center flex-wrap gap-3 sm:gap-5">
+<span class="inline-flex items-center gap-1.5 bg-surface-container-highest/20 text-tertiary-fixed px-2.5 py-0.5 rounded-full font-medium tracking-wide">
+<span class="w-2 h-2 rounded-full bg-sage-soft animate-ping"></span>
+<span class="">24/7 Rapid Response Active</span>
+</span>
+<div class="hidden sm:inline-block w-px h-3 bg-secondary"></div>
+<a class="inline-flex items-center gap-1.5 text-coral-warmth hover:text-marigold-bright font-semibold transition-colors" href="tel:1098">
+<span class="material-symbols-outlined text-xs">call</span>
+<span class="">Childline: <strong class="text-inverse-on-surface underline decoration-marigold-bright decoration-2">1098</strong></span>
+<span class="bg-emergency-crimson text-on-primary text-[10px] px-1.5 py-0.2 rounded font-bold uppercase tracking-wider">Toll Free</span>
+</a>
+<div class="hidden sm:inline-block w-px h-3 bg-secondary"></div>
+<a class="hidden sm:inline-flex items-center gap-1 text-secondary-fixed-dim hover:text-inverse-on-surface transition-colors" href="tel:181">
+<span class="material-symbols-outlined text-xs">shield_with_heart</span>
+<span class="">Women Helpline: <strong>181</strong></span>
+</a>
+</div>
+<div class="flex items-center gap-3 sm:gap-4 ml-auto">
+<span class="hidden md:inline-flex items-center gap-1 bg-highlight-amber-soft text-primary px-2.5 py-0.5 rounded-full font-bold text-[11px]">
+<span class="material-symbols-outlined text-xs">verified</span>
+      Section 8 Licensed Non-Profit Entity
+    </span>
+<div class="flex items-center text-label-md font-label-md text-secondary-fixed-dim border-l border-secondary/60 pl-3">
+<button class="font-bold text-marigold-bright px-1">EN</button>
+<span class="text-text-muted">/</span>
+<button class="px-1 hover:text-inverse-on-surface transition-colors">हिन्दी</button>
+</div>
+<a class="inline-flex items-center gap-1 bg-surface-container-highest/10 hover:bg-emergency-crimson text-secondary-fixed-dim hover:text-on-primary px-2 py-0.5 rounded transition-all text-[11px] font-medium border border-secondary/40" href="https://google.com" title="Quick Safety Exit (Leaves page immediately)">
+<span class="material-symbols-outlined text-xs">logout</span>
+<span class="hidden sm:inline">Quick Exit</span>
+</a>
+</div>
+</div>
+</div>
+<!-- STICKY TOPNAVBAR (Shared Component: TopNavBar) -->
+<header class="sticky top-0 z-50 pt-2 pb-2 px-2 sm:px-4 backdrop-blur-md bg-surface-ivory/90 border-b border-highlight-amber-soft/60 shadow-sm transition-all">
+<div class="max-w-7xl mx-auto flex items-center justify-between gap-4 px-2 sm:px-4 py-1.5 rounded-2xl bg-surface-container-lowest/90 border border-outline-variant/40 shadow-sm">
+<!-- Distinctive Brand Emblem -->
+<a class="flex items-center gap-3.5 group focus:outline-none rounded-xl py-1 pr-2" href="#">
+<div class="relative flex-shrink-0">
+<div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-highlight-amber-soft via-marigold-bright/20 to-primary/10 border-2 border-marigold-bright flex items-center justify-center text-primary group-hover:scale-105 transition-all shadow-sm">
+<svg class="w-7 h-7 text-primary" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24">
+<circle cx="12" cy="12" fill="#F59E0B" fill-opacity="0.28" r="4.5"></circle>
+<path d="M12 2v2"></path>
+<path d="M12 20v2"></path>
+<path d="m4.93 4.93 1.41 1.41"></path>
+<path d="m17.66 17.66 1.41 1.41"></path>
+<path d="M2 12h2"></path>
+<path d="M20 12h2"></path>
+<path d="m6.34 17.66-1.41 1.41"></path>
+<path d="m19.07 4.93-1.41 1.41"></path>
+</svg>
+</div>
+<span class="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-primary text-on-primary flex items-center justify-center text-[9px] font-bold shadow-sm">★</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5">
+<span class="text-headline-sm font-headline-sm font-extrabold text-on-surface tracking-tight leading-none group-hover:text-primary transition-colors">TRINETRA GARGI</span>
+<span class="text-[10px] uppercase font-bold tracking-widest text-primary bg-highlight-amber-soft px-1.5 py-0.5 rounded">NGO</span>
+</div>
+<span class="text-[11px] font-medium text-text-muted tracking-wide mt-0.5">FOUNDATION · Restoring Dignity &amp; Childhood</span>
+</div>
+</a>
+<!-- Creative Nav Links with Micro-indicators -->
+<nav class="hidden xl:flex items-center gap-1 bg-surface-container-low/70 p-1.5 rounded-xl border border-surface-container text-label-lg font-medium">
+<a class="px-3 py-1.5 rounded-lg text-secondary hover:text-primary hover:bg-surface-container-lowest transition-all" href="#about">About Us</a>
+<div class="relative group">
+<button class="flex items-center gap-1 px-3 py-1.5 rounded-lg text-secondary hover:text-primary hover:bg-surface-container-lowest transition-all">
+<span class="">Our Work</span>
+<span class="material-symbols-outlined text-xs">expand_more</span>
+</button>
+<div class="absolute left-0 mt-2 w-64 bg-surface-container-lowest border border-highlight-amber-soft rounded-xl shadow-lg p-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-150 z-50">
+<a class="block px-3 py-2 rounded-lg text-body-sm hover:bg-surface-container-low transition-colors" href="#pillar-education">Education &amp; Scholarships</a>
+<a class="block px-3 py-2 rounded-lg text-body-sm hover:bg-surface-container-low transition-colors" href="#pillar-protection">Child Protection &amp; Labour Prevention</a>
+<a class="block px-3 py-2 rounded-lg text-body-sm hover:bg-surface-container-low transition-colors" href="#pillar-women">Women Empowerment</a>
+<a class="block px-3 py-2 rounded-lg text-body-sm hover:bg-surface-container-low transition-colors" href="#pillar-family">Family Support &amp; Rehab</a>
+<a class="block px-3 py-2 rounded-lg text-body-sm hover:bg-surface-container-low transition-colors" href="#pillar-skills">Skill Development</a>
+<a class="block px-3 py-2 rounded-lg text-body-sm hover:bg-surface-container-low transition-colors" href="#pillar-health">Health &amp; Digital Safety</a>
+</div>
+</div>
+<a class="px-3 py-1.5 rounded-lg text-secondary hover:text-primary hover:bg-surface-container-lowest transition-all flex items-center gap-1" href="#government-schemes">
+<span class="">Govt Schemes</span>
+<span class="w-1.5 h-1.5 rounded-full bg-marigold-bright"></span>
+</a>
+<a class="px-3 py-1.5 rounded-lg text-secondary hover:text-primary hover:bg-surface-container-lowest transition-all" href="#impact">Impact &amp; Audits</a>
+<a class="px-3 py-1.5 rounded-lg text-secondary hover:text-primary hover:bg-surface-container-lowest transition-all" href="#stories">Stories</a>
+<a class="px-3 py-1.5 rounded-lg text-secondary hover:text-primary hover:bg-surface-container-lowest transition-all" href="#partner">Volunteer</a>
+</nav>
+<!-- Action Cluster with High-Visibility Emergency & Radiant Donate -->
+<div class="flex items-center gap-2 sm:gap-3">
+<a class="inline-flex items-center gap-1.5 bg-error-container/60 hover:bg-emergency-crimson text-emergency-crimson hover:text-on-primary border border-emergency-crimson/30 px-3 py-2 rounded-xl text-label-md font-bold transition-all duration-150 active:scale-95 shadow-sm" href="#help-portal">
+<span class="material-symbols-outlined text-base animate-pulse">e911_emergency</span>
+<span class="hidden md:inline">Report Crisis</span>
+<span class="md:hidden">SOS</span>
+</a>
+<a class="relative group inline-flex flex-col items-center justify-center bg-gradient-to-r from-primary to-marigold-bright hover:from-primary-container hover:to-primary text-on-primary px-4 sm:px-5 py-2 rounded-xl shadow-md hover:shadow-lg transition-all duration-150 active:scale-95" href="#donate">
+<div class="inline-flex items-center gap-1.5 text-label-lg font-bold leading-tight">
+<span class="material-symbols-outlined text-base group-hover:scale-110 transition-transform">volunteer_activism</span>
+<span class="">Donate Now</span>
+</div>
+<span class="text-[10px] text-highlight-amber-soft font-semibold leading-tight opacity-90">Section 8 Charitable Support</span>
+</a>
+</div>
+</div>
+</header>
+<main>
+<!-- HERO SECTION -->
+<section class="relative overflow-hidden pt-12 pb-20 md:pt-16 md:pb-28 bg-surface-ivory border-b border-surface-container">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="max-w-4xl mx-auto text-center">
+<!-- Civic Trust Pill -->
+<div class="inline-flex items-center gap-2 bg-surface-container-lowest border border-marigold-bright/30 rounded-full px-4 py-1.5 mb-8 shadow-sm">
+<span class="w-2 h-2 rounded-full bg-sage-soft animate-ping"></span>
+<span class="text-label-caps font-label-caps text-primary tracking-wider uppercase">Active Grassroots Intervention 2024</span>
+<span class="text-outline-variant">|</span>
+<span class="text-body-sm font-body-sm text-secondary font-medium">Over 85+ Districts Covered</span>
+</div>
+<!-- Headline -->
+<h1 class="text-display-mobile md:text-display font-display text-on-surface mb-6 leading-tight tracking-tight">
+            Every Vulnerable Child Deserves A Classroom. <br class="hidden sm:inline"/>
+<span class="text-primary underline decoration-marigold-bright decoration-wavy decoration-2 underline-offset-8">Every Community Deserves Dignity.</span>
+</h1>
+<!-- Subheading -->
+<p class="text-body-lg font-body-lg text-secondary max-w-2xl mx-auto mb-10">Trinetra Gargi Foundation bridges vulnerable youth from brick kilns and streets to classrooms, vocational livelihood programs, and direct government welfare schemes with complete statutory transparency.</p>
+<!-- Dual CTAs -->
+<div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+<a class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary-container text-on-primary px-8 py-3.5 rounded-lg text-label-lg font-label-lg shadow-md hover:shadow-lg transition-all active:scale-95 duration-100" href="#donate">
+<span class="material-symbols-outlined text-lg" data-icon="favorite">favorite</span>
+<span class="">Support A Life / Donate</span>
+</a>
+<a class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-surface-container-lowest border-2 border-secondary text-secondary hover:bg-surface-container-low px-7 py-3 rounded-lg text-label-lg font-label-lg transition-all active:scale-95 duration-100" href="#government-schemes">
+<span class="material-symbols-outlined text-lg" data-icon="account_balance">account_balance</span>
+<span class="">Explore Government Schemes</span>
+</a>
+</div>
+<!-- Hero Trust Metrics Strip -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 pt-8 border-t border-highlight-amber-soft">
+<div class="p-4 bg-surface-container-lowest rounded-xl border border-highlight-amber-soft text-left">
+<div class="text-headline-md font-headline-md font-bold text-primary">142,000+</div>
+<div class="text-body-sm font-body-sm text-text-muted">Children Educated</div>
+</div>
+<div class="p-4 bg-surface-container-lowest rounded-xl border border-highlight-amber-soft text-left">
+<div class="text-headline-md font-headline-md font-bold text-secondary">85+</div>
+<div class="text-body-sm font-body-sm text-text-muted">Grassroots Centers</div>
+</div>
+<div class="p-4 bg-surface-container-lowest rounded-xl border border-highlight-amber-soft text-left">
+<div class="text-headline-md font-headline-md font-bold text-tertiary">100%</div>
+<div class="text-body-sm font-body-sm text-text-muted">Section 8 Support</div>
+</div>
+<div class="p-4 bg-surface-container-lowest rounded-xl border border-highlight-amber-soft text-left">
+<div class="text-headline-md font-headline-md font-bold text-coral-warmth">Zero Admin</div>
+<div class="text-body-sm font-body-sm text-text-muted">Overhead on Direct Aid</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- URGENT HELP & REPORT PORTAL SECTION -->
+<section class="py-16 bg-surface-warm-card border-b border-surface-container" id="help-portal">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="bg-surface-container-lowest border-2 border-emergency-crimson/20 rounded-2xl p-6 sm:p-10 shadow-sm relative overflow-hidden">
+<div class="max-w-3xl">
+<div class="inline-flex items-center gap-2 px-3 py-1 bg-error-container text-emergency-crimson rounded-full text-label-md font-label-md mb-4">
+<span class="material-symbols-outlined text-sm" data-icon="emergency_home">emergency_home</span>
+              Immediate Protection &amp; Rapid Response Hub
+            </div>
+<h2 class="text-headline-lg font-headline-lg text-on-surface mb-3">
+              Need Help or Want to Report a Child / Family at Risk?
+            </h2>
+<p class="text-body-md font-body-md text-secondary mb-6">
+              Reports are triaged within 45 minutes by certified social caseworkers in coordination with District Child Protection Units (DCPU) and Childline 1098.
+            </p>
+</div>
+<!-- Interactive Confidential Triage Form -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mt-6 pt-6 border-t border-surface-container">
+<div class="lg:col-span-8 space-y-5">
+<div class="flex items-center justify-between bg-surface-container-low p-3 rounded-lg border border-surface-container">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary" data-icon="lock">lock</span>
+<span class="text-body-sm font-body-sm font-medium">100% Confidentiality &amp; Data Protection Protocol</span>
+</div>
+<label class="flex items-center cursor-pointer gap-2">
+<input checked="" class="rounded text-primary focus:ring-marigold-bright w-4 h-4" type="checkbox"/>
+<span class="text-label-md font-label-md text-on-surface">Submit Anonymously</span>
+</label>
+</div>
+<!-- Quick Issue Selector -->
+<div>
+<label class="block text-label-lg font-label-lg text-on-surface mb-2">Select Issue Category</label>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+<button class="border border-primary bg-highlight-amber-soft text-primary p-2.5 rounded-lg text-left text-label-md font-label-md flex flex-col gap-1" type="button">
+<span class="material-symbols-outlined text-base" data-icon="warning">warning</span>
+                    Child Labour
+                  </button>
+<button class="border border-outline-variant/40 bg-surface-container-lowest hover:bg-surface-container-low text-secondary p-2.5 rounded-lg text-left text-label-md font-label-md flex flex-col gap-1" type="button">
+<span class="material-symbols-outlined text-base" data-icon="school">school</span>
+                    Out-of-School
+                  </button>
+<button class="border border-outline-variant/40 bg-surface-container-lowest hover:bg-surface-container-low text-secondary p-2.5 rounded-lg text-left text-label-md font-label-md flex flex-col gap-1" type="button">
+<span class="material-symbols-outlined text-base" data-icon="shield">shield</span>
+                    Abuse / Domestic
+                  </button>
+<button class="border border-outline-variant/40 bg-surface-container-lowest hover:bg-surface-container-low text-secondary p-2.5 rounded-lg text-left text-label-md font-label-md flex flex-col gap-1" type="button">
+<span class="material-symbols-outlined text-base" data-icon="soup_kitchen">soup_kitchen</span>
+                    Severe Hunger
+                  </button>
+</div>
+</div>
+<!-- Location & Narrative Inputs -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div>
+<label class="block text-label-md font-label-md text-on-surface mb-1">Incident / Child Location Pin</label>
+<div class="relative">
+<input class="w-full pl-9 pr-3 py-2 bg-surface-container-lowest border border-outline-variant/60 rounded-lg text-body-sm font-body-sm focus:ring-2 focus:ring-marigold-bright focus:outline-none" placeholder="Landmark, Village, District or GPS..." type="text"/>
+<span class="material-symbols-outlined absolute left-2.5 top-2.5 text-text-muted text-base" data-icon="location_on">location_on</span>
+</div>
+</div>
+<div>
+<label class="block text-label-md font-label-md text-on-surface mb-1">Contact Callback (Optional)</label>
+<input class="w-full px-3 py-2 bg-surface-container-lowest border border-outline-variant/60 rounded-lg text-body-sm font-body-sm focus:ring-2 focus:ring-marigold-bright focus:outline-none" placeholder="+91 XXXXX XXXXX (or leave blank)" type="text"/>
+</div>
+</div>
+<div>
+<label class="block text-label-md font-label-md text-on-surface mb-1">Brief Description of Concern</label>
+<textarea class="w-full px-3 py-2 bg-surface-container-lowest border border-outline-variant/60 rounded-lg text-body-sm font-body-sm focus:ring-2 focus:ring-marigold-bright focus:outline-none" placeholder="Describe the situation safely (e.g. 10-year-old child working at roadside eatery without schooling)..." rows="2"></textarea>
+</div>
+<button class="bg-emergency-crimson hover:bg-red-700 text-on-primary px-6 py-2.5 rounded-lg text-label-lg font-label-lg flex items-center gap-2 transition-all active:scale-95 duration-100">
+<span class="material-symbols-outlined text-base" data-icon="send">send</span>
+                Submit Priority Concern Report
+              </button>
+</div>
+<!-- Direct Hotline Callout Box -->
+<div class="lg:col-span-4 bg-inverse-surface text-inverse-on-surface p-6 rounded-xl flex flex-col justify-between">
+<div>
+<span class="text-coral-warmth text-label-caps font-label-caps">Immediate Danger?</span>
+<h3 class="text-headline-sm font-headline-sm text-inverse-on-surface mt-1 mb-3">Dial Toll-Free Emergency</h3>
+<p class="text-body-sm font-body-sm text-secondary-fixed-dim mb-4">
+                  Do not wait for online form processing if a minor is in immediate physical danger or distress.
+                </p>
+<div class="space-y-3">
+<a class="flex items-center justify-between p-3 bg-surface-container-highest/10 hover:bg-surface-container-highest/20 rounded-lg border border-secondary transition-colors" href="tel:1098">
+<span class="font-bold">Childline Direct</span>
+<span class="text-headline-sm font-headline-sm text-marigold-bright">1098</span>
+</a>
+<a class="flex items-center justify-between p-3 bg-surface-container-highest/10 hover:bg-surface-container-highest/20 rounded-lg border border-secondary transition-colors" href="tel:112">
+<span class="font-bold">Police Emergency</span>
+<span class="text-headline-sm font-headline-sm text-coral-warmth">112</span>
+</a>
+</div>
+</div>
+<div class="mt-6 pt-4 border-t border-secondary text-body-sm font-body-sm text-secondary-fixed-dim flex items-center gap-2">
+<span class="material-symbols-outlined text-base text-tertiary-fixed" data-icon="gavel">gavel</span>
+                Protected under POCSO &amp; Juvenile Justice Act 2015.
+              </div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- OUR WORK: 6 CORE PILLARS SECTION -->
+<section class="py-20 bg-surface-ivory" id="our-work">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="text-center max-w-3xl mx-auto mb-16">
+<span class="text-label-caps font-label-caps text-primary tracking-wider uppercase">Strategic Impact Pillars</span>
+<h2 class="text-headline-lg font-headline-lg text-on-surface mt-2 mb-4">A Holistic Ecosystem of Interventions</h2>
+<p class="text-body-md font-body-md text-secondary">
+            Child vulnerability cannot be solved in isolation. Our integrated multi-tier model supports the child, safeguards the mother, and stabilises the family unit.
+          </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Pillar 1: Education & Scholarships -->
+<div class="bg-surface-container-lowest border border-highlight-amber-soft rounded-2xl p-6 hover:border-marigold-bright transition-all shadow-sm flex flex-col justify-between" id="pillar-education">
+<div>
+<div class="w-12 h-12 rounded-xl bg-highlight-amber-soft flex items-center justify-center text-primary mb-5">
+<span class="material-symbols-outlined text-2xl" data-icon="menu_book">menu_book</span>
+</div>
+<div class="flex items-center justify-between mb-2">
+<h3 class="text-headline-sm font-headline-sm text-on-surface">Education &amp; Scholarships</h3>
+<span class="text-label-md font-label-md bg-surface-container-low text-primary px-2.5 py-0.5 rounded-full">Pillar 01</span>
+</div>
+<p class="text-body-sm font-body-sm text-secondary mb-4">
+                Enabling children from ultra-poor households to complete uninterrupted K-12 and tertiary education.
+              </p>
+<ul class="space-y-2 text-body-sm font-body-sm text-on-surface-variant mb-6">
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-tertiary text-base" data-icon="check_circle">check_circle</span>
+<span class="">Non-formal Bridge Schools for migrant child dropouts</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-tertiary text-base" data-icon="check_circle">check_circle</span>
+<span class="">Digital smart classroom tablets &amp; syllabus kits</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-tertiary text-base" data-icon="check_circle">check_circle</span>
+<span class="">Full college sponsorship for first-generation girls</span>
+</li>
+</ul>
+</div>
+<div class="pt-4 border-t border-surface-container flex items-center justify-between">
+<span class="text-label-md font-label-md text-text-muted">62,000+ Enrolled</span>
+<a class="text-primary hover:text-primary-container font-semibold text-body-sm font-body-sm flex items-center gap-1" href="#donate">
+                Support Student →
+              </a>
+</div>
+</div>
+<!-- Pillar 2: Child Protection & Labour Prevention -->
+<div class="bg-surface-container-lowest border border-highlight-amber-soft rounded-2xl p-6 hover:border-marigold-bright transition-all shadow-sm flex flex-col justify-between" id="pillar-protection">
+<div>
+<div class="w-12 h-12 rounded-xl bg-error-container/40 flex items-center justify-center text-emergency-crimson mb-5">
+<span class="material-symbols-outlined text-2xl" data-icon="pan_tool">pan_tool</span>
+</div>
+<div class="flex items-center justify-between mb-2">
+<h3 class="text-headline-sm font-headline-sm text-on-surface">Child Labour Prevention</h3>
+<span class="text-label-md font-label-md bg-surface-container-low text-primary px-2.5 py-0.5 rounded-full">Pillar 02</span>
+</div>
+<p class="text-body-sm font-body-sm text-secondary mb-4">
+                Active street rescue operations, legal assistance, and safe community transit centers.
+              </p>
+<ul class="space-y-2 text-body-sm font-body-sm text-on-surface-variant mb-6">
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-tertiary text-base" data-icon="check_circle">check_circle</span>
+<span class="">Rescue raids with District Child Welfare Committees</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-tertiary text-base" data-icon="check_circle">check_circle</span>
+<span class="">Trauma-informed psychiatric counselling</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-tertiary text-base" data-icon="check_circle">check_circle</span>
+<span class="">Zero-tolerance monitoring in industrial clusters</span>
+</li>
+</ul>
+</div>
+<div class="pt-4 border-t border-surface-container flex items-center justify-between">
+<span class="text-label-md font-label-md text-text-muted">14,200+ Rescued</span>
+<a class="text-emergency-crimson hover:text-red-700 font-semibold text-body-sm font-body-sm flex items-center gap-1" href="#help-portal">
+                Report Case →
+              </a>
+</div>
+</div>
+<!-- Pillar 3: Women Empowerment -->
+<div class="bg-surface-container-lowest border border-highlight-amber-soft rounded-2xl p-6 hover:border-marigold-bright transition-all shadow-sm flex flex-col justify-between" id="pillar-women">
+<div>
+<div class="w-12 h-12 rounded-xl bg-secondary-fixed flex items-center justify-center text-secondary mb-5">
+<span class="material-symbols-outlined text-2xl" data-icon="diversity_3">diversity_3</span>
+</div>
+<div class="flex items-center justify-between mb-2">
+<h3 class="text-headline-sm font-headline-sm text-on-surface">Women Empowerment</h3>
+<span class="text-label-md font-label-md bg-surface-container-low text-primary px-2.5 py-0.5 rounded-full">Pillar 03</span>
+</div>
+<p class="text-body-sm font-body-sm text-secondary mb-4">
+                Financial independence and rights awareness for mothers, driving stable domestic environments.
+              </p>
+<ul class="space-y-2 text-body-sm font-body-sm text-on-surface-variant mb-6">
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-tertiary text-base" data-icon="check_circle">check_circle</span>
+<span class="">Self-Help Group (SHG) micro-lending networks</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-tertiary text-base" data-icon="check_circle">check_circle</span>
+<span class="">Sewing, textile, and artisanal production hubs</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-tertiary text-base" data-icon="check_circle">check_circle</span>
+<span class="">Direct link to PM Mudra Yojana financing</span>
+</li>
+</ul>
+</div>
+<div class="pt-4 border-t border-surface-container flex items-center justify-between">
+<span class="text-label-md font-label-md text-text-muted">38,500+ Mothers Supported</span>
+<a class="text-secondary hover:text-primary font-semibold text-body-sm font-body-sm flex items-center gap-1" href="#government-schemes">
+                Explore Grants →
+              </a>
+</div>
+</div>
+<!-- Pillar 4: Family Support & Rehab -->
+<div class="bg-surface-container-lowest border border-highlight-amber-soft rounded-2xl p-6 hover:border-marigold-bright transition-all shadow-sm flex flex-col justify-between" id="pillar-family">
+<div>
+<div class="w-12 h-12 rounded-xl bg-tertiary-fixed flex items-center justify-center text-tertiary mb-5">
+<span class="material-symbols-outlined text-2xl" data-icon="home_health">home_health</span>
+</div>
+<div class="flex items-center justify-between mb-2">
+<h3 class="text-headline-sm font-headline-sm text-on-surface">Family Support &amp; Rehab</h3>
+<span class="text-label-md font-label-md bg-surface-container-low text-primary px-2.5 py-0.5 rounded-full">Pillar 04</span>
+</div>
+<p class="text-body-sm font-body-sm text-secondary mb-4">
+                Mitigating economic emergencies so parents do not resort to sending minors into wage work.
+              </p>
+<ul class="space-y-2 text-body-sm font-body-sm text-on-surface-variant mb-6">
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-tertiary text-base" data-icon="check_circle">check_circle</span>
+<span class="">Crisis monthly food ration kits for distressed homes</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-tertiary text-base" data-icon="check_circle">check_circle</span>
+<span class="">Substance abuse de-addiction referrals</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-tertiary text-base" data-icon="check_circle">check_circle</span>
+<span class="">Emergency medical assistance funds</span>
+</li>
+</ul>
+</div>
+<div class="pt-4 border-t border-surface-container flex items-center justify-between">
+<span class="text-label-md font-label-md text-text-muted">19,000+ Families Stabilized</span>
+<a class="text-primary hover:text-primary-container font-semibold text-body-sm font-body-sm flex items-center gap-1" href="#donate">
+                Sponsor Ration →
+              </a>
+</div>
+</div>
+<!-- Pillar 5: Skill Development & Livelihood -->
+<div class="bg-surface-container-lowest border border-highlight-amber-soft rounded-2xl p-6 hover:border-marigold-bright transition-all shadow-sm flex flex-col justify-between" id="pillar-skills">
+<div>
+<div class="w-12 h-12 rounded-xl bg-surface-container-high flex items-center justify-center text-on-secondary-container mb-5">
+<span class="material-symbols-outlined text-2xl" data-icon="laptop_chromebook">laptop_chromebook</span>
+</div>
+<div class="flex items-center justify-between mb-2">
+<h3 class="text-headline-sm font-headline-sm text-on-surface">Skill Development</h3>
+<span class="text-label-md font-label-md bg-surface-container-low text-primary px-2.5 py-0.5 rounded-full">Pillar 05</span>
+</div>
+<p class="text-body-sm font-body-sm text-secondary mb-4">
+                Vocational skill certifications enabling youth aged 16-24 to enter organized formal industries.
+              </p>
+<ul class="space-y-2 text-body-sm font-body-sm text-on-surface-variant mb-6">
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-tertiary text-base" data-icon="check_circle">check_circle</span>
+<span class="">Computer software and hardware maintenance</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-tertiary text-base" data-icon="check_circle">check_circle</span>
+<span class="">Hospitality, retail and customer relationship tracks</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-tertiary text-base" data-icon="check_circle">check_circle</span>
+<span class="">Guaranteed placement interview drives</span>
+</li>
+</ul>
+</div>
+<div class="pt-4 border-t border-surface-container flex items-center justify-between">
+<span class="text-label-md font-label-md text-text-muted">87% Placement Rate</span>
+<a class="text-secondary hover:text-primary font-semibold text-body-sm font-body-sm flex items-center gap-1" href="#partner">
+                Hire Graduates →
+              </a>
+</div>
+</div>
+<!-- Pillar 6: Health & Digital Literacy -->
+<div class="bg-surface-container-lowest border border-highlight-amber-soft rounded-2xl p-6 hover:border-marigold-bright transition-all shadow-sm flex flex-col justify-between" id="pillar-health">
+<div>
+<div class="w-12 h-12 rounded-xl bg-highlight-amber-soft flex items-center justify-center text-primary mb-5">
+<span class="material-symbols-outlined text-2xl" data-icon="medical_services">medical_services</span>
+</div>
+<div class="flex items-center justify-between mb-2">
+<h3 class="text-headline-sm font-headline-sm text-on-surface">Health &amp; Digital Safety</h3>
+<span class="text-label-md font-label-md bg-surface-container-low text-primary px-2.5 py-0.5 rounded-full">Pillar 06</span>
+</div>
+<p class="text-body-sm font-body-sm text-secondary mb-4">
+                Preventive health interventions, nutrition checks, and cyber safety education for young teenagers.
+              </p>
+<ul class="space-y-2 text-body-sm font-body-sm text-on-surface-variant mb-6">
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-tertiary text-base" data-icon="check_circle">check_circle</span>
+<span class="">Mobile medical vans visiting underserved slums</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-tertiary text-base" data-icon="check_circle">check_circle</span>
+<span class="">Anaemia eradication &amp; micronutrient drives</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-tertiary text-base" data-icon="check_circle">check_circle</span>
+<span class="">Safe internet usage, cyber fraud prevention workshops</span>
+</li>
+</ul>
+</div>
+<div class="pt-4 border-t border-surface-container flex items-center justify-between">
+<span class="text-label-md font-label-md text-text-muted">110K+ Health Screenings</span>
+<a class="text-primary hover:text-primary-container font-semibold text-body-sm font-body-sm flex items-center gap-1" href="#donate">
+                Sponsor Van →
+              </a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- GOVERNMENT SCHEMES DIRECTORY (HIGHLIGHTED SECTION) -->
+<section class="py-20 bg-surface-warm-card border-y border-surface-container" id="government-schemes">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+<div>
+<div class="inline-flex items-center gap-1.5 text-label-caps font-label-caps text-secondary mb-2">
+<span class="material-symbols-outlined text-sm" data-icon="account_balance">account_balance</span>
+              Civic Rights &amp; Entitlements Directory
+            </div>
+<h2 class="text-headline-lg font-headline-lg text-on-surface">Verified Government Welfare Schemes</h2>
+<p class="text-body-md font-body-md text-secondary mt-1 max-w-2xl">
+              We assist low-income parents with document preparation, biometric enrollment, and application tracking for major state and central welfare portals.
+            </p>
+</div>
+<!-- Interactive Filter Tabs -->
+<div class="flex flex-wrap items-center gap-2 bg-surface-container-lowest p-1.5 rounded-xl border border-surface-container text-label-md font-label-md">
+<button class="bg-primary text-on-primary px-3 py-1.5 rounded-lg shadow-sm">All (6)</button>
+<button class="text-secondary hover:text-primary px-3 py-1.5 rounded-lg transition-colors">Education</button>
+<button class="text-secondary hover:text-primary px-3 py-1.5 rounded-lg transition-colors">Child Care</button>
+<button class="text-secondary hover:text-primary px-3 py-1.5 rounded-lg transition-colors">Women Empowerment</button>
+<button class="text-secondary hover:text-primary px-3 py-1.5 rounded-lg transition-colors">Skill Dev</button>
+</div>
+</div>
+<!-- Directory Cards Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Scheme 1: Beti Bachao Beti Padhao -->
+<div class="bg-surface-container-lowest border border-outline-variant/40 rounded-xl p-6 shadow-sm hover:border-marigold-bright transition-all flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-3">
+<span class="bg-highlight-amber-soft text-primary text-label-md font-label-md px-2.5 py-0.5 rounded-full">Girl Child Education</span>
+<span class="text-label-md font-label-md text-text-muted">Central Scheme</span>
+</div>
+<h3 class="text-headline-sm font-headline-sm text-on-surface mb-2">Beti Bachao Beti Padhao</h3>
+<p class="text-body-sm font-body-sm text-secondary mb-4">
+                National flagship initiative preventing gender biased sex selective elimination and ensuring education retention for girls.
+              </p>
+<div class="bg-surface-container-low p-3 rounded-lg mb-4 text-body-sm font-body-sm space-y-1.5">
+<div class="font-medium text-on-surface">Eligibility Criteria:</div>
+<div class="text-on-surface-variant flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sage-soft text-xs" data-icon="check">check</span>
+                  Any girl child below 10 years of age
+                </div>
+<div class="text-on-surface-variant flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sage-soft text-xs" data-icon="check">check</span>
+                  Enrolled in recognised district government school
+                </div>
+</div>
+</div>
+<div>
+<div class="text-label-md font-label-md text-secondary mb-3 flex items-center gap-1"><span class="material-symbols-outlined text-xs text-primary" data-icon="handshake">handshake</span> Trinetra Gargi Center Assistance: Document &amp; Bank Acc Linkage</div>
+<a class="w-full inline-flex items-center justify-center gap-1.5 border border-primary text-primary hover:bg-highlight-amber-soft py-2 px-3 rounded-lg text-label-lg font-label-lg transition-colors" href="https://wcd.nic.in" rel="noopener noreferrer" target="_blank">
+<span class="">View Official Scheme (.gov.in)</span>
+<span class="material-symbols-outlined text-sm" data-icon="open_in_new">open_in_new</span>
+</a>
+</div>
+</div>
+<!-- Scheme 2: PM Kaushal Vikas Yojana -->
+<div class="bg-surface-container-lowest border border-outline-variant/40 rounded-xl p-6 shadow-sm hover:border-marigold-bright transition-all flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-3">
+<span class="bg-surface-container text-secondary text-label-md font-label-md px-2.5 py-0.5 rounded-full">Skill Development</span>
+<span class="text-label-md font-label-md text-text-muted">MSDE Approved</span>
+</div>
+<h3 class="text-headline-sm font-headline-sm text-on-surface mb-2">PM Kaushal Vikas Yojana (PMKVY 4.0)</h3>
+<p class="text-body-sm font-body-sm text-secondary mb-4">
+                Industry-relevant skill certification and job placement support with government stipends for school/college dropouts.
+              </p>
+<div class="bg-surface-container-low p-3 rounded-lg mb-4 text-body-sm font-body-sm space-y-1.5">
+<div class="font-medium text-on-surface">Eligibility Criteria:</div>
+<div class="text-on-surface-variant flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sage-soft text-xs" data-icon="check">check</span>
+                  Youth aged 15-45 with Aadhaar ID
+                </div>
+<div class="text-on-surface-variant flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sage-soft text-xs" data-icon="check">check</span>
+                  School dropouts or unemployed youth
+                </div>
+</div>
+</div>
+<div>
+<div class="text-label-md font-label-md text-secondary mb-3 flex items-center gap-1"><span class="material-symbols-outlined text-xs text-primary" data-icon="handshake">handshake</span> Trinetra Gargi Center Assistance: Free Classroom Labs &amp; Training</div>
+<a class="w-full inline-flex items-center justify-center gap-1.5 border border-primary text-primary hover:bg-highlight-amber-soft py-2 px-3 rounded-lg text-label-lg font-label-lg transition-colors" href="https://pmkvyofficial.org" rel="noopener noreferrer" target="_blank">
+<span class="">View Official Scheme (.gov.in)</span>
+<span class="material-symbols-outlined text-sm" data-icon="open_in_new">open_in_new</span>
+</a>
+</div>
+</div>
+<!-- Scheme 3: Sukanya Samriddhi Yojana -->
+<div class="bg-surface-container-lowest border border-outline-variant/40 rounded-xl p-6 shadow-sm hover:border-marigold-bright transition-all flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-3">
+<span class="bg-highlight-amber-soft text-primary text-label-md font-label-md px-2.5 py-0.5 rounded-full">Girl Child Savings</span>
+<span class="text-label-md font-label-md text-text-muted">High Interest (8.2%)</span>
+</div>
+<h3 class="text-headline-sm font-headline-sm text-on-surface mb-2">Sukanya Samriddhi Yojana (SSY)</h3>
+<p class="text-body-sm font-body-sm text-secondary mb-4">
+                Government-backed high-yield savings scheme designed exclusively to build educational and higher marriage endowments.
+              </p>
+<div class="bg-surface-container-low p-3 rounded-lg mb-4 text-body-sm font-body-sm space-y-1.5">
+<div class="font-medium text-on-surface">Eligibility Criteria:</div>
+<div class="text-on-surface-variant flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sage-soft text-xs" data-icon="check">check</span>
+                  Age 0-10 years; open via Post Office or Bank
+                </div>
+<div class="text-on-surface-variant flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sage-soft text-xs" data-icon="check">check</span>
+                  Minimum deposit starting at only ₹250/year
+                </div>
+</div>
+</div>
+<div>
+<div class="text-label-md font-label-md text-secondary mb-3 flex items-center gap-1"><span class="material-symbols-outlined text-xs text-primary" data-icon="handshake">handshake</span> Trinetra Gargi Center Assistance: Post Office Account Setup</div>
+<a class="w-full inline-flex items-center justify-center gap-1.5 border border-primary text-primary hover:bg-highlight-amber-soft py-2 px-3 rounded-lg text-label-lg font-label-lg transition-colors" href="https://indiapost.gov.in" rel="noopener noreferrer" target="_blank">
+<span class="">View Official Scheme (.gov.in)</span>
+<span class="material-symbols-outlined text-sm" data-icon="open_in_new">open_in_new</span>
+</a>
+</div>
+</div>
+<!-- Scheme 4: RTE Section 12(1)(c) Free Schooling -->
+<div class="bg-surface-container-lowest border border-outline-variant/40 rounded-xl p-6 shadow-sm hover:border-marigold-bright transition-all flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-3">
+<span class="bg-secondary-container text-on-secondary-container text-label-md font-label-md px-2.5 py-0.5 rounded-full">Right to Education</span>
+<span class="text-label-md font-label-md text-text-muted">Statutory Right</span>
+</div>
+<h3 class="text-headline-sm font-headline-sm text-on-surface mb-2">RTE Section 12(1)(c) Free Schooling</h3>
+<p class="text-body-sm font-body-sm text-secondary mb-4">
+                Mandatory 25% quota reservation in private unaided schools for children from Economically Weaker Sections (EWS).
+              </p>
+<div class="bg-surface-container-low p-3 rounded-lg mb-4 text-body-sm font-body-sm space-y-1.5">
+<div class="font-medium text-on-surface">Eligibility Criteria:</div>
+<div class="text-on-surface-variant flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sage-soft text-xs" data-icon="check">check</span>
+                  Family income below state poverty threshold
+                </div>
+<div class="text-on-surface-variant flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sage-soft text-xs" data-icon="check">check</span>
+                  Children entering Nursery / Class 1 (Age 3-6)
+                </div>
+</div>
+</div>
+<div>
+<div class="text-label-md font-label-md text-secondary mb-3 flex items-center gap-1"><span class="material-symbols-outlined text-xs text-primary" data-icon="handshake">handshake</span> Trinetra Gargi Center Assistance: Online Lottery Form Filing</div>
+<a class="w-full inline-flex items-center justify-center gap-1.5 border border-primary text-primary hover:bg-highlight-amber-soft py-2 px-3 rounded-lg text-label-lg font-label-lg transition-colors" href="https://dsel.education.gov.in/rte" rel="noopener noreferrer" target="_blank">
+<span class="">View Official Scheme (.gov.in)</span>
+<span class="material-symbols-outlined text-sm" data-icon="open_in_new">open_in_new</span>
+</a>
+</div>
+</div>
+<!-- Scheme 5: Poshan Abhiyaan -->
+<div class="bg-surface-container-lowest border border-outline-variant/40 rounded-xl p-6 shadow-sm hover:border-marigold-bright transition-all flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-3">
+<span class="bg-tertiary-fixed text-on-tertiary-fixed text-label-md font-label-md px-2.5 py-0.5 rounded-full">Nutrition &amp; Health</span>
+<span class="text-label-md font-label-md text-text-muted">Holistic Poshan 2.0</span>
+</div>
+<h3 class="text-headline-sm font-headline-sm text-on-surface mb-2">Poshan Abhiyaan (National Nutrition)</h3>
+<p class="text-body-sm font-body-sm text-secondary mb-4">
+                Reduces stunting, wasting, anaemia, and low birth weight in infants, pregnant women, and lactating mothers.
+              </p>
+<div class="bg-surface-container-low p-3 rounded-lg mb-4 text-body-sm font-body-sm space-y-1.5">
+<div class="font-medium text-on-surface">Eligibility Criteria:</div>
+<div class="text-on-surface-variant flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sage-soft text-xs" data-icon="check">check</span>
+                  Children under 6 years &amp; pregnant/lactating women
+                </div>
+<div class="text-on-surface-variant flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sage-soft text-xs" data-icon="check">check</span>
+                  Access through local Anganwadi center registry
+                </div>
+</div>
+</div>
+<div>
+<div class="text-label-md font-label-md text-secondary mb-3 flex items-center gap-1"><span class="material-symbols-outlined text-xs text-primary" data-icon="handshake">handshake</span> Trinetra Gargi Center Assistance: Anganwadi Ration Linkage</div>
+<a class="w-full inline-flex items-center justify-center gap-1.5 border border-primary text-primary hover:bg-highlight-amber-soft py-2 px-3 rounded-lg text-label-lg font-label-lg transition-colors" href="https://poshanabhiyaan.gov.in" rel="noopener noreferrer" target="_blank">
+<span class="">View Official Scheme (.gov.in)</span>
+<span class="material-symbols-outlined text-sm" data-icon="open_in_new">open_in_new</span>
+</a>
+</div>
+</div>
+<!-- Scheme 6: PM Matru Vandana Yojana -->
+<div class="bg-surface-container-lowest border border-outline-variant/40 rounded-xl p-6 shadow-sm hover:border-marigold-bright transition-all flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-3">
+<span class="bg-highlight-amber-soft text-coral-warmth text-label-md font-label-md px-2.5 py-0.5 rounded-full">Maternity Benefit</span>
+<span class="text-label-md font-label-md text-text-muted">₹5,000 Direct Cash</span>
+</div>
+<h3 class="text-headline-sm font-headline-sm text-on-surface mb-2">PM Matru Vandana Yojana (PMMVY)</h3>
+<p class="text-body-sm font-body-sm text-secondary mb-4">
+                Direct Benefit Transfer (DBT) cash incentive to compensate wage loss and ensure institutional health delivery.
+              </p>
+<div class="bg-surface-container-low p-3 rounded-lg mb-4 text-body-sm font-body-sm space-y-1.5">
+<div class="font-medium text-on-surface">Eligibility Criteria:</div>
+<div class="text-on-surface-variant flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sage-soft text-xs" data-icon="check">check</span>
+                  Pregnant women &amp; lactating mothers for first living child
+                </div>
+<div class="text-on-surface-variant flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sage-soft text-xs" data-icon="check">check</span>
+                  Linked to Aadhaar bank account
+                </div>
+</div>
+</div>
+<div>
+<div class="text-label-md font-label-md text-secondary mb-3 flex items-center gap-1"><span class="material-symbols-outlined text-xs text-primary" data-icon="handshake">handshake</span> Trinetra Gargi Center Assistance: DBT Account Validation</div>
+<a class="w-full inline-flex items-center justify-center gap-1.5 border border-primary text-primary hover:bg-highlight-amber-soft py-2 px-3 rounded-lg text-label-lg font-label-lg transition-colors" href="https://pmmvy.wcd.gov.in" rel="noopener noreferrer" target="_blank">
+<span class="">View Official Scheme (.gov.in)</span>
+<span class="material-symbols-outlined text-sm" data-icon="open_in_new">open_in_new</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Banner for Assistance -->
+<div class="mt-10 p-6 bg-surface-container-lowest rounded-xl border border-marigold-bright/30 flex flex-col md:flex-row items-center justify-between gap-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-3xl text-primary" data-icon="contact_support">contact_support</span>
+<div>
+<h4 class="text-headline-sm font-headline-sm text-on-surface">Facing trouble applying or missing documents?</h4>
+<p class="text-body-sm font-body-sm text-secondary">Visit any of our 85+ grassroots community guidance booths or dial our civic helpline for free aid.</p>
+</div>
+</div>
+<a class="inline-flex items-center gap-1 bg-surface-container-low hover:bg-surface-container text-primary font-bold px-4 py-2 rounded-lg text-label-lg font-label-lg whitespace-nowrap transition-colors" href="#help-portal">Find Nearest Trinetra Gargi Booth →</a>
+</div>
+</div>
+</section>
+<!-- DONATIONS & TRANSPARENCY MODULE -->
+<section class="py-20 bg-surface-ivory" id="donate">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+<!-- Donation Pitch & Statutory Badges -->
+<div class="lg:col-span-6 space-y-6">
+<div class="inline-flex items-center gap-2 px-3 py-1 bg-highlight-amber-soft text-primary rounded-full text-label-md font-label-md">
+<span class="material-symbols-outlined text-sm" data-icon="workspace_premium">workspace_premium</span>
+              Tax exemption verification pending statutory filing.
+            </div>
+<h2 class="text-headline-lg font-headline-lg text-on-surface">
+              Fuel A Child's Future with Radical Transparency.
+            </h2>
+<p class="text-body-lg font-body-lg text-secondary">
+              100% of your public contributions directly fund education kits, bridge schools, and nutritional rescue meals. Overhead is separately funded by institutional CSR grants.
+            </p>
+<div class="space-y-4 pt-2">
+<div class="flex items-start gap-3">
+<div class="w-8 h-8 rounded-lg bg-surface-container-low flex items-center justify-center text-primary flex-shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-base" data-icon="receipt_long">receipt_long</span>
+</div>
+<div>
+<h4 class="font-bold text-on-surface text-body-md font-body-md">Official Contribution Receipt</h4>
+<p class="text-body-sm font-body-sm text-secondary">Generated immediately via email and WhatsApp upon payment completion.</p>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<div class="w-8 h-8 rounded-lg bg-surface-container-low flex items-center justify-center text-primary flex-shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-base" data-icon="analytics">analytics</span>
+</div>
+<div>
+<h4 class="font-bold text-on-surface text-body-md font-body-md">Quarterly Field Audits &amp; Child Progress Cards</h4>
+<p class="text-body-sm font-body-sm text-secondary">Opt in to receive anonymized academic performance and health report cards.</p>
+</div>
+</div>
+</div>
+<!-- Trust Verification Seals -->
+<div class="pt-6 border-t border-surface-container flex flex-wrap items-center gap-6 text-text-muted text-label-md font-label-md">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary text-base" data-icon="verified">verified</span>
+<span class="">Ministry of Home Affairs FCRA Registered</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-tertiary text-base" data-icon="security">security</span>
+<span class="">256-bit Encrypted SSL Gateway</span>
+</div>
+</div>
+</div>
+<!-- Interactive Donation Card -->
+<div class="lg:col-span-6 bg-surface-container-lowest border-2 border-highlight-amber-soft rounded-3xl p-6 sm:p-8 shadow-sm">
+<!-- Frequency Switch -->
+<div class="flex rounded-xl bg-surface-container-low p-1 mb-6">
+<button class="w-1/2 py-2 text-center rounded-lg bg-primary text-on-primary font-bold text-label-lg font-label-lg shadow-sm">Monthly Support (High Impact)</button>
+<button class="w-1/2 py-2 text-center rounded-lg text-secondary hover:text-primary font-medium text-label-lg font-label-lg transition-colors">One-Time Contribution</button>
+</div>
+<!-- Amount Presets -->
+<div class="grid grid-cols-2 gap-3 mb-6">
+<button class="p-3.5 rounded-xl border-2 border-primary bg-highlight-amber-soft text-left transition-all">
+<div class="text-headline-sm font-headline-sm font-bold text-primary">₹1,200</div>
+<div class="text-label-md font-label-md text-on-surface-variant">1 Month Child Schooling</div>
+</button>
+<button class="p-3.5 rounded-xl border border-surface-container hover:border-primary text-left transition-all">
+<div class="text-headline-sm font-headline-sm font-bold text-on-surface">₹3,600</div>
+<div class="text-label-md font-label-md text-text-muted">Nutrition &amp; Books (Quarter)</div>
+</button>
+<button class="p-3.5 rounded-xl border border-surface-container hover:border-primary text-left transition-all">
+<div class="text-headline-sm font-headline-sm font-bold text-on-surface">₹7,200</div>
+<div class="text-label-md font-label-md text-text-muted">Rescue Rehab + School Kit</div>
+</button>
+<button class="p-3.5 rounded-xl border border-surface-container hover:border-primary text-left transition-all">
+<div class="text-headline-sm font-headline-sm font-bold text-on-surface">₹14,400</div>
+<div class="text-label-md font-label-md text-text-muted">Full 1-Year Scholarship</div>
+</button>
+</div>
+<!-- Custom Amount Input -->
+<div class="mb-6">
+<label class="block text-label-md font-label-md text-secondary mb-1.5">Or Enter Custom Amount (₹)</label>
+<div class="relative">
+<span class="absolute left-3.5 top-2.5 font-bold text-secondary text-headline-sm">₹</span>
+<input class="w-full pl-8 pr-4 py-2.5 bg-surface-container-low border border-surface-container rounded-xl text-headline-sm font-headline-sm font-bold text-on-surface focus:outline-none focus:ring-2 focus:ring-marigold-bright" placeholder="Other Amount" type="number" value="1200"/>
+</div>
+</div>
+<!-- Citizen Details -->
+<div class="space-y-3 mb-6">
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+<input class="w-full px-3.5 py-2.5 bg-surface-container-lowest border border-outline-variant/60 rounded-xl text-body-sm font-body-sm focus:ring-2 focus:ring-marigold-bright focus:outline-none" placeholder="Full Legal Name (for 80G)" type="text"/>
+<input class="w-full px-3.5 py-2.5 bg-surface-container-lowest border border-outline-variant/60 rounded-xl text-body-sm font-body-sm focus:ring-2 focus:ring-marigold-bright focus:outline-none" placeholder="Email (for Tax Receipt)" type="email"/>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+<input class="w-full px-3.5 py-2.5 bg-surface-container-lowest border border-outline-variant/60 rounded-xl text-body-sm font-body-sm focus:ring-2 focus:ring-marigold-bright focus:outline-none uppercase" placeholder="PAN Number (Mandatory for 80G)" type="text"/>
+<input class="w-full px-3.5 py-2.5 bg-surface-container-lowest border border-outline-variant/60 rounded-xl text-body-sm font-body-sm focus:ring-2 focus:ring-marigold-bright focus:outline-none" placeholder="Mobile Number (+91)" type="tel"/>
+</div>
+</div>
+<!-- Payment Action -->
+<button class="w-full py-3.5 px-4 rounded-xl bg-primary hover:bg-primary-container text-on-primary font-bold text-headline-sm font-headline-sm flex items-center justify-center gap-2 shadow-md transition-all active:scale-95 duration-100">
+<span class="material-symbols-outlined text-lg" data-icon="lock">lock</span>
+<span class="">Proceed to Donate ₹1,200</span>
+</button>
+<!-- Supported Modes -->
+<div class="mt-4 flex items-center justify-center gap-4 text-label-md font-label-md text-text-muted">
+<span class="">UPI (Google Pay, PhonePe, Paytm)</span>
+<span class="">•</span>
+<span class="">Netbanking</span>
+<span class="">•</span>
+<span class="">Debit / Credit Cards</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- IMPACT NUMBERS & AUDITED REPORTS HUB -->
+<section class="py-20 bg-surface-warm-card border-b border-surface-container" id="impact">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="text-center max-w-3xl mx-auto mb-16">
+<span class="text-label-caps font-label-caps text-primary tracking-wider uppercase">Institutional Rigour</span>
+<h2 class="text-headline-lg font-headline-lg text-on-surface mt-2 mb-4">Audited Governance &amp; Field Metrics</h2>
+<p class="text-body-md font-body-md text-secondary">
+            Trust is earned through unbending statutory compliance. Every single rupee received is audited by independent chartered accountants and submitted to authorities.
+          </p>
+</div>
+<!-- Big Stat Display -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+<div class="bg-surface-container-lowest p-8 rounded-2xl border border-highlight-amber-soft text-center">
+<div class="text-stat-metric-mobile md:text-stat-metric font-stat-metric text-primary mb-2">88,400+</div>
+<div class="text-headline-sm font-headline-sm text-on-surface mb-1">Underprivileged Girls Enrolled</div>
+<p class="text-body-sm font-body-sm text-text-muted">Prevented from early marriage and secured in mainstream state board schools.</p>
+</div>
+<div class="bg-surface-container-lowest p-8 rounded-2xl border border-highlight-amber-soft text-center">
+<div class="text-stat-metric-mobile md:text-stat-metric font-stat-metric text-coral-warmth mb-2">14,200+</div>
+<div class="text-headline-sm font-headline-sm text-on-surface mb-1">Children Rescued from Hazardous Labour</div>
+<p class="text-body-sm font-body-sm text-text-muted">Extracted from brick kilns, glass works, and roadside workshops with legal care.</p>
+</div>
+<div class="bg-surface-container-lowest p-8 rounded-2xl border border-highlight-amber-soft text-center">
+<div class="text-stat-metric-mobile md:text-stat-metric font-stat-metric text-tertiary mb-2">₹4.8 Cr</div>
+<div class="text-headline-sm font-headline-sm text-on-surface mb-1">Direct Grassroots Aid Deployed</div>
+<p class="text-body-sm font-body-sm text-text-muted">Audited FY2023-24 financial capital delivered across 85 grassroots clusters.</p>
+</div>
+</div>
+<!-- Downloadable Compliance Hub -->
+<div class="bg-surface-container-lowest p-6 sm:p-8 rounded-2xl border border-outline-variant/40">
+<div class="flex items-center justify-between flex-wrap gap-4 mb-6">
+<div>
+<h3 class="text-headline-sm font-headline-sm text-on-surface">Annual Transparency &amp; Statutory Filings</h3>
+<p class="text-body-sm font-body-sm text-secondary">Public disclosure documents available for download in compliance with Ministry norms.</p>
+</div>
+<span class="inline-flex items-center gap-1 text-label-md font-label-md text-sage-soft bg-surface-container-low px-3 py-1 rounded-full">
+<span class="material-symbols-outlined text-sm" data-icon="check_circle">check_circle</span>
+              All Audits Fully Cleared
+            </span>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+<a class="p-4 rounded-xl border border-surface-container hover:border-primary bg-surface-container-lowest hover:bg-surface-container-low transition-all group flex items-start justify-between" href="#">
+<div>
+<span class="material-symbols-outlined text-2xl text-primary mb-2 group-hover:scale-110 transition-transform" data-icon="picture_as_pdf">picture_as_pdf</span>
+<div class="font-bold text-body-sm font-body-sm text-on-surface">FY 2023-24 Audited Financials</div>
+<div class="text-label-md font-label-md text-text-muted">Independent CA Report (PDF)</div>
+</div>
+<span class="material-symbols-outlined text-text-muted group-hover:text-primary transition-colors text-base" data-icon="download">download</span>
+</a>
+<a class="p-4 rounded-xl border border-surface-container hover:border-primary bg-surface-container-lowest hover:bg-surface-container-low transition-all group flex items-start justify-between" href="#">
+<div>
+<span class="material-symbols-outlined text-2xl text-primary mb-2 group-hover:scale-110 transition-transform" data-icon="description">description</span>
+<div class="font-bold text-body-sm font-body-sm text-on-surface">Annual Impact Whitepaper</div>
+<div class="text-label-md font-label-md text-text-muted">Field Outcomes &amp; Census (PDF)</div>
+</div>
+<span class="material-symbols-outlined text-text-muted group-hover:text-primary transition-colors text-base" data-icon="download">download</span>
+</a>
+<a class="p-4 rounded-xl border border-surface-container hover:border-primary bg-surface-container-lowest hover:bg-surface-container-low transition-all group flex items-start justify-between" href="#">
+<div>
+<span class="material-symbols-outlined text-2xl text-primary mb-2 group-hover:scale-110 transition-transform" data-icon="verified">verified</span>
+<div class="font-bold text-body-sm font-body-sm text-on-surface">80G &amp; 12A Certificates</div>
+<div class="text-label-md font-label-md text-text-muted">Income Tax Dept Validated</div>
+</div>
+<span class="material-symbols-outlined text-text-muted group-hover:text-primary transition-colors text-base" data-icon="download">download</span>
+</a>
+<a class="p-4 rounded-xl border border-surface-container hover:border-primary bg-surface-container-lowest hover:bg-surface-container-low transition-all group flex items-start justify-between" href="#">
+<div>
+<span class="material-symbols-outlined text-2xl text-primary mb-2 group-hover:scale-110 transition-transform" data-icon="public">public</span>
+<div class="font-bold text-body-sm font-body-sm text-on-surface">FCRA Compliance Returns</div>
+<div class="text-label-md font-label-md text-text-muted">Form FC-4 Annual Submission</div>
+</div>
+<span class="material-symbols-outlined text-text-muted group-hover:text-primary transition-colors text-base" data-icon="download">download</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- NEWS, EVENTS & SUCCESS STORIES SECTION -->
+<section class="py-20 bg-surface-ivory" id="stories">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+<div>
+<span class="text-label-caps font-label-caps text-primary tracking-wider uppercase">From Vulnerability to Triumph</span>
+<h2 class="text-headline-lg font-headline-lg text-on-surface mt-1">Ground Stories of Transformed Lives</h2>
+</div>
+<a class="text-primary hover:text-primary-container font-semibold text-body-md font-body-md flex items-center gap-1" href="#">
+            Read all archive stories →
+          </a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Story 1 -->
+<div class="bg-surface-container-lowest border border-highlight-amber-soft rounded-2xl p-6 shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-4">
+<span class="bg-highlight-amber-soft text-primary text-label-md font-label-md px-2.5 py-0.5 rounded-full">Academic Excellence</span>
+<span class="text-label-md font-label-md text-text-muted">Rajasthan Cluster</span>
+</div>
+<blockquote class="text-headline-sm font-headline-sm text-on-surface mb-3 leading-snug">
+                "From Brick Kiln to State Board Topper: Sunita's 5-Year Journey"
+              </blockquote>
+<p class="text-body-sm font-body-sm text-secondary mb-6">Rescued at age 11 from forced brick mould production, Sunita enrolled in Trinetra Gargi’s bridge school. In May 2024, she secured 91.4% in class 10 and is now pursuing government polytechnic engineering.</p>
+</div>
+<div class="pt-4 border-t border-surface-container flex items-center justify-between text-body-sm font-body-sm">
+<span class="text-text-muted">Field Caseworker: R. Sharma</span>
+<a class="text-primary font-bold hover:underline" href="#">Read Case File</a>
+</div>
+</div>
+<!-- Story 2 -->
+<div class="bg-surface-container-lowest border border-highlight-amber-soft rounded-2xl p-6 shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-4">
+<span class="bg-tertiary-fixed text-on-tertiary-fixed text-label-md font-label-md px-2.5 py-0.5 rounded-full">Livelihood Transformation</span>
+<span class="text-label-md font-label-md text-text-muted">Bhopal Hub</span>
+</div>
+<blockquote class="text-headline-sm font-headline-sm text-on-surface mb-3 leading-snug">
+                "Breaking Generation Poverty: 24 Mothers Establish Cooperative Tailoring"
+              </blockquote>
+<p class="text-body-sm font-body-sm text-secondary mb-6">Equipped with Trinetra Gargi micro-grants and electric sewing equipment, 24 domestic workers transitioned into an independent garment producer cooperative fulfilling wholesale hospital uniform orders.</p>
+</div>
+<div class="pt-4 border-t border-surface-container flex items-center justify-between text-body-sm font-body-sm">
+<span class="text-text-muted">SHG Leader: Shanti Devi</span>
+<a class="text-primary font-bold hover:underline" href="#">Read Case File</a>
+</div>
+</div>
+<!-- Story 3 -->
+<div class="bg-surface-container-lowest border border-highlight-amber-soft rounded-2xl p-6 shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-4">
+<span class="bg-surface-container text-secondary text-label-md font-label-md px-2.5 py-0.5 rounded-full">Digital Literacy</span>
+<span class="text-label-md font-label-md text-text-muted">Delhi Urban Slum</span>
+</div>
+<blockquote class="text-headline-sm font-headline-sm text-on-surface mb-3 leading-snug">
+                "Mohan's First Code: How a Ragpicker’s Son Landed IT Apprenticeship"
+              </blockquote>
+<p class="text-body-sm font-body-sm text-secondary mb-6">Attending Trinetra Gargi evening community tech lab after high school, 19-year-old Mohan mastered Python basics and hardware repair, qualifying for a salaried tier-1 enterprise tech internship.</p>
+</div>
+<div class="pt-4 border-t border-surface-container flex items-center justify-between text-body-sm font-body-sm">
+<span class="text-text-muted">Trainer: Amit Verma</span>
+<a class="text-primary font-bold hover:underline" href="#">Read Case File</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- VOLUNTEER & CORPORATE CSR PARTNERSHIP -->
+<section class="py-20 bg-surface-warm-card border-y border-surface-container" id="partner">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="text-center max-w-3xl mx-auto mb-16">
+<span class="text-label-caps font-label-caps text-primary tracking-wider uppercase">Collective Action</span>
+<h2 class="text-headline-lg font-headline-lg text-on-surface mt-2 mb-4">Partner With Trinetra Gargi Foundation</h2>
+<p class="text-body-md font-body-md text-secondary">
+            Whether you are an impassioned citizen seeking grassroots involvement or an enterprise optimizing statutory Schedule VII CSR allocations, we ensure seamless synergy.
+          </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<!-- Individual Volunteer Pathway -->
+<div class="bg-surface-container-lowest rounded-2xl p-8 border border-outline-variant/40 flex flex-col justify-between">
+<div>
+<div class="w-12 h-12 rounded-xl bg-highlight-amber-soft flex items-center justify-center text-primary mb-6">
+<span class="material-symbols-outlined text-2xl" data-icon="person_add">person_add</span>
+</div>
+<h3 class="text-headline-md font-headline-md text-on-surface mb-2">Join as Individual Volunteer</h3>
+<p class="text-body-md font-body-md text-secondary mb-6">
+                Teach weekend remedial classes, assist in medical triage camps, or offer pro-bono legal support to vulnerable families.
+              </p>
+<ul class="space-y-2.5 text-body-sm font-body-sm text-on-surface mb-8">
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary text-base" data-icon="check">check</span>
+                  Flexible 3-5 hours/week commitments (In-person or remote)
+                </li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary text-base" data-icon="check">check</span>
+                  Certified volunteer engagement certification
+                </li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary text-base" data-icon="check">check</span>
+                  Direct mentorship of enthusiastic children
+                </li>
+</ul>
+</div>
+<button class="w-full bg-secondary text-on-secondary hover:bg-on-background py-3 rounded-lg text-label-lg font-label-lg transition-colors">
+              Register as Volunteer →
+            </button>
+</div>
+<!-- Corporate CSR Pathway -->
+<div class="bg-surface-container-lowest rounded-2xl p-8 border-2 border-marigold-bright/30 flex flex-col justify-between">
+<div>
+<div class="w-12 h-12 rounded-xl bg-secondary-fixed flex items-center justify-center text-secondary mb-6">
+<span class="material-symbols-outlined text-2xl" data-icon="domain">domain</span>
+</div>
+<h3 class="text-headline-md font-headline-md text-on-surface mb-2">Corporate CSR &amp; Institutional Grants</h3>
+<p class="text-body-md font-body-md text-secondary mb-6">
+                Fully eligible under MCA CSR-1 registration. Turnkey program execution with verified logframe metrics and independent third-party impact assessments.
+              </p>
+<ul class="space-y-2.5 text-body-sm font-body-sm text-on-surface mb-8">
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary text-base" data-icon="check">check</span>
+                  MCA Form CSR-1 Registration No: CSR00039281
+                </li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary text-base" data-icon="check">check</span>
+                  Complete audit trail and quarterly board presentation packs
+                </li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary text-base" data-icon="check">check</span>
+                  Corporate employee volunteering engagement days
+                </li>
+</ul>
+</div>
+<button class="w-full bg-primary text-on-primary hover:bg-primary-container py-3 rounded-lg text-label-lg font-label-lg transition-colors">
+              Request CSR Partnership Deck →
+            </button>
+</div>
+</div>
+</div>
+</section>
+<!-- FREQUENTLY ASKED QUESTIONS (FAQ) -->
+<section class="py-20 bg-surface-ivory">
+<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="text-center mb-12">
+<span class="text-label-caps font-label-caps text-primary tracking-wider uppercase">Answers &amp; Clarifications</span>
+<h2 class="text-headline-lg font-headline-lg text-on-surface mt-2">Frequently Asked Questions</h2>
+</div>
+<div class="space-y-4">
+<div class="bg-surface-container-lowest border border-outline-variant/40 rounded-xl p-5 shadow-sm">
+<h4 class="text-headline-sm font-headline-sm text-on-surface mb-2">How is my donation utilized, and what are the overhead ratios?</h4>
+<p class="text-body-sm font-body-sm text-secondary">
+              100% of individual public contributions are directly funneled into schooling fees, bridge school infrastructure, student kits, and nutrition. Our management, operational overhead, and compliance legal costs are separately covered through specific CSR institutional endowments.
+            </p>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant/40 rounded-xl p-5 shadow-sm">
+<h4 class="text-headline-sm font-headline-sm text-on-surface mb-2">Can I report child labour or child abuse completely anonymously?</h4>
+<p class="text-body-sm font-body-sm text-secondary">
+              Yes. When you use our Urgent Help &amp; Report Portal, checking "Submit Anonymously" scrubs all metadata and personal IP identifiers. The report is passed directly to our rapid response field team and Childline 1098 without revealing your identity.
+            </p>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant/40 rounded-xl p-5 shadow-sm">
+<h4 class="text-headline-sm font-headline-sm text-on-surface mb-2">How do I claim my 80G tax deduction?</h4>
+<p class="text-body-sm font-body-sm text-secondary">Upon successful payment, our automated portal issues an official Statutory Donation Accounting Receipt bearing our registration number directly to your registered email. In accordance with the IT Department rules, Trinetra Gargi Foundation files Form 10BD annually so your donation automatically reflects in your Annual Information Statement (AIS).</p>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant/40 rounded-xl p-5 shadow-sm">
+<h4 class="text-headline-sm font-headline-sm text-on-surface mb-2">Do you assist families directly with Government Scheme paperwork?</h4>
+<p class="text-body-sm font-body-sm text-secondary">
+              Yes! Our 85+ grassroots community guidance booths feature trained paralegal volunteers who assist illiterate parents in procuring Aadhaar cards, setting up zero-balance Jan Dhan bank accounts, and submitting online forms for schemes like RTE Section 12(1)(c) and Sukanya Samriddhi Yojana without middlemen fees.
+            </p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- FOOTER (Shared Component: Footer) -->
+<footer class="bg-surface-warm-card dark:bg-inverse-surface border-t border-surface-container dark:border-outline-variant full-width">
+<div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
+<!-- Brand Info -->
+<div class="lg:col-span-2 space-y-4">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-lg bg-highlight-amber-soft flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-lg" data-icon="wb_sunny">wb_sunny</span>
+</div>
+<span class="text-headline-md font-headline-md font-bold text-on-surface dark:text-inverse-on-surface">Trinetra Gargi Foundation</span>
+</div>
+<p class="text-body-sm font-body-sm text-text-muted dark:text-secondary-fixed-dim max-w-sm">
+            A registered non-profit organization dedicated to rescuing children from exploitation, securing access to quality education, and unlocking economic empowerment for vulnerable families across India.
+          </p>
+<div class="text-label-md font-label-md text-text-muted space-y-1">
+<div class="">Govt Reg: <strong>TRUST/DEL/2012/84920</strong></div>
+<div class="">CSR-1 Reg: <strong>CSR00039281</strong> | FCRA No: <strong>231661842</strong></div>
+<div class="">Corporate CIN: <strong>U85300RJ2026NPL098757</strong></div>
+</div>
+</div>
+<!-- Links Column 1: Key Focus Areas -->
+<div>
+<h4 class="text-label-lg font-label-lg font-bold text-on-surface dark:text-inverse-on-surface mb-3">Our Work</h4>
+<ul class="space-y-2 text-body-sm font-body-sm">
+<li class=""><a class="text-text-muted dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary transition-colors" href="#pillar-education">Education &amp; Scholarships</a></li>
+<li class=""><a class="text-text-muted dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary transition-colors" href="#pillar-protection">Child Protection</a></li>
+<li class=""><a class="text-text-muted dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary transition-colors" href="#pillar-women">Women Empowerment</a></li>
+<li class=""><a class="text-text-muted dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary transition-colors" href="#pillar-family">Family Support &amp; Rehab</a></li>
+<li class=""><a class="text-text-muted dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary transition-colors" href="#pillar-skills">Skill Development</a></li>
+</ul>
+</div>
+<!-- Links Column 2: Government & Emergency -->
+<div>
+<h4 class="text-label-lg font-label-lg font-bold text-on-surface dark:text-inverse-on-surface mb-3">Resources &amp; Portals</h4>
+<ul class="space-y-2 text-body-sm font-body-sm">
+<li class=""><a class="text-text-muted dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary transition-colors" href="#government-schemes">Government Schemes Directory</a></li>
+<li class=""><a class="text-text-muted dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary transition-colors" href="#help-portal">Help &amp; Emergency Portal</a></li>
+<li class=""><a class="text-text-muted dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary transition-colors" href="#impact">Annual Impact Reports</a></li>
+<li class=""><a class="text-text-muted dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary transition-colors" href="#donate">Tax Exemption 80G</a></li>
+<li class=""><a class="text-text-muted dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary transition-colors" href="#partner">Volunteer &amp; CSR Partners</a></li>
+</ul>
+</div>
+<!-- Emergency Helplines Direct Contact -->
+<div>
+<h4 class="text-label-lg font-label-lg font-bold text-on-surface dark:text-inverse-on-surface mb-3">Emergency Lines</h4>
+<div class="space-y-2.5 text-body-sm font-body-sm">
+<div>
+<div class="text-text-muted dark:text-secondary-fixed-dim">National Childline:</div>
+<a class="font-bold text-emergency-crimson hover:underline" href="tel:1098">1098 (Toll Free)</a>
+</div>
+<div>
+<div class="text-text-muted dark:text-secondary-fixed-dim">Women Helpline:</div>
+<a class="font-bold text-on-surface dark:text-inverse-on-surface hover:underline" href="tel:181">181 (24/7)</a>
+</div>
+<div>
+<div class="text-text-muted dark:text-secondary-fixed-dim">Headquarters Email:</div>
+<a class="text-primary hover:underline" data-stitch-orig-opacity="0" href="mailto:support@trinetragargifoundation.org">support@trinetragargifoundation.org</a>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Bottom Strip -->
+<div class="pt-8 border-t border-surface-container dark:border-outline-variant flex flex-col sm:flex-row items-center justify-between gap-4 text-body-sm font-body-sm text-text-muted dark:text-secondary-fixed-dim">
+<p class="">© 2024 Trinetra Gargi Foundation. All Rights Reserved. Registered Non-Profit Entity (Section 8 Licensed Non-Profit).</p>
+<div class="flex items-center space-x-6 text-label-md font-label-md">
+<a class="hover:text-primary dark:hover:text-inverse-primary transition-colors" href="#">Privacy &amp; Confidentiality Policy</a>
+<a class="hover:text-primary dark:hover:text-inverse-primary transition-colors" href="#">Terms of Use</a>
+<a class="hover:text-primary dark:hover:text-inverse-primary transition-colors" href="#">Whistleblower Policy</a>
+</div>
+</div>
+</div>
+</footer>
+</body></html>

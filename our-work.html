@@ -532,7 +532,7 @@
 </div>
 </div>
 <!-- Metrics Stack -->
-<div class="grid grid-cols-2 gap-4">
+<div id="ourWorkHeroMetrics" class="grid grid-cols-2 gap-4">
 <div class="p-4 rounded-lg bg-surface-warm-card border border-surface-container/80">
 <span class="text-stat-metric-mobile font-stat-metric-mobile text-primary block">14,280+</span>
 <span class="text-label-md font-label-md text-text-muted">Children Mainstreamed into Schools</span>
@@ -1273,5 +1273,148 @@
 <script src="https://unpkg.com/@popperjs/core@2.11.8/dist/umd/popper.min.js" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/tippy.js@6" crossorigin="anonymous"></script>
 <script src="main.js?v=23"></script>
+
+<!-- Dynamic Supabase Our Work CMS Loader -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  (function() {
+    const SUPABASE_URL = "https://lfdnxklkncckboonyage.supabase.co";
+    const SUPABASE_ANON = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxmZG54a2xrbmNja2Jvb255YWdlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTMzNjIzMDYsImV4cCI6MjEwODkzODMwNn0.c4fLtTvSsC4YXdhoFOi1zgPU_gwCk--M7k-Zp50obxM";
+    const CLOUDINARY_CLOUD_NAME = "fobxcvyz";
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    function resolveCoverUrl(src) {
+      if (!src) return '';
+      if (src.startsWith('http') || src.startsWith('images/') || src.startsWith('/images/')) return src;
+      return 'https://res.cloudinary.com/' + CLOUDINARY_CLOUD_NAME + '/image/upload/f_auto,q_auto,w_800/' + src;
+    }
+
+    async function initOurWork() {
+      const grid = document.getElementById('pillar-grid');
+      if (!grid) return;
+
+      try {
+        let pillars = null;
+        let framework = null;
+
+        // 1. Direct Supabase Query
+        if (window.supabase) {
+          const sbClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
+          const { data, error } = await sbClient
+            .from('faqs')
+            .select('*')
+            .in('category', ['our_work_pillar', 'our_work_framework'])
+            .eq('is_published', true)
+            .order('order_index', { ascending: true });
+
+          if (!error && data && data.length > 0) {
+            pillars = [];
+            for (const r of data) {
+              if (r.category === 'our_work_framework') {
+                try { framework = JSON.parse(r.answer); } catch (e) {}
+              } else if (r.category === 'our_work_pillar') {
+                try {
+                  const p = JSON.parse(r.answer);
+                  pillars.push(p);
+                } catch (e) {}
+              }
+            }
+          }
+        }
+
+        // 2. Fallback to API endpoint
+        if (!pillars || pillars.length === 0) {
+          const res = await fetch('/api/admin/our-work');
+          if (res.ok) {
+            const json = await res.json();
+            if (json.success && json.pillars) {
+              pillars = json.pillars.filter(p => p.is_published !== false);
+              if (json.framework) framework = json.framework;
+            }
+          }
+        }
+
+        if (!pillars || pillars.length === 0) return;
+
+        // Render dynamic pillars
+        grid.innerHTML = pillars.map(p => {
+          const coverImg = resolveCoverUrl(p.cover_image) || 'images/pillars/pillar-education.webp';
+          const badgeText = p.pillar_number || 'Pillar';
+          const deliverablesHtml = Array.isArray(p.deliverables) && p.deliverables.length > 0
+            ? p.deliverables.map(d => `
+                <div class="flex items-start text-body-sm font-body-sm text-[#172033]">
+                  <span class="material-symbols-outlined text-tertiary text-base mr-2 mt-0.5" data-icon="check_circle">check_circle</span>
+                  <span><strong>${escapeHtml(d.title || '')}:</strong> ${escapeHtml(d.description || '')}</span>
+                </div>
+              `).join('')
+            : '';
+
+          return `
+            <article id="${escapeHtml(p.slug)}" class="pillar-card bg-surface-container-lowest rounded-xl border border-outline-variant/40 p-6 sm:p-8 flex flex-col justify-between hover:border-marigold-bright transition-all shadow-sm group" data-category="${escapeHtml(p.category || 'childhood')}">
+              <div>
+                <div class="relative aspect-[16/9] w-full rounded-xl overflow-hidden mb-6 border border-slate-200/80 bg-stone-100 shadow-xs">
+                  <img src="${coverImg}" alt="${escapeHtml(p.title)}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" width="1280" height="720" loading="lazy" />
+                  <div class="absolute inset-0 bg-gradient-to-t from-neutral-950/60 via-transparent to-transparent"></div>
+                  <div class="absolute bottom-2.5 left-3 text-[11px] font-bold text-white tracking-wide flex items-center gap-1.5">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                    <span>${escapeHtml(p.image_caption || p.title)}</span>
+                  </div>
+                </div>
+
+                <div class="flex items-center justify-between mb-6">
+                  <div class="w-12 h-12 rounded-xl bg-highlight-amber-soft text-primary flex items-center justify-center">
+                    <span class="material-symbols-outlined text-2xl" data-icon="${escapeHtml(p.icon || 'school')}">${escapeHtml(p.icon || 'school')}</span>
+                  </div>
+                  <span class="px-3 py-1 rounded-full text-label-md font-label-md bg-surface-container text-secondary font-medium">${escapeHtml(badgeText)}</span>
+                </div>
+
+                <h3 class="text-headline-sm font-headline-sm text-[#172033] mb-3 group-hover:text-primary transition-colors">
+                  ${escapeHtml(p.title)}
+                </h3>
+                <p class="text-body-md font-body-md text-secondary mb-6 leading-relaxed">
+                  ${escapeHtml(p.excerpt || p.description || '')}
+                </p>
+
+                ${deliverablesHtml ? `<div class="space-y-3 pt-2 pb-6 border-t border-surface-container">${deliverablesHtml}</div>` : ''}
+              </div>
+
+              <div class="pt-4 border-t border-surface-container flex items-center justify-between text-xs text-secondary">
+                <span class="font-bold text-primary">${escapeHtml(p.stat_metric || '')}</span>
+                <span class="text-text-muted">${escapeHtml(p.stat_label || '')}</span>
+              </div>
+            </article>
+          `;
+        }).join('');
+
+        // Render dynamic framework metrics if customized
+        if (framework && Array.isArray(framework.impact_metrics) && framework.impact_metrics.length === 4) {
+          const metricsContainer = document.getElementById('ourWorkHeroMetrics');
+          if (metricsContainer) {
+            metricsContainer.innerHTML = framework.impact_metrics.map(m => `
+              <div class="p-4 rounded-lg bg-surface-warm-card border border-surface-container/80">
+                <span class="text-stat-metric-mobile font-stat-metric-mobile text-primary block">${escapeHtml(m.value)}</span>
+                <span class="text-label-md font-label-md text-text-muted">${escapeHtml(m.label)}</span>
+              </div>
+            `).join('');
+          }
+        }
+
+      } catch (err) {
+        console.warn('[OUR-WORK-DYNAMIC-LOADER]', err);
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initOurWork);
+    } else {
+      initOurWork();
+    }
+  })();
+</script>
+
 </body>
 </html>

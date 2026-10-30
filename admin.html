@@ -65,7 +65,7 @@
   </header>
 
   <!-- MAIN CONTAINER -->
-  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+  <main class="flex-1 max-w-[1536px] w-full mx-auto px-3 sm:px-6 lg:px-8 py-6">
 
     <!-- FILE PROTOCOL WARNING (if opened via file:///) -->
     <div id="fileProtocolWarning" class="hidden max-w-md mx-auto mb-6 p-4 bg-amber-50 border-2 border-amber-300 rounded-2xl text-amber-900 shadow-sm">
@@ -163,49 +163,157 @@
     </div>
 
     <!-- 2. DASHBOARD & OPERATIONAL MODULES -->
-    <div id="dashboardSection" class="hidden space-y-6">
+    <div id="dashboardSection" class="hidden">
 
-      <!-- Navigation Tabs -->
-      <div class="flex flex-wrap gap-2 border-b border-amber-200 pb-3">
-        <button onclick="switchTab('overview')" id="tab-overview" class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold text-slate-700 hover:bg-amber-100 active-tab transition flex items-center gap-1.5">
-          <span class="material-symbols-outlined text-lg">dashboard</span>
-          Overview
-        </button>
-        <button onclick="switchTab('sos')" id="tab-sos" class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold text-slate-700 hover:bg-amber-100 transition flex items-center gap-1.5 relative">
-          <span class="material-symbols-outlined text-lg">sos</span>
-          Crisis SOS Triage
-          <span id="badgeSos" class="hidden ml-1 px-1.5 py-0.5 text-xs bg-red-600 text-white rounded-full font-bold">0</span>
-        </button>
-        <button onclick="switchTab('volunteers')" id="tab-volunteers" class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold text-slate-700 hover:bg-amber-100 transition flex items-center gap-1.5">
-          <span class="material-symbols-outlined text-lg">volunteer_activism</span>
-          Volunteers CRM
-          <span id="badgeVol" class="hidden ml-1 px-1.5 py-0.5 text-xs bg-amber-600 text-white rounded-full font-bold">0</span>
-        </button>
-        <button onclick="switchTab('donations')" id="tab-donations" class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold text-slate-700 hover:bg-amber-100 transition flex items-center gap-1.5">
-          <span class="material-symbols-outlined text-lg">receipt_long</span>
-          Donations & 80G
-        </button>
-        <button onclick="switchTab('schemes')" id="tab-schemes" class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold text-slate-700 hover:bg-amber-100 transition flex items-center gap-1.5">
-          <span class="material-symbols-outlined text-lg">policy</span>
-          Schemes CMS
-        </button>
-        <button onclick="switchTab('stories')" id="tab-stories" class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold text-slate-700 hover:bg-amber-100 transition flex items-center gap-1.5">
-          <span class="material-symbols-outlined text-lg">auto_stories</span>
-          Stories CMS
-        </button>
-        <button onclick="switchTab('media')" id="tab-media" class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold text-slate-700 hover:bg-amber-100 transition flex items-center gap-1.5">
-          <span class="material-symbols-outlined text-lg">cloud_upload</span>
-          Media Vault
-        </button>
-        <button onclick="switchTab('security')" id="tab-security" class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold text-slate-700 hover:bg-amber-100 transition flex items-center gap-1.5 hidden">
-          <span class="material-symbols-outlined text-lg text-amber-700">admin_panel_settings</span>
-          Security & Access
-        </button>
+      <!-- Mobile Top Utility Header (Visible on < lg screens) -->
+      <div class="lg:hidden flex items-center justify-between bg-white border border-slate-200/90 rounded-2xl p-3.5 mb-5 shadow-xs">
+        <div class="flex items-center gap-2.5">
+          <button type="button" onclick="toggleMobileAdminSidebar()" class="w-10 h-10 rounded-xl bg-amber-50 hover:bg-amber-100 text-deep-orange flex items-center justify-center border border-amber-200/80 transition shadow-2xs" aria-label="Toggle navigation drawer">
+            <span class="material-symbols-outlined text-2xl">menu</span>
+          </button>
+          <div>
+            <span id="mobileActiveTabLabel" class="text-sm font-bold text-slate-900 block leading-tight">Overview</span>
+            <span class="text-[10px] text-slate-500">Trinetra Admin Workspace</span>
+          </div>
+        </div>
+        <div class="flex items-center gap-2">
+          <span id="mobileAdminRolePill" class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-amber-400 text-slate-950">Admin</span>
+          <button onclick="handleLogout()" class="w-9 h-9 rounded-xl bg-slate-100 hover:bg-red-50 text-slate-600 hover:text-red-700 flex items-center justify-center transition" title="Logout">
+            <span class="material-symbols-outlined text-lg">logout</span>
+          </button>
+        </div>
       </div>
+
+      <!-- Left Sidebar Backdrop for Mobile -->
+      <div id="adminSidebarBackdrop" onclick="closeMobileAdminSidebar()" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-40 hidden lg:hidden transition-opacity"></div>
+
+      <!-- Main Cockpit: Left Sidebar + Right Content Workspace -->
+      <div class="flex flex-col lg:flex-row gap-6 items-start">
+
+        <!-- LEFT SIDEBAR NAVIGATION -->
+        <aside id="adminSidebar" class="fixed inset-y-0 left-0 z-50 w-72 bg-white border-r border-slate-200/90 shadow-2xl lg:shadow-xs flex flex-col justify-between transform -translate-x-full lg:translate-x-0 lg:static lg:w-64 xl:w-72 lg:rounded-3xl lg:border lg:border-slate-200/90 transition-transform duration-300 ease-in-out shrink-0 overflow-hidden min-h-[calc(100vh-6rem)]">
+          
+          <!-- Sidebar Header -->
+          <div class="p-4 sm:p-5 border-b border-slate-100 bg-amber-50/50">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2.5">
+                <div class="w-10 h-10 rounded-2xl bg-white border border-amber-200 flex items-center justify-center p-1.5 shadow-2xs shrink-0">
+                  <img src="logo-symbol.webp" alt="TGF" class="w-full h-full object-contain">
+                </div>
+                <div>
+                  <h2 class="text-xs font-extrabold text-slate-900 leading-tight tracking-tight uppercase">Trinetra Gargi</h2>
+                  <p class="text-[9.5px] text-deep-orange font-bold uppercase tracking-wider">Admin Workspace</p>
+                </div>
+              </div>
+              <button type="button" onclick="closeMobileAdminSidebar()" class="lg:hidden w-8 h-8 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center">
+                <span class="material-symbols-outlined text-lg">close</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Vertical Nav Menu Items -->
+          <nav class="flex-1 p-3 space-y-1 overflow-y-auto" aria-label="Admin Navigation Tabs">
+            <div class="text-[10px] font-extrabold uppercase tracking-wider text-slate-400 px-3 py-1">Operations</div>
+
+            <button onclick="switchTab('overview')" id="tab-overview" class="tab-btn w-full px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-700 hover:bg-amber-50 active-tab transition flex items-center justify-between group">
+              <div class="flex items-center gap-2.5">
+                <span class="material-symbols-outlined text-lg group-hover:scale-105 transition-transform">dashboard</span>
+                <span>Overview</span>
+              </div>
+            </button>
+
+            <button onclick="switchTab('sos')" id="tab-sos" class="tab-btn w-full px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-700 hover:bg-amber-50 transition flex items-center justify-between group">
+              <div class="flex items-center gap-2.5">
+                <span class="material-symbols-outlined text-lg text-red-600 group-hover:scale-105 transition-transform">emergency</span>
+                <span>Crisis SOS Triage</span>
+              </div>
+              <span id="badgeSos" class="hidden px-2 py-0.5 text-[10px] bg-red-600 text-white rounded-full font-extrabold">0</span>
+            </button>
+
+            <button onclick="switchTab('volunteers')" id="tab-volunteers" class="tab-btn w-full px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-700 hover:bg-amber-50 transition flex items-center justify-between group">
+              <div class="flex items-center gap-2.5">
+                <span class="material-symbols-outlined text-lg text-amber-700 group-hover:scale-105 transition-transform">volunteer_activism</span>
+                <span>Volunteers CRM</span>
+              </div>
+              <span id="badgeVol" class="hidden px-2 py-0.5 text-[10px] bg-amber-600 text-white rounded-full font-extrabold">0</span>
+            </button>
+
+            <button onclick="switchTab('donations')" id="tab-donations" class="tab-btn w-full px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-700 hover:bg-amber-50 transition flex items-center justify-between group">
+              <div class="flex items-center gap-2.5">
+                <span class="material-symbols-outlined text-lg text-emerald-700 group-hover:scale-105 transition-transform">receipt_long</span>
+                <span>Donations &amp; 80G</span>
+              </div>
+            </button>
+
+            <div class="text-[10px] font-extrabold uppercase tracking-wider text-slate-400 px-3 pt-3 py-1">Content Management</div>
+
+            <button onclick="switchTab('ourwork')" id="tab-ourwork" class="tab-btn w-full px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-700 hover:bg-amber-50 transition flex items-center justify-between group">
+              <div class="flex items-center gap-2.5">
+                <span class="material-symbols-outlined text-lg text-amber-700 group-hover:scale-105 transition-transform">handyman</span>
+                <span>Our Work CMS</span>
+              </div>
+              <span class="px-1.5 py-0.5 text-[9px] bg-amber-100 text-amber-900 rounded font-bold uppercase">6 Pillars</span>
+            </button>
+
+            <button onclick="switchTab('schemes')" id="tab-schemes" class="tab-btn w-full px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-700 hover:bg-amber-50 transition flex items-center justify-between group">
+              <div class="flex items-center gap-2.5">
+                <span class="material-symbols-outlined text-lg text-indigo-700 group-hover:scale-105 transition-transform">policy</span>
+                <span>Schemes CMS</span>
+              </div>
+              <span id="statSchemesNav" class="px-1.5 py-0.5 text-[9px] bg-indigo-50 text-indigo-900 rounded font-bold">6</span>
+            </button>
+
+            <button onclick="switchTab('stories')" id="tab-stories" class="tab-btn w-full px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-700 hover:bg-amber-50 transition flex items-center justify-between group">
+              <div class="flex items-center gap-2.5">
+                <span class="material-symbols-outlined text-lg text-orange-700 group-hover:scale-105 transition-transform">auto_stories</span>
+                <span>Stories CMS</span>
+              </div>
+              <span id="statStoriesNav" class="px-1.5 py-0.5 text-[9px] bg-orange-50 text-orange-900 rounded font-bold">CMS</span>
+            </button>
+
+            <button onclick="switchTab('media')" id="tab-media" class="tab-btn w-full px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-700 hover:bg-amber-50 transition flex items-center justify-between group">
+              <div class="flex items-center gap-2.5">
+                <span class="material-symbols-outlined text-lg text-sky-700 group-hover:scale-105 transition-transform">cloud_upload</span>
+                <span>Media Vault</span>
+              </div>
+            </button>
+
+            <div class="text-[10px] font-extrabold uppercase tracking-wider text-slate-400 px-3 pt-3 py-1" id="sectionSecurityHeader">Governance</div>
+
+            <button onclick="switchTab('security')" id="tab-security" class="tab-btn w-full px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-700 hover:bg-amber-50 transition flex items-center justify-between group hidden">
+              <div class="flex items-center gap-2.5">
+                <span class="material-symbols-outlined text-lg text-red-700 group-hover:scale-105 transition-transform">admin_panel_settings</span>
+                <span>Security &amp; Access</span>
+              </div>
+              <span class="px-1.5 py-0.5 text-[9px] bg-red-100 text-red-900 rounded font-extrabold">SUPER</span>
+            </button>
+          </nav>
+
+          <!-- Sidebar Bottom User Profile Card -->
+          <div class="p-3.5 border-t border-slate-100 bg-slate-50/80">
+            <div class="flex items-center justify-between gap-2 mb-2.5">
+              <div class="min-w-0">
+                <p id="sidebarAdminName" class="text-xs font-bold text-slate-900 truncate">Administrator</p>
+                <span id="sidebarAdminRole" class="text-[9.5px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-amber-400 text-slate-950 inline-block mt-0.5">Admin</span>
+              </div>
+              <button onclick="handleLogout()" class="p-2 rounded-xl bg-white hover:bg-red-50 text-slate-500 hover:text-red-700 border border-slate-200 transition shrink-0 shadow-2xs" title="Sign Out">
+                <span class="material-symbols-outlined text-base">logout</span>
+              </button>
+            </div>
+            <a href="index.html" target="_blank" class="w-full py-1.5 px-2.5 bg-white hover:bg-amber-50 text-slate-600 hover:text-deep-orange border border-slate-200 rounded-xl text-[11px] font-semibold transition flex items-center justify-center gap-1.5 shadow-2xs">
+              <span class="material-symbols-outlined text-xs">open_in_new</span>
+              <span>View Public Website</span>
+            </a>
+          </div>
+
+        </aside>
+
+        <!-- RIGHT WORKSPACE: ACTIVE TAB CONTENTS -->
+        <div class="flex-1 min-w-0 w-full space-y-6">
 
       <!-- TAB 1: OVERVIEW -->
       <div id="content-overview" class="tab-content space-y-6">
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-3.5">
           <div class="bg-white p-5 rounded-2xl border border-red-100 shadow-sm">
             <div class="flex items-center justify-between">
               <span class="text-xs font-bold text-red-600 uppercase tracking-wider">New Distress SOS</span>
@@ -249,6 +357,15 @@
             </div>
             <p id="statStories" class="text-3xl font-extrabold text-slate-900 mt-3">0</p>
             <p class="text-xs text-slate-500 mt-1">Ground casework & media</p>
+          </div>
+
+          <div class="bg-white p-5 rounded-2xl border border-amber-300 shadow-sm cursor-pointer hover:border-deep-orange transition" onclick="switchTab('ourwork')">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-deep-orange uppercase tracking-wider">Our Work</span>
+              <span class="p-2 bg-amber-50 text-deep-orange rounded-xl material-symbols-outlined">handyman</span>
+            </div>
+            <p id="statOurWork" class="text-3xl font-extrabold text-slate-900 mt-3">6</p>
+            <p class="text-xs text-slate-500 mt-1">Strategic pillars active</p>
           </div>
         </div>
 
@@ -325,6 +442,52 @@
 
         <div id="donationsListContainer" class="space-y-3">
           <div class="text-center py-12 text-slate-400">Loading donation records...</div>
+        </div>
+      </div>
+
+      <!-- TAB: OUR WORK CMS -->
+      <div id="content-ourwork" class="tab-content hidden space-y-6">
+        <!-- Top Action Header Banner -->
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between bg-white p-5 sm:p-6 rounded-2xl border border-amber-100 shadow-xs gap-4">
+          <div>
+            <div class="flex items-center gap-2.5">
+              <span class="p-2.5 bg-amber-100 text-deep-orange rounded-2xl material-symbols-outlined text-xl">handyman</span>
+              <h3 class="text-base sm:text-lg font-bold text-slate-900">Our Strategic Pillars &amp; Field Framework</h3>
+            </div>
+            <p class="text-xs text-slate-500 mt-1 max-w-2xl leading-relaxed">
+              Edit and customize the 6 strategic pillars, hero performance metrics, and 4-stage grassroots rehabilitation lifecycle flow displayed publicly on <code class="bg-amber-50 px-1.5 py-0.5 rounded text-amber-900 font-mono text-[11px]">/our-work.html</code>.
+            </p>
+          </div>
+          <div class="flex flex-wrap items-center gap-2">
+            <a href="our-work.html" target="_blank" class="px-3.5 py-2 text-xs font-bold text-amber-900 bg-amber-50 hover:bg-amber-100 border border-amber-300 rounded-xl transition flex items-center gap-1.5 shadow-2xs">
+              <span class="material-symbols-outlined text-sm">open_in_new</span>
+              <span>View Public Page</span>
+            </a>
+            <button onclick="openFrameworkModal()" class="px-3.5 py-2 text-xs font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 border border-slate-300 rounded-xl transition flex items-center gap-1.5 shadow-2xs">
+              <span class="material-symbols-outlined text-sm">tune</span>
+              <span>Edit Framework &amp; KPIs</span>
+            </button>
+            <button onclick="openLifecycleModal()" class="px-3.5 py-2 text-xs font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 border border-slate-300 rounded-xl transition flex items-center gap-1.5 shadow-2xs">
+              <span class="material-symbols-outlined text-sm">flowsheet</span>
+              <span>Edit 4-Stage Lifecycle</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Pillar Guidelines / Status Notice -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-amber-50/80 p-4 rounded-2xl border border-amber-200/90 text-xs">
+          <div class="flex items-center gap-2 text-amber-950 font-medium">
+            <span class="material-symbols-outlined text-amber-700 text-lg">verified</span>
+            <span>All 6 strategic pillars adhere strictly to Section 8 non-profit child safeguarding and legal mandates.</span>
+          </div>
+          <button onclick="loadOurWork()" class="px-3 py-1.5 text-xs bg-white hover:bg-amber-100 text-amber-900 border border-amber-200 font-semibold rounded-xl flex items-center gap-1 transition self-start sm:self-auto shadow-2xs">
+            <span class="material-symbols-outlined text-base">refresh</span> Refresh Pillars
+          </button>
+        </div>
+
+        <!-- Pillars Grid Container -->
+        <div id="pillarsListContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div class="col-span-full text-center py-12 text-slate-400">Loading strategic pillars...</div>
         </div>
       </div>
 
@@ -547,7 +710,9 @@
 
       </div>
 
-    </div>
+        </div> <!-- /flex-1 min-w-0 (Right Workspace) -->
+      </div> <!-- /flex gap-6 (Cockpit) -->
+    </div> <!-- /dashboardSection -->
   </main>
 
   <!-- DETAILS MODAL -->
@@ -780,14 +945,25 @@
         </div>
       `;
 
+      // Populate Left Sidebar Admin User Card
+      const sName = document.getElementById('sidebarAdminName');
+      const sRole = document.getElementById('sidebarAdminRole');
+      const mRole = document.getElementById('mobileAdminRolePill');
+      if (sName) sName.innerText = currentProfile.fullName || 'Administrator';
+      if (sRole) sRole.innerText = currentProfile.role;
+      if (mRole) mRole.innerText = currentProfile.role;
+
       // Super Admin Exclusive Tab Visibility
       const isSuperAdmin = currentProfile.role === 'super_admin';
       const secTab = document.getElementById('tab-security');
+      const secHead = document.getElementById('sectionSecurityHeader');
       if (secTab) {
         if (isSuperAdmin) {
           secTab.classList.remove('hidden');
+          if (secHead) secHead.classList.remove('hidden');
         } else {
           secTab.classList.add('hidden');
+          if (secHead) secHead.classList.add('hidden');
         }
       }
 
@@ -802,6 +978,9 @@
         ]);
 
         document.getElementById('statSchemes').innerText = schemesRes.count || 0;
+        if (document.getElementById('statOurWork')) {
+          document.getElementById('statOurWork').innerText = '6';
+        }
         if (document.getElementById('statStories')) {
           document.getElementById('statStories').innerText = storiesRes.count || 0;
         }
@@ -950,17 +1129,58 @@
       window.location.reload();
     }
 
-    // Tab Switching
+    // Mobile Sidebar Drawer Controls
+    function toggleMobileAdminSidebar() {
+      const sidebar = document.getElementById('adminSidebar');
+      const backdrop = document.getElementById('adminSidebarBackdrop');
+      if (!sidebar) return;
+      const isOpen = !sidebar.classList.contains('-translate-x-full');
+      if (isOpen) {
+        closeMobileAdminSidebar();
+      } else {
+        sidebar.classList.remove('-translate-x-full');
+        backdrop?.classList.remove('hidden');
+        document.body.classList.add('overflow-hidden');
+      }
+    }
+
+    function closeMobileAdminSidebar() {
+      const sidebar = document.getElementById('adminSidebar');
+      const backdrop = document.getElementById('adminSidebarBackdrop');
+      if (sidebar) sidebar.classList.add('-translate-x-full');
+      if (backdrop) backdrop.classList.add('hidden');
+      document.body.classList.remove('overflow-hidden');
+    }
+
+    // Tab Switching with Left Sidebar Highlight
     function switchTab(tabId) {
+      closeMobileAdminSidebar();
+
       document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active-tab'));
       document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden'));
 
       document.getElementById(`tab-${tabId}`)?.classList.add('active-tab');
       document.getElementById(`content-${tabId}`)?.classList.remove('hidden');
 
+      // Update mobile header title
+      const tabLabels = {
+        overview: 'Overview',
+        sos: 'Crisis SOS Triage',
+        volunteers: 'Volunteers CRM',
+        donations: 'Donations & 80G',
+        ourwork: 'Our Work CMS',
+        schemes: 'Schemes CMS',
+        stories: 'Stories CMS',
+        media: 'Media Vault',
+        security: 'Security & Access'
+      };
+      const mLabel = document.getElementById('mobileActiveTabLabel');
+      if (mLabel) mLabel.innerText = tabLabels[tabId] || 'Admin Workspace';
+
       if (tabId === 'sos') loadSosReports();
       if (tabId === 'volunteers') loadVolunteers();
       if (tabId === 'donations') loadDonations();
+      if (tabId === 'ourwork') loadOurWork();
       if (tabId === 'schemes') loadSchemes();
       if (tabId === 'stories') loadStories();
       if (tabId === 'security') loadSecurityData();
@@ -2874,6 +3094,573 @@
       document.getElementById('fileProtocolWarning')?.classList.remove('hidden');
     }
     initAuth();
+
+    // ==========================================
+    // 5. OUR WORK CMS: Strategic Pillars & Framework
+    // ==========================================
+    let loadedPillars = [];
+    let loadedFramework = null;
+
+    function getPillarCoverUrl(src) {
+      if (!src) return '';
+      if (src.startsWith('http') || src.startsWith('images/') || src.startsWith('/images/')) return src;
+      return `https://res.cloudinary.com/${CLOUDINARY_CLOUD_NAME}/image/upload/f_auto,q_auto,w_600/${src}`;
+    }
+
+    async function loadOurWork() {
+      const container = document.getElementById('pillarsListContainer');
+      if (!container) return;
+
+      container.innerHTML = '<div class="col-span-full text-center py-12 text-slate-400 flex items-center justify-center gap-2"><span class="material-symbols-outlined animate-spin text-xl">progress_activity</span><span>Loading strategic pillars...</span></div>';
+
+      try {
+        const res = await fetch('/api/admin/our-work');
+        const data = await res.json();
+
+        if (!data.success && !data.pillars) {
+          throw new Error(data.error || 'Failed to load strategic pillars.');
+        }
+
+        loadedPillars = data.pillars || [];
+        loadedFramework = data.framework || null;
+
+        if (loadedPillars.length === 0) {
+          container.innerHTML = '<div class="col-span-full text-center py-12 text-slate-400">No pillars found. Click refresh to seed defaults.</div>';
+          return;
+        }
+
+        container.innerHTML = loadedPillars.map(p => {
+          const coverUrl = getPillarCoverUrl(p.cover_image) || 'images/pillars/pillar-education.webp';
+          const isPub = p.is_published !== false;
+          const statusBadge = isPub
+            ? '<span class="inline-flex items-center gap-1 text-[10.5px] font-bold text-emerald-800 bg-emerald-100/90 px-2 py-0.5 rounded-full border border-emerald-300/60"><span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>Published</span>'
+            : '<span class="inline-flex items-center gap-1 text-[10.5px] font-bold text-slate-600 bg-slate-100 px-2 py-0.5 rounded-full border border-slate-300"><span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span>Draft</span>';
+
+          const deliverablesList = Array.isArray(p.deliverables) && p.deliverables.length > 0
+            ? p.deliverables.map(d => `<li class="flex items-start gap-1.5 text-xs text-slate-700 leading-snug"><span class="material-symbols-outlined text-xs text-emerald-600 mt-0.5 shrink-0">check_circle</span><span><strong>${escapeHtml(d.title || '')}:</strong> ${escapeHtml(d.description || '')}</span></li>`).join('')
+            : '<li class="text-xs text-slate-400 italic">No deliverables documented.</li>';
+
+          return `
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-xs hover:shadow-md transition-all flex flex-col justify-between overflow-hidden group">
+              <div>
+                <!-- Cover Image Thumbnail (16:9 ratio) -->
+                <div class="relative aspect-[16/9] w-full bg-slate-100 border-b border-slate-100 overflow-hidden">
+                  <img src="${coverUrl}" alt="${escapeHtml(p.title)}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" onerror="this.onerror=null;this.src='logo-symbol.webp';this.classList.add('p-8','object-contain');">
+                  <div class="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent"></div>
+                  <div class="absolute top-2.5 left-2.5 flex items-center gap-1.5">
+                    <span class="px-2 py-0.5 rounded-md text-[10px] font-extrabold uppercase tracking-wider bg-white/90 text-slate-900 shadow-2xs">${escapeHtml(p.pillar_number || 'Pillar')}</span>
+                    <span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-amber-500 text-slate-950 shadow-2xs">${escapeHtml(p.category_label || p.category || 'Child Rights')}</span>
+                  </div>
+                  <div class="absolute top-2.5 right-2.5">
+                    ${statusBadge}
+                  </div>
+                  <div class="absolute bottom-2 left-3 right-3 text-[11px] font-bold text-white tracking-wide truncate">
+                    ${escapeHtml(p.image_caption || p.title)}
+                  </div>
+                </div>
+
+                <!-- Body Content -->
+                <div class="p-4 sm:p-5 space-y-3">
+                  <div class="flex items-start justify-between gap-2">
+                    <h4 class="text-base font-serif font-bold text-slate-900 group-hover:text-deep-orange transition-colors leading-snug">
+                      ${escapeHtml(p.title)}
+                    </h4>
+                    <span class="material-symbols-outlined text-xl text-amber-700 shrink-0">${escapeHtml(p.icon || 'school')}</span>
+                  </div>
+
+                  <p class="text-xs text-slate-600 line-clamp-2 leading-relaxed">
+                    ${escapeHtml(p.excerpt || p.description || '')}
+                  </p>
+
+                  <div class="pt-2 border-t border-slate-100">
+                    <span class="text-[10.5px] font-bold uppercase tracking-wider text-slate-400 block mb-1.5">Key Deliverables</span>
+                    <ul class="space-y-1.5">
+                      ${deliverablesList}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Footer Actions & Impact Stat -->
+              <div class="p-4 bg-slate-50/80 border-t border-slate-100 flex items-center justify-between gap-2">
+                <div class="min-w-0">
+                  <span class="text-xs font-bold text-deep-orange block truncate">${escapeHtml(p.stat_metric || '10,000+')}</span>
+                  <span class="text-[10px] text-slate-500 block truncate">${escapeHtml(p.stat_label || 'Direct Target')}</span>
+                </div>
+                <div class="flex items-center gap-1.5 shrink-0">
+                  <button onclick="togglePillarPublished('${escapeHtml(p.slug)}', ${isPub})" class="p-1.5 rounded-lg border border-slate-200 bg-white hover:bg-slate-100 text-slate-600 transition" title="${isPub ? 'Unpublish / Draft' : 'Publish live'}">
+                    <span class="material-symbols-outlined text-base">${isPub ? 'visibility' : 'visibility_off'}</span>
+                  </button>
+                  <button onclick="openPillarModal('${escapeHtml(p.slug)}')" class="px-3 py-1.5 rounded-xl bg-deep-orange hover:bg-deep-orange-hover text-white text-xs font-bold transition flex items-center gap-1 shadow-2xs">
+                    <span class="material-symbols-outlined text-sm">edit</span>
+                    <span>Edit</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          `;
+        }).join('');
+
+      } catch (err) {
+        console.error('loadOurWork error:', err);
+        container.innerHTML = `<div class="col-span-full p-4 bg-red-50 border border-red-200 text-red-700 rounded-xl text-xs">${escapeHtml(err.message)}</div>`;
+      }
+    }
+
+    // Modal: Edit Strategic Pillar
+    function openPillarModal(slug) {
+      const p = loadedPillars.find(item => item.slug === slug);
+      if (!p) {
+        alert('Pillar not found for editing.');
+        return;
+      }
+
+      const coverSrc = getPillarCoverUrl(p.cover_image);
+      const deliv1 = p.deliverables?.[0] || { title: '', description: '' };
+      const deliv2 = p.deliverables?.[1] || { title: '', description: '' };
+      const deliv3 = p.deliverables?.[2] || { title: '', description: '' };
+
+      document.getElementById('modalContent').innerHTML = `
+        <form onsubmit="handleSavePillar(event, '${escapeHtml(p.slug)}')" class="space-y-4">
+          <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+            <div class="flex items-center gap-2">
+              <span class="p-2 bg-amber-100 text-deep-orange rounded-xl material-symbols-outlined">edit_note</span>
+              <div>
+                <h3 class="text-base font-bold text-slate-900">Edit Strategic Pillar: ${escapeHtml(p.pillar_number || '')}</h3>
+                <p class="text-xs text-slate-500">Update programmatic depth, cover visual, deliverables, and impact metrics.</p>
+              </div>
+            </div>
+            <span class="text-xs font-mono px-2 py-0.5 rounded bg-slate-100 text-slate-600">#${escapeHtml(p.slug)}</span>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div class="sm:col-span-2">
+              <label class="block text-xs font-bold text-slate-700 mb-1">Pillar Title *</label>
+              <input type="text" id="pillarTitle" required value="${escapeHtml(p.title || '')}" class="w-full text-xs p-2.5 border border-slate-300 rounded-xl focus:ring-1 focus:ring-deep-orange">
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">Pillar Number</label>
+              <input type="text" id="pillarNumber" value="${escapeHtml(p.pillar_number || 'Pillar I')}" class="w-full text-xs p-2.5 border border-slate-300 rounded-xl">
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">Category Domain</label>
+              <select id="pillarCategory" class="w-full text-xs p-2.5 border border-slate-300 rounded-xl bg-white">
+                <option value="childhood" ${p.category === 'childhood' ? 'selected' : ''}>Child Rights (childhood)</option>
+                <option value="economic" ${p.category === 'economic' ? 'selected' : ''}>Livelihoods (economic)</option>
+                <option value="wellness" ${p.category === 'wellness' ? 'selected' : ''}>Health & Tech (wellness)</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">Category Label</label>
+              <input type="text" id="pillarCategoryLabel" value="${escapeHtml(p.category_label || 'Child Rights')}" class="w-full text-xs p-2.5 border border-slate-300 rounded-xl">
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">Icon (Material Symbols)</label>
+              <input type="text" id="pillarIcon" value="${escapeHtml(p.icon || 'school')}" placeholder="e.g. school, shield, build" class="w-full text-xs p-2.5 border border-slate-300 rounded-xl">
+            </div>
+          </div>
+
+          <!-- Cover Image & Cloudinary Uploader -->
+          <div class="p-3.5 bg-amber-50/60 rounded-xl border border-amber-200/80 space-y-2.5">
+            <div class="flex items-center justify-between">
+              <label class="block text-xs font-bold text-slate-800">Cover Visual Photograph (16:9)</label>
+              <span class="text-[10px] text-slate-500">Child safeguarding: No faces of vulnerable minors</span>
+            </div>
+            <div class="flex flex-col sm:flex-row items-center gap-3">
+              <div class="w-24 h-16 rounded-xl overflow-hidden bg-slate-200 border border-slate-300 shrink-0">
+                <img id="previewPillarCover" src="${coverSrc || 'logo-symbol.webp'}" alt="Preview" class="w-full h-full object-cover">
+              </div>
+              <div class="flex-1 w-full space-y-1.5">
+                <input type="text" id="pillarCoverImage" value="${escapeHtml(p.cover_image || '')}" placeholder="images/pillars/pillar-education.webp or Cloudinary ID" class="w-full text-xs p-2 border border-slate-300 rounded-lg">
+                <div class="flex items-center gap-2">
+                  <input type="file" id="filePillarCover" accept="image/*" class="hidden" onchange="uploadStoryPhoto(this, 'pillarCoverImage', 'previewPillarCover')">
+                  <button type="button" onclick="document.getElementById('filePillarCover').click()" class="px-2.5 py-1 text-xs bg-white hover:bg-slate-100 border border-slate-300 rounded-lg font-semibold text-slate-700 flex items-center gap-1 shadow-2xs">
+                    <span class="material-symbols-outlined text-sm">cloud_upload</span> Upload to Cloudinary
+                  </button>
+                  <span class="text-[10.5px] text-slate-400">or enter relative image path</span>
+                </div>
+              </div>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">Cover Overlay Caption</label>
+              <input type="text" id="pillarImageCaption" value="${escapeHtml(p.image_caption || '')}" placeholder="e.g. Bridge Classroom Learning" class="w-full text-xs p-2.5 border border-slate-300 rounded-xl">
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Summary / Excerpt</label>
+            <input type="text" id="pillarExcerpt" value="${escapeHtml(p.excerpt || '')}" class="w-full text-xs p-2.5 border border-slate-300 rounded-xl">
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Full Description / Intervention Scope</label>
+            <textarea id="pillarDescription" rows="3" class="w-full text-xs p-2.5 border border-slate-300 rounded-xl">${escapeHtml(p.description || '')}</textarea>
+          </div>
+
+          <!-- 3 Key Deliverables -->
+          <div class="space-y-2 pt-2 border-t border-slate-100">
+            <label class="block text-xs font-bold text-slate-800">Key Deliverables (3 Bullet Points)</label>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+              <input type="text" id="deliv1Title" placeholder="Item 1 Title" value="${escapeHtml(deliv1.title)}" class="text-xs p-2 border border-slate-300 rounded-lg">
+              <input type="text" id="deliv1Desc" placeholder="Item 1 Description" value="${escapeHtml(deliv1.description)}" class="sm:col-span-2 text-xs p-2 border border-slate-300 rounded-lg">
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+              <input type="text" id="deliv2Title" placeholder="Item 2 Title" value="${escapeHtml(deliv2.title)}" class="text-xs p-2 border border-slate-300 rounded-lg">
+              <input type="text" id="deliv2Desc" placeholder="Item 2 Description" value="${escapeHtml(deliv2.description)}" class="sm:col-span-2 text-xs p-2 border border-slate-300 rounded-lg">
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+              <input type="text" id="deliv3Title" placeholder="Item 3 Title" value="${escapeHtml(deliv3.title)}" class="text-xs p-2 border border-slate-300 rounded-lg">
+              <input type="text" id="deliv3Desc" placeholder="Item 3 Description" value="${escapeHtml(deliv3.description)}" class="sm:col-span-2 text-xs p-2 border border-slate-300 rounded-lg">
+            </div>
+          </div>
+
+          <!-- Impact Metrics -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 border-t border-slate-100">
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">Key Impact Metric</label>
+              <input type="text" id="pillarStatMetric" value="${escapeHtml(p.stat_metric || '')}" placeholder="e.g. 14,280+ Students Transitioned" class="w-full text-xs p-2.5 border border-slate-300 rounded-xl">
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">Stat Sub-Label</label>
+              <input type="text" id="pillarStatLabel" value="${escapeHtml(p.stat_label || '')}" placeholder="e.g. Direct Enrollment" class="w-full text-xs p-2.5 border border-slate-300 rounded-xl">
+            </div>
+          </div>
+
+          <div class="flex items-center gap-2 pt-1">
+            <input type="checkbox" id="pillarIsPublished" ${p.is_published !== false ? 'checked' : ''} class="rounded border-slate-300 text-deep-orange focus:ring-deep-orange">
+            <label for="pillarIsPublished" class="text-xs font-semibold text-slate-700 cursor-pointer select-none">Publish live on /our-work.html</label>
+          </div>
+
+          <div class="flex items-center justify-end gap-2 pt-3 border-t border-slate-100">
+            <button type="button" onclick="closeModal()" class="px-4 py-2 border border-slate-300 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-50">Cancel</button>
+            <button type="submit" id="btnSavePillar" class="px-5 py-2 bg-deep-orange hover:bg-deep-orange-hover text-white rounded-xl text-xs font-bold flex items-center gap-1.5 shadow-sm">
+              <span class="material-symbols-outlined text-sm">save</span>
+              <span>Save Strategic Pillar</span>
+            </button>
+          </div>
+        </form>
+      `;
+
+      document.getElementById('actionModal').classList.remove('hidden');
+    }
+
+    async function handleSavePillar(e, slug) {
+      e.preventDefault();
+      const btn = document.getElementById('btnSavePillar');
+      btn.disabled = true;
+      btn.innerHTML = '<span class="material-symbols-outlined animate-spin text-sm">progress_activity</span> Saving...';
+
+      const existing = loadedPillars.find(p => p.slug === slug) || {};
+
+      const deliverables = [];
+      const d1T = document.getElementById('deliv1Title')?.value.trim();
+      const d1D = document.getElementById('deliv1Desc')?.value.trim();
+      if (d1T || d1D) deliverables.push({ title: d1T, description: d1D });
+
+      const d2T = document.getElementById('deliv2Title')?.value.trim();
+      const d2D = document.getElementById('deliv2Desc')?.value.trim();
+      if (d2T || d2D) deliverables.push({ title: d2T, description: d2D });
+
+      const d3T = document.getElementById('deliv3Title')?.value.trim();
+      const d3D = document.getElementById('deliv3Desc')?.value.trim();
+      if (d3T || d3D) deliverables.push({ title: d3T, description: d3D });
+
+      const updatedPillar = {
+        ...existing,
+        slug: slug,
+        title: document.getElementById('pillarTitle').value.trim(),
+        pillar_number: document.getElementById('pillarNumber').value.trim(),
+        category: document.getElementById('pillarCategory').value,
+        category_label: document.getElementById('pillarCategoryLabel').value.trim(),
+        icon: document.getElementById('pillarIcon').value.trim() || 'school',
+        cover_image: document.getElementById('pillarCoverImage').value.trim(),
+        image_caption: document.getElementById('pillarImageCaption').value.trim(),
+        excerpt: document.getElementById('pillarExcerpt').value.trim(),
+        description: document.getElementById('pillarDescription').value.trim(),
+        deliverables: deliverables.length > 0 ? deliverables : existing.deliverables,
+        stat_metric: document.getElementById('pillarStatMetric').value.trim(),
+        stat_label: document.getElementById('pillarStatLabel').value.trim(),
+        is_published: document.getElementById('pillarIsPublished').checked
+      };
+
+      try {
+        const token = currentSession?.access_token || '';
+        const res = await fetch('/api/admin/our-work', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify({ pillar: updatedPillar })
+        });
+        const data = await res.json();
+        if (!data.success) throw new Error(data.error || 'Failed to save pillar.');
+
+        closeModal();
+        await loadOurWork();
+      } catch (err) {
+        alert('Failed to save pillar: ' + err.message);
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = '<span class="material-symbols-outlined text-sm">save</span><span>Save Strategic Pillar</span>';
+      }
+    }
+
+    async function togglePillarPublished(slug, currentStatus) {
+      try {
+        const token = currentSession?.access_token || '';
+        const res = await fetch('/api/admin/our-work', {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify({ slug, is_published: !currentStatus })
+        });
+        const data = await res.json();
+        if (!data.success) throw new Error(data.error || 'Failed to update pillar status.');
+        await loadOurWork();
+      } catch (err) {
+        alert('Status update error: ' + err.message);
+      }
+    }
+
+    // Modal: Edit Framework & Hero KPIs
+    function openFrameworkModal() {
+      const fw = loadedFramework || {
+        hero_title: 'A Six-Pillar Framework of Grassroots Intervention',
+        hero_description: 'Holistically addressing the root causes of systemic vulnerability...',
+        impact_metrics: [
+          { value: '14,280+', label: 'Children Mainstreamed into Schools' },
+          { value: '1,820+', label: 'Children Rescued from Hazardous Labour' },
+          { value: '87%', label: 'Certified Vocational Placement Rate' },
+          { value: '420+', label: 'Women SHGs Micro-Financed' }
+        ]
+      };
+
+      const m = fw.impact_metrics || [];
+
+      document.getElementById('modalContent').innerHTML = `
+        <form onsubmit="handleSaveFramework(event)" class="space-y-4">
+          <div class="flex items-center gap-2 pb-3 border-b border-slate-100">
+            <span class="p-2 bg-amber-100 text-deep-orange rounded-xl material-symbols-outlined">tune</span>
+            <div>
+              <h3 class="text-base font-bold text-slate-900">Edit Operational Framework &amp; Public KPIs</h3>
+              <p class="text-xs text-slate-500">Update the top headline and 4 key impact metrics displayed on /our-work.html.</p>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Hero Analytical Headline</label>
+            <input type="text" id="fwHeroTitle" required value="${escapeHtml(fw.hero_title || '')}" class="w-full text-xs p-2.5 border border-slate-300 rounded-xl">
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Hero Subtitle / Statement</label>
+            <textarea id="fwHeroDescription" rows="2" class="w-full text-xs p-2.5 border border-slate-300 rounded-xl">${escapeHtml(fw.hero_description || '')}</textarea>
+          </div>
+
+          <div class="space-y-2 pt-2 border-t border-slate-100">
+            <label class="block text-xs font-bold text-slate-800">4 Operational Reach Impact Numbers</label>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 p-3 bg-slate-50 rounded-xl border border-slate-200">
+              <div>
+                <label class="block text-[11px] font-bold text-slate-600 mb-0.5">Metric 1 (Value)</label>
+                <input type="text" id="fwM1Val" value="${escapeHtml(m[0]?.value || '14,280+')}" class="text-xs p-2 w-full border rounded-lg">
+              </div>
+              <div>
+                <label class="block text-[11px] font-bold text-slate-600 mb-0.5">Metric 1 (Label)</label>
+                <input type="text" id="fwM1Lbl" value="${escapeHtml(m[0]?.label || 'Children Mainstreamed into Schools')}" class="text-xs p-2 w-full border rounded-lg">
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 p-3 bg-slate-50 rounded-xl border border-slate-200">
+              <div>
+                <label class="block text-[11px] font-bold text-slate-600 mb-0.5">Metric 2 (Value)</label>
+                <input type="text" id="fwM2Val" value="${escapeHtml(m[1]?.value || '1,820+')}" class="text-xs p-2 w-full border rounded-lg">
+              </div>
+              <div>
+                <label class="block text-[11px] font-bold text-slate-600 mb-0.5">Metric 2 (Label)</label>
+                <input type="text" id="fwM2Lbl" value="${escapeHtml(m[1]?.label || 'Children Rescued from Hazardous Labour')}" class="text-xs p-2 w-full border rounded-lg">
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 p-3 bg-slate-50 rounded-xl border border-slate-200">
+              <div>
+                <label class="block text-[11px] font-bold text-slate-600 mb-0.5">Metric 3 (Value)</label>
+                <input type="text" id="fwM3Val" value="${escapeHtml(m[2]?.value || '87%')}" class="text-xs p-2 w-full border rounded-lg">
+              </div>
+              <div>
+                <label class="block text-[11px] font-bold text-slate-600 mb-0.5">Metric 3 (Label)</label>
+                <input type="text" id="fwM3Lbl" value="${escapeHtml(m[2]?.label || 'Certified Vocational Placement Rate')}" class="text-xs p-2 w-full border rounded-lg">
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 p-3 bg-slate-50 rounded-xl border border-slate-200">
+              <div>
+                <label class="block text-[11px] font-bold text-slate-600 mb-0.5">Metric 4 (Value)</label>
+                <input type="text" id="fwM4Val" value="${escapeHtml(m[3]?.value || '420+')}" class="text-xs p-2 w-full border rounded-lg">
+              </div>
+              <div>
+                <label class="block text-[11px] font-bold text-slate-600 mb-0.5">Metric 4 (Label)</label>
+                <input type="text" id="fwM4Lbl" value="${escapeHtml(m[3]?.label || 'Women SHGs Micro-Financed')}" class="text-xs p-2 w-full border rounded-lg">
+              </div>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-end gap-2 pt-3 border-t border-slate-100">
+            <button type="button" onclick="closeModal()" class="px-4 py-2 border border-slate-300 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-50">Cancel</button>
+            <button type="submit" id="btnSaveFw" class="px-5 py-2 bg-deep-orange hover:bg-deep-orange-hover text-white rounded-xl text-xs font-bold flex items-center gap-1.5 shadow-sm">
+              <span class="material-symbols-outlined text-sm">save</span>
+              <span>Update Framework &amp; KPIs</span>
+            </button>
+          </div>
+        </form>
+      `;
+
+      document.getElementById('actionModal').classList.remove('hidden');
+    }
+
+    async function handleSaveFramework(e) {
+      e.preventDefault();
+      const btn = document.getElementById('btnSaveFw');
+      btn.disabled = true;
+      btn.innerHTML = '<span class="material-symbols-outlined animate-spin text-sm">progress_activity</span> Updating...';
+
+      const frameworkPayload = {
+        hero_title: document.getElementById('fwHeroTitle').value.trim(),
+        hero_description: document.getElementById('fwHeroDescription').value.trim(),
+        impact_metrics: [
+          { value: document.getElementById('fwM1Val').value.trim(), label: document.getElementById('fwM1Lbl').value.trim() },
+          { value: document.getElementById('fwM2Val').value.trim(), label: document.getElementById('fwM2Lbl').value.trim() },
+          { value: document.getElementById('fwM3Val').value.trim(), label: document.getElementById('fwM3Lbl').value.trim() },
+          { value: document.getElementById('fwM4Val').value.trim(), label: document.getElementById('fwM4Lbl').value.trim() }
+        ],
+        lifecycle_stages: loadedFramework?.lifecycle_stages || []
+      };
+
+      try {
+        const token = currentSession?.access_token || '';
+        const res = await fetch('/api/admin/our-work', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify({ framework: frameworkPayload })
+        });
+        const data = await res.json();
+        if (!data.success) throw new Error(data.error || 'Failed to update framework.');
+
+        loadedFramework = frameworkPayload;
+        closeModal();
+        alert('Public framework & KPIs updated successfully!');
+      } catch (err) {
+        alert('Update error: ' + err.message);
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = '<span class="material-symbols-outlined text-sm">save</span><span>Update Framework &amp; KPIs</span>';
+      }
+    }
+
+    // Modal: Edit 4-Stage Grassroots Lifecycle
+    function openLifecycleModal() {
+      const stages = loadedFramework?.lifecycle_stages || [
+        { stage: '01', title: 'Identification & Mapping', description: 'Surveillance across brick kilns, tea stalls...', milestone: 'Vulnerability Index Score' },
+        { stage: '02', title: 'Rescue & Legal Safe-Custody', description: 'Joint taskforce raids with DCPU and Police...', milestone: 'Institutional Custody Order' },
+        { stage: '03', title: 'Bridge Rehabilitation', description: 'Accelerated learning at Non-Formal Bridge Centres...', milestone: 'Foundational Competency Pass' },
+        { stage: '04', title: 'Mainstream Integration', description: 'Enrollment into formal CBSE/State schools...', milestone: 'Sustained Autonomy & Safety' }
+      ];
+
+      document.getElementById('modalContent').innerHTML = `
+        <form onsubmit="handleSaveLifecycle(event)" class="space-y-4">
+          <div class="flex items-center gap-2 pb-3 border-b border-slate-100">
+            <span class="p-2 bg-amber-100 text-deep-orange rounded-xl material-symbols-outlined">flowsheet</span>
+            <div>
+              <h3 class="text-base font-bold text-slate-900">Edit 4-Stage Grassroots Rehabilitation Lifecycle</h3>
+              <p class="text-xs text-slate-500">Configure the methodology steps and milestone certifications shown on /our-work.html.</p>
+            </div>
+          </div>
+
+          <div class="space-y-3">
+            ${stages.map((s, idx) => `
+              <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-bold text-deep-orange">Stage ${s.stage || ('0' + (idx + 1))}</span>
+                  <input type="text" id="lcStageTitle_${idx}" value="${escapeHtml(s.title || '')}" placeholder="Stage Title" class="text-xs p-1.5 border rounded-lg font-bold flex-1 ml-3">
+                </div>
+                <div>
+                  <textarea id="lcStageDesc_${idx}" rows="2" placeholder="Field operational methodology description..." class="w-full text-xs p-2 border rounded-lg">${escapeHtml(s.description || '')}</textarea>
+                </div>
+                <div>
+                  <input type="text" id="lcStageMile_${idx}" value="${escapeHtml(s.milestone || '')}" placeholder="Milestone / Attestation Badge" class="w-full text-xs p-1.5 border rounded-lg text-emerald-800 font-semibold">
+                </div>
+              </div>
+            `).join('')}
+          </div>
+
+          <div class="flex items-center justify-end gap-2 pt-3 border-t border-slate-100">
+            <button type="button" onclick="closeModal()" class="px-4 py-2 border border-slate-300 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-50">Cancel</button>
+            <button type="submit" id="btnSaveLc" class="px-5 py-2 bg-deep-orange hover:bg-deep-orange-hover text-white rounded-xl text-xs font-bold flex items-center gap-1.5 shadow-sm">
+              <span class="material-symbols-outlined text-sm">save</span>
+              <span>Update Lifecycle Protocol</span>
+            </button>
+          </div>
+        </form>
+      `;
+
+      document.getElementById('actionModal').classList.remove('hidden');
+    }
+
+    async function handleSaveLifecycle(e) {
+      e.preventDefault();
+      const btn = document.getElementById('btnSaveLc');
+      btn.disabled = true;
+      btn.innerHTML = '<span class="material-symbols-outlined animate-spin text-sm">progress_activity</span> Updating...';
+
+      const existingFw = loadedFramework || {};
+      const stages = [0, 1, 2, 3].map(idx => ({
+        stage: '0' + (idx + 1),
+        title: document.getElementById('lcStageTitle_' + idx)?.value.trim() || '',
+        description: document.getElementById('lcStageDesc_' + idx)?.value.trim() || '',
+        milestone: document.getElementById('lcStageMile_' + idx)?.value.trim() || '',
+        icon: idx === 0 ? 'search' : idx === 1 ? 'shield' : idx === 2 ? 'school' : 'workspace_premium',
+        image: `images/lifecycle/stage-${idx + 1}-identification.webp`
+      }));
+
+      const frameworkPayload = {
+        ...existingFw,
+        lifecycle_stages: stages
+      };
+
+      try {
+        const token = currentSession?.access_token || '';
+        const res = await fetch('/api/admin/our-work', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify({ framework: frameworkPayload })
+        });
+        const data = await res.json();
+        if (!data.success) throw new Error(data.error || 'Failed to update lifecycle stages.');
+
+        loadedFramework = frameworkPayload;
+        closeModal();
+        alert('Lifecycle methodology steps updated successfully!');
+      } catch (err) {
+        alert('Lifecycle update error: ' + err.message);
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = '<span class="material-symbols-outlined text-sm">save</span><span>Update Lifecycle Protocol</span>';
+      }
+    }
+
   </script>
 </body>
 </html>

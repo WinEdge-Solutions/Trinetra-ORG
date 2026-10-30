@@ -1084,6 +1084,8 @@
     }
 
     // 4. Schemes CMS
+    let loadedSchemes = [];
+
     async function loadSchemes() {
       const container = document.getElementById('schemesListContainer');
       container.innerHTML = `<div class="col-span-2 text-center py-8 text-slate-400">Loading government schemes...</div>`;
@@ -1091,6 +1093,8 @@
       try {
         const { data: schemes, error } = await sbClient.from('schemes').select('*').order('created_at', { ascending: false });
         if (error) throw error;
+
+        loadedSchemes = schemes || [];
 
         if (!schemes || schemes.length === 0) {
           container.innerHTML = `<div class="col-span-2 bg-white p-8 rounded-2xl text-center text-slate-400 border border-slate-100">No schemes added yet. Click "Add Scheme" above.</div>`;
@@ -1104,6 +1108,10 @@
                 : `https://res.cloudinary.com/${CLOUDINARY_CLOUD_NAME}/image/upload/f_auto,q_auto,w_500/${s.poster_cloudinary_id}`)
             : null;
 
+          const docsPills = Array.isArray(s.required_documents) && s.required_documents.length > 0
+            ? s.required_documents.map(d => `<span class="px-2 py-0.5 bg-slate-100 text-slate-700 text-[10px] rounded-md border border-slate-200/80 font-medium">${d}</span>`).join(' ')
+            : '';
+
           return `
             <div class="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm flex flex-col justify-between gap-3 hover:border-amber-200 transition">
               <div>
@@ -1114,30 +1122,52 @@
                   </span>
                 </div>
                 ${posterSrc ? `
-                  <div class="relative w-full aspect-[16/9] rounded-xl overflow-hidden mb-3 bg-slate-100 border border-slate-200/80">
-                    <img src="${posterSrc}" alt="${s.title}" class="w-full h-full object-cover" loading="lazy">
+                  <div class="relative w-full aspect-[16/9] rounded-xl overflow-hidden mb-3 bg-slate-100 border border-slate-200/80 group">
+                    <img src="${posterSrc}" alt="${s.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
                   </div>
                 ` : ''}
                 <h4 class="text-base font-bold text-slate-900">${s.title}</h4>
                 <p class="text-xs text-slate-600 mt-1 line-clamp-3 leading-relaxed">${s.description}</p>
+                
                 ${s.eligibility ? `
                   <div class="mt-2.5 text-xs text-slate-700 bg-amber-50/60 p-2.5 rounded-xl border border-amber-100">
                     <span class="font-bold text-amber-900 block text-[11px] uppercase tracking-wider mb-0.5">Eligibility:</span>
                     <span>${s.eligibility}</span>
                   </div>
                 ` : ''}
+
+                ${s.how_to_apply ? `
+                  <div class="mt-2 text-xs text-slate-600 bg-slate-50 p-2.5 rounded-xl border border-slate-100">
+                    <span class="font-bold text-slate-800 block text-[11px] uppercase tracking-wider mb-0.5">Official Link & Application:</span>
+                    <span class="break-all">${s.how_to_apply}</span>
+                  </div>
+                ` : ''}
+
+                ${docsPills ? `
+                  <div class="mt-2">
+                    <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400 block mb-1">Mandatory Documents:</span>
+                    <div class="flex flex-wrap gap-1">${docsPills}</div>
+                  </div>
+                ` : ''}
               </div>
+
               <div class="border-t pt-3 mt-1 space-y-2.5">
                 <div class="text-xs text-slate-600">
                   <span class="font-bold text-slate-700">Benefits:</span> ${s.benefits}
                 </div>
                 <div class="flex items-center justify-between pt-1 text-xs">
-                  <button onclick="handleToggleSchemeStatus('${s.id}', ${!s.is_published})" class="px-2.5 py-1 text-[11px] font-bold rounded-lg border transition ${s.is_published ? 'bg-slate-50 hover:bg-slate-100 text-slate-700 border-slate-200' : 'bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border-emerald-200'}">
-                    ${s.is_published ? 'Unpublish' : 'Publish'}
+                  <button onclick="openEditSchemeModal('${s.id}')" class="px-3 py-1.5 text-xs font-bold bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-300 rounded-xl transition flex items-center gap-1 shadow-2xs">
+                    <span class="material-symbols-outlined text-sm">edit</span>
+                    <span>Edit Scheme</span>
                   </button>
-                  <button onclick="handleDeleteScheme('${s.id}')" class="px-2.5 py-1 text-[11px] font-bold text-red-600 hover:bg-red-50 rounded-lg transition" title="Delete scheme">
-                    Delete
-                  </button>
+                  <div class="flex items-center gap-1.5">
+                    <button onclick="handleToggleSchemeStatus('${s.id}', ${!s.is_published})" class="px-2.5 py-1.5 text-xs font-semibold rounded-xl border transition ${s.is_published ? 'bg-slate-50 hover:bg-slate-100 text-slate-700 border-slate-200' : 'bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border-emerald-200'}">
+                      ${s.is_published ? 'Unpublish' : 'Publish'}
+                    </button>
+                    <button onclick="handleDeleteScheme('${s.id}')" class="p-1.5 text-red-600 hover:bg-red-50 rounded-xl transition" title="Delete scheme">
+                      <span class="material-symbols-outlined text-base">delete</span>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1148,70 +1178,265 @@
       }
     }
 
-    function openSchemeModal() {
+    // Modal: Edit Existing Scheme
+    function openEditSchemeModal(schemeId) {
+      const scheme = loadedSchemes.find(s => s.id === schemeId);
+      if (!scheme) {
+        alert('Scheme details not found. Please refresh.');
+        return;
+      }
+
+      const posterSrc = scheme.poster_cloudinary_id
+        ? (scheme.poster_cloudinary_id.startsWith('http') || scheme.poster_cloudinary_id.startsWith('images/') 
+            ? scheme.poster_cloudinary_id 
+            : `https://res.cloudinary.com/${CLOUDINARY_CLOUD_NAME}/image/upload/f_auto,q_auto,w_500/${scheme.poster_cloudinary_id}`)
+        : '';
+
+      const docsStr = Array.isArray(scheme.required_documents) ? scheme.required_documents.join(', ') : '';
+
       document.getElementById('modalContent').innerHTML = `
-        <form onsubmit="handleCreateScheme(event)" class="space-y-4">
-          <h3 class="text-lg font-bold font-serif text-slate-900 border-b pb-2">Add New Government Scheme</h3>
+        <form onsubmit="handleUpdateScheme(event, '${scheme.id}')" class="space-y-4">
+          <div class="flex items-center gap-2 pb-3 border-b border-slate-100">
+            <span class="p-2 bg-amber-50 text-amber-800 rounded-xl material-symbols-outlined">edit_document</span>
+            <div>
+              <h3 class="text-base font-bold text-slate-900">Edit Government Welfare Scheme</h3>
+              <p class="text-xs text-slate-500">Update photo banner, descriptions, eligibility, and official links.</p>
+            </div>
+          </div>
+
           <div>
             <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Scheme Title</label>
-            <input type="text" id="schemeTitle" required class="w-full text-xs p-2.5 border rounded-xl" placeholder="e.g. Palhar Yojana">
+            <input type="text" id="editSchemeTitle" required class="w-full text-xs p-2.5 border rounded-xl border-slate-300 font-semibold" value="${escapeHtml(scheme.title || '')}">
           </div>
-          <div class="grid grid-cols-2 gap-3">
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
               <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Category</label>
-              <input type="text" id="schemeCategory" required class="w-full text-xs p-2.5 border rounded-xl" placeholder="e.g. Child Welfare">
+              <input type="text" id="editSchemeCategory" required class="w-full text-xs p-2.5 border rounded-xl border-slate-300" value="${escapeHtml(scheme.category || '')}" placeholder="e.g. Girl Child Education">
             </div>
             <div>
-              <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Cloudinary Image Public ID (Optional)</label>
-              <input type="text" id="schemeCloudinary" class="w-full text-xs p-2.5 border rounded-xl" placeholder="e.g. trinetra-gargi-foundation/schemes/palhar">
+              <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Publication Status</label>
+              <label class="flex items-center gap-2 h-[38px] px-3 bg-slate-50 border border-slate-200 rounded-xl cursor-pointer select-none">
+                <input type="checkbox" id="editSchemePublished" ${scheme.is_published ? 'checked' : ''} class="rounded border-slate-300 text-deep-orange focus:ring-deep-orange">
+                <span class="text-xs font-semibold text-slate-700">Published Live on Site</span>
+              </label>
             </div>
           </div>
+
+          <!-- Poster Photo / Banner Section -->
           <div>
-            <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Description</label>
-            <textarea id="schemeDesc" required rows="2" class="w-full text-xs p-2.5 border rounded-xl" placeholder="Overview of the scheme..."></textarea>
+            <div class="flex items-center justify-between mb-1">
+              <label class="block text-xs font-bold uppercase text-slate-600">Poster Photo / Banner Image</label>
+              <div class="flex items-center gap-2">
+                <input type="file" id="editSchemePhotoFile" accept="image/*" class="hidden" onchange="uploadSchemePhoto(this, 'editSchemePoster', 'editSchemePreview')">
+                <button type="button" onclick="document.getElementById('editSchemePhotoFile').click()" class="text-[11px] font-bold text-deep-orange hover:text-deep-orange-hover flex items-center gap-1">
+                  <span class="material-symbols-outlined text-xs">cloud_upload</span> Upload Image
+                </button>
+              </div>
+            </div>
+            <div id="editSchemePreviewContainer" class="mb-2">
+              <img id="editSchemePreview" src="${posterSrc}" alt="Poster Preview" class="w-full max-h-40 object-cover rounded-xl border border-slate-200 ${posterSrc ? '' : 'hidden'}">
+            </div>
+            <input type="text" id="editSchemePoster" oninput="updateImagePreview(this.value, 'editSchemePreview')" class="w-full text-xs p-2.5 border rounded-xl border-slate-300 font-mono" value="${escapeHtml(scheme.poster_cloudinary_id || '')}" placeholder="Enter image URL (https://...), local path (images/schemes/...), or Cloudinary ID">
+            <p class="text-[10px] text-slate-400 mt-1">Upload a photo banner or paste a direct image URL.</p>
           </div>
+
+          <div>
+            <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Overview Description</label>
+            <textarea id="editSchemeDesc" required rows="2" class="w-full text-xs p-2.5 border rounded-xl border-slate-300">${escapeHtml(scheme.description || '')}</textarea>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Key Benefits & Grants</label>
+            <textarea id="editSchemeBenefits" required rows="2" class="w-full text-xs p-2.5 border rounded-xl border-slate-300">${escapeHtml(scheme.benefits || '')}</textarea>
+          </div>
+
           <div>
             <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Eligibility Criteria</label>
-            <textarea id="schemeElig" required rows="2" class="w-full text-xs p-2.5 border rounded-xl" placeholder="Who qualifies for this scheme?"></textarea>
+            <textarea id="editSchemeElig" required rows="2" class="w-full text-xs p-2.5 border rounded-xl border-slate-300">${escapeHtml(scheme.eligibility || '')}</textarea>
           </div>
+
           <div>
-            <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Key Benefits</label>
-            <textarea id="schemeBenefits" required rows="2" class="w-full text-xs p-2.5 border rounded-xl" placeholder="Financial or educational grants provided..."></textarea>
+            <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Official Portal Link & How to Apply</label>
+            <textarea id="editSchemeApply" rows="2" class="w-full text-xs p-2.5 border rounded-xl border-slate-300" placeholder="e.g. Apply online at https://wcd.nic.in or visit district office">${escapeHtml(scheme.how_to_apply || '')}</textarea>
           </div>
-          <div class="flex justify-end gap-2 pt-2">
+
+          <div>
+            <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Mandatory Documents (Comma-separated)</label>
+            <input type="text" id="editSchemeDocs" class="w-full text-xs p-2.5 border rounded-xl border-slate-300" value="${escapeHtml(docsStr)}" placeholder="e.g. Child Birth Certificate, Parents Aadhaar, Bank Passbook">
+          </div>
+
+          <div class="flex justify-end gap-2 pt-3 border-t border-slate-100">
             <button type="button" onclick="closeModal()" class="px-4 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-100 rounded-xl">Cancel</button>
-            <button type="submit" class="px-4 py-2 text-xs font-semibold bg-deep-orange hover:bg-deep-orange-hover text-white rounded-xl">Publish Scheme</button>
+            <button type="submit" id="btnUpdateSchemeSubmit" class="px-4 py-2 text-xs font-bold bg-deep-orange hover:bg-deep-orange-hover text-white rounded-xl shadow-sm flex items-center gap-1">
+              <span class="material-symbols-outlined text-sm">save</span>
+              <span>Update Scheme</span>
+            </button>
           </div>
         </form>
       `;
       document.getElementById('actionModal').classList.remove('hidden');
     }
 
+    // Modal: Add New Government Scheme
+    function openSchemeModal() {
+      document.getElementById('modalContent').innerHTML = `
+        <form onsubmit="handleCreateScheme(event)" class="space-y-4">
+          <div class="flex items-center gap-2 pb-3 border-b border-slate-100">
+            <span class="p-2 bg-amber-50 text-amber-800 rounded-xl material-symbols-outlined">add_circle</span>
+            <div>
+              <h3 class="text-base font-bold text-slate-900">Publish New Government Welfare Scheme</h3>
+              <p class="text-xs text-slate-500">Add a verified civic entitlement or welfare initiative to the public directory.</p>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Scheme Title</label>
+            <input type="text" id="schemeTitle" required class="w-full text-xs p-2.5 border rounded-xl border-slate-300 font-semibold" placeholder="e.g. Palhar Yojana / National Scholarship">
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Category</label>
+              <input type="text" id="schemeCategory" required class="w-full text-xs p-2.5 border rounded-xl border-slate-300" placeholder="e.g. Child Welfare, Education, Health">
+            </div>
+            <div>
+              <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Publication Status</label>
+              <label class="flex items-center gap-2 h-[38px] px-3 bg-slate-50 border border-slate-200 rounded-xl cursor-pointer select-none">
+                <input type="checkbox" id="schemePublished" checked class="rounded border-slate-300 text-deep-orange focus:ring-deep-orange">
+                <span class="text-xs font-semibold text-slate-700">Publish Immediately</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Poster Photo / Banner Section -->
+          <div>
+            <div class="flex items-center justify-between mb-1">
+              <label class="block text-xs font-bold uppercase text-slate-600">Poster Photo / Banner Image</label>
+              <div class="flex items-center gap-2">
+                <input type="file" id="schemePhotoFile" accept="image/*" class="hidden" onchange="uploadSchemePhoto(this, 'schemePoster', 'schemePreview')">
+                <button type="button" onclick="document.getElementById('schemePhotoFile').click()" class="text-[11px] font-bold text-deep-orange hover:text-deep-orange-hover flex items-center gap-1">
+                  <span class="material-symbols-outlined text-xs">cloud_upload</span> Upload Image
+                </button>
+              </div>
+            </div>
+            <div id="schemePreviewContainer" class="mb-2">
+              <img id="schemePreview" src="" alt="Poster Preview" class="w-full max-h-40 object-cover rounded-xl border border-slate-200 hidden">
+            </div>
+            <input type="text" id="schemePoster" oninput="updateImagePreview(this.value, 'schemePreview')" class="w-full text-xs p-2.5 border rounded-xl border-slate-300 font-mono" placeholder="Enter image URL (https://...), local path (images/schemes/...), or Cloudinary ID">
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Overview Description</label>
+            <textarea id="schemeDesc" required rows="2" class="w-full text-xs p-2.5 border rounded-xl border-slate-300" placeholder="Summary of the scheme..."></textarea>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Key Benefits & Grants</label>
+            <textarea id="schemeBenefits" required rows="2" class="w-full text-xs p-2.5 border rounded-xl border-slate-300" placeholder="Financial aid, rations, tuition waivers provided..."></textarea>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Eligibility Criteria</label>
+            <textarea id="schemeElig" required rows="2" class="w-full text-xs p-2.5 border rounded-xl border-slate-300" placeholder="Who qualifies for this initiative?"></textarea>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Official Portal Link & How to Apply</label>
+            <textarea id="schemeApply" rows="2" class="w-full text-xs p-2.5 border rounded-xl border-slate-300" placeholder="Official government URL (https://...) and application instructions"></textarea>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Mandatory Documents (Comma-separated)</label>
+            <input type="text" id="schemeDocs" class="w-full text-xs p-2.5 border rounded-xl border-slate-300" placeholder="e.g. Aadhaar Card, Income Certificate, School Bonafide">
+          </div>
+
+          <div class="flex justify-end gap-2 pt-3 border-t border-slate-100">
+            <button type="button" onclick="closeModal()" class="px-4 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-100 rounded-xl">Cancel</button>
+            <button type="submit" id="btnCreateSchemeSubmit" class="px-4 py-2 text-xs font-bold bg-deep-orange hover:bg-deep-orange-hover text-white rounded-xl shadow-sm flex items-center gap-1">
+              <span class="material-symbols-outlined text-sm">publish</span>
+              <span>Publish Scheme</span>
+            </button>
+          </div>
+        </form>
+      `;
+      document.getElementById('actionModal').classList.remove('hidden');
+    }
+
+    // Handlers: Create, Update, Delete & Photo Upload
     async function handleCreateScheme(e) {
       e.preventDefault();
+      const btn = document.getElementById('btnCreateSchemeSubmit');
+      btn.disabled = true;
+      btn.innerHTML = `<span class="material-symbols-outlined animate-spin text-sm">progress_activity</span> Publishing...`;
+
+      const docsRaw = document.getElementById('schemeDocs').value;
+      const docsArray = docsRaw ? docsRaw.split(',').map(d => d.trim()).filter(Boolean) : [];
+
       const payload = {
         title: document.getElementById('schemeTitle').value.trim(),
         category: document.getElementById('schemeCategory').value.trim(),
-        poster_cloudinary_id: document.getElementById('schemeCloudinary').value.trim() || null,
+        poster_cloudinary_id: document.getElementById('schemePoster').value.trim() || null,
         description: document.getElementById('schemeDesc').value.trim(),
         eligibility: document.getElementById('schemeElig').value.trim(),
         benefits: document.getElementById('schemeBenefits').value.trim(),
-        is_published: true
+        how_to_apply: document.getElementById('schemeApply').value.trim() || null,
+        required_documents: docsArray,
+        is_published: document.getElementById('schemePublished').checked
       };
 
       try {
         const { error } = await sbClient.from('schemes').insert(payload);
         if (error) throw error;
         closeModal();
-        loadSchemes();
+        await loadSchemes();
       } catch (err) {
-        alert(err.message);
+        alert('Failed to publish scheme: ' + err.message);
+        btn.disabled = false;
+        btn.innerHTML = `<span class="material-symbols-outlined text-sm">publish</span><span>Publish Scheme</span>`;
+      }
+    }
+
+    async function handleUpdateScheme(e, schemeId) {
+      e.preventDefault();
+      const btn = document.getElementById('btnUpdateSchemeSubmit');
+      btn.disabled = true;
+      btn.innerHTML = `<span class="material-symbols-outlined animate-spin text-sm">progress_activity</span> Updating...`;
+
+      const docsRaw = document.getElementById('editSchemeDocs').value;
+      const docsArray = docsRaw ? docsRaw.split(',').map(d => d.trim()).filter(Boolean) : [];
+
+      const payload = {
+        title: document.getElementById('editSchemeTitle').value.trim(),
+        category: document.getElementById('editSchemeCategory').value.trim(),
+        poster_cloudinary_id: document.getElementById('editSchemePoster').value.trim() || null,
+        description: document.getElementById('editSchemeDesc').value.trim(),
+        eligibility: document.getElementById('editSchemeElig').value.trim(),
+        benefits: document.getElementById('editSchemeBenefits').value.trim(),
+        how_to_apply: document.getElementById('editSchemeApply').value.trim() || null,
+        required_documents: docsArray,
+        is_published: document.getElementById('editSchemePublished').checked,
+        updated_at: new Date().toISOString()
+      };
+
+      try {
+        const { error } = await sbClient.from('schemes').update(payload).eq('id', schemeId);
+        if (error) throw error;
+        closeModal();
+        await loadSchemes();
+      } catch (err) {
+        alert('Failed to update scheme: ' + err.message);
+        btn.disabled = false;
+        btn.innerHTML = `<span class="material-symbols-outlined text-sm">save</span><span>Update Scheme</span>`;
       }
     }
 
     async function handleToggleSchemeStatus(id, newStatus) {
       try {
-        const { error } = await sbClient.from('schemes').update({ is_published: newStatus }).eq('id', id);
+        const { error } = await sbClient.from('schemes').update({ 
+          is_published: newStatus,
+          updated_at: new Date().toISOString()
+        }).eq('id', id);
         if (error) throw error;
         await loadSchemes();
       } catch (err) {
@@ -1228,6 +1453,61 @@
       } catch (err) {
         alert('Failed to delete scheme: ' + err.message);
       }
+    }
+
+    // Scheme Photo Helpers
+    function updateImagePreview(val, previewImgId) {
+      const preview = document.getElementById(previewImgId);
+      if (!preview) return;
+      const cleanVal = (val || '').trim();
+      if (cleanVal) {
+        preview.src = cleanVal.startsWith('http') || cleanVal.startsWith('images/')
+          ? cleanVal
+          : `https://res.cloudinary.com/${CLOUDINARY_CLOUD_NAME}/image/upload/f_auto,q_auto,w_500/${cleanVal}`;
+        preview.classList.remove('hidden');
+      } else {
+        preview.classList.add('hidden');
+      }
+    }
+
+    async function uploadSchemePhoto(fileInput, targetInputId, previewImgId) {
+      const file = fileInput.files[0];
+      if (!file) return;
+
+      const targetInput = document.getElementById(targetInputId);
+      const preview = document.getElementById(previewImgId);
+
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+
+      try {
+        const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/auto/upload`, {
+          method: 'POST',
+          body: formData
+        });
+        const data = await res.json();
+        if (data.error) throw new Error(data.error.message);
+
+        const secureUrl = data.secure_url || data.public_id;
+        if (targetInput) targetInput.value = secureUrl;
+        if (preview) {
+          preview.src = secureUrl;
+          preview.classList.remove('hidden');
+        }
+      } catch (err) {
+        alert('Photo upload note: ' + err.message + '\nYou can also paste a direct image URL or path.');
+      }
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
     }
 
     // 5. Cloudinary Direct Upload

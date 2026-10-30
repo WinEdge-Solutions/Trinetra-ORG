@@ -46,7 +46,9 @@ loadLocalEnvFallback();
 
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://lfdnxklkncckboonyage.supabase.co';
 const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxmZG54a2xrbmNja2Jvb255YWdlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTMzNjIzMDYsImV4cCI6MjEwODkzODMwNn0.c4fLtTvSsC4YXdhoFOi1zgPU_gwCk--M7k-Zp50obxM';
-const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY;
+const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || 
+  process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY ||
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxmZG54a2xrbmNja2Jvb255YWdlIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc5MzM2MjMwNiwiZXhwIjoyMTA4OTM4MzA2fQ.8THUrSrX3zEVwXAY1Efl1WDOJOs2zmIty6KZbRXmj1g';
 
 let supabaseAnon = null;
 let supabaseAdmin = null;

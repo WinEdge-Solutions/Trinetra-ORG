@@ -238,6 +238,11 @@ module.exports = async function handler(req, res) {
           return res.status(400).json({ success: false, error: 'Invalid role specified.' });
         }
 
+        // Prevent super_admin from demoting themselves and locking themselves out
+        if (userId === auth.user.id && newRole !== 'super_admin') {
+          return res.status(400).json({ success: false, error: 'Cannot demote your own superadmin account.' });
+        }
+
         const { error: roleErr } = await supabaseAdmin
           .from('admin_profiles')
           .update({ role: newRole })

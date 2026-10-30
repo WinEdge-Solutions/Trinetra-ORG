@@ -83,56 +83,58 @@
     </div>
 
     <!-- 1. LOGIN SCREEN -->
-    <div id="loginSection" class="max-w-md mx-auto my-12 bg-white rounded-2xl shadow-xl border border-amber-100 p-8 transition-all">
-      <div class="text-center mb-6">
-        <div class="inline-flex items-center gap-1.5 px-3 py-1 bg-amber-50 text-amber-900 border border-amber-200/80 rounded-full text-[11px] font-semibold mb-3 shadow-xs">
-          <span class="material-symbols-outlined text-sm text-deep-orange">verified_user</span>
-          <span>Supabase RBAC • Rate-Limit Guarded</span>
+    <div id="loginSection" class="max-w-md mx-auto my-14 bg-white rounded-3xl shadow-xl shadow-slate-200/50 border border-slate-100 p-8 sm:p-10 transition-all">
+      <div class="text-center mb-8">
+        <div class="w-12 h-12 mx-auto mb-4 bg-amber-50 rounded-2xl flex items-center justify-center text-deep-orange border border-amber-200/60 shadow-xs">
+          <span class="material-symbols-outlined text-2xl">admin_panel_settings</span>
         </div>
-        <h2 class="text-2xl font-bold font-serif text-slate-900">Admin Sign In</h2>
-        <p class="text-sm text-slate-500 mt-1">Authorized personnel, triage coordinators, and superadmins</p>
+        <h2 class="text-2xl font-bold font-serif text-slate-900 tracking-tight">Staff Portal</h2>
+        <p class="text-xs text-slate-500 mt-1">Trinetra Gargi Foundation</p>
       </div>
 
-      <div id="rateLimitNotice" class="hidden mb-4 p-3 bg-amber-50 border border-amber-300 text-amber-950 text-xs rounded-xl flex items-center gap-2">
-        <span class="material-symbols-outlined text-amber-700 text-lg animate-pulse">timer</span>
-        <span id="rateLimitTimerText" class="font-medium">Security lock active. Please wait.</span>
+      <div id="rateLimitNotice" class="hidden mb-4 p-3.5 bg-amber-50 border border-amber-200 text-amber-950 text-xs rounded-xl flex items-center gap-2">
+        <span class="material-symbols-outlined text-amber-700 text-base animate-pulse">timer</span>
+        <span id="rateLimitTimerText" class="font-medium">Too many attempts. Please try again later.</span>
       </div>
 
-      <div id="loginSuccess" class="hidden mb-4 p-3 bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs rounded-xl leading-relaxed whitespace-pre-wrap"></div>
-      <div id="loginError" class="hidden mb-4 p-3 bg-red-50 border border-red-200 text-red-700 text-xs rounded-xl leading-relaxed whitespace-pre-wrap"></div>
+      <div id="loginSuccess" class="hidden mb-4 p-3.5 bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs rounded-xl leading-relaxed whitespace-pre-wrap"></div>
+      <div id="loginError" class="hidden mb-4 p-3.5 bg-red-50 border border-red-200 text-red-700 text-xs rounded-xl leading-relaxed whitespace-pre-wrap"></div>
 
       <form id="loginForm" class="space-y-4">
         <div>
-          <label class="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-1">Email Address</label>
-          <input type="email" id="loginEmail" required autocomplete="username" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-deep-orange/20 focus:border-deep-orange transition text-sm" placeholder="superadmin@trinetragargifoundation.org">
+          <label class="block text-xs font-semibold text-slate-700 mb-1.5">Email Address</label>
+          <input type="email" id="loginEmail" required autocomplete="username" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-deep-orange/20 focus:border-deep-orange transition text-sm text-slate-800 placeholder-slate-400" placeholder="name@trinetragargifoundation.org">
         </div>
-        <div class="relative">
-          <label class="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-1">Password</label>
-          <input type="password" id="loginPassword" required autocomplete="current-password" class="w-full px-4 py-2.5 pr-10 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-deep-orange/20 focus:border-deep-orange transition text-sm" placeholder="Enter Supabase password">
-          <button type="button" onclick="togglePasswordVisibility('loginPassword', 'togglePasswordIcon')" class="absolute right-3 top-7 text-slate-400 hover:text-slate-600 focus:outline-none" title="Toggle password visibility">
-            <span id="togglePasswordIcon" class="material-symbols-outlined text-lg">visibility</span>
-          </button>
+        <div>
+          <div class="flex items-center justify-between mb-1.5">
+            <label class="block text-xs font-semibold text-slate-700">Password</label>
+            <button type="button" onclick="handleForgotPassword()" class="text-xs text-deep-orange hover:text-deep-orange-hover font-medium transition">
+              Forgot password?
+            </button>
+          </div>
+          <div class="relative">
+            <input type="password" id="loginPassword" required autocomplete="current-password" class="w-full px-4 py-2.5 pr-11 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-deep-orange/20 focus:border-deep-orange transition text-sm text-slate-800 placeholder-slate-400" placeholder="••••••••••••">
+            <button type="button" onclick="togglePasswordVisibility('loginPassword', 'togglePasswordIcon')" class="absolute right-3 top-2.5 text-slate-400 hover:text-slate-600 focus:outline-none" title="Toggle password visibility">
+              <span id="togglePasswordIcon" class="material-symbols-outlined text-lg">visibility</span>
+            </button>
+          </div>
         </div>
 
-        <div class="flex items-center justify-between text-xs pt-1">
-          <label class="flex items-center gap-1.5 text-slate-600 cursor-pointer select-none">
+        <div class="pt-1">
+          <label class="flex items-center gap-2 text-xs text-slate-600 cursor-pointer select-none">
             <input type="checkbox" id="rememberMe" checked class="rounded border-slate-300 text-deep-orange focus:ring-deep-orange/20">
             <span>Keep session active</span>
           </label>
-          <button type="button" onclick="handleForgotPassword()" class="text-deep-orange hover:text-deep-orange-hover font-semibold transition">
-            Forgot password?
-          </button>
         </div>
 
-        <button type="submit" id="loginBtn" class="w-full py-3 bg-deep-orange hover:bg-deep-orange-hover text-white font-semibold rounded-xl text-sm transition flex items-center justify-center gap-2 shadow-md">
-          <span>Authenticate Session</span>
+        <button type="submit" id="loginBtn" class="w-full py-3 mt-2 bg-deep-orange hover:bg-deep-orange-hover text-white font-semibold rounded-xl text-sm transition flex items-center justify-center gap-2 shadow-sm hover:shadow active:scale-[0.99]">
+          <span>Sign In</span>
           <span class="material-symbols-outlined text-lg">arrow_forward</span>
         </button>
       </form>
 
-      <div class="mt-6 pt-5 border-t border-slate-100 text-center space-y-1">
-        <p class="text-xs text-slate-500 font-medium">Statutory Compliance Protection</p>
-        <p class="text-[11px] text-slate-400">All administrative operations, record reads, and triage actions are audited under POCSO & statutory compliance regulations.</p>
+      <div class="mt-8 pt-4 border-t border-slate-100 text-center">
+        <p class="text-[11px] text-slate-400">Authorized personnel only</p>
       </div>
     </div>
 
@@ -618,7 +620,7 @@
       }, 1000);
     }
 
-    // Forgot Password Handler
+    // Forgot Password Handler (Anti-enumeration compliant)
     async function handleForgotPassword() {
       const emailInput = document.getElementById('loginEmail');
       const email = (emailInput.value || prompt('Enter your registered administrator email:'))?.trim();
@@ -629,16 +631,15 @@
       errEl.classList.add('hidden');
 
       try {
-        const { error } = await sbClient.auth.resetPasswordForEmail(email, {
+        await sbClient.auth.resetPasswordForEmail(email, {
           redirectTo: window.location.origin + '/admin'
         });
-        if (error) throw error;
-        succEl.innerText = `Password recovery link dispatched to ${email}. Please check your inbox.`;
-        succEl.classList.remove('hidden');
       } catch (err) {
-        errEl.innerText = err.message || 'Unable to dispatch recovery email.';
-        errEl.classList.remove('hidden');
+        // Silently log to avoid account enumeration disclosure
+        console.warn('Password recovery note:', err.message);
       }
+      succEl.innerText = 'If an account exists with this email address, password recovery instructions have been dispatched to your inbox.';
+      succEl.classList.remove('hidden');
     }
 
     async function renderDashboardData() {
@@ -701,7 +702,7 @@
       }
     }
 
-    // Login Form Submit Handler
+    // Login Form Submit Handler (Single deterministic proxy with direct-auth resilience)
     document.getElementById('loginForm').addEventListener('submit', async (e) => {
       e.preventDefault();
 
@@ -713,34 +714,16 @@
       const notice = document.getElementById('rateLimitNotice');
 
       btn.disabled = true;
-      btn.innerHTML = `<span class="material-symbols-outlined animate-spin text-lg">progress_activity</span> Authenticating Session...`;
+      btn.innerHTML = `<span class="material-symbols-outlined animate-spin text-lg">progress_activity</span> Signing In...`;
       errEl.classList.add('hidden');
       succEl.classList.add('hidden');
       notice?.classList.add('hidden');
 
       try {
         let authSession = null;
-        let lastErrorMsg = '';
 
-        // 1. Direct Supabase Client Sign In
+        // Primary: Same-Origin Backend Proxy (enforces rate-limiting, audit log & RLS self-healing)
         try {
-          const { data, error } = await sbClient.auth.signInWithPassword({
-            email: email,
-            password: password
-          });
-
-          if (error) {
-            lastErrorMsg = error.message;
-          } else if (data && data.session) {
-            authSession = data.session;
-          }
-        } catch (clientErr) {
-          console.warn('Direct Supabase auth note:', clientErr);
-          lastErrorMsg = clientErr.message || 'Direct auth failed';
-        }
-
-        // 2. Same-Origin Proxy Fallback
-        if (!authSession) {
           const res = await fetch('/api/admin/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -752,11 +735,11 @@
           if (res.status === 429) {
             const retrySec = data.retryAfter || 300;
             triggerClientLockout(retrySec);
-            throw new Error(data.error || `Too many failed attempts. Security lock active for ${Math.ceil(retrySec / 60)} minutes.`);
+            throw new Error(data.error || `Too many failed attempts. Security cooldown active for ${Math.ceil(retrySec / 60)} minutes.`);
           }
 
           if (!data.success) {
-            throw new Error(data.error || lastErrorMsg || 'Invalid email or password.');
+            throw new Error(data.error || 'Invalid email or password.');
           }
 
           authSession = data.session;
@@ -769,6 +752,22 @@
               console.warn('SetSession note:', sessionErr);
             }
           }
+        } catch (proxyErr) {
+          // If the backend actively rejected with 429, 401, or deactivation, rethrow immediately
+          const msg = proxyErr.message || '';
+          if (msg.includes('Too many') || msg.includes('Invalid') || msg.includes('deactivated') || msg.includes('required')) {
+            throw proxyErr;
+          }
+
+          // Fallback to direct client auth only in edge cases where backend proxy is unreachable (offline network)
+          console.warn('Backend proxy unreachable, falling back to direct auth:', proxyErr);
+          const { data, error } = await sbClient.auth.signInWithPassword({ email, password });
+          if (error) throw error;
+          authSession = data?.session;
+        }
+
+        if (!authSession) {
+          throw new Error('Invalid email or password.');
         }
 
         currentSession = authSession;
@@ -782,7 +781,7 @@
         errEl.innerText = err.message || 'Authentication failed. Please verify your email and password.';
         errEl.classList.remove('hidden');
         btn.disabled = false;
-        btn.innerHTML = `<span>Authenticate Session</span><span class="material-symbols-outlined text-lg">arrow_forward</span>`;
+        btn.innerHTML = `<span>Sign In</span><span class="material-symbols-outlined text-lg">arrow_forward</span>`;
       }
     });
 

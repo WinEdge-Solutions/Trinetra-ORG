@@ -33,3 +33,4 @@ $$ LANGUAGE plpgsql;
 
 -- Alternatively, drop trigger if manual profile syncing is preferred:
 -- DROP TRIGGER IF EXISTS trg_on_auth_user_created ON auth.users;
+

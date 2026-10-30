@@ -5,6 +5,8 @@
 
 const { supabaseAdmin } = require('./supabase/client');
 
+const SUPERADMIN_EMAILS = ['trinetragargi@gmail.com', 'imgreat00700@gmail.com'];
+
 /**
  * Verify admin token and return user profile
  * @param {object} req - HTTP request
@@ -31,14 +33,38 @@ async function authenticateAdmin(req, res, allowedRoles = ['editor', 'triage', '
       return null;
     }
 
+    const userEmail = (user.email || '').toLowerCase();
+    const isSuperAdminEmail = SUPERADMIN_EMAILS.includes(userEmail);
+
     // 2. Query admin profile & role
-    const { data: profile, error: profileError } = await supabaseAdmin
+    let { data: profile, error: profileError } = await supabaseAdmin
       .from('admin_profiles')
       .select('*')
       .eq('id', user.id)
-      .single();
+      .maybeSingle();
 
-    if (profileError || !profile) {
+    if (!profile && isSuperAdminEmail) {
+      // Self-heal profile for pre-authorized superadmin
+      const newProfile = {
+        id: user.id,
+        email: userEmail,
+        full_name: userEmail.startsWith('imgreat') ? 'Administrator' : 'Trinetra Gargi Foundation',
+        role: 'super_admin',
+        is_active: true
+      };
+      try {
+        const { data: inserted } = await supabaseAdmin
+          .from('admin_profiles')
+          .insert(newProfile)
+          .select()
+          .single();
+        profile = inserted || newProfile;
+      } catch (insertErr) {
+        profile = newProfile;
+      }
+    }
+
+    if (!profile) {
       res.status(403).json({ success: false, error: 'Access denied. No admin profile found for this account.' });
       return null;
     }

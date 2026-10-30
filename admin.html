@@ -120,6 +120,24 @@
           </div>
         </div>
 
+        <!-- Security Verification (CAPTCHA) -->
+        <div>
+          <div class="flex items-center justify-between mb-1.5">
+            <label class="block text-xs font-semibold text-slate-700">Security Verification</label>
+            <button type="button" onclick="refreshCaptcha()" class="text-xs text-deep-orange hover:text-deep-orange-hover flex items-center gap-1 font-medium transition" title="Get a new verification code">
+              <span id="captchaRefreshIcon" class="material-symbols-outlined text-sm">refresh</span>
+              <span>Refresh</span>
+            </button>
+          </div>
+          <div class="flex items-center gap-2.5">
+            <div id="captchaSvgContainer" class="flex-shrink-0 cursor-pointer select-none rounded-xl overflow-hidden border border-amber-200/80 shadow-2xs transition hover:border-amber-300" onclick="refreshCaptcha()" title="Click image to refresh">
+              <div class="w-[140px] h-[40px] bg-amber-50/50 flex items-center justify-center text-xs text-slate-400 font-mono">Loading code...</div>
+            </div>
+            <input type="text" id="loginCaptcha" required maxlength="6" autocomplete="off" autocorrect="off" autocapitalize="characters" spellcheck="false" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-deep-orange/20 focus:border-deep-orange transition text-sm font-mono tracking-widest uppercase text-slate-800 placeholder-slate-400" placeholder="Code">
+          </div>
+          <input type="hidden" id="loginCaptchaToken" value="">
+        </div>
+
         <div class="pt-1">
           <label class="flex items-center gap-2 text-xs text-slate-600 cursor-pointer select-none">
             <input type="checkbox" id="rememberMe" checked class="rounded border-slate-300 text-deep-orange focus:ring-deep-orange/20">
@@ -573,6 +591,38 @@
       } else {
         errEl.classList.add('hidden');
       }
+      loadCaptcha();
+    }
+
+    // Visual Security Verification (CAPTCHA)
+    let isCaptchaLoading = false;
+    async function loadCaptcha() {
+      if (isCaptchaLoading) return;
+      isCaptchaLoading = true;
+      const icon = document.getElementById('captchaRefreshIcon');
+      const container = document.getElementById('captchaSvgContainer');
+      const tokenInput = document.getElementById('loginCaptchaToken');
+      const codeInput = document.getElementById('loginCaptcha');
+
+      if (icon) icon.classList.add('animate-spin');
+      try {
+        const res = await fetch('/api/admin/login?captcha=1');
+        const data = await res.json();
+        if (data.success && data.svg && data.token) {
+          if (container) container.innerHTML = data.svg;
+          if (tokenInput) tokenInput.value = data.token;
+          if (codeInput) codeInput.value = '';
+        }
+      } catch (err) {
+        console.warn('Captcha load note:', err);
+      } finally {
+        isCaptchaLoading = false;
+        if (icon) icon.classList.remove('animate-spin');
+      }
+    }
+
+    function refreshCaptcha() {
+      loadCaptcha();
     }
 
     // Toggle Password Visibility
@@ -702,16 +752,25 @@
       }
     }
 
-    // Login Form Submit Handler (Single deterministic proxy with direct-auth resilience)
+    // Login Form Submit Handler (Single deterministic proxy with visual CAPTCHA & direct-auth resilience)
     document.getElementById('loginForm').addEventListener('submit', async (e) => {
       e.preventDefault();
 
       const email = document.getElementById('loginEmail').value.trim().toLowerCase();
       const password = document.getElementById('loginPassword').value;
+      const captchaCode = (document.getElementById('loginCaptcha')?.value || '').trim();
+      const captchaToken = document.getElementById('loginCaptchaToken')?.value || '';
       const btn = document.getElementById('loginBtn');
       const errEl = document.getElementById('loginError');
       const succEl = document.getElementById('loginSuccess');
       const notice = document.getElementById('rateLimitNotice');
+
+      if (!captchaCode) {
+        errEl.innerText = 'Please enter the security verification code.';
+        errEl.classList.remove('hidden');
+        document.getElementById('loginCaptcha')?.focus();
+        return;
+      }
 
       btn.disabled = true;
       btn.innerHTML = `<span class="material-symbols-outlined animate-spin text-lg">progress_activity</span> Signing In...`;
@@ -722,12 +781,12 @@
       try {
         let authSession = null;
 
-        // Primary: Same-Origin Backend Proxy (enforces rate-limiting, audit log & RLS self-healing)
+        // Primary: Same-Origin Backend Proxy (enforces CAPTCHA, rate-limiting, audit log & RLS self-healing)
         try {
           const res = await fetch('/api/admin/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email, password })
+            body: JSON.stringify({ email, password, captchaCode, captchaToken })
           });
 
           const data = await res.json();
@@ -753,9 +812,9 @@
             }
           }
         } catch (proxyErr) {
-          // If the backend actively rejected with 429, 401, or deactivation, rethrow immediately
+          // If the backend actively rejected with 429, 401, 400 (captcha), or deactivation, rethrow immediately
           const msg = proxyErr.message || '';
-          if (msg.includes('Too many') || msg.includes('Invalid') || msg.includes('deactivated') || msg.includes('required')) {
+          if (msg.includes('Too many') || msg.includes('Invalid') || msg.includes('deactivated') || msg.includes('required') || msg.includes('verification') || msg.includes('code') || msg.includes('expired')) {
             throw proxyErr;
           }
 
@@ -782,6 +841,8 @@
         errEl.classList.remove('hidden');
         btn.disabled = false;
         btn.innerHTML = `<span>Sign In</span><span class="material-symbols-outlined text-lg">arrow_forward</span>`;
+        // Refresh CAPTCHA on every failed attempt
+        await loadCaptcha();
       }
     });
 

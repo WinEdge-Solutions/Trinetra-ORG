@@ -8,6 +8,7 @@ const crypto = require('crypto');
 const { supabaseAnon, supabaseAdmin } = require('../_lib/supabase/client');
 const { getPrivacyIPHash, validateOrigin } = require('../_lib/security');
 const { logAuditAction } = require('../_lib/adminAuth');
+const { generateCaptchaChallenge, verifyCaptchaChallenge } = require('../_lib/captcha');
 
 const SUPERADMIN_EMAILS = ['trinetragargi@gmail.com', 'imgreat00700@gmail.com'];
 
@@ -63,8 +64,19 @@ function resetLoginAttempts(ipHash, email) {
 }
 
 module.exports = async function handler(req, res) {
+  // GET: Issue fresh visual verification challenge
+  if (req.method === 'GET') {
+    const challenge = generateCaptchaChallenge();
+    res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+    return res.status(200).json({
+      success: true,
+      svg: challenge.svg,
+      token: challenge.token
+    });
+  }
+
   if (req.method !== 'POST') {
-    res.setHeader('Allow', ['POST']);
+    res.setHeader('Allow', ['GET', 'POST']);
     return res.status(405).json({ success: false, error: 'Method Not Allowed' });
   }
 
@@ -72,15 +84,25 @@ module.exports = async function handler(req, res) {
     return res.status(403).json({ success: false, error: 'Cross-site request blocked.' });
   }
 
-  const { email, password } = req.body || {};
+  const { email, password, captchaCode, captchaToken } = req.body || {};
   if (!email || !password) {
     return res.status(400).json({ success: false, error: 'Email and password are required.' });
+  }
+
+  // 1. Verify Visual CAPTCHA Challenge
+  const captchaCheck = verifyCaptchaChallenge(captchaCode, captchaToken);
+  if (!captchaCheck.valid) {
+    return res.status(400).json({
+      success: false,
+      error: captchaCheck.error,
+      code: 'CAPTCHA_MISMATCH'
+    });
   }
 
   const trimmedEmail = email.trim().toLowerCase();
   const ipHash = getPrivacyIPHash(req);
 
-  // 1. Check Rate Limiter
+  // 2. Check Rate Limiter
   const rateCheck = checkLoginRateLimit(ipHash, trimmedEmail);
   if (!rateCheck.allowed) {
     res.setHeader('Retry-After', rateCheck.retryAfter);

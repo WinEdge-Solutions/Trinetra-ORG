@@ -97,31 +97,17 @@
       <form id="loginForm" class="space-y-4">
         <div>
           <label class="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-1">Email Address</label>
-          <input type="email" id="loginEmail" required class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-deep-orange/20 focus:border-deep-orange transition text-sm" placeholder="e.g. imgreat00700@gmail.com">
+          <input type="email" id="loginEmail" required autocomplete="username" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-deep-orange/20 focus:border-deep-orange transition text-sm" placeholder="name@organization.org">
         </div>
         <div>
           <label class="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-1">Password</label>
-          <input type="password" id="loginPassword" required class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-deep-orange/20 focus:border-deep-orange transition text-sm">
+          <input type="password" id="loginPassword" required autocomplete="current-password" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-deep-orange/20 focus:border-deep-orange transition text-sm" placeholder="Enter your password">
         </div>
         <button type="submit" id="loginBtn" class="w-full py-3 bg-deep-orange hover:bg-deep-orange-hover text-white font-semibold rounded-xl text-sm transition flex items-center justify-center gap-2 shadow-md">
           <span>Authenticate Session</span>
           <span class="material-symbols-outlined text-lg">arrow_forward</span>
         </button>
       </form>
-
-      <div class="mt-5 pt-4 border-t border-slate-100">
-        <p class="text-[11px] font-bold text-slate-500 mb-2 uppercase tracking-wider text-center">1-Click Fast Access (Pre-Configured Superadmins):</p>
-        <div class="space-y-2">
-          <button type="button" onclick="quickFillAndLogin('imgreat00700@gmail.com', 'Admin@Trinetra2026')" class="w-full py-2 px-3 bg-amber-50 hover:bg-amber-100 border border-amber-300 text-amber-950 rounded-xl text-xs font-bold transition flex items-center justify-between shadow-sm">
-            <span>🔑 Sign In as imgreat00700@gmail.com</span>
-            <span class="material-symbols-outlined text-base">arrow_forward</span>
-          </button>
-          <button type="button" onclick="quickFillAndLogin('trinetragargi@gmail.com', 'Admin@Trinetra2026')" class="w-full py-2 px-3 bg-indigo-50 hover:bg-indigo-100 border border-indigo-300 text-indigo-950 rounded-xl text-xs font-bold transition flex items-center justify-between shadow-sm">
-            <span>🔑 Sign In as trinetragargi@gmail.com</span>
-            <span class="material-symbols-outlined text-base">arrow_forward</span>
-          </button>
-        </div>
-      </div>
 
       <div class="mt-6 pt-5 border-t border-slate-100 text-center">
         <p class="text-xs text-slate-400">All administrative operations, record reads, and triage actions are audited under statutory compliance regulations.</p>
@@ -337,7 +323,7 @@
 
   <script>
     // Supabase Configuration
-    const SUPABASE_URL = "https://lfdnxklkncckboonyage.sbClient.co";
+    const SUPABASE_URL = "https://lfdnxklkncckboonyage.supabase.co";
     const SUPABASE_ANON = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxmZG54a2xrbmNja2Jvb255YWdlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTMzNjIzMDYsImV4cCI6MjEwODkzODMwNn0.c4fLtTvSsC4YXdhoFOi1zgPU_gwCk--M7k-Zp50obxM";
     const CLOUDINARY_CLOUD_NAME = "fobxcvyz";
     const CLOUDINARY_UPLOAD_PRESET = "tgf_public_media";
@@ -463,7 +449,7 @@
       }
     }
 
-    // Login Form Submit Handler (Same-Origin Proxy — Guaranteed Zero CORS)
+    // Login Form Submit Handler — Direct Supabase Auth with Proxy Fallback
     document.getElementById('loginForm').addEventListener('submit', async (e) => {
       e.preventDefault();
       const email = document.getElementById('loginEmail').value.trim();
@@ -476,44 +462,63 @@
       errEl.classList.add('hidden');
 
       try {
-        const res = await fetch('/api/admin/login', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, password })
-        });
+        let authSuccess = false;
+        let lastErrorMsg = '';
 
-        const data = await res.json();
-        if (!data.success) {
-          throw new Error(data.error || 'Invalid login credentials.');
-        }
+        // 1. Direct Supabase Client Sign In
+        try {
+          const { data, error } = await sbClient.auth.signInWithPassword({
+            email: email,
+            password: password
+          });
 
-        currentSession = data.session;
-        currentProfile = data.profile;
-
-        if (sbClient && sbClient.auth) {
-          try {
-            await sbClient.auth.setSession(data.session);
-          } catch (sessionErr) {
-            console.warn('SetSession note:', sessionErr);
+          if (error) {
+            lastErrorMsg = error.message;
+          } else if (data && data.session) {
+            currentSession = data.session;
+            authSuccess = true;
+            await loadUserProfileAndDashboard();
+            return;
           }
+        } catch (clientErr) {
+          console.warn('Direct Supabase auth attempt:', clientErr);
+          lastErrorMsg = clientErr.message || 'Direct auth failed';
         }
 
-        await renderDashboardData();
+        // 2. Same-Origin Proxy Fallback
+        if (!authSuccess) {
+          const res = await fetch('/api/admin/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password })
+          });
+
+          const data = await res.json();
+          if (!data.success) {
+            throw new Error(data.error || lastErrorMsg || 'Invalid email or password.');
+          }
+
+          currentSession = data.session;
+          currentProfile = data.profile;
+
+          if (sbClient && sbClient.auth && data.session) {
+            try {
+              await sbClient.auth.setSession(data.session);
+            } catch (sessionErr) {
+              console.warn('SetSession note:', sessionErr);
+            }
+          }
+
+          await renderDashboardData();
+        }
       } catch (err) {
         console.error('Login error details:', err);
-        errEl.innerText = err.message || 'Authentication failed.';
+        errEl.innerText = err.message || 'Authentication failed. Please verify your email and password.';
         errEl.classList.remove('hidden');
         btn.disabled = false;
         btn.innerHTML = `<span>Authenticate Session</span><span class="material-symbols-outlined text-lg">arrow_forward</span>`;
       }
     });
-
-    async function quickFillAndLogin(email, password) {
-      document.getElementById('loginEmail').value = email;
-      document.getElementById('loginPassword').value = password;
-      const form = document.getElementById('loginForm');
-      form.requestSubmit ? form.requestSubmit() : form.dispatchEvent(new Event('submit', { cancelable: true }));
-    }
 
     async function handleLogout() {
       await sbClient.auth.signOut();

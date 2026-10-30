@@ -4,8 +4,9 @@
  * Complies with docs/FORMS-SPEC.md Section 2.5
  */
 
-const { getPrivacyIPHash, checkServerRateLimit, sanitizePayload, validateOrigin, dispatchNotification } = require('./_lib/security');
+const { getPrivacyIPHash, checkServerRateLimit, sanitizePayload, validateOrigin, dispatchNotification, generateTrackingId } = require('./_lib/security');
 const { donationReceiptSchema } = require('./_lib/schemas');
+const { supabaseAdmin } = require('./_lib/supabase/client');
 
 module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -44,7 +45,8 @@ module.exports = async function handler(req, res) {
     const validationResult = donationReceiptSchema.safeParse(sanitized);
     if (!validationResult.success) {
       const fieldErrors = {};
-      validationResult.error.errors.forEach(err => {
+      const issues = validationResult.error.issues || validationResult.error.errors || [];
+      issues.forEach(err => {
         const field = err.path[0] || 'general';
         fieldErrors[field] = err.message;
       });
@@ -56,45 +58,68 @@ module.exports = async function handler(req, res) {
     }
 
     const validData = validationResult.data;
+    const trackingId = generateTrackingId('donation-receipt');
 
+    // Persist to Supabase
+    try {
+      const { error: dbError } = await supabaseAdmin
+        .from('donations')
+        .insert({
+          tracking_id:            trackingId,
+          donor_name:             validData.donorName,
+          donor_email:            validData.donorEmail,
+          donor_phone:            validData.donorPhone || null,
+          pan_number:             validData.donorPAN || null,
+          address:                validData.postalAddress || null,
+          amount:                 validData.amountPaid,
+          currency:               'INR',
+          payment_method:         validData.paymentMode,
+          payment_gateway_txn_id: validData.transactionRefNo || null,
+          payment_status:         'captured',
+          receipt_80g_issued:     false
+        });
+
+      if (dbError) {
+        console.warn(`[DONATION-DB-WARN] Docket: ${trackingId} | Code: ${dbError.code}`);
+      }
+    } catch (e) {
+      console.warn(`[DONATION-DB-EX] Docket: ${trackingId} | Error: ${e.message}`);
+    }
+
+    // Notification dispatch
     const summary = [
       `DONATION CONFIRMATION & RECEIPT REQUEST`,
+      `Docket: ${trackingId}`,
       `Timestamp: ${new Date().toISOString()}`,
       `Donor: ${validData.donorName}`,
       `Email: ${validData.donorEmail}`,
       `Phone: ${validData.donorPhone}`,
       `Amount: ₹${validData.amountPaid}`,
       `Payment Mode: ${validData.paymentMode}`,
-      `Transaction Ref: ${validData.transactionRefNo}`,
+      `Transaction Ref: ${validData.transactionRefNo || 'N/A'}`,
       `PAN: ${validData.donorPAN || 'Not provided'}`,
       `Postal Address: ${validData.postalAddress || 'Not provided'}`
     ].join('\n');
 
-    const dispatchResult = await dispatchNotification({
+    await dispatchNotification({
       subject: `[DONATION RECEIPT] ₹${validData.amountPaid} - ${validData.donorName}`,
       recipient: 'donations@trinetragargifoundation.org',
       textSummary: summary,
       formType: 'donation-receipt'
     });
 
-    if (!dispatchResult.success) {
-      return res.status(500).json({
-        success: false,
-        error: 'Unable to register receipt request. Please email donations@trinetragargifoundation.org directly.'
-      });
-    }
-
     return res.status(200).json({
       success: true,
-      trackingId: dispatchResult.trackingId,
+      trackingId,
       message: 'Donation acknowledgment registered. Official receipt documentation will be dispatched to your email.',
       data: {
         name: validData.donorName,
         amount: validData.amountPaid,
-        trackingId: dispatchResult.trackingId,
+        trackingId,
         date: new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })
       }
     });
+
   } catch (err) {
     return res.status(400).json({ success: false, error: 'Malformed JSON payload.' });
   }

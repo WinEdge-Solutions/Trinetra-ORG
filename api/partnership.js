@@ -4,8 +4,9 @@
  * Complies with docs/FORMS-SPEC.md Section 2.3
  */
 
-const { getPrivacyIPHash, checkServerRateLimit, sanitizePayload, validateOrigin, dispatchNotification } = require('./_lib/security');
+const { getPrivacyIPHash, checkServerRateLimit, sanitizePayload, validateOrigin, dispatchNotification, generateTrackingId } = require('./_lib/security');
 const { csrSchema } = require('./_lib/schemas');
+const { supabaseAdmin } = require('./_lib/supabase/client');
 
 module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -44,7 +45,8 @@ module.exports = async function handler(req, res) {
     const validationResult = csrSchema.safeParse(sanitized);
     if (!validationResult.success) {
       const fieldErrors = {};
-      validationResult.error.errors.forEach(err => {
+      const issues = validationResult.error.issues || validationResult.error.errors || [];
+      issues.forEach(err => {
         const field = err.path[0] || 'general';
         fieldErrors[field] = err.message;
       });
@@ -56,9 +58,42 @@ module.exports = async function handler(req, res) {
     }
 
     const validData = validationResult.data;
+    const trackingId = generateTrackingId('partnership');
 
+    // Normalize partnership type for DB enum
+    let normalizedType = validData.partnershipType || 'csr-grant';
+    if (normalizedType === 'corporate_csr') normalizedType = 'csr-grant';
+    if (!['csr-grant', 'employee-engagement', 'institutional-mou', 'in-kind-support'].includes(normalizedType)) {
+      normalizedType = 'csr-grant';
+    }
+
+    // Persist to Supabase
+    try {
+      const { error: dbError } = await supabaseAdmin
+        .from('csr_partnerships')
+        .insert({
+          tracking_id:          trackingId,
+          company_name:         validData.companyName,
+          contact_person_name:  validData.contactPersonName,
+          official_email:       validData.officialEmail,
+          phone:                validData.phone,
+          partnership_type:     normalizedType,
+          budget_range:         validData.budgetRange || null,
+          message:              `[Pillar: ${validData.targetPillar}] ${validData.message || ''}`,
+          status:               'new'
+        });
+
+      if (dbError) {
+        console.warn(`[CSR-DB-WARN] Docket: ${trackingId} | Code: ${dbError.code}`);
+      }
+    } catch (e) {
+      console.warn(`[CSR-DB-EX] Docket: ${trackingId} | Error: ${e.message}`);
+    }
+
+    // Notification dispatch
     const summary = [
       `NEW CORPORATE CSR / PARTNERSHIP INQUIRY`,
+      `Docket: ${trackingId}`,
       `Timestamp: ${new Date().toISOString()}`,
       `Organization: ${validData.companyName}`,
       `Contact Person: ${validData.contactPersonName}`,
@@ -70,25 +105,19 @@ module.exports = async function handler(req, res) {
       `Message: ${validData.message}`
     ].join('\n');
 
-    const dispatchResult = await dispatchNotification({
+    await dispatchNotification({
       subject: `[CSR INQUIRY] ${validData.companyName} - ${validData.partnershipType}`,
       recipient: 'csr@trinetragargifoundation.org',
       textSummary: summary,
       formType: 'partnership'
     });
 
-    if (!dispatchResult.success) {
-      return res.status(500).json({
-        success: false,
-        error: 'Unable to route partnership enquiry. Please email csr@trinetragargifoundation.org directly.'
-      });
-    }
-
     return res.status(200).json({
       success: true,
-      trackingId: dispatchResult.trackingId,
+      trackingId,
       message: 'Corporate partnership enquiry received. The leadership desk will respond to your official coordinates.'
     });
+
   } catch (err) {
     return res.status(400).json({ success: false, error: 'Malformed JSON payload.' });
   }

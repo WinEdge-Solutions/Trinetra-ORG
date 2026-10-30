@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Operations Portal | Trinetra Gargi Foundation</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'deep-orange': '#9A3412',
+            'deep-orange-hover': '#7C2D12',
+            'primary': '#9A3412',
+            'primary-hover': '#7C2D12',
+            'trust-indigo': '#172554',
+            'bright-saffron': '#F59E0B',
+            'teal-accent': '#0F766E',
+            'warm-bg': '#FFF9F1',
+            'card-bg': '#FFFFFF'
+          },
+          fontFamily: {
+            'serif': ['"Playfair Display"', 'Georgia', 'serif'],
+            'sans': ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      vertical-align: middle;
+    }
+    .active-tab {
+      background-color: #9A3412;
+      color: #FFFFFF !important;
+    }
+  </style>
+</head>
+<body class="bg-warm-bg text-slate-800 font-sans min-h-screen flex flex-col">
+
+  <!-- TOP BAR -->
+  <header class="bg-trust-indigo text-white border-b border-indigo-900 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <img src="logo-symbol.webp" alt="TGF" class="h-9 w-9 rounded-full bg-white p-1">
+        <div>
+          <h1 class="text-base font-bold font-serif leading-tight">Trinetra Gargi Foundation</h1>
+          <p class="text-xs text-amber-300 font-medium tracking-wide">SECURE OPERATIONS & TRIAGE PORTAL</p>
+        </div>
+      </div>
+      <div id="authNavArea" class="flex items-center gap-4">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+    <!-- FILE PROTOCOL WARNING (if opened via file:///) -->
+    <div id="fileProtocolWarning" class="hidden max-w-md mx-auto mb-6 p-4 bg-amber-50 border-2 border-amber-300 rounded-2xl text-amber-900 shadow-sm">
+      <div class="flex items-start gap-3">
+        <span class="material-symbols-outlined text-amber-600 text-2xl">warning</span>
+        <div class="text-xs">
+          <p class="font-bold text-sm">Notice: Opened as Local File</p>
+          <p class="mt-1">Chrome and Edge block authentication when opened from a local file path (<code class="bg-amber-100 px-1 py-0.5 rounded">file:///</code>).</p>
+          <p class="mt-2 font-semibold">Please click below to use the local server:</p>
+          <a href="http://localhost:3000/admin.html" class="inline-block mt-1.5 px-3 py-1.5 bg-amber-600 hover:bg-amber-700 text-white rounded-lg font-bold">
+            Open http://localhost:3000/admin.html
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 1. LOGIN SCREEN -->
+    <div id="loginSection" class="max-w-md mx-auto my-12 bg-white rounded-2xl shadow-xl border border-amber-100 p-8">
+      <div class="text-center mb-6">
+        <div class="inline-flex p-3 bg-amber-50 rounded-2xl text-deep-orange mb-3">
+          <span class="material-symbols-outlined text-3xl">admin_panel_settings</span>
+        </div>
+        <h2 class="text-2xl font-bold font-serif text-slate-900">Admin Sign In</h2>
+        <p class="text-sm text-slate-500 mt-1">Authorized personnel and ground coordinators only</p>
+      </div>
+
+      <div id="loginError" class="hidden mb-4 p-3 bg-red-50 border border-red-200 text-red-700 text-xs rounded-xl leading-relaxed whitespace-pre-wrap"></div>
+
+      <form id="loginForm" class="space-y-4">
+        <div>
+          <label class="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-1">Email Address</label>
+          <input type="email" id="loginEmail" required class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-deep-orange/20 focus:border-deep-orange transition text-sm" placeholder="e.g. imgreat00700@gmail.com">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-1">Password</label>
+          <input type="password" id="loginPassword" required class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-deep-orange/20 focus:border-deep-orange transition text-sm">
+        </div>
+        <button type="submit" id="loginBtn" class="w-full py-3 bg-deep-orange hover:bg-deep-orange-hover text-white font-semibold rounded-xl text-sm transition flex items-center justify-center gap-2 shadow-md">
+          <span>Authenticate Session</span>
+          <span class="material-symbols-outlined text-lg">arrow_forward</span>
+        </button>
+      </form>
+
+      <div class="mt-5 pt-4 border-t border-slate-100">
+        <p class="text-[11px] font-bold text-slate-500 mb-2 uppercase tracking-wider text-center">1-Click Fast Access (Pre-Configured Superadmins):</p>
+        <div class="space-y-2">
+          <button type="button" onclick="quickFillAndLogin('imgreat00700@gmail.com', 'Admin@Trinetra2026')" class="w-full py-2 px-3 bg-amber-50 hover:bg-amber-100 border border-amber-300 text-amber-950 rounded-xl text-xs font-bold transition flex items-center justify-between shadow-sm">
+            <span>🔑 Sign In as imgreat00700@gmail.com</span>
+            <span class="material-symbols-outlined text-base">arrow_forward</span>
+          </button>
+          <button type="button" onclick="quickFillAndLogin('trinetragargi@gmail.com', 'Admin@Trinetra2026')" class="w-full py-2 px-3 bg-indigo-50 hover:bg-indigo-100 border border-indigo-300 text-indigo-950 rounded-xl text-xs font-bold transition flex items-center justify-between shadow-sm">
+            <span>🔑 Sign In as trinetragargi@gmail.com</span>
+            <span class="material-symbols-outlined text-base">arrow_forward</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="mt-6 pt-5 border-t border-slate-100 text-center">
+        <p class="text-xs text-slate-400">All administrative operations, record reads, and triage actions are audited under statutory compliance regulations.</p>
+      </div>
+    </div>
+
+    <!-- 2. DASHBOARD & OPERATIONAL MODULES -->
+    <div id="dashboardSection" class="hidden space-y-6">
+
+      <!-- Navigation Tabs -->
+      <div class="flex flex-wrap gap-2 border-b border-amber-200 pb-3">
+        <button onclick="switchTab('overview')" id="tab-overview" class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold text-slate-700 hover:bg-amber-100 active-tab transition flex items-center gap-1.5">
+          <span class="material-symbols-outlined text-lg">dashboard</span>
+          Overview
+        </button>
+        <button onclick="switchTab('sos')" id="tab-sos" class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold text-slate-700 hover:bg-amber-100 transition flex items-center gap-1.5 relative">
+          <span class="material-symbols-outlined text-lg">sos</span>
+          Crisis SOS Triage
+          <span id="badgeSos" class="hidden ml-1 px-1.5 py-0.5 text-xs bg-red-600 text-white rounded-full font-bold">0</span>
+        </button>
+        <button onclick="switchTab('volunteers')" id="tab-volunteers" class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold text-slate-700 hover:bg-amber-100 transition flex items-center gap-1.5">
+          <span class="material-symbols-outlined text-lg">volunteer_activism</span>
+          Volunteers CRM
+          <span id="badgeVol" class="hidden ml-1 px-1.5 py-0.5 text-xs bg-amber-600 text-white rounded-full font-bold">0</span>
+        </button>
+        <button onclick="switchTab('donations')" id="tab-donations" class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold text-slate-700 hover:bg-amber-100 transition flex items-center gap-1.5">
+          <span class="material-symbols-outlined text-lg">receipt_long</span>
+          Donations & 80G
+        </button>
+        <button onclick="switchTab('schemes')" id="tab-schemes" class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold text-slate-700 hover:bg-amber-100 transition flex items-center gap-1.5">
+          <span class="material-symbols-outlined text-lg">policy</span>
+          Schemes CMS
+        </button>
+        <button onclick="switchTab('media')" id="tab-media" class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold text-slate-700 hover:bg-amber-100 transition flex items-center gap-1.5">
+          <span class="material-symbols-outlined text-lg">cloud_upload</span>
+          Media Vault
+        </button>
+      </div>
+
+      <!-- TAB 1: OVERVIEW -->
+      <div id="content-overview" class="tab-content space-y-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="bg-white p-5 rounded-2xl border border-red-100 shadow-sm">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-red-600 uppercase tracking-wider">New Distress SOS</span>
+              <span class="p-2 bg-red-50 text-red-600 rounded-xl material-symbols-outlined">emergency</span>
+            </div>
+            <p id="statNewSos" class="text-3xl font-extrabold text-slate-900 mt-3">0</p>
+            <p class="text-xs text-slate-500 mt-1">Pending immediate crisis verification</p>
+          </div>
+
+          <div class="bg-white p-5 rounded-2xl border border-amber-100 shadow-sm">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-amber-700 uppercase tracking-wider">Volunteer Applications</span>
+              <span class="p-2 bg-amber-50 text-amber-700 rounded-xl material-symbols-outlined">group</span>
+            </div>
+            <p id="statNewVol" class="text-3xl font-extrabold text-slate-900 mt-3">0</p>
+            <p class="text-xs text-slate-500 mt-1">Pending background review</p>
+          </div>
+
+          <div class="bg-white p-5 rounded-2xl border border-emerald-100 shadow-sm">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-emerald-700 uppercase tracking-wider">Total Donations</span>
+              <span class="p-2 bg-emerald-50 text-emerald-700 rounded-xl material-symbols-outlined">payments</span>
+            </div>
+            <p id="statDonations" class="text-3xl font-extrabold text-slate-900 mt-3">₹0</p>
+            <p class="text-xs text-slate-500 mt-1">Recorded through web portal</p>
+          </div>
+
+          <div class="bg-white p-5 rounded-2xl border border-indigo-100 shadow-sm">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-indigo-700 uppercase tracking-wider">Active Schemes</span>
+              <span class="p-2 bg-indigo-50 text-indigo-700 rounded-xl material-symbols-outlined">menu_book</span>
+            </div>
+            <p id="statSchemes" class="text-3xl font-extrabold text-slate-900 mt-3">0</p>
+            <p class="text-xs text-slate-500 mt-1">Published on public directory</p>
+          </div>
+        </div>
+
+        <div class="bg-gradient-to-r from-trust-indigo to-indigo-900 text-white p-6 rounded-2xl shadow-md">
+          <div class="flex items-start gap-4">
+            <span class="p-3 bg-white/10 rounded-xl material-symbols-outlined text-2xl text-amber-300">verified_user</span>
+            <div>
+              <h3 class="text-lg font-bold font-serif">Statutory Child Protection & Safeguarding Protocol</h3>
+              <p class="text-sm text-indigo-100 mt-1 max-w-3xl">
+                All records containing distress reports, identifiable minor details, or sensitive locations are subject to the Protection of Children from Sexual Offences (POCSO) Act and Juvenile Justice Act. Never export unmasked child identifiers outside authorized law enforcement escalation.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 2: SOS TRIAGE -->
+      <div id="content-sos" class="tab-content hidden space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white p-4 rounded-2xl border border-amber-100">
+          <div class="flex items-center gap-2">
+            <label class="text-xs font-bold uppercase tracking-wider text-slate-500">Status:</label>
+            <select id="filterSosStatus" onchange="loadSosReports()" class="text-sm px-3 py-1.5 border border-slate-300 rounded-xl focus:outline-none focus:ring-1 focus:ring-deep-orange">
+              <option value="all">All Statuses</option>
+              <option value="new" selected>New / Unreviewed</option>
+              <option value="under_investigation">Under Investigation</option>
+              <option value="escalated">Escalated to CWC/Police</option>
+              <option value="resolved">Resolved</option>
+            </select>
+          </div>
+          <button onclick="loadSosReports()" class="px-3 py-1.5 text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-xl flex items-center gap-1 transition">
+            <span class="material-symbols-outlined text-base">refresh</span> Refresh
+          </button>
+        </div>
+
+        <div id="sosListContainer" class="space-y-3">
+          <div class="text-center py-12 text-slate-400">Loading SOS distress records...</div>
+        </div>
+      </div>
+
+      <!-- TAB 3: VOLUNTEERS CRM -->
+      <div id="content-volunteers" class="tab-content hidden space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white p-4 rounded-2xl border border-amber-100">
+          <div class="flex items-center gap-2">
+            <label class="text-xs font-bold uppercase tracking-wider text-slate-500">Filter:</label>
+            <select id="filterVolStatus" onchange="loadVolunteers()" class="text-sm px-3 py-1.5 border border-slate-300 rounded-xl focus:outline-none focus:ring-1 focus:ring-deep-orange">
+              <option value="all">All Applications</option>
+              <option value="new" selected>New</option>
+              <option value="under_review">Under Review</option>
+              <option value="approved">Approved</option>
+              <option value="rejected">Rejected</option>
+            </select>
+          </div>
+          <button onclick="loadVolunteers()" class="px-3 py-1.5 text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-xl flex items-center gap-1 transition">
+            <span class="material-symbols-outlined text-base">refresh</span> Refresh
+          </button>
+        </div>
+
+        <div id="volunteersListContainer" class="space-y-3">
+          <div class="text-center py-12 text-slate-400">Loading volunteer pipeline...</div>
+        </div>
+      </div>
+
+      <!-- TAB 4: DONATIONS -->
+      <div id="content-donations" class="tab-content hidden space-y-4">
+        <div class="flex items-center justify-between bg-white p-4 rounded-2xl border border-amber-100">
+          <h3 class="text-base font-bold text-slate-900 flex items-center gap-2">
+            <span class="material-symbols-outlined text-emerald-600">account_balance_wallet</span>
+            Statutory Donation Register (80G Compliance)
+          </h3>
+          <button onclick="loadDonations()" class="px-3 py-1.5 text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-xl flex items-center gap-1 transition">
+            <span class="material-symbols-outlined text-base">refresh</span> Refresh
+          </button>
+        </div>
+
+        <div id="donationsListContainer" class="space-y-3">
+          <div class="text-center py-12 text-slate-400">Loading donation records...</div>
+        </div>
+      </div>
+
+      <!-- TAB 5: SCHEMES CMS -->
+      <div id="content-schemes" class="tab-content hidden space-y-4">
+        <div class="flex items-center justify-between bg-white p-4 rounded-2xl border border-amber-100">
+          <h3 class="text-base font-bold text-slate-900">Government Welfare Schemes</h3>
+          <button onclick="openSchemeModal()" class="px-3 py-1.5 text-xs bg-deep-orange hover:bg-deep-orange-hover text-white font-semibold rounded-xl flex items-center gap-1 transition shadow-sm">
+            <span class="material-symbols-outlined text-base">add</span> Add Scheme
+          </button>
+        </div>
+
+        <div id="schemesListContainer" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="col-span-2 text-center py-12 text-slate-400">Loading schemes...</div>
+        </div>
+      </div>
+
+      <!-- TAB 6: MEDIA VAULT -->
+      <div id="content-media" class="tab-content hidden space-y-4">
+        <div class="bg-white p-6 rounded-2xl border border-amber-100 shadow-sm">
+          <h3 class="text-base font-bold text-slate-900 mb-2 flex items-center gap-2">
+            <span class="material-symbols-outlined text-deep-orange">cloud_upload</span>
+            Cloudinary Fast CDN Media Uploader
+          </h3>
+          <p class="text-xs text-slate-500 mb-4">Direct upload to global Cloudinary CDN. Automatically delivers WebP/AVIF with auto quality compression.</p>
+
+          <div class="border-2 border-dashed border-amber-200 rounded-2xl p-8 text-center hover:bg-amber-50/50 transition cursor-pointer" onclick="document.getElementById('cloudinaryFileInput').click()">
+            <input type="file" id="cloudinaryFileInput" class="hidden" accept="image/*,application/pdf" onchange="handleCloudinaryUpload(event)">
+            <span class="material-symbols-outlined text-4xl text-amber-600 mb-2">upload_file</span>
+            <p class="text-sm font-semibold text-slate-800">Click to upload poster image or PDF brochure</p>
+            <p class="text-xs text-slate-400 mt-1">PNG, JPG, WebP, PDF (Max 10MB)</p>
+          </div>
+
+          <div id="uploadProgress" class="hidden mt-4 p-3 bg-amber-50 rounded-xl text-xs text-amber-900 flex items-center gap-2">
+            <span class="material-symbols-outlined animate-spin text-base">progress_activity</span>
+            <span>Uploading asset to Cloudinary CDN...</span>
+          </div>
+
+          <div id="uploadResult" class="hidden mt-4 p-4 bg-emerald-50 border border-emerald-200 rounded-xl space-y-2">
+            <p class="text-xs font-bold text-emerald-800">Asset successfully hosted on Cloudinary!</p>
+            <div class="flex items-center gap-2">
+              <input type="text" id="uploadedCdnUrl" readonly class="flex-1 text-xs px-3 py-2 bg-white border border-emerald-300 rounded-lg">
+              <button onclick="copyCdnUrl()" class="px-3 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold rounded-lg transition">Copy URL</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- DETAILS MODAL -->
+  <div id="actionModal" class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 shadow-2xl relative">
+      <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600">
+        <span class="material-symbols-outlined text-2xl">close</span>
+      </button>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <script>
+    // Supabase Configuration
+    const SUPABASE_URL = "https://lfdnxklkncckboonyage.sbClient.co";
+    const SUPABASE_ANON = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxmZG54a2xrbmNja2Jvb255YWdlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTMzNjIzMDYsImV4cCI6MjEwODkzODMwNn0.c4fLtTvSsC4YXdhoFOi1zgPU_gwCk--M7k-Zp50obxM";
+    const CLOUDINARY_CLOUD_NAME = "fobxcvyz";
+    const CLOUDINARY_UPLOAD_PRESET = "tgf_public_media";
+
+    const SUPERADMIN_EMAILS = ['trinetragargi@gmail.com', 'imgreat00700@gmail.com'];
+
+    // Avoid identifier collision with global window.supabase from CDN
+    const sbClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
+    let currentSession = null;
+    let currentProfile = null;
+
+    // Check existing auth state on load
+    async function initAuth() {
+      try {
+        const { data: { session } } = await sbClient.auth.getSession();
+        if (session) {
+          currentSession = session;
+          await loadUserProfileAndDashboard();
+        } else {
+          showLogin();
+        }
+      } catch (e) {
+        showLogin();
+      }
+    }
+
+    async function loadUserProfileAndDashboard() {
+      try {
+        // Query profile directly from Supabase
+        const { data: profile, error } = await sbClient
+          .from('admin_profiles')
+          .select('*')
+          .eq('id', currentSession.user.id)
+          .maybeSingle();
+
+        const userEmail = (currentSession.user.email || '').toLowerCase();
+        const isAuthorizedSuperadmin = SUPERADMIN_EMAILS.includes(userEmail);
+
+        if (profile) {
+          currentProfile = {
+            fullName: profile.full_name || userEmail.split('@')[0],
+            email: profile.email,
+            role: isAuthorizedSuperadmin ? 'super_admin' : profile.role
+          };
+        } else if (isAuthorizedSuperadmin) {
+          // Self-heal profile for authorized superadmin
+          currentProfile = {
+            fullName: userEmail.split('@')[0],
+            email: userEmail,
+            role: 'super_admin'
+          };
+        } else {
+          showLogin('No admin profile assigned. Please contact the administrator.');
+          return;
+        }
+
+        await renderDashboardData();
+      } catch (err) {
+        console.error('Profile fetch error:', err);
+        showLogin('Error loading profile: ' + err.message);
+      }
+    }
+
+    function showLogin(errMsg = '') {
+      document.getElementById('loginSection').classList.remove('hidden');
+      document.getElementById('dashboardSection').classList.add('hidden');
+      document.getElementById('authNavArea').innerHTML = '';
+      const errEl = document.getElementById('loginError');
+      if (errMsg) {
+        errEl.innerText = errMsg;
+        errEl.classList.remove('hidden');
+      } else {
+        errEl.classList.add('hidden');
+      }
+    }
+
+    async function renderDashboardData() {
+      document.getElementById('loginSection').classList.add('hidden');
+      document.getElementById('dashboardSection').classList.remove('hidden');
+
+      // Top nav user display
+      document.getElementById('authNavArea').innerHTML = `
+        <div class="flex items-center gap-3">
+          <div class="text-right hidden sm:block">
+            <p class="text-xs font-semibold text-white">${currentProfile.fullName}</p>
+            <span class="text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-full bg-amber-400 text-slate-900 font-extrabold">${currentProfile.role}</span>
+          </div>
+          <button onclick="handleLogout()" class="px-3 py-1.5 bg-white/10 hover:bg-white/20 text-white rounded-xl text-xs font-semibold transition flex items-center gap-1">
+            <span class="material-symbols-outlined text-base">logout</span> Logout
+          </button>
+        </div>
+      `;
+
+      // Fetch live counts from Supabase
+      try {
+        const [schemesRes, sosRes, volRes, donRes] = await Promise.all([
+          sbClient.from('schemes').select('id', { count: 'exact', head: true }),
+          sbClient.from('sos_reports').select('id', { count: 'exact', head: true }).eq('status', 'new'),
+          sbClient.from('volunteers').select('id', { count: 'exact', head: true }).eq('status', 'new'),
+          sbClient.from('donations').select('amount')
+        ]);
+
+        document.getElementById('statSchemes').innerText = schemesRes.count || 0;
+        document.getElementById('statNewSos').innerText = sosRes.count || 0;
+        document.getElementById('statNewVol').innerText = volRes.count || 0;
+
+        if (sosRes.count > 0) {
+          const badge = document.getElementById('badgeSos');
+          badge.innerText = sosRes.count;
+          badge.classList.remove('hidden');
+        }
+        if (volRes.count > 0) {
+          const badge = document.getElementById('badgeVol');
+          badge.innerText = volRes.count;
+          badge.classList.remove('hidden');
+        }
+
+        const donationRows = donRes.data || [];
+        const total = donationRows.reduce((sum, d) => sum + (parseFloat(d.amount) || 0), 0);
+        document.getElementById('statDonations').innerText = '₹' + Number(total).toLocaleString('en-IN');
+      } catch (e) {
+        console.warn('Dashboard counters warning:', e);
+      }
+    }
+
+    // Login Form Submit Handler (Same-Origin Proxy — Guaranteed Zero CORS)
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('loginEmail').value.trim();
+      const password = document.getElementById('loginPassword').value;
+      const btn = document.getElementById('loginBtn');
+      const errEl = document.getElementById('loginError');
+
+      btn.disabled = true;
+      btn.innerHTML = `<span class="material-symbols-outlined animate-spin text-lg">progress_activity</span> Authenticating...`;
+      errEl.classList.add('hidden');
+
+      try {
+        const res = await fetch('/api/admin/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        });
+
+        const data = await res.json();
+        if (!data.success) {
+          throw new Error(data.error || 'Invalid login credentials.');
+        }
+
+        currentSession = data.session;
+        currentProfile = data.profile;
+
+        if (sbClient && sbClient.auth) {
+          try {
+            await sbClient.auth.setSession(data.session);
+          } catch (sessionErr) {
+            console.warn('SetSession note:', sessionErr);
+          }
+        }
+
+        await renderDashboardData();
+      } catch (err) {
+        console.error('Login error details:', err);
+        errEl.innerText = err.message || 'Authentication failed.';
+        errEl.classList.remove('hidden');
+        btn.disabled = false;
+        btn.innerHTML = `<span>Authenticate Session</span><span class="material-symbols-outlined text-lg">arrow_forward</span>`;
+      }
+    });
+
+    async function quickFillAndLogin(email, password) {
+      document.getElementById('loginEmail').value = email;
+      document.getElementById('loginPassword').value = password;
+      const form = document.getElementById('loginForm');
+      form.requestSubmit ? form.requestSubmit() : form.dispatchEvent(new Event('submit', { cancelable: true }));
+    }
+
+    async function handleLogout() {
+      await sbClient.auth.signOut();
+      window.location.reload();
+    }
+
+    // Tab Switching
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active-tab'));
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden'));
+
+      document.getElementById(`tab-${tabId}`)?.classList.add('active-tab');
+      document.getElementById(`content-${tabId}`)?.classList.remove('hidden');
+
+      if (tabId === 'sos') loadSosReports();
+      if (tabId === 'volunteers') loadVolunteers();
+      if (tabId === 'donations') loadDonations();
+      if (tabId === 'schemes') loadSchemes();
+    }
+
+    // 1. SOS Reports
+    async function loadSosReports() {
+      const container = document.getElementById('sosListContainer');
+      const status = document.getElementById('filterSosStatus').value;
+      container.innerHTML = `<div class="text-center py-8 text-slate-400">Loading SOS reports...</div>`;
+
+      try {
+        let query = sbClient.from('sos_reports').select('*');
+        if (status && status !== 'all') {
+          query = query.eq('status', status);
+        }
+        const { data: reports, error } = await query.order('created_at', { ascending: false });
+        if (error) throw error;
+
+        if (!reports || reports.length === 0) {
+          container.innerHTML = `<div class="bg-white p-8 rounded-2xl text-center text-slate-400 border border-slate-100">No distress reports matching this status.</div>`;
+          return;
+        }
+
+        container.innerHTML = reports.map(r => `
+          <div class="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div>
+              <div class="flex items-center gap-2 mb-1">
+                <span class="text-xs font-mono font-bold text-deep-orange bg-amber-50 px-2 py-0.5 rounded-lg">${r.tracking_id}</span>
+                <span class="text-xs px-2 py-0.5 rounded-full font-bold uppercase ${r.status === 'new' ? 'bg-red-100 text-red-700' : r.status === 'escalated' ? 'bg-indigo-100 text-indigo-700' : 'bg-emerald-100 text-emerald-700'}">${(r.status || 'new').replace('_', ' ')}</span>
+                <span class="text-xs text-slate-400">${new Date(r.created_at).toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' })}</span>
+              </div>
+              <h4 class="text-sm font-bold text-slate-900">${(r.incident_category || '').toUpperCase()} — ${r.district || 'Rajasthan'}</h4>
+              <p class="text-xs text-slate-500 mt-0.5">Landmark: ${r.landmark_location}</p>
+            </div>
+            <button onclick="viewSosReport('${r.id}')" class="px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-semibold rounded-xl flex items-center gap-1 transition self-start md:self-auto">
+              <span class="material-symbols-outlined text-base">visibility</span> View Docket
+            </button>
+          </div>
+        `).join('');
+      } catch (err) {
+        container.innerHTML = `<div class="p-4 bg-red-50 text-red-700 text-xs rounded-xl">${err.message}</div>`;
+      }
+    }
+
+    async function viewSosReport(id) {
+      try {
+        const { data: r, error } = await sbClient.from('sos_reports').select('*').eq('id', id).single();
+        if (error) throw error;
+
+        document.getElementById('modalContent').innerHTML = `
+          <div class="space-y-4">
+            <div class="flex items-center justify-between border-b pb-3">
+              <div>
+                <span class="text-xs font-mono font-bold text-deep-orange">${r.tracking_id}</span>
+                <h3 class="text-lg font-bold font-serif text-slate-900">${(r.incident_category || '').toUpperCase()} (${r.district})</h3>
+              </div>
+              <span class="text-xs px-3 py-1 rounded-full font-bold uppercase bg-amber-100 text-amber-800">${r.status}</span>
+            </div>
+
+            <div class="bg-amber-50/50 p-4 rounded-xl border border-amber-100 space-y-2 text-xs">
+              <p><strong>Identity Mode:</strong> ${r.is_anonymous ? 'Anonymous Whistleblower' : `Identified (${r.reporter_name || 'N/A'}, Phone: ${r.reporter_phone || 'N/A'})`}</p>
+              <p><strong>Landmark Location:</strong> ${r.landmark_location}</p>
+              <p><strong>Logged:</strong> ${new Date(r.created_at).toLocaleString('en-IN')}</p>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Incident Narrative:</label>
+              <div class="p-4 bg-slate-50 rounded-xl text-xs text-slate-800 whitespace-pre-wrap leading-relaxed">${r.description}</div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Update Status:</label>
+              <select id="modalSosStatus" class="w-full text-xs p-2.5 border rounded-xl">
+                <option value="new" ${r.status === 'new' ? 'selected' : ''}>New</option>
+                <option value="under_investigation" ${r.status === 'under_investigation' ? 'selected' : ''}>Under Investigation</option>
+                <option value="escalated" ${r.status === 'escalated' ? 'selected' : ''}>Escalated to CWC / Police</option>
+                <option value="resolved" ${r.status === 'resolved' ? 'selected' : ''}>Resolved</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Coordinator Action Notes:</label>
+              <textarea id="modalSosNotes" rows="3" class="w-full text-xs p-2.5 border rounded-xl" placeholder="Add verified action updates or CWC referral numbers...">${r.admin_notes || ''}</textarea>
+            </div>
+
+            <div class="flex justify-end gap-2 pt-2">
+              <button onclick="closeModal()" class="px-4 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-100 rounded-xl">Cancel</button>
+              <button onclick="saveSosUpdate('${r.id}')" class="px-4 py-2 text-xs font-semibold bg-deep-orange hover:bg-deep-orange-hover text-white rounded-xl">Save Updates</button>
+            </div>
+          </div>
+        `;
+        document.getElementById('actionModal').classList.remove('hidden');
+      } catch (err) {
+        alert(err.message);
+      }
+    }
+
+    async function saveSosUpdate(id) {
+      const status = document.getElementById('modalSosStatus').value;
+      const admin_notes = document.getElementById('modalSosNotes').value;
+
+      try {
+        const { error } = await sbClient.from('sos_reports').update({ status, admin_notes }).eq('id', id);
+        if (error) throw error;
+        closeModal();
+        loadSosReports();
+      } catch (err) {
+        alert(err.message);
+      }
+    }
+
+    // 2. Volunteers CRM
+    async function loadVolunteers() {
+      const container = document.getElementById('volunteersListContainer');
+      const status = document.getElementById('filterVolStatus').value;
+      container.innerHTML = `<div class="text-center py-8 text-slate-400">Loading volunteers...</div>`;
+
+      try {
+        let query = sbClient.from('volunteers').select('*');
+        if (status && status !== 'all') {
+          query = query.eq('status', status);
+        }
+        const { data: volunteers, error } = await query.order('created_at', { ascending: false });
+        if (error) throw error;
+
+        if (!volunteers || volunteers.length === 0) {
+          container.innerHTML = `<div class="bg-white p-8 rounded-2xl text-center text-slate-400 border border-slate-100">No volunteer applications in this status.</div>`;
+          return;
+        }
+
+        container.innerHTML = volunteers.map(v => `
+          <div class="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div>
+              <div class="flex items-center gap-2 mb-1">
+                <span class="text-xs font-mono font-bold text-amber-700 bg-amber-50 px-2 py-0.5 rounded-lg">${v.tracking_id}</span>
+                <span class="text-xs px-2 py-0.5 rounded-full font-bold uppercase ${v.status === 'approved' ? 'bg-emerald-100 text-emerald-800' : v.status === 'rejected' ? 'bg-red-100 text-red-800' : 'bg-slate-100 text-slate-700'}">${v.status}</span>
+              </div>
+              <h4 class="text-sm font-bold text-slate-900">${v.full_name} (${v.city}) — ${v.preferred_role}</h4>
+              <p class="text-xs text-slate-500 mt-0.5">Email: ${v.email} | Mobile: ${v.phone} | Availability: ${v.weekly_availability_hours}</p>
+            </div>
+            <div class="flex items-center gap-2">
+              <button onclick="updateVolunteerStatus('${v.id}', 'approved')" class="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold rounded-xl transition">Approve</button>
+              <button onclick="updateVolunteerStatus('${v.id}', 'rejected')" class="px-3 py-1.5 bg-red-600 hover:bg-red-700 text-white text-xs font-semibold rounded-xl transition">Reject</button>
+            </div>
+          </div>
+        `).join('');
+      } catch (err) {
+        container.innerHTML = `<div class="p-4 bg-red-50 text-red-700 text-xs rounded-xl">${err.message}</div>`;
+      }
+    }
+
+    async function updateVolunteerStatus(id, status) {
+      try {
+        const { error } = await sbClient.from('volunteers').update({ status }).eq('id', id);
+        if (error) throw error;
+        loadVolunteers();
+      } catch (err) {
+        alert(err.message);
+      }
+    }
+
+    // 3. Donations Register
+    async function loadDonations() {
+      const container = document.getElementById('donationsListContainer');
+      container.innerHTML = `<div class="text-center py-8 text-slate-400">Loading donation ledger...</div>`;
+
+      try {
+        const { data: donations, error } = await sbClient.from('donations').select('*').order('created_at', { ascending: false });
+        if (error) throw error;
+
+        if (!donations || donations.length === 0) {
+          container.innerHTML = `<div class="bg-white p-8 rounded-2xl text-center text-slate-400 border border-slate-100">No donations logged yet.</div>`;
+          return;
+        }
+
+        container.innerHTML = donations.map(d => `
+          <div class="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div>
+              <div class="flex items-center gap-2 mb-1">
+                <span class="text-xs font-mono font-bold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded-lg">${d.tracking_id}</span>
+                <span class="text-xs font-bold text-slate-700">₹${Number(d.amount).toLocaleString('en-IN')}</span>
+                ${d.receipt_80g_issued ? '<span class="text-xs bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full font-bold">80G Issued</span>' : '<span class="text-xs bg-amber-100 text-amber-800 px-2 py-0.5 rounded-full font-bold">Receipt Pending</span>'}
+              </div>
+              <h4 class="text-sm font-bold text-slate-900">${d.donor_name} &lt;${d.donor_email}&gt;</h4>
+              <p class="text-xs text-slate-500 mt-0.5">PAN: ${d.pan_number || 'Not provided'} | Mode: ${d.payment_method} | Date: ${new Date(d.created_at).toLocaleDateString('en-IN')}</p>
+            </div>
+            ${!d.receipt_80g_issued ? `
+              <button onclick="toggle80GReceipt('${d.id}', true)" class="px-3 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold rounded-xl flex items-center gap-1 transition">
+                <span class="material-symbols-outlined text-base">receipt</span> Issue 80G Receipt
+              </button>
+            ` : `
+              <span class="text-xs font-mono text-slate-400">${d.receipt_tracking_id || 'Issued'}</span>
+            `}
+          </div>
+        `).join('');
+      } catch (err) {
+        container.innerHTML = `<div class="p-4 bg-red-50 text-red-700 text-xs rounded-xl">${err.message}</div>`;
+      }
+    }
+
+    async function toggle80GReceipt(id, markReceiptIssued) {
+      if (!confirm('Issue official 80G statutory receipt docket for this donation?')) return;
+      try {
+        const receiptDocket = 'TGF-REC-' + Date.now().toString(36).toUpperCase();
+        const { error } = await sbClient.from('donations').update({
+          receipt_80g_issued: markReceiptIssued,
+          receipt_issued_at: markReceiptIssued ? new Date().toISOString() : null,
+          receipt_tracking_id: markReceiptIssued ? receiptDocket : null
+        }).eq('id', id);
+
+        if (error) throw error;
+        loadDonations();
+      } catch (err) {
+        alert(err.message);
+      }
+    }
+
+    // 4. Schemes CMS
+    async function loadSchemes() {
+      const container = document.getElementById('schemesListContainer');
+      container.innerHTML = `<div class="col-span-2 text-center py-8 text-slate-400">Loading government schemes...</div>`;
+
+      try {
+        const { data: schemes, error } = await sbClient.from('schemes').select('*').order('created_at', { ascending: false });
+        if (error) throw error;
+
+        if (!schemes || schemes.length === 0) {
+          container.innerHTML = `<div class="col-span-2 bg-white p-8 rounded-2xl text-center text-slate-400 border border-slate-100">No schemes added yet. Click "Add Scheme" above.</div>`;
+          return;
+        }
+
+        container.innerHTML = schemes.map(s => `
+          <div class="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm flex flex-col justify-between gap-3">
+            <div>
+              <div class="flex items-center justify-between mb-1">
+                <span class="text-xs font-bold text-deep-orange uppercase tracking-wider">${s.category}</span>
+                <span class="text-xs px-2 py-0.5 rounded-full font-bold ${s.is_published ? 'bg-emerald-100 text-emerald-800' : 'bg-slate-100 text-slate-600'}">${s.is_published ? 'Published' : 'Draft'}</span>
+              </div>
+              <h4 class="text-base font-bold text-slate-900">${s.title}</h4>
+              <p class="text-xs text-slate-600 mt-1 line-clamp-2">${s.description}</p>
+            </div>
+            <div class="text-xs text-slate-500 border-t pt-2 mt-1">
+              <p><strong>Benefits:</strong> ${s.benefits}</p>
+            </div>
+          </div>
+        `).join('');
+      } catch (err) {
+        container.innerHTML = `<div class="col-span-2 p-4 bg-red-50 text-red-700 text-xs rounded-xl">${err.message}</div>`;
+      }
+    }
+
+    function openSchemeModal() {
+      document.getElementById('modalContent').innerHTML = `
+        <form onsubmit="handleCreateScheme(event)" class="space-y-4">
+          <h3 class="text-lg font-bold font-serif text-slate-900 border-b pb-2">Add New Government Scheme</h3>
+          <div>
+            <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Scheme Title</label>
+            <input type="text" id="schemeTitle" required class="w-full text-xs p-2.5 border rounded-xl" placeholder="e.g. Palhar Yojana">
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Category</label>
+              <input type="text" id="schemeCategory" required class="w-full text-xs p-2.5 border rounded-xl" placeholder="e.g. Child Welfare">
+            </div>
+            <div>
+              <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Cloudinary Image Public ID (Optional)</label>
+              <input type="text" id="schemeCloudinary" class="w-full text-xs p-2.5 border rounded-xl" placeholder="e.g. trinetra-gargi-foundation/schemes/palhar">
+            </div>
+          </div>
+          <div>
+            <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Description</label>
+            <textarea id="schemeDesc" required rows="2" class="w-full text-xs p-2.5 border rounded-xl" placeholder="Overview of the scheme..."></textarea>
+          </div>
+          <div>
+            <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Eligibility Criteria</label>
+            <textarea id="schemeElig" required rows="2" class="w-full text-xs p-2.5 border rounded-xl" placeholder="Who qualifies for this scheme?"></textarea>
+          </div>
+          <div>
+            <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Key Benefits</label>
+            <textarea id="schemeBenefits" required rows="2" class="w-full text-xs p-2.5 border rounded-xl" placeholder="Financial or educational grants provided..."></textarea>
+          </div>
+          <div class="flex justify-end gap-2 pt-2">
+            <button type="button" onclick="closeModal()" class="px-4 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-100 rounded-xl">Cancel</button>
+            <button type="submit" class="px-4 py-2 text-xs font-semibold bg-deep-orange hover:bg-deep-orange-hover text-white rounded-xl">Publish Scheme</button>
+          </div>
+        </form>
+      `;
+      document.getElementById('actionModal').classList.remove('hidden');
+    }
+
+    async function handleCreateScheme(e) {
+      e.preventDefault();
+      const payload = {
+        title: document.getElementById('schemeTitle').value.trim(),
+        category: document.getElementById('schemeCategory').value.trim(),
+        poster_cloudinary_id: document.getElementById('schemeCloudinary').value.trim() || null,
+        description: document.getElementById('schemeDesc').value.trim(),
+        eligibility: document.getElementById('schemeElig').value.trim(),
+        benefits: document.getElementById('schemeBenefits').value.trim(),
+        is_published: true
+      };
+
+      try {
+        const { error } = await sbClient.from('schemes').insert(payload);
+        if (error) throw error;
+        closeModal();
+        loadSchemes();
+      } catch (err) {
+        alert(err.message);
+      }
+    }
+
+    // 5. Cloudinary Direct Upload
+    async function handleCloudinaryUpload(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const progressEl = document.getElementById('uploadProgress');
+      const resultEl = document.getElementById('uploadResult');
+      progressEl.classList.remove('hidden');
+      resultEl.classList.add('hidden');
+
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+
+      try {
+        const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/auto/upload`, {
+          method: 'POST',
+          body: formData
+        });
+        const data = await res.json();
+        if (data.error) throw new Error(data.error.message);
+
+        progressEl.classList.add('hidden');
+        resultEl.classList.remove('hidden');
+        document.getElementById('uploadedCdnUrl').value = data.secure_url;
+      } catch (err) {
+        progressEl.classList.add('hidden');
+        alert('Upload failed: ' + err.message);
+      }
+    }
+
+    function copyCdnUrl() {
+      const copyText = document.getElementById('uploadedCdnUrl');
+      copyText.select();
+      navigator.clipboard.writeText(copyText.value);
+      alert('Cloudinary CDN URL copied to clipboard!');
+    }
+
+    function closeModal() {
+      document.getElementById('actionModal').classList.add('hidden');
+      document.getElementById('modalContent').innerHTML = '';
+    }
+
+    // Auto-init on page load
+    if (window.location.protocol === 'file:') {
+      document.getElementById('fileProtocolWarning')?.classList.remove('hidden');
+    }
+    initAuth();
+  </script>
+</body>
+</html>

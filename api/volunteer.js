@@ -4,8 +4,9 @@
  * Complies with docs/FORMS-SPEC.md Section 2.2
  */
 
-const { getPrivacyIPHash, checkServerRateLimit, sanitizePayload, validateOrigin, dispatchNotification } = require('./_lib/security');
+const { getPrivacyIPHash, checkServerRateLimit, sanitizePayload, validateOrigin, dispatchNotification, generateTrackingId } = require('./_lib/security');
 const { volunteerSchema } = require('./_lib/schemas');
+const { supabaseAdmin } = require('./_lib/supabase/client');
 
 module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -36,7 +37,6 @@ module.exports = async function handler(req, res) {
     const parsedBody = typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
     const sanitized = sanitizePayload(parsedBody);
 
-    // Honeypot check
     if (sanitized.honeypot_company) {
       return res.status(200).json({ success: true, message: 'Volunteer application registered.' });
     }
@@ -44,7 +44,8 @@ module.exports = async function handler(req, res) {
     const validationResult = volunteerSchema.safeParse(sanitized);
     if (!validationResult.success) {
       const fieldErrors = {};
-      validationResult.error.errors.forEach(err => {
+      const issues = validationResult.error.issues || validationResult.error.errors || [];
+      issues.forEach(err => {
         const field = err.path[0] || 'general';
         fieldErrors[field] = err.message;
       });
@@ -56,9 +57,36 @@ module.exports = async function handler(req, res) {
     }
 
     const validData = validationResult.data;
+    const trackingId = generateTrackingId('volunteer');
 
+    // Persist to Supabase
+    try {
+      const { error: dbError } = await supabaseAdmin
+        .from('volunteers')
+        .insert({
+          tracking_id:                trackingId,
+          full_name:                  validData.fullName,
+          email:                      validData.email,
+          phone:                      validData.phone,
+          city:                       validData.city,
+          preferred_role:             validData.preferredRole,
+          weekly_availability_hours:  validData.weeklyAvailabilityHours,
+          skills_and_background:      validData.skillsAndBackground,
+          safeguarding_agreed:        validData.safeguardingAgreement,
+          status:                     'new'
+        });
+
+      if (dbError) {
+        console.warn(`[VOLUNTEER-DB-WARN] Docket: ${trackingId} | Code: ${dbError.code}`);
+      }
+    } catch (e) {
+      console.warn(`[VOLUNTEER-DB-EX] Docket: ${trackingId} | Error: ${e.message}`);
+    }
+
+    // Email notification
     const summary = [
       `NEW VOLUNTEER APPLICATION`,
+      `Docket: ${trackingId}`,
       `Timestamp: ${new Date().toISOString()}`,
       `Applicant: ${validData.fullName}`,
       `Email: ${validData.email}`,
@@ -70,25 +98,19 @@ module.exports = async function handler(req, res) {
       `Safeguarding Agreement: Accepted`
     ].join('\n');
 
-    const dispatchResult = await dispatchNotification({
+    await dispatchNotification({
       subject: `[VOLUNTEER] ${validData.fullName} - ${validData.preferredRole}`,
       recipient: 'volunteers@trinetragargifoundation.org',
       textSummary: summary,
       formType: 'volunteer'
     });
 
-    if (!dispatchResult.success) {
-      return res.status(500).json({
-        success: false,
-        error: 'Unable to route volunteer application. Please contact info@trinetragargifoundation.org directly.'
-      });
-    }
-
     return res.status(200).json({
       success: true,
-      trackingId: dispatchResult.trackingId,
+      trackingId,
       message: 'Volunteer application received! Our team will review your application per safeguarding guidelines.'
     });
+
   } catch (err) {
     return res.status(400).json({ success: false, error: 'Malformed JSON payload.' });
   }

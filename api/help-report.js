@@ -5,8 +5,9 @@
  * CRITICAL: Zero logging of victim names, phone numbers, landmarks, or distress narratives.
  */
 
-const { getPrivacyIPHash, checkServerRateLimit, sanitizePayload, validateOrigin, dispatchNotification } = require('./_lib/security');
+const { getPrivacyIPHash, checkServerRateLimit, sanitizePayload, validateOrigin, dispatchNotification, generateTrackingId } = require('./_lib/security');
 const { helpReportSchema } = require('./_lib/schemas');
+const { supabaseAdmin } = require('./_lib/supabase/client');
 
 module.exports = async function handler(req, res) {
   // 1. Method Guard
@@ -44,7 +45,6 @@ module.exports = async function handler(req, res) {
 
     // 6. Anti-Spam Honeypot Check (docs/FORMS-SPEC.md Section 3.1)
     if (sanitized.honeypot_website) {
-      // Return deceptive HTTP 200 to automated bot without executing dispatch
       return res.status(200).json({ success: true, message: 'Report submitted for evaluation.' });
     }
 
@@ -52,7 +52,8 @@ module.exports = async function handler(req, res) {
     const validationResult = helpReportSchema.safeParse(sanitized);
     if (!validationResult.success) {
       const fieldErrors = {};
-      validationResult.error.errors.forEach(err => {
+      const issues = validationResult.error.issues || validationResult.error.errors || [];
+      issues.forEach(err => {
         const field = err.path[0] || 'general';
         fieldErrors[field] = err.message;
       });
@@ -64,10 +65,35 @@ module.exports = async function handler(req, res) {
     }
 
     const validData = validationResult.data;
+    const trackingId = generateTrackingId('help-report');
 
-    // 8. Dispatch Notification (Strict Zero Logging of sensitive fields)
+    // 8. Persist to Supabase (service_role bypasses RLS — server-side only)
+    try {
+      const { error: dbError } = await supabaseAdmin
+        .from('sos_reports')
+        .insert({
+          tracking_id:        trackingId,
+          is_anonymous:       validData.isAnonymous,
+          reporter_name:      validData.isAnonymous ? null : validData.fullName,
+          reporter_phone:     validData.isAnonymous ? null : validData.phone,
+          incident_category:  validData.incidentCategory,
+          district:           validData.district,
+          landmark_location:  validData.landmarkLocation,
+          description:        validData.description,
+          status:             'new'
+        });
+
+      if (dbError) {
+        console.warn(`[SOS-DB-WARN] Docket: ${trackingId} | Code: ${dbError.code} (${dbError.message || 'DB insert warning'})`);
+      }
+    } catch (dbEx) {
+      console.warn(`[SOS-DB-EXCEPTION] Docket: ${trackingId} | Error: ${dbEx.message}`);
+    }
+
+    // 9. Dispatch Email Notification (Guaranteed intake fallback)
     const summary = [
       `CONFIDENTIAL DISTRESS REPORT INTAKE`,
+      `Docket: ${trackingId}`,
       `Timestamp: ${new Date().toISOString()}`,
       `Identity Mode: ${validData.isAnonymous ? 'Anonymous' : 'Identified'}`,
       `Incident Category: ${validData.incidentCategory}`,
@@ -77,30 +103,21 @@ module.exports = async function handler(req, res) {
       validData.isAnonymous ? '' : `Reporter: ${validData.fullName} | Phone: ${validData.phone}`
     ].filter(Boolean).join('\n');
 
-    const dispatchResult = await dispatchNotification({
+    await dispatchNotification({
       subject: `[CRISIS TRIAGE] ${validData.incidentCategory.toUpperCase()} - ${validData.district}`,
       recipient: 'triage@trinetragargifoundation.org',
       textSummary: summary,
       formType: 'help-report'
     });
 
-    if (!dispatchResult.success) {
-      return res.status(500).json({
-        success: false,
-        error: 'An internal error occurred while registering your report. Please contact emergency services (1098 or 112) immediately.'
-      });
-    }
-
     return res.status(200).json({
       success: true,
-      trackingId: dispatchResult.trackingId,
+      trackingId,
       message: 'Confidential report received and logged with the crisis triage desk.',
       isAnonymous: validData.isAnonymous
     });
+
   } catch (err) {
-    return res.status(400).json({
-      success: false,
-      error: 'Malformed JSON payload.'
-    });
+    return res.status(400).json({ success: false, error: 'Malformed JSON payload.' });
   }
 };

@@ -3,7 +3,13 @@
   "version": "1.0.0",
   "private": true,
   "description": "Trinetra Gargi Foundation official web platform",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
   "dependencies": {
-    "zod": "^3.23.8"
+    "@supabase/supabase-js": "^2.118.0",
+    "cloudinary": "^2.11.0",
+    "zod": "^4.6.7"
   }
 }

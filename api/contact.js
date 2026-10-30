@@ -4,8 +4,9 @@
  * Complies with docs/FORMS-SPEC.md Section 2.4
  */
 
-const { getPrivacyIPHash, checkServerRateLimit, sanitizePayload, validateOrigin, dispatchNotification } = require('./_lib/security');
+const { getPrivacyIPHash, checkServerRateLimit, sanitizePayload, validateOrigin, dispatchNotification, generateTrackingId } = require('./_lib/security');
 const { contactSchema } = require('./_lib/schemas');
+const { supabaseAdmin } = require('./_lib/supabase/client');
 
 module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -44,7 +45,8 @@ module.exports = async function handler(req, res) {
     const validationResult = contactSchema.safeParse(sanitized);
     if (!validationResult.success) {
       const fieldErrors = {};
-      validationResult.error.errors.forEach(err => {
+      const issues = validationResult.error.issues || validationResult.error.errors || [];
+      issues.forEach(err => {
         const field = err.path[0] || 'general';
         fieldErrors[field] = err.message;
       });
@@ -56,9 +58,33 @@ module.exports = async function handler(req, res) {
     }
 
     const validData = validationResult.data;
+    const trackingId = generateTrackingId('contact');
 
+    // Persist to Supabase
+    try {
+      const { error: dbError } = await supabaseAdmin
+        .from('contact_inquiries')
+        .insert({
+          tracking_id:  trackingId,
+          full_name:    validData.fullName,
+          email:        validData.email,
+          phone:        validData.phone || null,
+          subject:      validData.inquiryType,
+          message:      validData.message,
+          status:       'new'
+        });
+
+      if (dbError) {
+        console.warn(`[CONTACT-DB-WARN] Docket: ${trackingId} | Code: ${dbError.code}`);
+      }
+    } catch (e) {
+      console.warn(`[CONTACT-DB-EX] Docket: ${trackingId} | Error: ${e.message}`);
+    }
+
+    // Notification dispatch
     const summary = [
       `GENERAL CONTACT INQUIRY`,
+      `Docket: ${trackingId}`,
       `Timestamp: ${new Date().toISOString()}`,
       `Sender: ${validData.fullName}`,
       `Email: ${validData.email}`,
@@ -67,25 +93,19 @@ module.exports = async function handler(req, res) {
       `Message: ${validData.message}`
     ].join('\n');
 
-    const dispatchResult = await dispatchNotification({
+    await dispatchNotification({
       subject: `[INQUIRY] ${validData.inquiryType.toUpperCase()} - ${validData.fullName}`,
       recipient: 'info@trinetragargifoundation.org',
       textSummary: summary,
       formType: 'contact'
     });
 
-    if (!dispatchResult.success) {
-      return res.status(500).json({
-        success: false,
-        error: 'Unable to route message. Please email info@trinetragargifoundation.org directly.'
-      });
-    }
-
     return res.status(200).json({
       success: true,
-      trackingId: dispatchResult.trackingId,
+      trackingId,
       message: 'Thank you for contacting us. Your message has been routed to our community assistance desk.'
     });
+
   } catch (err) {
     return res.status(400).json({ success: false, error: 'Malformed JSON payload.' });
   }

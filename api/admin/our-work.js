@@ -297,12 +297,9 @@ module.exports = async function handler(req, res) {
     return res.status(403).json({ success: false, error: 'Cross-site request blocked.' });
   }
 
-  const adminAuth = await authenticateAdmin(req);
-  if (!adminAuth.authorized) {
-    return res.status(adminAuth.status).json({ success: false, error: adminAuth.error });
-  }
-
-  const { admin } = adminAuth;
+  const auth = await authenticateAdmin(req, res, ['editor', 'triage', 'super_admin']);
+  if (!auth) return;
+  const { user, profile: admin } = auth;
 
   // POST: Create or upsert a pillar
   if (req.method === 'POST') {
@@ -491,3 +488,4 @@ module.exports = async function handler(req, res) {
   res.setHeader('Allow', ['GET', 'POST', 'PATCH', 'DELETE']);
   return res.status(405).json({ success: false, error: 'Method not allowed' });
 };
+

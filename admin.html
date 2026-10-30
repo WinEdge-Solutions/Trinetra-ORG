@@ -701,28 +701,25 @@
       }
     }
 
-    // Login Form Submit Handler — With Anti-Brute-Force Rate Limiting
+    // Login Form Submit Handler
     document.getElementById('loginForm').addEventListener('submit', async (e) => {
       e.preventDefault();
-
-      if (failedAttemptsCount >= 5) {
-        triggerClientLockout(300);
-        return;
-      }
 
       const email = document.getElementById('loginEmail').value.trim().toLowerCase();
       const password = document.getElementById('loginPassword').value;
       const btn = document.getElementById('loginBtn');
       const errEl = document.getElementById('loginError');
       const succEl = document.getElementById('loginSuccess');
+      const notice = document.getElementById('rateLimitNotice');
 
       btn.disabled = true;
       btn.innerHTML = `<span class="material-symbols-outlined animate-spin text-lg">progress_activity</span> Authenticating Session...`;
       errEl.classList.add('hidden');
       succEl.classList.add('hidden');
+      notice?.classList.add('hidden');
 
       try {
-        let authSuccess = false;
+        let authSession = null;
         let lastErrorMsg = '';
 
         // 1. Direct Supabase Client Sign In
@@ -735,20 +732,15 @@
           if (error) {
             lastErrorMsg = error.message;
           } else if (data && data.session) {
-            currentSession = data.session;
-            authSuccess = true;
-            sessionStorage.removeItem('admin_login_fails');
-            failedAttemptsCount = 0;
-            await loadUserProfileAndDashboard();
-            return;
+            authSession = data.session;
           }
         } catch (clientErr) {
-          console.warn('Direct Supabase auth attempt:', clientErr);
+          console.warn('Direct Supabase auth note:', clientErr);
           lastErrorMsg = clientErr.message || 'Direct auth failed';
         }
 
-        // 2. Same-Origin Proxy Fallback with Anti-Brute-Force Rate Limiting
-        if (!authSuccess) {
+        // 2. Same-Origin Proxy Fallback
+        if (!authSession) {
           const res = await fetch('/api/admin/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -757,7 +749,6 @@
 
           const data = await res.json();
 
-          // Handle HTTP 429 Rate Limited
           if (res.status === 429) {
             const retrySec = data.retryAfter || 300;
             triggerClientLockout(retrySec);
@@ -765,18 +756,11 @@
           }
 
           if (!data.success) {
-            failedAttemptsCount++;
-            sessionStorage.setItem('admin_login_fails', failedAttemptsCount.toString());
-            if (failedAttemptsCount >= 5) {
-              triggerClientLockout(300);
-            }
-            throw new Error(data.error || lastErrorMsg || 'Invalid login credentials. Please check your Supabase Auth credentials.');
+            throw new Error(data.error || lastErrorMsg || 'Invalid email or password.');
           }
 
-          currentSession = data.session;
+          authSession = data.session;
           currentProfile = data.profile;
-          sessionStorage.removeItem('admin_login_fails');
-          failedAttemptsCount = 0;
 
           if (sbClient && sbClient.auth && data.session) {
             try {
@@ -785,12 +769,17 @@
               console.warn('SetSession note:', sessionErr);
             }
           }
-
-          await renderDashboardData();
         }
+
+        currentSession = authSession;
+        sessionStorage.removeItem('admin_login_fails');
+        failedAttemptsCount = 0;
+
+        await loadUserProfileAndDashboard();
+
       } catch (err) {
         console.error('Login error details:', err);
-        errEl.innerText = err.message || 'Authentication failed. Please verify your credentials.';
+        errEl.innerText = err.message || 'Authentication failed. Please verify your email and password.';
         errEl.classList.remove('hidden');
         btn.disabled = false;
         btn.innerHTML = `<span>Authenticate Session</span><span class="material-symbols-outlined text-lg">arrow_forward</span>`;

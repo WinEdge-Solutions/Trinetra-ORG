@@ -14,7 +14,7 @@ const SUPERADMIN_EMAILS = ['trinetragargi@gmail.com', 'imgreat00700@gmail.com'];
 // Sliding-window memory store for failed login attempts
 // key: ipHash or emailKey -> array of timestamps
 const loginAttemptsStore = new Map();
-const MAX_ATTEMPTS = 5;
+const MAX_ATTEMPTS = 10;
 const WINDOW_MS = 15 * 60 * 1000; // 15 minutes
 
 // Clean up stale attempts periodically

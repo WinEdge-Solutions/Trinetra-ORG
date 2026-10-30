@@ -64,12 +64,15 @@ function resetLoginAttempts(ipHash, email) {
 }
 
 module.exports = async function handler(req, res) {
-  // GET: Issue fresh visual verification challenge
+  // GET: Issue fresh math addition verification challenge
   if (req.method === 'GET') {
     const challenge = generateCaptchaChallenge();
     res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
     return res.status(200).json({
       success: true,
+      equation: challenge.equation,
+      num1: challenge.num1,
+      num2: challenge.num2,
       svg: challenge.svg,
       token: challenge.token
     });

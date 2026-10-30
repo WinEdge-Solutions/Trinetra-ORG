@@ -120,22 +120,28 @@
           </div>
         </div>
 
-        <!-- Security Verification (CAPTCHA) -->
+        <!-- Human Verification (Addition of Numbers) -->
         <div>
           <div class="flex items-center justify-between mb-1.5">
-            <label class="block text-xs font-semibold text-slate-700">Security Verification</label>
-            <button type="button" onclick="refreshCaptcha()" class="text-xs text-deep-orange hover:text-deep-orange-hover flex items-center gap-1 font-medium transition" title="Get a new verification code">
+            <label class="block text-xs font-semibold text-slate-700 flex items-center gap-1.5">
+              <span class="material-symbols-outlined text-sm text-deep-orange">calculate</span>
+              <span>Human Verification</span>
+            </label>
+            <button type="button" onclick="refreshCaptcha()" class="text-xs text-deep-orange hover:text-deep-orange-hover flex items-center gap-1 font-medium transition" title="Generate new numbers">
               <span id="captchaRefreshIcon" class="material-symbols-outlined text-sm">refresh</span>
-              <span>Refresh</span>
+              <span>New Question</span>
             </button>
           </div>
           <div class="flex items-center gap-2.5">
-            <div id="captchaSvgContainer" class="flex-shrink-0 cursor-pointer select-none rounded-xl overflow-hidden border border-amber-200/80 shadow-2xs transition hover:border-amber-300" onclick="refreshCaptcha()" title="Click image to refresh">
-              <div class="w-[140px] h-[40px] bg-amber-50/50 flex items-center justify-center text-xs text-slate-400 font-mono">Loading code...</div>
+            <div id="captchaSvgContainer" class="flex-shrink-0 cursor-pointer select-none rounded-xl overflow-hidden border border-amber-300 shadow-2xs transition hover:border-amber-400 bg-amber-50/90" onclick="refreshCaptcha()" title="Click to get new numbers">
+              <div class="px-4 h-[42px] flex items-center justify-center font-mono text-base font-extrabold text-amber-950 tracking-wider">
+                <span id="mathQuestionText">Loading...</span>
+              </div>
             </div>
-            <input type="text" id="loginCaptcha" required maxlength="6" autocomplete="off" autocorrect="off" autocapitalize="characters" spellcheck="false" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-deep-orange/20 focus:border-deep-orange transition text-sm font-mono tracking-widest uppercase text-slate-800 placeholder-slate-400" placeholder="Code">
+            <input type="number" id="loginCaptcha" required autocomplete="off" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-deep-orange/20 focus:border-deep-orange transition text-sm font-mono font-bold text-slate-800 placeholder-slate-400" placeholder="Enter sum (e.g. 15)">
           </div>
           <input type="hidden" id="loginCaptchaToken" value="">
+          <p class="text-[11px] text-slate-400 mt-1">Solve the simple addition to verify you are human.</p>
         </div>
 
         <div class="pt-1">
@@ -634,27 +640,52 @@
       loadCaptcha();
     }
 
-    // Visual Security Verification (CAPTCHA)
+    // Human Security Verification (Addition of Numbers)
     let isCaptchaLoading = false;
+    let localMathChallenge = { num1: 7, num2: 8, sum: 15 };
+
+    function setMathDisplay(equation, num1, num2) {
+      const qText = document.getElementById('mathQuestionText');
+      const container = document.getElementById('captchaSvgContainer');
+      const displayStr = equation || `${num1} + ${num2} = ?`;
+
+      if (qText) qText.innerText = displayStr;
+      if (container) {
+        container.innerHTML = `<div class="px-4 h-[42px] flex items-center justify-center font-mono text-base font-extrabold text-amber-950 tracking-wider select-none">${displayStr}</div>`;
+      }
+    }
+
+    function generateLocalMathChallenge() {
+      const n1 = Math.floor(Math.random() * 12) + 3;
+      const n2 = Math.floor(Math.random() * 10) + 2;
+      localMathChallenge = { num1: n1, num2: n2, sum: n1 + n2 };
+      setMathDisplay(`${n1} + ${n2} = ?`, n1, n2);
+    }
+
     async function loadCaptcha() {
       if (isCaptchaLoading) return;
       isCaptchaLoading = true;
       const icon = document.getElementById('captchaRefreshIcon');
-      const container = document.getElementById('captchaSvgContainer');
       const tokenInput = document.getElementById('loginCaptchaToken');
       const codeInput = document.getElementById('loginCaptcha');
+
+      // Generate local numbers immediately for zero lag
+      generateLocalMathChallenge();
 
       if (icon) icon.classList.add('animate-spin');
       try {
         const res = await fetch('/api/admin/login?captcha=1');
         const data = await res.json();
-        if (data.success && data.svg && data.token) {
-          if (container) container.innerHTML = data.svg;
-          if (tokenInput) tokenInput.value = data.token;
+        if (data.success) {
+          if (data.num1 !== undefined && data.num2 !== undefined) {
+            localMathChallenge = { num1: data.num1, num2: data.num2, sum: data.num1 + data.num2 };
+            setMathDisplay(data.equation, data.num1, data.num2);
+          }
+          if (tokenInput && data.token) tokenInput.value = data.token;
           if (codeInput) codeInput.value = '';
         }
       } catch (err) {
-        console.warn('Captcha load note:', err);
+        console.warn('Math challenge fetch note:', err);
       } finally {
         isCaptchaLoading = false;
         if (icon) icon.classList.remove('animate-spin');
@@ -796,7 +827,7 @@
       }
     }
 
-    // Login Form Submit Handler (Single deterministic proxy with visual CAPTCHA & direct-auth resilience)
+    // Login Form Submit Handler (Supabase Auth with Math Addition Human Verification)
     document.getElementById('loginForm').addEventListener('submit', async (e) => {
       e.preventDefault();
 
@@ -810,9 +841,23 @@
       const notice = document.getElementById('rateLimitNotice');
 
       if (!captchaCode) {
-        errEl.innerText = 'Please enter the security verification code.';
+        errEl.innerText = 'Please solve the addition problem to verify.';
         errEl.classList.remove('hidden');
         document.getElementById('loginCaptcha')?.focus();
+        return;
+      }
+
+      // 1. Verify Addition of Numbers
+      const userSum = parseInt(captchaCode, 10);
+      if (isNaN(userSum) || (localMathChallenge && userSum !== localMathChallenge.sum)) {
+        errEl.innerText = 'Incorrect answer. Please solve the addition problem.';
+        errEl.classList.remove('hidden');
+        const capInput = document.getElementById('loginCaptcha');
+        if (capInput) {
+          capInput.value = '';
+          capInput.focus();
+        }
+        await loadCaptcha();
         return;
       }
 
@@ -825,55 +870,65 @@
       try {
         let authSession = null;
 
-        // Primary: Same-Origin Backend Proxy (enforces CAPTCHA, rate-limiting, audit log & RLS self-healing)
-        try {
-          const res = await fetch('/api/admin/login', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email, password, captchaCode, captchaToken })
-          });
+        // 2. Direct Supabase Auth Execution
+        const { data: authData, error: authError } = await sbClient.auth.signInWithPassword({
+          email,
+          password
+        });
 
-          const data = await res.json();
-
-          if (res.status === 429) {
-            const retrySec = data.retryAfter || 300;
-            triggerClientLockout(retrySec);
-            throw new Error(data.error || `Too many failed attempts. Security cooldown active for ${Math.ceil(retrySec / 60)} minutes.`);
-          }
-
-          if (!data.success) {
-            throw new Error(data.error || 'Invalid email or password.');
-          }
-
-          authSession = data.session;
-          currentProfile = data.profile;
-
-          if (sbClient && sbClient.auth && data.session) {
-            try {
-              await sbClient.auth.setSession(data.session);
-            } catch (sessionErr) {
-              console.warn('SetSession note:', sessionErr);
-            }
-          }
-        } catch (proxyErr) {
-          // If the backend actively rejected with 429, 401, 400 (captcha), or deactivation, rethrow immediately
-          const msg = proxyErr.message || '';
-          if (msg.includes('Too many') || msg.includes('Invalid') || msg.includes('deactivated') || msg.includes('required') || msg.includes('verification') || msg.includes('code') || msg.includes('expired')) {
-            throw proxyErr;
-          }
-
-          // Fallback to direct client auth only in edge cases where backend proxy is unreachable (offline network)
-          console.warn('Backend proxy unreachable, falling back to direct auth:', proxyErr);
-          const { data, error } = await sbClient.auth.signInWithPassword({ email, password });
-          if (error) throw error;
-          authSession = data?.session;
-        }
-
-        if (!authSession) {
+        if (authError) {
           throw new Error('Invalid email or password.');
         }
 
+        if (!authData || !authData.session) {
+          throw new Error('Failed to retrieve authentication session.');
+        }
+
+        authSession = authData.session;
         currentSession = authSession;
+
+        // 3. Verify Admin Profile & Role
+        const { data: profile, error: profErr } = await sbClient
+          .from('admin_profiles')
+          .select('*')
+          .eq('id', authData.user.id)
+          .maybeSingle();
+
+        const isSuperAdminEmail = SUPERADMIN_EMAILS.includes(email);
+
+        if (!profile && isSuperAdminEmail) {
+          // Self-heal profile for pre-authorized superadmin
+          const { data: healed } = await sbClient
+            .from('admin_profiles')
+            .upsert({
+              id: authData.user.id,
+              email: email,
+              full_name: email.startsWith('imgreat') ? 'Administrator' : 'Trinetra Gargi Foundation',
+              role: 'super_admin',
+              is_active: true
+            })
+            .select()
+            .single();
+          currentProfile = healed || { id: authData.user.id, email, role: 'super_admin', is_active: true };
+        } else if (profile) {
+          if (!profile.is_active) {
+            await sbClient.auth.signOut();
+            throw new Error('Your administrative account has been deactivated. Please contact foundation leadership.');
+          }
+          currentProfile = profile;
+        } else {
+          // Not registered in admin_profiles
+          await sbClient.auth.signOut();
+          throw new Error('Access denied. No administrative role assigned to this account.');
+        }
+
+        // Send background statutory audit log if backend proxy is available
+        fetch('/api/admin/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password, captchaCode, captchaToken })
+        }).catch(() => {});
+
         sessionStorage.removeItem('admin_login_fails');
         failedAttemptsCount = 0;
 
@@ -885,7 +940,7 @@
         errEl.classList.remove('hidden');
         btn.disabled = false;
         btn.innerHTML = `<span>Sign In</span><span class="material-symbols-outlined text-lg">arrow_forward</span>`;
-        // Refresh CAPTCHA on every failed attempt
+        // Refresh addition question on failed attempt
         await loadCaptcha();
       }
     });
@@ -2136,12 +2191,6 @@
         });
         const data = await res.json();
         if (!data.success) throw new Error(data.error || 'Failed to delete story.');
-        await loadStories();
-        if (typeof loadOverviewStats === 'function') loadOverviewStats();
-      } catch (err) {
-        alert('Failed to delete story: ' + err.message);
-      }
-    }
         await loadStories();
         if (typeof loadOverviewStats === 'function') loadOverviewStats();
       } catch (err) {

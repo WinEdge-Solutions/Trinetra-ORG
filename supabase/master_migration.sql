@@ -395,7 +395,10 @@ EXCEPTION WHEN duplicate_object THEN null; END $$;
 
 -- 5. AUTO-ADMIN USER TRIGGER & SUPERADMIN PROMOTION
 CREATE OR REPLACE FUNCTION public.handle_new_admin_user()
-RETURNS TRIGGER AS $$
+RETURNS TRIGGER 
+SECURITY DEFINER
+SET search_path = public
+AS $$
 BEGIN
   INSERT INTO public.admin_profiles (id, email, full_name, role)
   VALUES (
@@ -403,18 +406,21 @@ BEGIN
     NEW.email,
     COALESCE(NEW.raw_user_meta_data->>'full_name', split_part(NEW.email, '@', 1)),
     CASE 
-      WHEN LOWER(NEW.email) IN ('trinetragargi@gmail.com', 'imgreat00700@gmail.com') THEN 'super_admin'::admin_role
-      ELSE COALESCE((NEW.raw_user_meta_data->>'role')::admin_role, 'editor'::admin_role)
+      WHEN LOWER(NEW.email) IN ('trinetragargi@gmail.com', 'imgreat00700@gmail.com') THEN 'super_admin'::public.admin_role
+      ELSE COALESCE((NEW.raw_user_meta_data->>'role')::public.admin_role, 'editor'::public.admin_role)
     END
   )
   ON CONFLICT (id) DO UPDATE
     SET role = CASE 
-      WHEN LOWER(EXCLUDED.email) IN ('trinetragargi@gmail.com', 'imgreat00700@gmail.com') THEN 'super_admin'::admin_role
+      WHEN LOWER(EXCLUDED.email) IN ('trinetragargi@gmail.com', 'imgreat00700@gmail.com') THEN 'super_admin'::public.admin_role
       ELSE public.admin_profiles.role
     END;
   RETURN NEW;
+EXCEPTION WHEN OTHERS THEN
+  -- Safe fallback: never abort auth.users creation if profile write fails
+  RETURN NEW;
 END;
-$$ LANGUAGE plpgsql SECURITY DEFINER;
+$$ LANGUAGE plpgsql;
 
 DROP TRIGGER IF EXISTS trg_on_auth_user_created ON auth.users;
 CREATE TRIGGER trg_on_auth_user_created

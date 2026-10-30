@@ -183,6 +183,10 @@
           <span class="material-symbols-outlined text-lg">policy</span>
           Schemes CMS
         </button>
+        <button onclick="switchTab('stories')" id="tab-stories" class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold text-slate-700 hover:bg-amber-100 transition flex items-center gap-1.5">
+          <span class="material-symbols-outlined text-lg">auto_stories</span>
+          Stories CMS
+        </button>
         <button onclick="switchTab('media')" id="tab-media" class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold text-slate-700 hover:bg-amber-100 transition flex items-center gap-1.5">
           <span class="material-symbols-outlined text-lg">cloud_upload</span>
           Media Vault
@@ -195,23 +199,23 @@
 
       <!-- TAB 1: OVERVIEW -->
       <div id="content-overview" class="tab-content space-y-6">
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
           <div class="bg-white p-5 rounded-2xl border border-red-100 shadow-sm">
             <div class="flex items-center justify-between">
               <span class="text-xs font-bold text-red-600 uppercase tracking-wider">New Distress SOS</span>
               <span class="p-2 bg-red-50 text-red-600 rounded-xl material-symbols-outlined">emergency</span>
             </div>
             <p id="statNewSos" class="text-3xl font-extrabold text-slate-900 mt-3">0</p>
-            <p class="text-xs text-slate-500 mt-1">Pending immediate crisis verification</p>
+            <p class="text-xs text-slate-500 mt-1">Pending crisis verification</p>
           </div>
 
           <div class="bg-white p-5 rounded-2xl border border-amber-100 shadow-sm">
             <div class="flex items-center justify-between">
-              <span class="text-xs font-bold text-amber-700 uppercase tracking-wider">Volunteer Applications</span>
+              <span class="text-xs font-bold text-amber-700 uppercase tracking-wider">Volunteers</span>
               <span class="p-2 bg-amber-50 text-amber-700 rounded-xl material-symbols-outlined">group</span>
             </div>
             <p id="statNewVol" class="text-3xl font-extrabold text-slate-900 mt-3">0</p>
-            <p class="text-xs text-slate-500 mt-1">Pending background review</p>
+            <p class="text-xs text-slate-500 mt-1">Pending review</p>
           </div>
 
           <div class="bg-white p-5 rounded-2xl border border-emerald-100 shadow-sm">
@@ -220,16 +224,25 @@
               <span class="p-2 bg-emerald-50 text-emerald-700 rounded-xl material-symbols-outlined">payments</span>
             </div>
             <p id="statDonations" class="text-3xl font-extrabold text-slate-900 mt-3">₹0</p>
-            <p class="text-xs text-slate-500 mt-1">Recorded through web portal</p>
+            <p class="text-xs text-slate-500 mt-1">Recorded via portal</p>
           </div>
 
-          <div class="bg-white p-5 rounded-2xl border border-indigo-100 shadow-sm">
+          <div class="bg-white p-5 rounded-2xl border border-indigo-100 shadow-sm cursor-pointer hover:border-indigo-300 transition" onclick="switchTab('schemes')">
             <div class="flex items-center justify-between">
               <span class="text-xs font-bold text-indigo-700 uppercase tracking-wider">Active Schemes</span>
               <span class="p-2 bg-indigo-50 text-indigo-700 rounded-xl material-symbols-outlined">menu_book</span>
             </div>
             <p id="statSchemes" class="text-3xl font-extrabold text-slate-900 mt-3">0</p>
-            <p class="text-xs text-slate-500 mt-1">Published on public directory</p>
+            <p class="text-xs text-slate-500 mt-1">Government welfare</p>
+          </div>
+
+          <div class="bg-white p-5 rounded-2xl border border-amber-200 shadow-sm cursor-pointer hover:border-amber-400 transition" onclick="switchTab('stories')">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-amber-800 uppercase tracking-wider">Field Stories</span>
+              <span class="p-2 bg-amber-50 text-amber-800 rounded-xl material-symbols-outlined">auto_stories</span>
+            </div>
+            <p id="statStories" class="text-3xl font-extrabold text-slate-900 mt-3">0</p>
+            <p class="text-xs text-slate-500 mt-1">Ground casework & media</p>
           </div>
         </div>
 
@@ -320,6 +333,33 @@
 
         <div id="schemesListContainer" class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div class="col-span-2 text-center py-12 text-slate-400">Loading schemes...</div>
+        </div>
+      </div>
+
+      <!-- TAB 6: STORIES CMS -->
+      <div id="content-stories" class="tab-content hidden space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between bg-white p-4 rounded-2xl border border-amber-100 shadow-xs gap-3">
+          <div>
+            <h3 class="text-base font-bold text-slate-900 flex items-center gap-2">
+              <span class="material-symbols-outlined text-deep-orange">auto_stories</span>
+              <span>Ground Casework &amp; Field Stories CMS</span>
+            </h3>
+            <p class="text-xs text-slate-500 mt-0.5">Publish and edit verified field rescues, photographs, documentary videos, and impact timelines on the live website.</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <a href="stories-events.html" target="_blank" class="px-3 py-1.5 text-xs font-bold text-amber-900 bg-amber-50 hover:bg-amber-100 border border-amber-300 rounded-xl transition flex items-center gap-1 shadow-2xs">
+              <span class="material-symbols-outlined text-sm">open_in_new</span>
+              <span>View Live Stories</span>
+            </a>
+            <button onclick="openStoryModal()" class="px-3.5 py-1.5 text-xs bg-deep-orange hover:bg-deep-orange-hover text-white font-bold rounded-xl flex items-center gap-1 transition shadow-sm">
+              <span class="material-symbols-outlined text-base">add_circle</span>
+              <span>Publish New Story</span>
+            </button>
+          </div>
+        </div>
+
+        <div id="storiesListContainer" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="col-span-2 text-center py-12 text-slate-400">Loading ground stories...</div>
         </div>
       </div>
 
@@ -506,7 +546,7 @@
 
   <!-- DETAILS MODAL -->
   <div id="actionModal" class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
-    <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 shadow-2xl relative">
+    <div class="bg-white rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto p-6 shadow-2xl relative">
       <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600">
         <span class="material-symbols-outlined text-2xl">close</span>
       </button>
@@ -722,14 +762,18 @@
 
       // Fetch live counts from Supabase
       try {
-        const [schemesRes, sosRes, volRes, donRes] = await Promise.all([
+        const [schemesRes, storiesRes, sosRes, volRes, donRes] = await Promise.all([
           sbClient.from('schemes').select('id', { count: 'exact', head: true }),
+          sbClient.from('stories').select('id', { count: 'exact', head: true }),
           sbClient.from('sos_reports').select('id', { count: 'exact', head: true }).eq('status', 'new'),
           sbClient.from('volunteers').select('id', { count: 'exact', head: true }).eq('status', 'new'),
           sbClient.from('donations').select('amount')
         ]);
 
         document.getElementById('statSchemes').innerText = schemesRes.count || 0;
+        if (document.getElementById('statStories')) {
+          document.getElementById('statStories').innerText = storiesRes.count || 0;
+        }
         document.getElementById('statNewSos').innerText = sosRes.count || 0;
         document.getElementById('statNewVol').innerText = volRes.count || 0;
 
@@ -863,6 +907,7 @@
       if (tabId === 'volunteers') loadVolunteers();
       if (tabId === 'donations') loadDonations();
       if (tabId === 'schemes') loadSchemes();
+      if (tabId === 'stories') loadStories();
       if (tabId === 'security') loadSecurityData();
     }
 
@@ -1508,6 +1553,692 @@
         .replace(/>/g, '&gt;')
         .replace(/"/g, '&quot;')
         .replace(/'/g, '&#39;');
+    }
+
+    // ==========================================
+    // 5. STORIES & GROUND CASEWORK CMS
+    // ==========================================
+    let loadedStories = [];
+
+    function parseStoryContent(raw) {
+      if (!raw) return { body: '' };
+      if (typeof raw === 'object') return raw;
+      if (typeof raw === 'string' && raw.trim().startsWith('{')) {
+        try {
+          return JSON.parse(raw);
+        } catch (e) {
+          return { body: raw };
+        }
+      }
+      return { body: String(raw) };
+    }
+
+    function getStoryVideoEmbed(url) {
+      if (!url) return '';
+      const cleanUrl = url.trim();
+      const ytMatch = cleanUrl.match(/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/i);
+      if (ytMatch && ytMatch[1]) {
+        return `<div class="relative w-full aspect-video rounded-xl overflow-hidden border border-slate-200 shadow-xs bg-black">
+          <iframe src="https://www.youtube-nocookie.com/embed/${ytMatch[1]}" class="w-full h-full" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>`;
+      }
+      const vimeoMatch = cleanUrl.match(/vimeo\.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|video\/|)(\d+)/i);
+      if (vimeoMatch && vimeoMatch[3]) {
+        return `<div class="relative w-full aspect-video rounded-xl overflow-hidden border border-slate-200 shadow-xs bg-black">
+          <iframe src="https://player.vimeo.com/video/${vimeoMatch[3]}" class="w-full h-full" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+        </div>`;
+      }
+      if (cleanUrl.match(/\.(mp4|webm|ogg)($|\?)/i) || (cleanUrl.includes('cloudinary.com') && cleanUrl.includes('/video/'))) {
+        return `<div class="relative w-full aspect-video rounded-xl overflow-hidden border border-slate-200 shadow-xs bg-black flex items-center justify-center">
+          <video src="${cleanUrl}" controls class="w-full h-full object-contain" preload="metadata"></video>
+        </div>`;
+      }
+      return `<div class="p-3 bg-amber-50/70 border border-amber-200 rounded-xl text-xs flex items-center justify-between">
+        <div class="flex items-center gap-2 text-slate-800 font-semibold truncate">
+          <span class="material-symbols-outlined text-deep-orange text-base">movie</span>
+          <span class="truncate">${escapeHtml(cleanUrl)}</span>
+        </div>
+        <a href="${cleanUrl}" target="_blank" class="px-2.5 py-1 text-[11px] bg-white border border-slate-200 text-deep-orange font-bold rounded-lg shrink-0 hover:bg-amber-50">Open Video ↗</a>
+      </div>`;
+    }
+
+    function updateStoryVideoPreview(url, previewContainerId) {
+      const container = document.getElementById(previewContainerId);
+      if (!container) return;
+      if (!url || !url.trim()) {
+        container.innerHTML = '';
+        container.classList.add('hidden');
+        return;
+      }
+      container.innerHTML = getStoryVideoEmbed(url);
+      container.classList.remove('hidden');
+    }
+
+    function updateStoryGalleryPreview(rawText, previewGridId) {
+      const grid = document.getElementById(previewGridId);
+      if (!grid) return;
+      const urls = (rawText || '').split(/[\n,]/).map(u => u.trim()).filter(Boolean);
+      if (urls.length === 0) {
+        grid.innerHTML = '';
+        grid.classList.add('hidden');
+        return;
+      }
+      grid.classList.remove('hidden');
+      grid.innerHTML = urls.map(u => {
+        const src = u.startsWith('http') || u.startsWith('images/') 
+          ? u 
+          : `https://res.cloudinary.com/${CLOUDINARY_CLOUD_NAME}/image/upload/f_auto,q_auto,w_300/${u}`;
+        return `
+          <div class="relative aspect-video rounded-lg overflow-hidden bg-slate-100 border border-slate-200 shadow-2xs group">
+            <img src="${src}" alt="Gallery" class="w-full h-full object-cover" onerror="this.parentElement.remove()">
+          </div>
+        `;
+      }).join('');
+    }
+
+    async function loadStories() {
+      const container = document.getElementById('storiesListContainer');
+      container.innerHTML = `<div class="col-span-2 text-center py-8 text-slate-400">Loading ground casework stories...</div>`;
+
+      try {
+        let stories = [];
+        const token = currentSession?.access_token;
+        if (token) {
+          try {
+            const res = await fetch('/api/admin/stories', {
+              headers: { 'Authorization': `Bearer ${token}` }
+            });
+            const json = await res.json();
+            if (json.success && Array.isArray(json.stories)) {
+              stories = json.stories;
+            }
+          } catch (apiErr) {
+            console.warn('API stories fetch fallback:', apiErr);
+          }
+        }
+
+        if (stories.length === 0) {
+          const { data, error } = await sbClient
+            .from('stories')
+            .select('*')
+            .order('created_at', { ascending: false });
+          if (!error && data) stories = data;
+        }
+
+        loadedStories = stories || [];
+
+        if (!stories || stories.length === 0) {
+          container.innerHTML = `
+            <div class="col-span-2 bg-white p-8 rounded-2xl text-center text-slate-400 border border-slate-100 space-y-2">
+              <span class="material-symbols-outlined text-4xl text-slate-300">auto_stories</span>
+              <p>No casework stories published yet. Click "Publish New Story" above.</p>
+            </div>
+          `;
+          return;
+        }
+
+        container.innerHTML = stories.map(s => {
+          const meta = parseStoryContent(s.content);
+          const coverSrc = s.cover_cloudinary_id
+            ? (s.cover_cloudinary_id.startsWith('http') || s.cover_cloudinary_id.startsWith('images/') 
+                ? s.cover_cloudinary_id 
+                : `https://res.cloudinary.com/${CLOUDINARY_CLOUD_NAME}/image/upload/f_auto,q_auto,w_600/${s.cover_cloudinary_id}`)
+            : null;
+
+          const hasVideo = !!meta.videoUrl;
+          const galleryCount = Array.isArray(meta.gallery) ? meta.gallery.length : 0;
+          const displaySummary = meta.excerpt || meta.body || '';
+
+          return `
+            <div class="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm flex flex-col justify-between gap-3 hover:border-amber-200 transition">
+              <div>
+                <div class="flex items-center justify-between mb-2">
+                  <span class="text-xs font-bold text-deep-orange uppercase tracking-wider">${escapeHtml(s.category)}</span>
+                  <div class="flex items-center gap-1.5">
+                    ${hasVideo ? `
+                      <span class="text-[10px] px-2 py-0.5 rounded-full font-bold bg-rose-50 text-rose-700 border border-rose-200 flex items-center gap-1">
+                        <span class="material-symbols-outlined text-xs">play_circle</span> Video
+                      </span>
+                    ` : ''}
+                    ${galleryCount > 0 ? `
+                      <span class="text-[10px] px-2 py-0.5 rounded-full font-bold bg-indigo-50 text-indigo-700 border border-indigo-200 flex items-center gap-1">
+                        <span class="material-symbols-outlined text-xs">photo_library</span> ${galleryCount} Photos
+                      </span>
+                    ` : ''}
+                    <span class="text-[11px] px-2.5 py-0.5 rounded-full font-bold ${s.is_published ? 'bg-emerald-100 text-emerald-800 border border-emerald-200' : 'bg-slate-100 text-slate-600'}">
+                      ${s.is_published ? 'Published' : 'Draft'}
+                    </span>
+                  </div>
+                </div>
+
+                ${coverSrc ? `
+                  <div class="relative w-full aspect-[16/9] rounded-xl overflow-hidden mb-3 bg-slate-100 border border-slate-200/80 shadow-2xs group">
+                    <img src="${coverSrc}" alt="${escapeHtml(s.title)}" class="w-full h-full object-cover group-hover:scale-102 transition duration-300" loading="lazy">
+                    ${hasVideo ? `
+                      <div class="absolute bottom-2.5 right-2.5 bg-black/75 backdrop-blur-xs text-white text-[11px] font-bold px-2.5 py-1 rounded-md flex items-center gap-1">
+                        <span class="material-symbols-outlined text-xs text-amber-400">videocam</span> Video Ready
+                      </div>
+                    ` : ''}
+                  </div>
+                ` : ''}
+
+                <h4 class="text-base font-bold text-slate-900 leading-snug">${escapeHtml(s.title)}</h4>
+
+                <div class="flex items-center gap-2 text-xs text-slate-500 mt-1.5">
+                  <span class="material-symbols-outlined text-sm text-slate-400">location_on</span>
+                  <span class="font-medium">${escapeHtml(s.broad_region)}</span>
+                  ${meta.caseworker ? `<span class="text-slate-300">•</span><span class="text-slate-600 font-medium">Lead: ${escapeHtml(meta.caseworker)}</span>` : ''}
+                </div>
+
+                <p class="text-xs text-slate-600 mt-2 line-clamp-3 leading-relaxed">${escapeHtml(displaySummary)}</p>
+
+                ${meta.quote ? `
+                  <div class="mt-2.5 text-xs text-amber-950 bg-amber-50/60 p-2.5 rounded-xl border border-amber-200/60 italic border-l-3 border-l-marigold-bright">
+                    "${escapeHtml(meta.quote)}"
+                    ${meta.quoteAuthor ? `<span class="block not-italic text-[10px] font-bold text-amber-800 mt-1">— ${escapeHtml(meta.quoteAuthor)}</span>` : ''}
+                  </div>
+                ` : ''}
+              </div>
+
+              <div class="border-t pt-3 mt-1 space-y-2.5">
+                <div class="flex items-center justify-between pt-1 text-xs">
+                  <div class="flex items-center gap-2">
+                    <button onclick="openEditStoryModal('${s.id}')" class="px-3 py-1.5 text-xs font-bold bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-300 rounded-xl transition flex items-center gap-1 shadow-2xs">
+                      <span class="material-symbols-outlined text-sm">edit</span>
+                      <span>Edit Story</span>
+                    </button>
+                    <a href="stories-events.html" target="_blank" class="px-2.5 py-1.5 text-xs text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-xl border border-slate-200 transition flex items-center gap-0.5" title="Preview on live site">
+                      <span class="material-symbols-outlined text-sm">open_in_new</span>
+                    </a>
+                  </div>
+                  <div class="flex items-center gap-1.5">
+                    <button onclick="handleToggleStoryStatus('${s.id}', ${!s.is_published})" class="px-2.5 py-1.5 text-xs font-semibold rounded-xl border transition ${s.is_published ? 'bg-slate-50 hover:bg-slate-100 text-slate-700 border-slate-200' : 'bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border-emerald-200'}">
+                      ${s.is_published ? 'Unpublish' : 'Publish'}
+                    </button>
+                    <button onclick="handleDeleteStory('${s.id}')" class="p-1.5 text-red-600 hover:bg-red-50 rounded-xl transition" title="Delete story">
+                      <span class="material-symbols-outlined text-base">delete</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          `;
+        }).join('');
+      } catch (err) {
+        container.innerHTML = `<div class="col-span-2 p-4 bg-red-50 text-red-700 text-xs rounded-xl">${err.message}</div>`;
+      }
+    }
+
+    // Modal: Story Editor (Publish New or Edit Existing)
+    function openStoryModal(storyId = null) {
+      const isEditing = !!storyId;
+      const story = isEditing ? loadedStories.find(s => s.id === storyId) : null;
+      const meta = story ? parseStoryContent(story.content) : {};
+
+      const coverSrc = story?.cover_cloudinary_id
+        ? (story.cover_cloudinary_id.startsWith('http') || story.cover_cloudinary_id.startsWith('images/') 
+            ? story.cover_cloudinary_id 
+            : `https://res.cloudinary.com/${CLOUDINARY_CLOUD_NAME}/image/upload/f_auto,q_auto,w_600/${story.cover_cloudinary_id}`)
+        : '';
+
+      const galleryStr = Array.isArray(meta.gallery) ? meta.gallery.join('\n') : (meta.gallery || '');
+
+      let timelineStr = '';
+      if (Array.isArray(meta.timeline)) {
+        timelineStr = meta.timeline.map(t => `${t.year || ''} | ${t.title || ''} | ${t.desc || ''}`).join('\n');
+      }
+
+      document.getElementById('modalContent').innerHTML = `
+        <form onsubmit="${isEditing ? `handleUpdateStory(event, '${story.id}')` : 'handleCreateStory(event)'}" class="space-y-5">
+          <!-- Modal Header -->
+          <div class="flex items-center gap-3 pb-3 border-b border-slate-100">
+            <span class="p-2.5 bg-amber-50 text-amber-800 rounded-xl material-symbols-outlined text-xl">auto_stories</span>
+            <div>
+              <h3 class="text-lg font-bold text-slate-900">${isEditing ? 'Edit Field Casework Story' : 'Publish New Field Casework Story'}</h3>
+              <p class="text-xs text-slate-500">Document field rescues, upload verified photographs, video testimonies, and impact trajectories.</p>
+            </div>
+          </div>
+
+          <!-- Section 1: Basic Metadata -->
+          <div class="space-y-3">
+            <div>
+              <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Story Headline / Title *</label>
+              <input type="text" id="storyTitle" required class="w-full text-xs p-2.5 border rounded-xl border-slate-300 font-semibold focus:ring-2 focus:ring-amber-400" value="${escapeHtml(story?.title || '')}" placeholder="e.g. From Yamuna Khadar Brick Kiln to State Board Topper: Sunita's 5-Year Journey">
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div>
+                <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Category *</label>
+                <input type="text" id="storyCategory" required list="storyCategorySuggestions" class="w-full text-xs p-2.5 border rounded-xl border-slate-300 font-semibold focus:ring-2 focus:ring-amber-400" value="${escapeHtml(story?.category || 'Child Protection & Education')}" placeholder="Category name">
+                <datalist id="storyCategorySuggestions">
+                  <option value="Child Protection & Education">
+                  <option value="Women Livelihoods & SHGs">
+                  <option value="Youth Skill Development & Tech">
+                  <option value="Child Protection & Anti-Trafficking">
+                  <option value="Emergency Healthcare & Trauma">
+                  <option value="Community Assemblies & Conclaves">
+                  <option value="Legal Aid & Civic Identity">
+                </datalist>
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Broad District / Region *</label>
+                <input type="text" id="storyRegion" required class="w-full text-xs p-2.5 border rounded-xl border-slate-300 focus:ring-2 focus:ring-amber-400" value="${escapeHtml(story?.broad_region || '')}" placeholder="e.g. Alwar Bridge Node, Rajasthan">
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Publication Status</label>
+                <label class="flex items-center gap-2 h-[38px] px-3 bg-slate-50 border border-slate-200 rounded-xl cursor-pointer select-none">
+                  <input type="checkbox" id="storyPublished" ${story ? (story.is_published ? 'checked' : '') : 'checked'} class="rounded border-slate-300 text-deep-orange focus:ring-deep-orange">
+                  <span class="text-xs font-semibold text-slate-700">Published Live on Site</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Lead Caseworker / Mentor</label>
+                <input type="text" id="storyCaseworker" class="w-full text-xs p-2.5 border rounded-xl border-slate-300" value="${escapeHtml(meta.caseworker || '')}" placeholder="e.g. R. Sharma, Child Protection Unit">
+              </div>
+              <div>
+                <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Publication Date</label>
+                <input type="text" id="storyPublishedAt" class="w-full text-xs p-2.5 border rounded-xl border-slate-300 text-slate-500 font-mono" value="${story?.published_at ? new Date(story.published_at).toISOString().split('T')[0] : new Date().toISOString().split('T')[0]}" placeholder="YYYY-MM-DD">
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 2: Photos & Visual Banners -->
+          <div class="p-4 bg-amber-50/40 rounded-2xl border border-amber-200/80 space-y-4">
+            <div class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-amber-700 text-base">photo_camera</span>
+              <h4 class="text-xs font-bold text-amber-900 uppercase tracking-wider">Photographs &amp; Visual Media</h4>
+            </div>
+
+            <!-- Cover Photo -->
+            <div>
+              <div class="flex items-center justify-between mb-1">
+                <label class="block text-xs font-bold uppercase text-slate-700">Primary Cover Photo / Banner</label>
+                <div class="flex items-center gap-2">
+                  <input type="file" id="storyCoverFile" accept="image/*" class="hidden" onchange="uploadStoryPhoto(this, 'storyCover', 'storyCoverPreview')">
+                  <button type="button" onclick="document.getElementById('storyCoverFile').click()" class="text-[11px] font-bold text-deep-orange hover:text-deep-orange-hover flex items-center gap-1">
+                    <span class="material-symbols-outlined text-xs">cloud_upload</span> Upload Cover Photo
+                  </button>
+                </div>
+              </div>
+              <div id="storyCoverPreviewContainer" class="mb-2">
+                <img id="storyCoverPreview" src="${coverSrc}" alt="Cover Preview" class="w-full max-h-48 object-cover rounded-xl border border-slate-200 ${coverSrc ? '' : 'hidden'}">
+              </div>
+              <input type="text" id="storyCover" oninput="updateImagePreview(this.value, 'storyCoverPreview')" class="w-full text-xs p-2.5 border rounded-xl border-slate-300 font-mono" value="${escapeHtml(story?.cover_cloudinary_id || '')}" placeholder="Enter image URL (https://...), local path (images/stories/...), or Cloudinary ID">
+              <p class="text-[10px] text-slate-400 mt-1">Upload a high-resolution field photograph or paste a direct image URL.</p>
+            </div>
+
+            <!-- Additional Gallery Photos -->
+            <div>
+              <div class="flex items-center justify-between mb-1">
+                <label class="block text-xs font-bold uppercase text-slate-700">Additional Field Photos (Gallery)</label>
+                <div class="flex items-center gap-2">
+                  <input type="file" id="storyGalleryFile" accept="image/*" multiple class="hidden" onchange="uploadStoryGalleryFile(this, 'storyGallery', 'galleryPreviewGrid')">
+                  <button type="button" onclick="document.getElementById('storyGalleryFile').click()" class="text-[11px] font-bold text-deep-orange hover:text-deep-orange-hover flex items-center gap-1">
+                    <span class="material-symbols-outlined text-xs">add_photo_alternate</span> Upload to Gallery
+                  </button>
+                </div>
+              </div>
+              <textarea id="storyGallery" rows="2" oninput="updateStoryGalleryPreview(this.value, 'galleryPreviewGrid')" class="w-full text-xs p-2.5 border rounded-xl border-slate-300 font-mono" placeholder="Paste image URLs (one per line or comma-separated)">${escapeHtml(galleryStr)}</textarea>
+              <div id="galleryPreviewGrid" class="grid grid-cols-4 gap-2 mt-2 ${galleryStr ? '' : 'hidden'}"></div>
+              <p class="text-[10px] text-slate-400 mt-1">Add additional verified casework photos to be displayed in the story gallery.</p>
+            </div>
+          </div>
+
+          <!-- Section 3: Video Showcase -->
+          <div class="p-4 bg-rose-50/40 rounded-2xl border border-rose-200/80 space-y-3">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-rose-700 text-base">smart_display</span>
+                <h4 class="text-xs font-bold text-rose-900 uppercase tracking-wider">Video Showcase &amp; Documentary (YouTube / Vimeo / MP4 / Cloudinary)</h4>
+              </div>
+              <div class="flex items-center gap-2">
+                <input type="file" id="storyVideoFile" accept="video/*" class="hidden" onchange="uploadStoryVideo(this, 'storyVideoUrl', 'storyVideoPreview')">
+                <button type="button" onclick="document.getElementById('storyVideoFile').click()" class="text-[11px] font-bold text-rose-700 hover:text-rose-800 flex items-center gap-1">
+                  <span class="material-symbols-outlined text-xs">upload</span> Upload Video to CDN
+                </button>
+              </div>
+            </div>
+
+            <div>
+              <input type="text" id="storyVideoUrl" oninput="updateStoryVideoPreview(this.value, 'storyVideoPreview')" class="w-full text-xs p-2.5 border rounded-xl border-slate-300 font-mono" value="${escapeHtml(meta.videoUrl || '')}" placeholder="Paste YouTube link (https://www.youtube.com/watch?v=...), Vimeo, or direct MP4/Cloudinary URL">
+              <p class="text-[10px] text-slate-400 mt-1">Supports YouTube watch &amp; short links, Vimeo, and direct MP4 video streams.</p>
+            </div>
+
+            <!-- Live Video Preview Player -->
+            <div id="storyVideoPreview" class="${meta.videoUrl ? '' : 'hidden'} mt-2">
+              ${meta.videoUrl ? getStoryVideoEmbed(meta.videoUrl) : ''}
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Video Caption / Title</label>
+              <input type="text" id="storyVideoCaption" class="w-full text-xs p-2.5 border rounded-xl border-slate-300" value="${escapeHtml(meta.videoCaption || '')}" placeholder="e.g. Field Casework Documentary · Extraction to Rehabilitation">
+            </div>
+          </div>
+
+          <!-- Section 4: Narrative & Content -->
+          <div class="space-y-3">
+            <div>
+              <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Story Summary / Excerpt (1-2 sentences) *</label>
+              <textarea id="storyExcerpt" required rows="2" class="w-full text-xs p-2.5 border rounded-xl border-slate-300 focus:ring-2 focus:ring-amber-400" placeholder="A compelling summary shown on card previews...">${escapeHtml(meta.excerpt || '')}</textarea>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Full Story Body Content *</label>
+              <textarea id="storyBody" required rows="6" class="w-full text-xs p-2.5 border rounded-xl border-slate-300 focus:ring-2 focus:ring-amber-400 leading-relaxed" placeholder="Complete narrative description of the case, initial condition, rescue, intervention, and current progress...">${escapeHtml(meta.body || '')}</textarea>
+            </div>
+          </div>
+
+          <!-- Section 5: Quote & Intervention Trajectory -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
+              <label class="block text-xs font-bold uppercase text-slate-700">Beneficiary / Caseworker Quote</label>
+              <textarea id="storyQuote" rows="2" class="w-full text-xs p-2 border rounded-lg border-slate-300 italic" placeholder="e.g. 'When the case workers arrived at the kiln...'">${escapeHtml(meta.quote || '')}</textarea>
+              <input type="text" id="storyQuoteAuthor" class="w-full text-xs p-2 border rounded-lg border-slate-300" value="${escapeHtml(meta.quoteAuthor || '')}" placeholder="Quote Attribution (e.g. Sunita, Now Scholar)">
+            </div>
+
+            <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
+              <label class="block text-xs font-bold uppercase text-slate-700">Multi-Year Trajectory Milestones</label>
+              <textarea id="storyTimeline" rows="4" class="w-full text-xs p-2 border rounded-lg border-slate-300 font-mono text-[11px]" placeholder="Format per line: Year | Milestone Title | Details&#10;2019 | Extraction | CWC clearance & nutrition&#10;2022 | Bridge School | Admitted to Model Senior Sec&#10;2024 | State Topper | 93.6% in Commerce Board">${escapeHtml(timelineStr)}</textarea>
+              <p class="text-[10px] text-slate-400">One milestone per line separated by pipe (|).</p>
+            </div>
+          </div>
+
+          <!-- Section 6: Child Protection & Statutory Notice -->
+          <div class="p-3 bg-indigo-50/50 rounded-xl border border-indigo-100">
+            <div class="flex items-center gap-1.5 mb-1 text-indigo-900 font-bold text-xs">
+              <span class="material-symbols-outlined text-sm">security</span>
+              <span>Child Protection &amp; POCSO Identity Notice</span>
+            </div>
+            <input type="text" id="storyNotice" class="w-full text-xs p-2 border rounded-lg border-indigo-200 bg-white" value="${escapeHtml(story?.pseudonym_notice || 'Name and identifying details changed to protect the privacy and dignity of the minor under Juvenile Justice Act 2015.')}">
+            <p class="text-[10px] text-indigo-700/80 mt-1">Ensures strict statutory compliance with Child Protection, POCSO Act, and Juvenile Justice Act guidelines.</p>
+          </div>
+
+          <!-- Form Actions -->
+          <div class="flex justify-end gap-2 pt-3 border-t border-slate-100">
+            <button type="button" onclick="closeModal()" class="px-4 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-100 rounded-xl">Cancel</button>
+            <button type="submit" id="btnStorySubmit" class="px-5 py-2 text-xs font-bold bg-deep-orange hover:bg-deep-orange-hover text-white rounded-xl shadow-sm flex items-center gap-1.5">
+              <span class="material-symbols-outlined text-sm">${isEditing ? 'save' : 'publish'}</span>
+              <span>${isEditing ? 'Save Changes' : 'Publish Story'}</span>
+            </button>
+          </div>
+        </form>
+      `;
+
+      if (galleryStr) updateStoryGalleryPreview(galleryStr, 'galleryPreviewGrid');
+      document.getElementById('actionModal').classList.remove('hidden');
+    }
+
+    function openEditStoryModal(storyId) {
+      openStoryModal(storyId);
+    }
+
+    // Handlers: Create, Update, Delete & Story Media Uploads
+    async function handleCreateStory(e) {
+      e.preventDefault();
+      const btn = document.getElementById('btnStorySubmit');
+      btn.disabled = true;
+      btn.innerHTML = `<span class="material-symbols-outlined animate-spin text-sm">progress_activity</span> Publishing...`;
+
+      const galleryRaw = document.getElementById('storyGallery').value;
+      const galleryArray = galleryRaw ? galleryRaw.split(/[\n,]/).map(g => g.trim()).filter(Boolean) : [];
+
+      const timelineRaw = document.getElementById('storyTimeline').value;
+      const timelineArray = timelineRaw ? timelineRaw.split('\n').map(line => {
+        const parts = line.split('|').map(p => p.trim());
+        if (!parts[0]) return null;
+        return { year: parts[0], title: parts[1] || '', desc: parts[2] || '' };
+      }).filter(Boolean) : [];
+
+      const contentObj = {
+        excerpt: document.getElementById('storyExcerpt').value.trim(),
+        body: document.getElementById('storyBody').value.trim(),
+        caseworker: document.getElementById('storyCaseworker').value.trim() || null,
+        videoUrl: document.getElementById('storyVideoUrl').value.trim() || null,
+        videoCaption: document.getElementById('storyVideoCaption').value.trim() || null,
+        gallery: galleryArray,
+        quote: document.getElementById('storyQuote').value.trim() || null,
+        quoteAuthor: document.getElementById('storyQuoteAuthor').value.trim() || null,
+        timeline: timelineArray
+      };
+
+      const payload = {
+        title: document.getElementById('storyTitle').value.trim(),
+        category: document.getElementById('storyCategory').value.trim(),
+        broad_region: document.getElementById('storyRegion').value.trim(),
+        cover_cloudinary_id: document.getElementById('storyCover').value.trim() || null,
+        pseudonym_notice: document.getElementById('storyNotice').value.trim(),
+        content: JSON.stringify(contentObj),
+        is_published: document.getElementById('storyPublished').checked,
+        published_at: new Date().toISOString()
+      };
+
+      try {
+        const token = currentSession?.access_token;
+        const res = await fetch('/api/admin/stories', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+        if (!data.success) throw new Error(data.error || 'Failed to publish story.');
+
+        closeModal();
+        await loadStories();
+        if (typeof loadOverviewStats === 'function') loadOverviewStats();
+      } catch (err) {
+        alert('Failed to publish story: ' + err.message);
+        btn.disabled = false;
+        btn.innerHTML = `<span class="material-symbols-outlined text-sm">publish</span><span>Publish Story</span>`;
+      }
+    }
+
+    async function handleUpdateStory(e, storyId) {
+      e.preventDefault();
+      const btn = document.getElementById('btnStorySubmit');
+      btn.disabled = true;
+      btn.innerHTML = `<span class="material-symbols-outlined animate-spin text-sm">progress_activity</span> Updating...`;
+
+      const galleryRaw = document.getElementById('storyGallery').value;
+      const galleryArray = galleryRaw ? galleryRaw.split(/[\n,]/).map(g => g.trim()).filter(Boolean) : [];
+
+      const timelineRaw = document.getElementById('storyTimeline').value;
+      const timelineArray = timelineRaw ? timelineRaw.split('\n').map(line => {
+        const parts = line.split('|').map(p => p.trim());
+        if (!parts[0]) return null;
+        return { year: parts[0], title: parts[1] || '', desc: parts[2] || '' };
+      }).filter(Boolean) : [];
+
+      const contentObj = {
+        excerpt: document.getElementById('storyExcerpt').value.trim(),
+        body: document.getElementById('storyBody').value.trim(),
+        caseworker: document.getElementById('storyCaseworker').value.trim() || null,
+        videoUrl: document.getElementById('storyVideoUrl').value.trim() || null,
+        videoCaption: document.getElementById('storyVideoCaption').value.trim() || null,
+        gallery: galleryArray,
+        quote: document.getElementById('storyQuote').value.trim() || null,
+        quoteAuthor: document.getElementById('storyQuoteAuthor').value.trim() || null,
+        timeline: timelineArray
+      };
+
+      const payload = {
+        id: storyId,
+        title: document.getElementById('storyTitle').value.trim(),
+        category: document.getElementById('storyCategory').value.trim(),
+        broad_region: document.getElementById('storyRegion').value.trim(),
+        cover_cloudinary_id: document.getElementById('storyCover').value.trim() || null,
+        pseudonym_notice: document.getElementById('storyNotice').value.trim(),
+        content: JSON.stringify(contentObj),
+        is_published: document.getElementById('storyPublished').checked
+      };
+
+      try {
+        const token = currentSession?.access_token;
+        const res = await fetch('/api/admin/stories', {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+        if (!data.success) throw new Error(data.error || 'Failed to update story.');
+
+        closeModal();
+        await loadStories();
+        if (typeof loadOverviewStats === 'function') loadOverviewStats();
+      } catch (err) {
+        alert('Failed to update story: ' + err.message);
+        btn.disabled = false;
+        btn.innerHTML = `<span class="material-symbols-outlined text-sm">save</span><span>Save Changes</span>`;
+      }
+    }
+
+    async function handleToggleStoryStatus(id, newStatus) {
+      try {
+        const token = currentSession?.access_token;
+        const res = await fetch('/api/admin/stories', {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify({ id, is_published: newStatus })
+        });
+        const data = await res.json();
+        if (!data.success) throw new Error(data.error || 'Failed to update status.');
+        await loadStories();
+        if (typeof loadOverviewStats === 'function') loadOverviewStats();
+      } catch (err) {
+        alert('Failed to update story status: ' + err.message);
+      }
+    }
+
+    async function handleDeleteStory(id) {
+      if (!confirm('Are you sure you want to permanently delete this field story?')) return;
+      try {
+        const token = currentSession?.access_token;
+        const res = await fetch('/api/admin/stories', {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify({ id })
+        });
+        const data = await res.json();
+        if (!data.success) throw new Error(data.error || 'Failed to delete story.');
+        await loadStories();
+        if (typeof loadOverviewStats === 'function') loadOverviewStats();
+      } catch (err) {
+        alert('Failed to delete story: ' + err.message);
+      }
+    }
+        await loadStories();
+        if (typeof loadOverviewStats === 'function') loadOverviewStats();
+      } catch (err) {
+        alert('Failed to delete story: ' + err.message);
+      }
+    }
+
+    async function uploadStoryPhoto(fileInput, targetInputId, previewImgId) {
+      const file = fileInput.files[0];
+      if (!file) return;
+
+      const targetInput = document.getElementById(targetInputId);
+      const preview = document.getElementById(previewImgId);
+
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+
+      try {
+        const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/auto/upload`, {
+          method: 'POST',
+          body: formData
+        });
+        const data = await res.json();
+        if (data.error) throw new Error(data.error.message);
+
+        const secureUrl = data.secure_url || data.public_id;
+        if (targetInput) targetInput.value = secureUrl;
+        if (preview) {
+          preview.src = secureUrl;
+          preview.classList.remove('hidden');
+        }
+      } catch (err) {
+        alert('Photo upload failed: ' + err.message + '\nYou can also paste a direct image URL.');
+      }
+    }
+
+    async function uploadStoryVideo(fileInput, targetInputId, previewContainerId) {
+      const file = fileInput.files[0];
+      if (!file) return;
+
+      const targetInput = document.getElementById(targetInputId);
+      const previewContainer = document.getElementById(previewContainerId);
+
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+
+      if (previewContainer) {
+        previewContainer.innerHTML = `<div class="p-3 bg-amber-50 rounded-xl text-xs text-amber-900 flex items-center gap-2"><span class="material-symbols-outlined animate-spin text-base">progress_activity</span> Uploading video to CDN...</div>`;
+        previewContainer.classList.remove('hidden');
+      }
+
+      try {
+        const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/video/upload`, {
+          method: 'POST',
+          body: formData
+        });
+        const data = await res.json();
+        if (data.error) throw new Error(data.error.message);
+
+        const videoUrl = data.secure_url || data.public_id;
+        if (targetInput) targetInput.value = videoUrl;
+        updateStoryVideoPreview(videoUrl, previewContainerId);
+      } catch (err) {
+        alert('Video upload note: ' + err.message + '\nYou can also paste a YouTube, Vimeo, or MP4 URL directly.');
+        if (previewContainer) previewContainer.classList.add('hidden');
+      }
+    }
+
+    async function uploadStoryGalleryFile(fileInput, targetTextareaId, previewGridId) {
+      const files = Array.from(fileInput.files || []);
+      if (files.length === 0) return;
+
+      const textarea = document.getElementById(targetTextareaId);
+
+      for (const file of files) {
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+
+        try {
+          const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/auto/upload`, {
+            method: 'POST',
+            body: formData
+          });
+          const data = await res.json();
+          if (data.secure_url && textarea) {
+            const current = textarea.value.trim();
+            textarea.value = current ? `${current}\n${data.secure_url}` : data.secure_url;
+          }
+        } catch (e) {
+          console.warn('Single gallery photo upload error', e);
+        }
+      }
+
+      if (textarea) updateStoryGalleryPreview(textarea.value, previewGridId);
     }
 
     // 5. Cloudinary Direct Upload

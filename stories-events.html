@@ -511,7 +511,7 @@
 <span>Identity protected under JJ Act 2015 protocols</span>
 </div>
 </div>
-<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<div id="storiesDynamicGrid" class="grid grid-cols-1 lg:grid-cols-12 gap-8">
 <!-- CASE STUDY 1: FEATURED EXPANDED (Sunita - Yamuna Khadar) -->
 <article class="lg:col-span-12 bg-surface-container-lowest rounded-2xl border border-highlight-amber-soft p-6 sm:p-8 elevation-ambient relative overflow-hidden">
 <div class="absolute top-0 right-0 w-48 h-48 bg-highlight-amber-soft/30 rounded-bl-full pointer-events-none -mr-10 -mt-10"></div>
@@ -1166,5 +1166,300 @@
 <script src="https://unpkg.com/@popperjs/core@2.11.8/dist/umd/popper.min.js" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/tippy.js@6" crossorigin="anonymous"></script>
 <script src="main.js?v=23"></script>
+
+<!-- Dynamic Supabase Stories Loader -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  (function() {
+    const SUPABASE_URL = "https://lfdnxklkncckboonyage.supabase.co";
+    const SUPABASE_ANON = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxmZG54a2xrbmNja2Jvb255YWdlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTMzNjIzMDYsImV4cCI6MjEwODkzODMwNn0.c4fLtTvSsC4YXdhoFOi1zgPU_gwCk--M7k-Zp50obxM";
+    const CLOUDINARY_CLOUD_NAME = "fobxcvyz";
+
+    function parseStoryContent(raw) {
+      if (!raw) return { body: '' };
+      if (typeof raw === 'object') return raw;
+      if (typeof raw === 'string' && raw.trim().startsWith('{')) {
+        try {
+          return JSON.parse(raw);
+        } catch (e) {
+          return { body: raw };
+        }
+      }
+      return { body: String(raw) };
+    }
+
+    function getStoryMediaHtml(coverId, title, videoUrl) {
+      const coverSrc = coverId
+        ? (coverId.startsWith('http') || coverId.startsWith('images/') 
+            ? coverId 
+            : `https://res.cloudinary.com/${CLOUDINARY_CLOUD_NAME}/image/upload/f_auto,q_auto,w_1000/${coverId}`)
+        : null;
+
+      let videoEmbed = '';
+      if (videoUrl && videoUrl.trim()) {
+        const cleanUrl = videoUrl.trim();
+        const ytMatch = cleanUrl.match(/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/i);
+        if (ytMatch && ytMatch[1]) {
+          videoEmbed = `
+            <div class="relative w-full aspect-video rounded-xl overflow-hidden mb-6 bg-black border border-slate-200/90 shadow-2xs">
+              <iframe src="https://www.youtube-nocookie.com/embed/${ytMatch[1]}" class="w-full h-full" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+          `;
+        } else {
+          const vimeoMatch = cleanUrl.match(/vimeo\.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|video\/|)(\d+)/i);
+          if (vimeoMatch && vimeoMatch[3]) {
+            videoEmbed = `
+              <div class="relative w-full aspect-video rounded-xl overflow-hidden mb-6 bg-black border border-slate-200/90 shadow-2xs">
+                <iframe src="https://player.vimeo.com/video/${vimeoMatch[3]}" class="w-full h-full" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+              </div>
+            `;
+          } else if (cleanUrl.match(/\.(mp4|webm|ogg)($|\?)/i) || (cleanUrl.includes('cloudinary.com') && cleanUrl.includes('/video/'))) {
+            videoEmbed = `
+              <div class="relative w-full aspect-video rounded-xl overflow-hidden mb-6 bg-black border border-slate-200/90 shadow-2xs flex items-center justify-center">
+                <video src="${cleanUrl}" controls class="w-full h-full object-contain" preload="metadata"></video>
+              </div>
+            `;
+          }
+        }
+      }
+
+      if (videoEmbed) {
+        return videoEmbed;
+      }
+
+      if (coverSrc) {
+        return `
+          <div class="w-full h-56 sm:h-72 rounded-xl overflow-hidden mb-6 border border-slate-200/90 relative bg-slate-100 shadow-2xs group">
+            <img src="${coverSrc}" alt="${escapeHtml(title)}" class="w-full h-full object-cover group-hover:scale-103 transition-transform duration-500" loading="lazy">
+            <div class="absolute bottom-3 left-3 bg-neutral-900/85 text-white text-xs px-3 py-1 rounded-md backdrop-blur-xs flex items-center gap-1.5">
+              <span class="material-symbols-outlined text-sm text-amber-400">verified</span>
+              <span>Field Casework Documentation</span>
+            </div>
+          </div>
+        `;
+      }
+
+      return '';
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    async function initStories() {
+      const container = document.getElementById('storiesDynamicGrid');
+      if (!container || !window.supabase) return;
+
+      try {
+        const sbClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
+        const { data: stories, error } = await sbClient
+          .from('stories')
+          .select('*')
+          .eq('is_published', true)
+          .order('created_at', { ascending: false });
+
+        if (error || !stories || stories.length === 0) return;
+
+        container.innerHTML = stories.map((s, index) => {
+          const meta = parseStoryContent(s.content);
+          const isFeatured = index === 0;
+          const mediaHtml = getStoryMediaHtml(s.cover_cloudinary_id, s.title, meta.videoUrl);
+
+          let timelineHtml = '';
+          if (Array.isArray(meta.timeline) && meta.timeline.length > 0) {
+            timelineHtml = `
+              <div class="bg-surface-warm-card rounded-xl p-5 border border-surface-container mb-6">
+                <h4 class="font-label-caps text-label-caps text-[#172033] tracking-wider uppercase mb-3 flex items-center">
+                  <span class="material-symbols-outlined text-primary text-[18px] mr-1.5">timeline</span>
+                  Multi-Tier Intervention Trajectory
+                </h4>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-${Math.min(meta.timeline.length, 4)} gap-3 text-body-sm">
+                  ${meta.timeline.map(t => `
+                    <div class="border-l-2 border-marigold-bright pl-3">
+                      <span class="font-bold text-[#172033] block text-label-md">${escapeHtml(t.year)}: ${escapeHtml(t.title)}</span>
+                      <span class="text-text-muted text-[13px]">${escapeHtml(t.desc)}</span>
+                    </div>
+                  `).join('')}
+                </div>
+              </div>
+            `;
+          }
+
+          let quoteHtml = '';
+          if (meta.quote) {
+            quoteHtml = `
+              <div class="flex items-start space-x-4 bg-highlight-amber-soft/40 border-l-4 border-marigold-bright p-4 rounded-r-lg mb-6">
+                <span class="material-symbols-outlined text-marigold-bright text-[32px] leading-none shrink-0">format_quote</span>
+                <div>
+                  <p class="italic text-[#172033] font-body-md leading-snug">
+                    "${escapeHtml(meta.quote)}"
+                  </p>
+                  ${meta.quoteAuthor ? `<span class="block mt-2 font-label-md text-label-md text-primary font-bold">— ${escapeHtml(meta.quoteAuthor)}</span>` : ''}
+                </div>
+              </div>
+            `;
+          }
+
+          let galleryHtml = '';
+          if (Array.isArray(meta.gallery) && meta.gallery.length > 1) {
+            galleryHtml = `
+              <div class="mb-6">
+                <h5 class="text-xs font-bold text-slate-700 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                  <span class="material-symbols-outlined text-sm text-deep-orange">photo_library</span>
+                  <span>Field Casework Gallery</span>
+                </h5>
+                <div class="grid grid-cols-3 sm:grid-cols-4 gap-2.5">
+                  ${meta.gallery.map(img => {
+                    const src = img.startsWith('http') || img.startsWith('images/') ? img : `https://res.cloudinary.com/${CLOUDINARY_CLOUD_NAME}/image/upload/f_auto,q_auto,w_400/${img}`;
+                    return `
+                      <a href="${src}" target="_blank" class="aspect-video rounded-lg overflow-hidden border border-slate-200 shadow-2xs group block bg-slate-100">
+                        <img src="${src}" alt="Field Casework" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" loading="lazy">
+                      </a>
+                    `;
+                  }).join('')}
+                </div>
+              </div>
+            `;
+          }
+
+          let metricsHtml = '';
+          if (Array.isArray(meta.metrics) && meta.metrics.length > 0) {
+            metricsHtml = `
+              <div class="bg-surface-warm-card rounded-lg p-4 border border-highlight-amber-soft mb-4">
+                <div class="grid grid-cols-${meta.metrics.length} gap-2 text-center">
+                  ${meta.metrics.map(m => `
+                    <div>
+                      <span class="text-headline-sm font-headline-sm text-primary font-bold">${escapeHtml(m.value)}</span>
+                      <span class="block text-label-md text-text-muted">${escapeHtml(m.label)}</span>
+                    </div>
+                  `).join('')}
+                </div>
+              </div>
+            `;
+          }
+
+          if (isFeatured) {
+            return `
+              <article class="lg:col-span-12 bg-surface-container-lowest rounded-2xl border border-highlight-amber-soft p-6 sm:p-8 elevation-ambient relative overflow-hidden" id="story-${s.id}">
+                <div class="absolute top-0 right-0 w-48 h-48 bg-highlight-amber-soft/30 rounded-bl-full pointer-events-none -mr-10 -mt-10"></div>
+                <div class="flex flex-wrap items-center justify-between gap-3 mb-6 border-b border-surface-container pb-4">
+                  <div class="flex items-center space-x-3 flex-wrap gap-2">
+                    <span class="px-3 py-1 rounded bg-highlight-amber-soft text-primary font-label-caps text-label-caps font-bold uppercase tracking-wider">
+                      ${escapeHtml(s.category)}
+                    </span>
+                    <span class="inline-flex items-center text-label-md text-tertiary font-semibold">
+                      <span class="material-symbols-outlined text-[16px] mr-1">task_alt</span> Interventions: Complete &amp; Ongoing Mentorship
+                    </span>
+                  </div>
+                  <div class="text-label-md font-label-md text-text-muted flex items-center space-x-2">
+                    <span class="material-symbols-outlined text-[16px]">location_on</span>
+                    <span>${escapeHtml(s.broad_region)}</span>
+                    ${meta.caseworker ? `<span class="mx-1">•</span><span>Case Worker: <strong>${escapeHtml(meta.caseworker)}</strong></span>` : ''}
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                  <div class="lg:col-span-7">
+                    ${mediaHtml}
+                    <h3 class="text-headline-lg font-headline-lg text-[#172033] tracking-tight mb-4">
+                      ${escapeHtml(s.title)}
+                    </h3>
+                    <p class="text-body-md font-body-md text-secondary mb-4 leading-relaxed">
+                      ${escapeHtml(meta.body || meta.excerpt || '')}
+                    </p>
+                    ${timelineHtml}
+                    ${quoteHtml}
+                    ${galleryHtml}
+                  </div>
+
+                  <div class="lg:col-span-5 bg-[#FFF9F1] rounded-xl border border-surface-container p-6">
+                    <div class="flex items-center space-x-3 pb-4 border-b border-surface-container">
+                      <div class="w-12 h-12 rounded-full bg-primary-fixed flex items-center justify-center text-primary font-bold font-headline-sm">
+                        <span class="material-symbols-outlined text-2xl text-marigold-bright">verified_user</span>
+                      </div>
+                      <div>
+                        <h4 class="font-headline-sm font-headline-sm text-[#172033]">${escapeHtml(s.category)}</h4>
+                        <p class="text-body-sm text-text-muted">Field Record: TGF-${s.id.slice(0, 8).toUpperCase()}</p>
+                      </div>
+                    </div>
+                    <div class="py-4 space-y-3">
+                      <div class="flex justify-between items-center text-body-sm">
+                        <span class="text-text-muted">Broad Nodal Region</span>
+                        <span class="font-medium text-[#172033]">${escapeHtml(s.broad_region)}</span>
+                      </div>
+                      <div class="flex justify-between items-center text-body-sm">
+                        <span class="text-text-muted">Lead Caseworker</span>
+                        <span class="font-semibold text-primary">${escapeHtml(meta.caseworker || 'Child Protection Unit')}</span>
+                      </div>
+                      <div class="flex justify-between items-center text-body-sm">
+                        <span class="text-text-muted">Child Safeguarding</span>
+                        <span class="font-semibold text-tertiary">JJ Act &amp; POCSO Compliant</span>
+                      </div>
+                      <div class="flex justify-between items-center text-body-sm">
+                        <span class="text-text-muted">Statutory Clearance</span>
+                        <span class="font-semibold text-primary">CWC Field Monitored</span>
+                      </div>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-surface-container flex items-center justify-between">
+                      <div class="flex items-center space-x-1.5 text-label-md text-sage-soft font-semibold">
+                        <span class="material-symbols-outlined text-[16px]">verified</span>
+                        <span>Field Log Sign-off: Verified</span>
+                      </div>
+                      <span class="text-xs text-text-muted">${s.pseudonym_notice || 'Identity Protected'}</span>
+                    </div>
+                  </div>
+                </div>
+              </article>
+            `;
+          } else {
+            return `
+              <article class="lg:col-span-6 bg-surface-container-lowest rounded-2xl border border-surface-container p-6 elevation-ambient flex flex-col justify-between" id="story-${s.id}">
+                <div>
+                  <div class="flex items-center justify-between mb-4 flex-wrap gap-2">
+                    <span class="px-2.5 py-0.5 rounded bg-surface-warm-card border border-surface-container text-secondary font-label-caps text-label-caps uppercase font-bold">
+                      ${escapeHtml(s.category)}
+                    </span>
+                    <span class="text-label-md text-text-muted">${escapeHtml(s.broad_region)}</span>
+                  </div>
+                  ${mediaHtml}
+                  <h3 class="text-headline-md font-headline-md text-[#172033] tracking-tight mb-3">
+                    ${escapeHtml(s.title)}
+                  </h3>
+                  <p class="text-body-md font-body-md text-secondary mb-4 leading-relaxed">
+                    ${escapeHtml(meta.body || meta.excerpt || '')}
+                  </p>
+                  ${metricsHtml}
+                  ${quoteHtml}
+                  ${galleryHtml}
+                </div>
+                <div class="mt-6 pt-4 border-t border-surface-container flex items-center justify-between text-body-sm">
+                  <span class="text-text-muted flex items-center">
+                    <span class="material-symbols-outlined text-[16px] text-tertiary mr-1">verified</span>
+                    ${escapeHtml(meta.caseworker || 'Field Casework Unit')}
+                  </span>
+                  <span class="text-xs text-slate-400">JJ Act 2015</span>
+                </div>
+              </article>
+            `;
+          }
+        }).join('');
+      } catch (err) {
+        console.warn('Dynamic stories loading fallback active:', err);
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initStories);
+    } else {
+      initStories();
+    }
+  })();
+</script>
 </body>
 </html>
